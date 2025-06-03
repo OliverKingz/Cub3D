@@ -18,4 +18,45 @@
 # include <unistd.h>  // To use system calls like write, open, read, close.
  */
 
+
+//Oliver lo pone bonito
+
+typedef struct s_player
+{
+	int		x;
+	int		y;
+	float	angle;
+}	t_player;
+
+typedef struct s_scene
+{
+	char	*map1d;
+	char	**map2d;
+	int		height;
+	int		width;
+	int		floor_rgb;
+	int		ceil_rgb;
+}   t_scene;
+
+typedef struct s_graph
+{
+	mlx_texture_t	*north_t;
+	mlx_texture_t	*south_t;
+	mlx_texture_t	*east_t;
+	mlx_texture_t	*west_t;
+	mlx_image_t		*north;
+	mlx_image_t		*south;
+	mlx_image_t		*east;
+	mlx_image_t		*west;
+}	t_graph;
+
+typedef struct s_game
+{
+	t_scene		scene;
+	t_graph		graphs;
+	t_player	player;
+	mlx_t		*mlx;
+	bool		is_running;
+}   t_game;
+
 #endif
