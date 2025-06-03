@@ -121,6 +121,42 @@ fclean:
 re: fclean all
 
 # **************************************************************************** #
+# BONUS SECTION 
+
+# BONUS DIRECTORIES
+SRC_BONUS_DIR	:= src/bonus/
+INC_BONUS_DIR	:= inc/bonus/
+OBJ_BONUS_DIR	:= obj/bonus/
+
+# BONUS FILES
+BONUS_NAME	:= .cub3d_bonus
+SRC_BONUS_FILES	:= main_bonus
+INC_BONUS_FILES	:= cub3d_bonus
+
+# BONUS GENERAL FILES
+SRCS_BONUS	:= $(addprefix $(SRC_BONUS_DIR), $(addsuffix .c, $(SRC_BONUS_FILES)))
+OBJS_BONUS	:= $(SRCS_BONUS:$(SRC_BONUS_DIR)%.c=$(OBJ_BONUS_DIR)%.o)
+DEPS_BONUS	:= $(OBJS_BONUS:.o=.d)
+INCS_BONUS	:= $(addprefix $(INC_BONUS_DIR), $(addsuffix .h, $(INC_BONUS_FILES)))
+
+# BONUS COMPILER FLAGS
+IFLAGS_BONUS:= -I$(INC_BONUS_DIR) -I$(LIBFT_INC_DIR)
+
+# BONUS RULES
+bonus: libft $(BONUS_NAME)
+$(BONUS_NAME): $(OBJS_BONUS)
+	@$(CC) $(CFLAGS) $(IFLAGS_BONUS) $(OBJS_BONUS) $(LDFLAGS) -o $(NAME) 
+	@touch $(BONUS_NAME)
+	@printf "%b" "$(CL) -> $(BW)[$(NAME)]:\t\t$(BG)Bonus compiled\t\t✅$(NC)\n"
+
+$(OBJ_BONUS_DIR):
+	@mkdir -p $(OBJ_BONUS_DIR)
+$(OBJ_BONUS_DIR)%.o: $(SRC_BONUS_DIR)%.c | $(OBJ_BONUS_DIR)
+	@mkdir -p $(dir $@)
+	@printf "%b" "$(CL) -> $(BW)[$(NAME)]:\t\t$(NC)$<\r"
+	@$(CC) $(CFLAGS) $(IFLAGS_BONUS) -c $< -o $@
+
+# **************************************************************************** #
 # NORM AND DEBUG RULES
 
 # Rule to check if the files pass norminette
