@@ -19,12 +19,15 @@ LIBMLX		:= $(LIBMLX_DIR)build/libmlx42.a
 
 # **************************************************************************** #
 # FILES
-SRC_FILES	:=	main background
+SRC_FILES	:= $(wildcard $(SRC_DIR)*.c)
 INC_FILES	:=	cub3d
 
 # GENERAL FILES
-SRCS	:= $(addprefix $(SRC_DIR), $(addsuffix .c, $(SRC_FILES)))
-OBJS	:= $(addprefix $(OBJ_DIR), $(addsuffix .o, $(SRC_FILES)))
+SRCS	:= $(SRC_FILES)
+OBJS	:= $(addprefix $(OBJ_DIR), $(notdir $(SRC_FILES:.c=.o)))
+
+#SRCS	:= $(addprefix $(SRC_DIR), $(addsuffix .c, $(SRC_FILES)))
+#OBJS	:= $(addprefix $(OBJ_DIR), $(addsuffix .o, $(SRC_FILES)))
 DEPS	:= $(OBJS:.o=.d)
 INCS	:= $(INC_DIR)so_long.h $(LIBFT_INC_DIR)libft.h $(LIBMLX_INC_DIR)MLX42.h
 
@@ -184,6 +187,69 @@ valgrind:
 	-@valgrind $(VALGRIND_FLAGS) ./$(NAME) $(ARGS)
 
 # **************************************************************************** #
+
+# **************************************************************************** #
+# ADDITIONAL RULES
+
+# Rule to show help
+help:
+	@echo "$(BY)Available targets:$(NC)"
+	@echo "  $(BB)all$(NC)       - Build the project"
+	@echo "  $(BB)clean$(NC)     - Remove object files"
+	@echo "  $(BB)fclean$(NC)    - Remove object files and executable"
+	@echo "  $(BB)re$(NC)        - Rebuild the project from scratch"
+	@echo "  $(BB)bonus$(NC)     - Build the bonus part of the project"
+	@echo "  $(BB)norm$(NC)      - Check code with norminette"
+	@echo "  $(BB)debug$(NC)     - Build the project with debug flags"
+	@echo "  $(BB)valgrind$(NC)  - Build the project with valgrind flags"
+	@echo "  $(BB)help$(NC)      - Show this help message"
+	@echo "  $(BB)show$(NC)      - Show compilation and linking commands"
+	@echo "  $(BB)info$(NC)      - Show all variables being used"
+
+# Rule to show compilation and linking commands
+show:
+	@echo "$(BY)Compilation command:$(NC)\t"\
+		"$(CC) $(CFLAGS) $(IFLAGS) -c $(SRC_DIR)$(NAME).c -o $(OBJ_DIR)$(NAME).o"
+	@echo "$(BY)Linking command:$(NC)\t"\
+		"$(CC) $(CFLAGS) $(IFLAGS) $(OBJS) -o $(NAME) $(LDFLAGS)"
+	@echo "$(BY)Cleaning command:$(NC)\t rm -rf $(NAME) $(BONUS_NAME)"\
+		"$(OBJ_DIR)*.o $(OBJ_DIR)*.d $(OBJ_DIR) $(BUILD_MODE_FILE)"
+
+# Rule to show all variables being used
+info:
+	@echo "$(BY)\nozamora's Project:$(NC)"
+	@echo "$(BB)NAME: $(NC)$(NAME)"
+	@echo "$(BB)LIBFT: $(NC)$(LIBFT)"
+	@echo "$(BB)BONUS_NAME: $(NC)$(BONUS_NAME)"
+	@echo "$(BY)\nCompiler:$(NC)"
+	@echo "$(BB)CC: $(NC)$(CC)"
+	@echo "$(BB)CFLAGS: $(NC)$(CFLAGS)"
+	@echo "$(BB)IFLAGS: $(NC)$(IFLAGS)"
+	@echo "$(BB)LDFLAGS: $(NC)$(LDFLAGS)"
+	@echo "$(BY)\nDirectories:$(NC)"
+	@echo "$(BB)SRC_DIR: $(NC)$(SRC_DIR)"
+	@echo "$(BB)INC_DIR: $(NC)$(INC_DIR)"
+	@echo "$(BB)OBJ_DIR: $(NC)$(OBJ_DIR)"
+	@echo "$(BB)LIB_DIR: $(NC)$(LIB_DIR)"
+	@echo "$(BB)LIBFT_DIR: $(NC)$(LIBFT_DIR)"
+	@echo "$(BB)LIBFT_INC_DIR: $(NC)$(LIBFT_INC_DIR)"
+	@echo "$(BY)\nFiles:$(NC)"
+	@echo "$(BB)NAME: $(NC)$(NAME)"
+	@echo "$(BB)SRC_FILES: $(NC)$(SRC_FILES)"
+	@echo "$(BB)INC_FILES: $(NC)$(INC_FILES)"
+	@echo "$(BB)SRCS: $(NC)$(SRCS)"
+	@echo "$(BB)OBJS: $(NC)$(OBJS)"
+	@echo "$(BB)DEPS: $(NC)$(DEPS)"
+	@echo "$(BB)INCS: $(NC)$(INCS)"
+	@echo "$(BY)\nBonus:$(NC)"
+	@echo "$(BB)BONUS_NAME: $(NC)$(BONUS_NAME)"
+	@echo "$(BB)SRC_BONUS_FILES: $(NC)$(SRC_BONUS_FILES)"
+	@echo "$(BB)INC_BONUS_FILES: $(NC)$(INC_BONUS_FILES)"
+	@echo "$(BB)SRCS_BONUS: $(NC)$(SRCS_BONUS)"
+	@echo "$(BB)OBJS_BONUS: $(NC)$(OBJS_BONUS)"
+	@echo "$(BB)DEPS_BONUS: $(NC)$(DEPS_BONUS)"
+	@echo "$(BB)INCS_BONUS: $(NC)$(INCS_BONUS)"
+	@echo "$(BB)IFLAGS_BONUS: $(NC)$(IFLAGS_BONUS)"
 
 .PHONY: all clean fclean re libmlx libft norm debug valgrind
 .DEFAULT_GOAL := all
