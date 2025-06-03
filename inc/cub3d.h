@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: raperez- <raperez-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 18:31:20 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/06/03 19:21:03 by raperez-         ###   ########.fr       */
+/*   Updated: 2025/06/03 20:46:07 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,11 @@
 
 #define USAGE "Usage: ./cub3d \"assets/scenes/example.cub\"\n"
 
+#define SCENE_EMPTY "Invalid scene: path is empty\n"
+#define FAIL_MLX "Failed initializing MLX42\n"
+#define FAIL_TEXTURE "Failed loading textures\n"
+#define FAIL_IMAGES "Failed loading images\n"
+
 #define WIDTH 1080
 #define HEIGHT 720
 
@@ -66,13 +71,14 @@ typedef struct s_scene
 
 typedef struct s_graph
 {
+	mlx_texture_t	*icon_t;
+	mlx_texture_t	*east_t;
 	mlx_texture_t	*north_t;
 	mlx_texture_t	*south_t;
-	mlx_texture_t	*east_t;
 	mlx_texture_t	*west_t;
+	mlx_image_t		*east;
 	mlx_image_t		*north;
 	mlx_image_t		*south;
-	mlx_image_t		*east;
 	mlx_image_t		*west;
 	mlx_image_t		*bg;
 	mlx_image_t		*minimap;
@@ -91,7 +97,30 @@ typedef struct s_game
 /*                              FUNCTION DECLARATIONS                         */
 /* ************************************************************************** */
 
+// init.c
+
+t_game	init_game(t_game *game);
+void	init_texture(t_game *game);
+void	init_images(t_game *game);
+// void	init_player(t_game *game);
+void	init_mlx(t_game *game);
+
+// background.c
+
 void	draw_bg(t_game *game);
+void	draw_minimap(t_game *game);
+
+// hook.c
+
+void	key_hook(mlx_key_data_t keydata, void *param);
+void	close_hook(void *param);
+
+// exit.c
+
+void	ft_mlx_err(const char *msg);
+void	free_textures(t_game *game);
+void	free_images(t_game *game);
+void	free_game(t_game *game);
 
 /* ************************************************************************** */
 #endif

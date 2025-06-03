@@ -1,10 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   example.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/06/03 19:38:28 by ozamora-          #+#    #+#             */
+/*   Updated: 2025/06/03 19:41:26 by ozamora-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3d.h"
 
-#include <stdlib.h>
-#include <stdio.h>
-#define WIDTH 720
-#define HEIGHT 480
-
+/*
 void my_keyhook(mlx_key_data_t keydata, void* param)
 {
 	(void)param;
@@ -23,13 +31,15 @@ void my_keyhook(mlx_key_data_t keydata, void* param)
 
 int32_t	main(void)
 {
-	mlx_t* mlx;
+	t_game	game;
 
-	if (!(mlx = mlx_init(WIDTH, HEIGHT, "MLX42", true)))
+	if (!(game.mlx = mlx_init(WIDTH, HEIGHT, "MLX42", true)))
 		return (EXIT_FAILURE);
-
-	mlx_key_hook(mlx, &my_keyhook, NULL);
-	mlx_loop(mlx);
-	mlx_terminate(mlx);
+	mlx_set_setting(MLX_STRETCH_IMAGE, true);
+	draw_bg(&game);
+	mlx_key_hook(game.mlx, &my_keyhook, NULL);
+	mlx_loop(game.mlx);
+	mlx_terminate(game.mlx);
 	return (EXIT_SUCCESS);
 }
+*/
