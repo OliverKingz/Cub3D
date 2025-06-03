@@ -3,6 +3,7 @@
 		"stdio.h": "c",
 		"time.h": "c",
 		"math.h": "c",
-		"stdlib.h": "c"
+		"stdlib.h": "c",
+		"mlx42.h": "c"
 	}
 }
