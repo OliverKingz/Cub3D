@@ -19,7 +19,7 @@ LIBMLX		:= $(LIBMLX_DIR)build/libmlx42.a
 
 # **************************************************************************** #
 # FILES
-SRC_FILES	:=	main
+SRC_FILES	:=	main background
 INC_FILES	:=	cub3d
 
 # GENERAL FILES
