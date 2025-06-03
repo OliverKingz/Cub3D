@@ -1,1 +1,161 @@
-# Cub3d
+# cub3D 
+
+<div align="right">
+
+  [![GitHub stars](https://img.shields.io/github/stars/oliverkingz/cub3D?color=brightgreen)]()
+  [![Visits Badge](https://badges.pufler.dev/visits/oliverkingz/cub3D)]()
+  [![Created Badge](https://badges.pufler.dev/created/oliverkingz/cub3D)]()
+  [![Updated Badge](https://badges.pufler.dev/updated/oliverkingz/cub3D)]()
+
+</div>
+
+[42-Cursus] A project inspired by the classic Wolfenstein 3D game. This ray-caster uses **MLX42 from Codam** to create a dynamic 3D maze navigable in first-person view, with textured walls, floor/ceiling colors, and smooth controls.  
+
+![Example Screenshot](assets/images/cub3d_demo.png) *A glimpse of the ray-casting maze.*
+
+Keywords  
+- **Ray-Casting**  
+- **MLX42 from Codam**  
+- **3D Projection**  
+- **C Programming**  
+- **Game Development**  
+
+<div align="right">
+
+Made by: [![Contributors Display](https://badges.pufler.dev/contributors/oliverkingz/Cub3d?size=30&padding=5&perRow=10&bots=true)](https://github.com/RaulPerezDEV)
+
+</div>
+
+---
+
+## Index
+
+- [Overview](#overview)
+- [Features](#features)
+- [Bonus Features](#bonus-features)
+- [Requirements](#requirements)
+- [How to Run](#how-to-run)
+  - [Example Usage](#example-usage)
+  - [Bonus Usage](#bonus-usage)
+  - [Error Handling](#error-handling)
+- [Controls](#controls)
+- [What I Learned](#what-i-learned)
+- [Assets Credits](#assets-credits)
+- [Authors](#authors)
+- [Acknowledgments](#acknowledgments)
+
+---
+
+## Overview  
+**cub3D** is a 3D maze exploration game built using ray-casting techniques, mimicking the mechanics of the iconic *Wolfenstein 3D*. The project leverages **MLX42** for rendering and emphasizes efficient mathematical algorithms to create a seamless first-person perspective. Players navigate a maze with textured walls, customizable floor/ceiling colors, and intuitive controls.
+
+---
+
+## Features  
+- **Ray-Casting Engine**: Dynamic 3D rendering from a 2D map.  
+- **Textured Walls**: Unique textures for North/South/East/West walls.  
+- **Customizable Colors**: RGB values for floor and ceiling.  
+- **Smooth Controls**: WASD movement, arrow-key rotation, and ESC to quit.  
+- **Map Validation**: Ensures maps are closed/surrounded by walls.  
+
+---
+
+## Bonus Features  
+- **Minimap**: Displays a real-time top-down view of the maze.  
+- **Wall Collisions**: Prevents walking through walls.  
+- **Mouse Rotation**: Rotate the view by moving the mouse.  
+- **Animated Sprites**: Adds dynamic elements to the environment.  
+- **Doors**: which can open and close
+
+---
+
+## Requirements  
+- **MLX42** (provided by 42 or compiled from Codam).  
+- **Map File**: Must be a valid `.cub` file (see [Example Usage](#example-usage)).  
+
+---
+
+## How to Run  
+
+1. Clone this repository:  
+   ```bash  
+   git clone https://github.com/oliverkingz/cub3D.git  
+   cd cub3D  
+   ``` 
+2. Compile the project:  
+   ```bash  
+   make  
+   ```  
+3. Run with a map file:  
+   ```bash  
+   ./cub3D maps/example.cub  
+   ```  
+
+### Example Usage  
+
+| **Command**                          | **Description**                          | **Expected Output**                |  
+|--------------------------------------|------------------------------------------|------------------------------------|  
+| `./cub3D maps/valid.cub`             | Runs the game with a valid map.         | Renders the 3D maze.              |  
+| `./cub3D maps/invalid_open.cub`      | Map not surrounded by walls.             | `Error: Map is not closed.`       |  
+
+### Bonus Usage  
+Compile and run bonuses:  
+   ```bash  
+   make bonus  
+   ./cub3D_bonus maps/example.cub  
+   ```  
+
+| **Command**                          | **Description**                          | **Expected Output**                |  
+|--------------------------------------|------------------------------------------|------------------------------------|  
+| `./cub3D_bonus maps/with_minimap.cub`| Displays the minimap.                   | Renders maze + top-down view.      |  
+
+### Error Handling  
+
+| **Command**                          | **Error Scenario**                      | **Output**                          |  
+|--------------------------------------|------------------------------------------|-------------------------------------|  
+| `./cub3D nonexistent.cub`            | Invalid file path.                       | `Error: File not found.`           |  
+| `./cub3D maps/missing_texture.cub`   | Missing texture path.                    | `Error: Texture file missing.`     |  
+
+---
+
+## Controls  
+- **W/A/S/D**: Move forward/left/backward/right.  
+- **←/→ Arrow Keys**: Rotate view left/right.  
+- **ESC**: Close the window.  
+- **Mouse Move (Bonus)**: Rotate view horizontally.  
+
+---
+
+## What I Learned  
+- **Ray-Casting Math**: Understanding angles, distances, and projections.  
+- **MLX42 Mastery**: Window management, event hooks, and image rendering.  
+- **Map Parsing**: Robust validation of user-provided files.  
+- **Optimization**: Balancing performance with real-time rendering.  
+
+---
+
+## Assets Credits  
+- **Inspiration**: Wolfenstein 3D (Id Software, 1992).  
+
+---
+
+## Authors
+
+<div align="center">
+
+| **Name**                   | **GitHub Profile**                              | **42 Login** |
+| -------------------------- | ----------------------------------------------- | ------------ |
+| **Oliver King Zamora**     | [OliverKingz](https://github.com/oliverkingz)   | **ozamora-** |
+| **Raúl José Pérez Medina** | [RaulPerezDEV](https://github.com/RaulPerezDEV) | **raperez-** |
+
+</div>
+
+---
+
+## Acknowledgments  
+This project is part of the **42 Cursus**, a rigorous programming curriculum that emphasizes hands-on learning and problem-solving. Special thanks to the 42 team for providing this challenging and rewarding project!  
+Also thanks to peers and mentors for their feedback and support during the development process.
+
+- **42 Community**: For the collaborative environment and peer reviews.
+- **MLX42 Docs** for rendering guidance.  
+- **John Carmack & Romero** for pioneering ray-casting!  
