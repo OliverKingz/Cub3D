@@ -73,12 +73,13 @@ CL	= \033[2K
 -include $(DEPS)
 
 # Default rule to create the program
-all: libmlx libft $(NAME)
+all: libft libmlx $(NAME)
 
 # Rule to create the program
 $(NAME): $(OBJS) $(LIBFT) $(LIBMLX)
+	@printf "%b" "$(CL) -> $(BW)[$(NAME)]:\t\t$(NC)$(BY)Compilation start\t⏳$(NC)\n"
 	@$(CC) $(CFLAGS) $(IFLAGS) $^ $(LDFLAGS) -o $(NAME)
-	@printf "%b" "$(CL) -> $(BW)[$(NAME)]:\t\t$(BG)Compilation success\t✅$(NC)\n"
+	@printf "%b" "$(CL) -> $(BW)[$(NAME)]:\t\t$(NC)$(BG)Compilation success\t✅$(NC)\n"
 	@echo "─────────────────────────────────────────────────────$(BY)"
 	@echo "              ▗▄▄▖     ▗▖   ▗▄▄▖ ▗▄▄▄                ";
 	@echo "             ▐▌        ▐▌      ▐▌▐▌  █               ";
@@ -103,7 +104,8 @@ $(LIBFT):
 # Rule to make the library Libmlx
 libmlx: $(LIBMLX)
 $(LIBMLX):
-	-@cmake $(LIBMLX_DIR) -B $(LIBMLX_DIR)/build > /dev/null && make -C $(LIBMLX_DIR)/build -j4 > /dev/null
+	@printf "%b" "$(CL) -> $(BW)[LibMLX]:\t\t$(NC)$(BY)Compilation start\t⏳$(NC)\n"
+	@cmake $(LIBMLX_DIR) -B $(LIBMLX_DIR)/build > /dev/null && make -C $(LIBMLX_DIR)/build -j4 > /dev/null
 	@printf "%b" "$(CL) -> $(BW)[LibMLX]:\t\t$(NC)$(BG)Compilation success\t✅$(NC)\n"
 
 # Rule to clean generated files
@@ -185,8 +187,6 @@ valgrind:
 	@$(MAKE) VALGRIND=1 -s
 	@echo " -> $(BW)[Valgrind]:\t\t$(BB)Valgrind mode enabled\t🟦$(NC)\n"
 	-@valgrind $(VALGRIND_FLAGS) ./$(NAME) $(ARGS)
-
-# **************************************************************************** #
 
 # **************************************************************************** #
 # ADDITIONAL RULES
