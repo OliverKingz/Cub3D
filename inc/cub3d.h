@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: raperez- <raperez-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 18:31:20 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/06/03 20:46:07 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/06/05 00:54:14 by raperez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,12 +45,37 @@
 #define FAIL_TEXTURE "Failed loading textures\n"
 #define FAIL_IMAGES "Failed loading images\n"
 
-#define WIDTH 1080
-#define HEIGHT 720
+#define WIDTH 540
+#define HEIGHT 360
+
+#define M_PI 3.14159265358979323846
 
 /* ************************************************************************** */
 /*                              ENUMS AND STRUCTS                             */
 /* ************************************************************************** */
+
+typedef struct s_point
+{
+	double	x;
+	double	y;
+}	t_point;
+
+typedef enum e_dir
+{
+	none, up, down, right, left
+}	t_dir;
+
+typedef struct s_ray
+{
+	double	angle_radians;
+	t_point	vector;
+	t_point	start_point;
+	t_point	pos;
+	t_point	hit_point;
+	t_dir	hit_dir;
+	t_point	delta_dist;
+	t_point	axis_dist;
+}	t_ray;
 
 typedef struct s_player
 {
