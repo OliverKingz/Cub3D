@@ -76,25 +76,48 @@ Made by: [![Contributors Display](https://badges.pufler.dev/contributors/oliverk
 ## Requirements
 
 - **MLX42** (provided by 42 or compiled from Codam).
-- **Map File**: Must be a valid `.cub` file (see [Example Usage](#example-usage)).
+- **Scene File**: Must be a valid `.cub` file (see [Example Usage](#example-usage)).
 
 ---
 
 ## How to Run
 
-1. Clone this repository:
+1. **Clone this repository:**
+
    ```bash
    git clone https://github.com/oliverkingz/cub3D.git
    cd cub3D
    ```
-2. Compile the project:
+
+2. **Compile the project using the provided Makefile** (use the `bonus` rule for a better experience):
+
+   For the mandatory part:
+
    ```bash
    make
    ```
-3. Run with a map file:
+
+   For the bonus part:
+
    ```bash
-   ./cub3D maps/example.cub
+   make bonus
    ```
+
+   If the above command fails to compile **MLX42** correctly (for example, on WSL or with specific compiler issues), you can use the alternative script to compile MLX42 library:
+
+   ```bash
+   bash alternative_mlx42_compiler.sh
+   make bonus
+   ```
+
+3. **Run the game with a scene file** (e.g., `example.cub` for mandatory, `example_bonus.cub` for bonus):
+
+   ```bash
+   ./cub3D assets/scenes/example.cub
+   ./cub3D_bonus assets/scenes/example_bonus.cub
+   ```
+
+---
 
 ### Example Usage
 
@@ -109,12 +132,12 @@ Compile and run bonuses:
 
 ```bash
 make bonus
-./cub3D_bonus maps/example.cub
+./cub3D_bonus assets/scenes/example.cub
 ```
 
 | **Command**                           | **Description**       | **Expected Output**           |
 | ------------------------------------- | --------------------- | ----------------------------- |
-| `./cub3D_bonus maps/with_minimap.cub` | Displays the minimap. | Renders maze + top-down view. |
+| `./cub3D_bonus assets/scenes/example.cub` | Displays the minimap. | Renders maze + top-down view. |
 
 ### Error Handling
 

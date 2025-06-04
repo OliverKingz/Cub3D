@@ -6,7 +6,7 @@
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 19:43:10 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/06/03 19:47:40 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/06/04 20:56:41 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ void	ft_mlx_err(const char *msg)
 
 void	free_textures(t_game *game)
 {
+	mlx_delete_texture(game->graphs.icon_t);
 	mlx_delete_texture(game->graphs.north_t);
 	mlx_delete_texture(game->graphs.south_t);
 	mlx_delete_texture(game->graphs.east_t);
