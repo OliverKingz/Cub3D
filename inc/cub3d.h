@@ -6,7 +6,7 @@
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 18:31:20 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/06/03 20:46:07 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/06/04 19:34:22 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,15 +38,28 @@
 /*                              MACROS AND DEFINES                            */
 /* ************************************************************************** */
 
-#define USAGE "Usage: ./cub3d \"assets/scenes/example.cub\"\n"
+# define USAGE "Usage: ./cub3d assets/scenes/example.cub\n"
 
-#define SCENE_EMPTY "Invalid scene: path is empty\n"
-#define FAIL_MLX "Failed initializing MLX42\n"
-#define FAIL_TEXTURE "Failed loading textures\n"
-#define FAIL_IMAGES "Failed loading images\n"
+# define SCENE_EMPTY "Invalid scene: path is empty\n"
+# define FAIL_MLX "Failed initializing MLX42\n"
+# define FAIL_TEXTURE "Failed loading textures\n"
+# define FAIL_IMAGES "Failed loading images\n"
 
-#define WIDTH 1080
-#define HEIGHT 720
+# define WIDTH 540
+# define HEIGHT 360
+
+# define PI 3.14159265358979323846
+
+# define BLACK 0x000000FF
+# define WHITE 0xFFFFFFFF
+# define GREY 0x808080FF
+# define LIGHT_GREY 0xC0C0C0FF
+# define DARK_GREY 0x404040FF
+# define GREEN 0x00FF00FF
+# define TURQUOISE 0x40E0D0FF
+# define BLUE 0x0000FFFF
+# define LIGHT_BLUE 0xADD8E6FF
+# define DARK_BLUE 0x00008BFF
 
 /* ************************************************************************** */
 /*                              ENUMS AND STRUCTS                             */
@@ -56,6 +69,8 @@ typedef struct s_player
 {
 	int				x;
 	int				y;
+	int				x_map;
+	int				y_map;
 	float			angle;
 }					t_player;
 
@@ -63,8 +78,9 @@ typedef struct s_scene
 {
 	char			*map1d;
 	char			**map2d;
-	int				height;
-	int				width;
+	int				height_map;
+	int				width_map;
+	int				cell_size;
 	int				floor_rgb;
 	int				ceil_rgb;
 }					t_scene;
@@ -99,28 +115,28 @@ typedef struct s_game
 
 // init.c
 
-t_game	init_game(t_game *game);
-void	init_texture(t_game *game);
-void	init_images(t_game *game);
+t_game				init_game(t_game *game);
+void				init_texture(t_game *game);
+void				init_images(t_game *game);
 // void	init_player(t_game *game);
-void	init_mlx(t_game *game);
+void				init_mlx(t_game *game);
 
 // background.c
 
-void	draw_bg(t_game *game);
-void	draw_minimap(t_game *game);
+void				draw_bg(t_game *game);
+void				draw_minimap(t_game *game);
 
 // hook.c
 
-void	key_hook(mlx_key_data_t keydata, void *param);
-void	close_hook(void *param);
+void				key_hook(mlx_key_data_t keydata, void *param);
+void				close_hook(void *param);
 
 // exit.c
 
-void	ft_mlx_err(const char *msg);
-void	free_textures(t_game *game);
-void	free_images(t_game *game);
-void	free_game(t_game *game);
+void				ft_mlx_err(const char *msg);
+void				free_textures(t_game *game);
+void				free_images(t_game *game);
+void				free_game(t_game *game);
 
 /* ************************************************************************** */
 #endif

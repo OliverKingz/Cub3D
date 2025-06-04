@@ -6,7 +6,7 @@
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 19:11:12 by raperez-          #+#    #+#             */
-/*   Updated: 2025/06/03 20:49:45 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/06/04 19:36:11 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,12 @@ void	draw_bg(t_game *game)
 		y = 0;
 		while (y < HEIGHT / 2)
 		{
-			mlx_put_pixel(game->graphs.bg, x, y, 0x60FFFFFF);
+			mlx_put_pixel(game->graphs.bg, x, y, LIGHT_BLUE);
 			y++;
 		}
 		while (y < HEIGHT)
 		{
-			mlx_put_pixel(game->graphs.bg, x, y, 0x606060FF);
+			mlx_put_pixel(game->graphs.bg, x, y, DARK_GREY);
 			y++;
 		}
 		x++;
