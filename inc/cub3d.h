@@ -6,7 +6,7 @@
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 18:31:20 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/06/04 19:34:22 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/06/04 20:51:56 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,11 @@
 # define FAIL_MLX "Failed initializing MLX42\n"
 # define FAIL_TEXTURE "Failed loading textures\n"
 # define FAIL_IMAGES "Failed loading images\n"
+# define FAIL_MINIMAP_TOO_BIG "Minimap is too big, change the tile size\n"
 
 # define WIDTH 540
 # define HEIGHT 360
+# define MAP_TILE 10
 
 # define PI 3.14159265358979323846
 
@@ -80,7 +82,6 @@ typedef struct s_scene
 	char			**map2d;
 	int				height_map;
 	int				width_map;
-	int				cell_size;
 	int				floor_rgb;
 	int				ceil_rgb;
 }					t_scene;
