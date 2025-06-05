@@ -6,7 +6,7 @@
 /*   By: raperez- <raperez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 14:35:02 by raperez-          #+#    #+#             */
-/*   Updated: 2025/06/05 16:26:44 by raperez-         ###   ########.fr       */
+/*   Updated: 2025/06/05 19:20:17 by raperez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,12 +42,12 @@ void	set_delta_dist(t_ray *ray)
 	if (cosAngle == 0)
 		ray->delta_dist.x = 1e30;
 	else
-		ray->delta_dist.x = 1 / cos(ray->angle_radians);
+		ray->delta_dist.x = fabs(1 / cos(ray->angle_radians));
 	senAngle = sin(ray->angle_radians);
 	if (senAngle == 0)
 		ray->delta_dist.y = 1e30;
 	else
-		ray->delta_dist.y = 1 / sin(ray->angle_radians);
+		ray->delta_dist.y = fabs(1 / sin(ray->angle_radians));
 }
 
 void	init_ray(t_game *game, t_ray *ray, double angle)
@@ -74,13 +74,13 @@ void	calculate_axis_dist(t_ray *ray)
 {
 		// Chequear distancia del punto hasta eje x e y
 		if (ray->vector.x > 0)
-			ray->axis_dist.x = 1 - (ray->pos.x - (int)ray->pos.x);
+			ray->axis_dist.x = 1 - fabs(ray->pos.x - (int)ray->pos.x);
 		else
-			ray->axis_dist.x = ray->pos.x - (int)ray->pos.x;
+			ray->axis_dist.x = fabs(ray->pos.x - (int)ray->pos.x);
 		if (ray->vector.y > 0)
-			ray->axis_dist.y = 1 - (ray->pos.y - (int)ray->pos.y);
+			ray->axis_dist.y = 1 - fabs(ray->pos.y - (int)ray->pos.y);
 		else
-			ray->axis_dist.y = ray->pos.y - (int)ray->pos.y;
+			ray->axis_dist.y = fabs(ray->pos.y - (int)ray->pos.y);
 		//Mover el rayo
 		// Regla de tres:
 		// 1 casilla x --> delta x
@@ -128,7 +128,7 @@ void	move_ray(t_ray *ray)
 			ray->pos.y = (int)ray->pos.y + ray->step.y;
 		else if(ray->vector.y == 0) // nos movemos horizontalmente, solo avanzo 1
 			ray->pos.x = (int)ray->pos.x + ray->step.x;
-		else if (ray->real_axis_dist.x < ray->real_axis_dist.y) // intersecciona primero con el eje vertical y
+		else if (ray->real_axis_dist.x > 0 && ray->real_axis_dist.x < ray->real_axis_dist.y) // intersecciona primero con el eje vertical y
 		{
 			ray->pos.x = (int)ray->pos.x + ray->step.x;
 			ray->pos.y = tan(ray->angle_radians) * (ray->pos.x - ray->start_point.x)
@@ -140,7 +140,7 @@ void	move_ray(t_ray *ray)
 			ray->pos.x = (ray->pos.y - ray->start_point.y)/tan(ray->angle_radians)
 				+ ray->start_point.x;
 		}
-		//printf("Interseccion P(%f, %f)\n", ray->pos.x, ray->pos.y);
+		printf("Interseccion P(%f, %f)\n", ray->pos.x, ray->pos.y);
 }
 
 void	check_hit(t_ray *ray, t_scene *scene)
@@ -150,17 +150,16 @@ void	check_hit(t_ray *ray, t_scene *scene)
 	
 	x = (int)ray->pos.x;
 	y = (int)ray->pos.y;
-	if (ray->vector.x < 0)
+	if (ray->vector.x < 0 && ray->vector.y > 0)
 		x -= 1;
-	if (ray->vector.y < 0)
-		y -= 1;
+	
 	if (scene->map2d[y][x] == '1')
 	{
 		if (ray->real_axis_dist.x < ray->real_axis_dist.y && ray->vector.x >= 0)
 			ray->hit_dir = WE;
 		else if (ray->real_axis_dist.x < ray->real_axis_dist.y && ray->vector.x < 0)
 			ray->hit_dir = EA;
-		if (ray->real_axis_dist.x >= ray->real_axis_dist.y && ray->vector.y > 0)
+		else if (ray->real_axis_dist.x >= ray->real_axis_dist.y && ray->vector.y > 0)
 			ray->hit_dir = NO;
 		else
 			ray->hit_dir = SO;
@@ -179,18 +178,16 @@ double	calculate_ray_size(t_ray ray)
 
 //Lanza un rayo desde la posición inicial (xO, yO) con el angulo (angle)
 //Retorna la distancia que recorrió el rayo
-t_ray	launch_ray(t_game *game, int angle)
+t_ray	launch_ray(t_game *game, double angle)
 {
 	t_ray	ray;
-	
-	init_ray(game, &ray, (double)angle);
-	while (1)
+
+	init_ray(game, &ray, angle);
+	while (!ray.hit_dir)
 	{
-		check_hit(&ray, &(game->scene));
-		if (ray.hit_dir)
-			break;
 		calculate_axis_dist(&ray);
 		move_ray(&ray);
+		check_hit(&ray, &(game->scene));
 	}
 	ray.size = calculate_ray_size(ray);
 	return (ray);
@@ -202,11 +199,10 @@ t_ray	launch_ray(t_game *game, int angle)
 // 	t_game	game;
 // 	t_ray	ray;
 
-// 	game.player.angle = 180;
-// 	game.player.pos.x = 3.5;
-// 	game.player.pos.y = 2.3;
+// 	game.player.pos.x = 2;
+// 	game.player.pos.y = 2;
 // 	game.scene.map2d = ft_split("11111 10001 10001 10001 11111", ' ');
-//  	ray = launch_ray(&game);
+//  	ray = launch_ray(&game, 91);
 // 	printf("Distancia: %f\n", ray.size);
 // 	return (0);
 // }

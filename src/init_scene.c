@@ -37,7 +37,7 @@ void	init_texture(t_game *game, const char *scene_dir)
 void	init_player(t_game *game, const char *scene_dir)
 {
 	(void)scene_dir;
-	game->player.angle = 61;
+	game->player.angle = 120;
 	game->player.pos.x = 2;
 	game->player.pos.y = 2;
 	game->player.mmap.x = game->player.pos.x * MAP_TILE;

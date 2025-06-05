@@ -6,33 +6,50 @@
 /*   By: raperez- <raperez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 19:11:12 by raperez-          #+#    #+#             */
-/*   Updated: 2025/06/05 17:12:21 by raperez-         ###   ########.fr       */
+/*   Updated: 2025/06/05 19:08:59 by raperez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	draw_rays(t_game *game, int mmap_width, int mmap_height)
+void	draw_ray(mlx_image_t *img, t_ray ray, int mult)
+{
+	int	x;
+	int	y;
+
+	ray.start_point.x *= mult;
+	ray.start_point.y *= mult;
+	ray.pos.x *= mult;
+	ray.pos.y *= mult;
+	x = ray.start_point.x;
+	while ((ray.vector.x > 0 && x <= ray.pos.x) || (ray.vector.x < 0 && x >= ray.pos.x))
+	{
+		y = tan(ray.angle_radians)*(x - ray.start_point.x) + ray.start_point.y;
+		mlx_put_pixel(img, x, y, BLUE);
+		x += ray.step.x;
+	}
+	y = ray.start_point.y;
+	while ((ray.vector.y > 0 && y <= ray.pos.y) || (ray.vector.y < 0 && y >= ray.pos.y))
+	{
+		x = (y - ray.start_point.y) / tan(ray.angle_radians) + ray.start_point.x;
+		mlx_put_pixel(img, x, y, BLUE);
+		y += ray.step.y;
+	}
+}
+
+void	draw_walls(t_game *game, int mmap_width, int mmap_height)
 {
 	double		i;
-	double		x;
-	double		y;
-	t_ray	ray;
+	t_ray		ray;
 
 	game->graphs.rays_mmap = mlx_new_image(game->mlx, mmap_width, mmap_height);
 	i = game->player.angle - FOV / 2;
 	while (i < game->player.angle + FOV / 2)
 	{
 		ray = launch_ray(game, i);
-		x = ray.start_point.x;
-		while (x <= ray.pos.x)
-		{
-			y = tan(ray.angle_radians)*(x - ray.start_point.x) + ray.start_point.y;
-			mlx_put_pixel(game->graphs.rays_mmap, x * MAP_TILE, y * MAP_TILE, BLUE);
-			x += 0.001;
-		}
+		draw_ray(game->graphs.rays_mmap, ray, MAP_TILE);
 		printf("Distacia: %f\n", ray.size);
-		i += 0.001;
+		i++;
 	}
 	mlx_image_to_window(game->mlx, game->graphs.rays_mmap, WIDTH - 10
 		- mmap_width, HEIGHT - 10 - mmap_height);
@@ -48,9 +65,8 @@ void	draw_game(t_game *game)
 	mmap_height = MAP_TILE * game->scene.height_map;
 	if (mmap_width > WIDTH - 20 || mmap_height > HEIGHT - 20)
 		return (free_game(game), ft_mlx_err(FAIL_MINIMAP_TOO_BIG));
-	//draw_walls
 	draw_minimap(game, mmap_width, mmap_height);
-	draw_rays(game, mmap_width, mmap_height);
+	draw_walls(game, mmap_width, mmap_height);
 	draw_player_mmap(game, 3, mmap_width, mmap_height);
 }
 

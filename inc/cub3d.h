@@ -6,7 +6,7 @@
 /*   By: raperez- <raperez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 18:31:20 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/06/05 17:13:05 by raperez-         ###   ########.fr       */
+/*   Updated: 2025/06/05 18:17:10 by raperez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -189,7 +189,7 @@ void				calculate_axis_dist(t_ray *ray);
 void				move_ray(t_ray *ray);
 void				check_hit(t_ray *ray, t_scene *scene);
 double				calculate_ray_size(t_ray ray);
-t_ray				launch_ray(t_game *game, int angle);
+t_ray				launch_ray(t_game *game, double angle);
 
 /* ************************************************************************** */
 #endif
