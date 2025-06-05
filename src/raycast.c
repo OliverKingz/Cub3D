@@ -6,7 +6,7 @@
 /*   By: raperez- <raperez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 14:35:02 by raperez-          #+#    #+#             */
-/*   Updated: 2025/06/05 15:35:30 by raperez-         ###   ########.fr       */
+/*   Updated: 2025/06/05 15:41:31 by raperez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -167,6 +167,16 @@ void	check_hit(t_ray *ray, t_scene *scene)
 	}
 }
 
+double	calculate_ray_size(t_ray ray)
+{
+	double	size_x;
+	double	size_y;
+
+	size_x = ray.start_point.x - ray.pos.x;
+	size_y = ray.start_point.y - ray.pos.y;
+	return (sqrt(size_x * size_x + size_y * size_y));
+}
+
 //Lanza un rayo desde la posición inicial (xO, yO) con el angulo (angle)
 //Retorna la distancia que recorrió el rayo
 t_ray	launch_ray(t_game *game)
@@ -182,6 +192,7 @@ t_ray	launch_ray(t_game *game)
 		calculate_axis_dist(&ray);
 		move_ray(&ray);
 	}
+	ray.size = calculate_ray_size(ray);
 	return (ray);
 }
 
@@ -190,19 +201,13 @@ t_ray	launch_ray(t_game *game)
 // {
 // 	t_game	game;
 // 	t_ray	ray;
-// 	double	distX;
-// 	double	distY;
-// 	double	dist;
 
-// 	game.player.angle = -90;
-// 	game.player.pos.x = 1;
-// 	game.player.pos.y = 1;
+// 	game.player.angle = 180;
+// 	game.player.pos.x = 3.5;
+// 	game.player.pos.y = 2.3;
 // 	game.scene.map2d = ft_split("11111 10001 10001 10001 11111", ' ');
 //  	ray = launch_ray(&game);
-// 	distX = ray.start_point.x - ray.pos.x;
-// 	distY = ray.start_point.y - ray.pos.y;
-// 	dist = sqrt(distX * distX + distY * distY);
-// 	printf("Distancia: %f\n", dist);
+// 	printf("Distancia: %f\n", ray.size);
 // 	return (0);
 // }
 
