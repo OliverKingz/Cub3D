@@ -6,7 +6,7 @@
 /*   By: raperez- <raperez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 19:11:12 by raperez-          #+#    #+#             */
-/*   Updated: 2025/06/05 17:08:25 by raperez-         ###   ########.fr       */
+/*   Updated: 2025/06/05 17:12:21 by raperez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	draw_rays(t_game *game, int mmap_width, int mmap_height)
 			x += 0.001;
 		}
 		printf("Distacia: %f\n", ray.size);
-		i += 0.01;
+		i += 0.001;
 	}
 	mlx_image_to_window(game->mlx, game->graphs.rays_mmap, WIDTH - 10
 		- mmap_width, HEIGHT - 10 - mmap_height);
