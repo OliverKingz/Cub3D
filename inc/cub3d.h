@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: raperez- <raperez-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 18:31:20 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/06/05 12:42:24 by raperez-         ###   ########.fr       */
+/*   Updated: 2025/06/05 15:42:48 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@
 # define MAP_TILE 20
 # define FOV 60
 
-#define PI 3.14159265358979323846
+# define PI 3.14159265358979323846
 
 # define BLACK 0x000000FFAdd
 # define WHITE 0xFFFFFFFF
@@ -70,26 +70,30 @@
 
 typedef enum e_dir
 {
-	NONE, NO, SO, EA, WE
-}	t_dir;
+	NONE,
+	NO,
+	SO,
+	EA,
+	WE
+}					t_dir;
 
 typedef struct s_point
 {
-	double	x;
-	double	y;
-}	t_point;
+	double			x;
+	double			y;
+}					t_point;
 
 typedef struct s_ray
 {
-	double	angle_radians;
-	t_point	vector;
-	t_point	start_point;
-	t_point	pos;
-	t_point	hit_point;
-	t_dir	hit_dir;
-	t_point	delta_dist;
-	t_point	axis_dist;
-}	t_ray;
+	double			angle_radians;
+	t_point			vector;
+	t_point			start_point;
+	t_point			pos;
+	t_point			hit_point;
+	t_dir			hit_dir;
+	t_point			delta_dist;
+	t_point			axis_dist;
+}					t_ray;
 
 typedef struct s_player
 {
@@ -126,9 +130,9 @@ typedef struct s_graph
 typedef struct s_game
 {
 	t_scene			scene;
-	t_graph			graphs;
 	t_player		player;
 	mlx_t			*mlx;
+	t_graph			graphs;
 	bool			is_running;
 }					t_game;
 
@@ -136,17 +140,24 @@ typedef struct s_game
 /*                              FUNCTION DECLARATIONS                         */
 /* ************************************************************************** */
 
-// init.c
+// init_game.c
 
-t_game				init_game(t_game *game);
-void				init_texture(t_game *game);
+t_game				init_game(t_game *game, const char *scene_dir);
 void				init_images(t_game *game);
-// void	init_player(t_game *game);
 void				init_mlx(t_game *game);
 
-// background.c
+// init_scene.c
+t_game				init_scene(t_game *game, const char *scene_dir);
+void				init_texture(t_game *game, const char *scene_dir);
+void				init_player(t_game *game, const char *scene_dir);
+void				init_map(t_game *game, const char *scene_dir);
 
+// draw.c
+void				draw_game(t_game *game);
 void				draw_bg(t_game *game);
+
+// map.c
+
 void				draw_minimap(t_game *game);
 
 // hook.c
@@ -159,6 +170,7 @@ void				close_hook(void *param);
 void				ft_mlx_err(const char *msg);
 void				free_textures(t_game *game);
 void				free_images(t_game *game);
+void				free_map(t_game *game);
 void				free_game(t_game *game);
 
 /* ************************************************************************** */

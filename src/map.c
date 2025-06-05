@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: raperez- <raperez-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 18:42:36 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/06/05 12:37:19 by raperez-         ###   ########.fr       */
+/*   Updated: 2025/06/05 15:16:43 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,20 +131,8 @@ static void	draw_map_player(t_game *game, int radius, int mmap_width,
 
 void	draw_minimap(t_game *game)
 {
-	static char	*default_map[] = {"11111111", "10010001", "1000N001",
-			"10000101", "11111111"};
 	int			mmap_width;
 	int			mmap_height;
-
-	// Set map dimensions and pointer
-	game->scene.height_map = 5;
-	game->scene.width_map = 8;
-	game->scene.map2d = default_map;
-	game->player.mmap.x = 2;
-	game->player.mmap.y = 2;
-	game->player.pos.x = game->player.mmap.x * MAP_TILE + MAP_TILE / 2;
-	game->player.pos.y = game->player.mmap.y * MAP_TILE + MAP_TILE / 2;
-	game->player.angle = 0;
 	
 	mmap_width = MAP_TILE * game->scene.width_map;
 	mmap_height = MAP_TILE * game->scene.height_map;

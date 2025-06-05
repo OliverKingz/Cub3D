@@ -6,7 +6,7 @@
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 19:43:10 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/06/04 20:56:41 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/06/05 15:46:00 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,22 @@ void	free_images(t_game *game)
 	mlx_delete_image(game->mlx, game->graphs.minimap);
 }
 
+void	free_map(t_game *game)
+{
+	int	i;
+
+	i = 0;
+	while (i < game->scene.height_map)
+	{
+		free(game->scene.map2d[i]);
+		i++;
+	}
+	free(game->scene.map2d);
+	free(game->scene.map1d);
+}
 void	free_game(t_game *game)
 {
 	free_images(game);
 	free_textures(game);
-	//free_map2d(game);
+	free_map(game);
 }

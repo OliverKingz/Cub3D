@@ -1,0 +1,53 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   init_scene.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/06/05 15:07:34 by ozamora-          #+#    #+#             */
+/*   Updated: 2025/06/05 15:45:41 by ozamora-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "cub3d.h"
+
+t_game	init_scene(t_game *game, const char *scene_dir)
+{
+	init_texture(game, scene_dir);
+	init_map(game, scene_dir);
+	init_player(game, scene_dir);
+	return (*game);
+}
+
+void	init_texture(t_game *game, const char *scene_dir)
+{
+	(void)scene_dir;
+	game->graphs.icon_t = mlx_load_png("./assets/textures/cub3de.png");
+	game->graphs.east_t = mlx_load_png("./assets/textures/basic_ES.png"); // Coger de scene, necesario leer 
+	game->graphs.north_t = mlx_load_png("./assets/textures/basic_NO.png");
+	game->graphs.south_t = mlx_load_png("./assets/textures/basic_SO.png");
+	game->graphs.west_t = mlx_load_png("./assets/textures/basic_WE.png");
+	if (!game->graphs.north_t || !game->graphs.south_t
+		|| !game->graphs.east_t || !game->graphs.west_t)
+		ft_mlx_err(FAIL_TEXTURE);
+}
+
+void	init_player(t_game *game, const char *scene_dir)
+{
+	(void)scene_dir;
+	game->player.angle = 45;
+	game->player.mmap.x = 2;
+	game->player.mmap.y = 2;
+	game->player.pos.x = game->player.mmap.x * MAP_TILE + MAP_TILE / 2;
+	game->player.pos.y = game->player.mmap.y * MAP_TILE + MAP_TILE / 2;
+}
+
+void	init_map(t_game *game, const char *scene_dir)
+{
+	(void)scene_dir;
+	game->scene.height_map = 5;
+	game->scene.width_map = 8;
+	game->scene.map1d = ft_strdup("11111111 10010001 1000N001 10000101 11111111");
+	game->scene.map2d = ft_split(game->scene.map1d, ' ');
+}

@@ -1,16 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   background.c                                       :+:      :+:    :+:   */
+/*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 19:11:12 by raperez-          #+#    #+#             */
-/*   Updated: 2025/06/04 19:37:28 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/06/05 15:23:01 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+void	draw_game(t_game *game)
+{
+	draw_bg(game);
+	// draw_walls(game); //AKA draw textures
+	draw_minimap(game);
+}
+
 
 void	draw_bg(t_game *game)
 {
