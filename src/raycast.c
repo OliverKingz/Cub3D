@@ -6,7 +6,7 @@
 /*   By: raperez- <raperez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 14:35:02 by raperez-          #+#    #+#             */
-/*   Updated: 2025/06/05 13:11:25 by raperez-         ###   ########.fr       */
+/*   Updated: 2025/06/05 13:30:54 by raperez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,34 @@ t_ray	launch_ray(t_game *game)
 		double distY = fabs(ray.delta_dist.y * ray.axis_dist.y);
 		
 		// Nos quedamos con el pequeño, que es el que intersecciona primero con el eje cualquiera
-		//y - y0 = m(x - x0) | m = tan(angle)
+		
+		/*
+		Ecuacion de la recta | Punto pendiente
+		y - y0 = m(x - x0) 
+		y = variable a calcular
+		y0 = posicion inicial y
+		m = pendiente
+		x = variable a calcular
+		x0 = posicion inicial x
+
+		Ecuacion de la pendiente
+		m = tan(alpha) = sen(alpha)/cos(alpha)
+		*/
+	
+
+		/* Ejemplo: dist x < dis y (interseccion con eje y)
+			P (0.7 , 2.3)
+			pos x = (int) pos.x + 1 = 0 + 1 = 1.0 (de 0.7 avanzamos a 1.0 en x)
+			Ahora calculamos el avance de y usando punto pendiente
+			y = m(x -x0) + y0 = tan(alpha) * (x - x0) + y0
+		*/
+	
+		/* Ejemplo: dist y < dis x (interseccion con eje x)
+			P (0.7 , 2.3)
+			pos y = (int) pos.y + 1 = 0 + 1 = 1.0 (de 2.3 avanzamos a 3.0 en y)
+			Ahora calculamos el avance de x usando punto pendiente
+			x = (y -y0)/m +x0
+		*/
 
 		// Hacemos ajustes porque cos puede valer 0, descarto esos casos
 		if (ray.vector.x == 0) // nos movemos verticalmente, solo avanzo 1
