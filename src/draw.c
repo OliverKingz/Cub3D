@@ -6,7 +6,7 @@
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 19:11:12 by raperez-          #+#    #+#             */
-/*   Updated: 2025/06/05 15:23:01 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/06/05 16:18:31 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,19 @@
 
 void	draw_game(t_game *game)
 {
+	int			mmap_width;
+	int			mmap_height;
+	
 	draw_bg(game);
 	// draw_walls(game); //AKA draw textures
-	draw_minimap(game);
-}
 
+	mmap_width = MAP_TILE * game->scene.width_map;
+	mmap_height = MAP_TILE * game->scene.height_map;
+	if (mmap_width > WIDTH - 20 || mmap_height > HEIGHT - 20)
+		return (free_game(game), ft_mlx_err(FAIL_MINIMAP_TOO_BIG));
+	draw_minimap(game, mmap_width, mmap_height);
+	draw_player_mmap(game, 3, mmap_width, mmap_height);
+}
 
 void	draw_bg(t_game *game)
 {
@@ -32,12 +40,12 @@ void	draw_bg(t_game *game)
 		y = 0;
 		while (y < HEIGHT / 2)
 		{
-			mlx_put_pixel(game->graphs.bg, x, y, LIGHT_BLUE);
+			mlx_put_pixel(game->graphs.bg, x, y, game->scene.ceil_rgb);
 			y++;
 		}
 		while (y < HEIGHT)
 		{
-			mlx_put_pixel(game->graphs.bg, x, y, DARK_GREY);
+			mlx_put_pixel(game->graphs.bg, x, y, game->scene.floor_rgb);
 			y++;
 		}
 		x++;

@@ -6,7 +6,7 @@
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 18:42:36 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/06/05 15:16:43 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/06/05 16:15:56 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ static void	draw_map_grid(t_game *game, int mmap_width, int mmap_height)
 	}
 }
 
-static void	draw_map_player(t_game *game, int radius, int mmap_width,
+void	draw_player_mmap(t_game *game, int radius, int mmap_width,
 		int mmap_height)
 {
 	int	dy;
@@ -109,6 +109,7 @@ static void	draw_map_player(t_game *game, int radius, int mmap_width,
 	int	draw_x;
 	int	draw_y;
 
+	game->graphs.player_mmap = mlx_new_image(game->mlx, 2 * radius, 2 * radius);
 	dy = -radius;
 	while (dy <= radius)
 	{
@@ -117,8 +118,8 @@ static void	draw_map_player(t_game *game, int radius, int mmap_width,
 		{
 			if (dx * dx + dy * dy <= radius * radius)
 			{
-				draw_x = game->player.pos.x + dx;
-				draw_y = game->player.pos.y + dy;
+				draw_x = game->player.mmap.x + dx;
+				draw_y = game->player.mmap.y + dy;
 				if (draw_x >= 0 && draw_x < mmap_width 
 					&& draw_y >= 0 && draw_y < mmap_height)
 					mlx_put_pixel(game->graphs.minimap, draw_x, draw_y, GREEN);
@@ -127,23 +128,16 @@ static void	draw_map_player(t_game *game, int radius, int mmap_width,
 		}
 		dy++;
 	}
+	mlx_image_to_window(game->mlx, game->graphs.player_mmap, WIDTH - 10
+		- mmap_width, HEIGHT - 10 - mmap_height);
 }
 
-void	draw_minimap(t_game *game)
+void	draw_minimap(t_game *game, int mmap_width, int mmap_height)
 {
-	int			mmap_width;
-	int			mmap_height;
-	
-	mmap_width = MAP_TILE * game->scene.width_map;
-	mmap_height = MAP_TILE * game->scene.height_map;
-	if (mmap_width > WIDTH - 20 || mmap_height > HEIGHT - 20)
-		return (free_game(game), ft_mlx_err(FAIL_MINIMAP_TOO_BIG));
-
 	game->graphs.minimap = mlx_new_image(game->mlx, mmap_width, mmap_height);
 	draw_map_bg(game, mmap_width, mmap_height);
 	draw_map_cells(game);
 	draw_map_grid(game, mmap_width, mmap_height);
-	draw_map_player(game, 3, mmap_width, mmap_height);
 	mlx_image_to_window(game->mlx, game->graphs.minimap, WIDTH - 10
 		- mmap_width, HEIGHT - 10 - mmap_height);
 }

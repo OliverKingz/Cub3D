@@ -1,3 +1,4 @@
+// 	game.player.pos.x = 3.5;
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
@@ -37,15 +38,17 @@ void	init_player(t_game *game, const char *scene_dir)
 {
 	(void)scene_dir;
 	game->player.angle = 45;
-	game->player.mmap.x = 2;
-	game->player.mmap.y = 2;
-	game->player.pos.x = game->player.mmap.x * MAP_TILE + MAP_TILE / 2;
-	game->player.pos.y = game->player.mmap.y * MAP_TILE + MAP_TILE / 2;
+	game->player.pos.x = 2;
+	game->player.pos.y = 2;
+	game->player.mmap.x = game->player.pos.x * MAP_TILE + MAP_TILE / 2;
+	game->player.mmap.y = game->player.pos.y * MAP_TILE + MAP_TILE / 2;
 }
 
 void	init_map(t_game *game, const char *scene_dir)
 {
 	(void)scene_dir;
+	game->scene.ceil_rgb = LIGHT_BLUE;
+	game->scene.floor_rgb = DARK_GREY;
 	game->scene.height_map = 5;
 	game->scene.width_map = 8;
 	game->scene.map1d = ft_strdup("11111111 10010001 1000N001 10000101 11111111");

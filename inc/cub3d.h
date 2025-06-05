@@ -6,7 +6,7 @@
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 18:31:20 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/06/05 15:49:11 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/06/05 16:17:10 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@
 # define HEIGHT 360
 # define MAP_TILE 20
 # define FOV 60
+# define SPEED 0.02
 
 # define PI 3.14159265358979323846
 
@@ -83,20 +84,6 @@ typedef struct s_point
 	double			y;
 }					t_point;
 
-typedef struct s_ray
-{
-	double	angle_radians;
-	t_point	vector;
-	t_point	start_point;
-	t_point	pos;
-	t_dir	hit_dir;
-	t_point	delta_dist;
-	t_point	axis_dist;
-	t_point real_axis_dist;
-	t_point	step;
-	double	size;
-}	t_ray;
-
 typedef struct s_player
 {
 	t_point			pos;
@@ -114,6 +101,20 @@ typedef struct s_scene
 	int				ceil_rgb;
 }					t_scene;
 
+typedef struct s_ray
+{
+	double	angle_radians;
+	t_point	vector;
+	t_point	start_point;
+	t_point	pos;
+	t_dir	hit_dir;
+	t_point	delta_dist;
+	t_point	axis_dist;
+	t_point real_axis_dist;
+	t_point	step;
+	double	size;
+}	t_ray;
+
 typedef struct s_graph
 {
 	mlx_texture_t	*icon_t;
@@ -127,6 +128,7 @@ typedef struct s_graph
 	mlx_image_t		*west;
 	mlx_image_t		*bg;
 	mlx_image_t		*minimap;
+	mlx_image_t		*player_mmap;
 }					t_graph;
 
 typedef struct s_game
@@ -160,7 +162,8 @@ void				draw_bg(t_game *game);
 
 // map.c
 
-void				draw_minimap(t_game *game);
+void				draw_minimap(t_game *game, int mmap_width, int mmap_height);
+void	draw_player_mmap(t_game *game, int radius, int mmap_width, int mmap_height);
 
 // hook.c
 
