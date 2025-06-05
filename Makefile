@@ -166,6 +166,7 @@ $(OBJ_BONUS_DIR)%.o: $(SRC_BONUS_DIR)%.c | $(OBJ_BONUS_DIR)
 norm:
 	@norminette $(SRC_DIR) $(INC_DIR)
 
+ARGS = assets/scenes/example.cub
 # Rule to compile with debug flags
 debug:
 	@if [ ! -f $(BUILD_MODE_FILE) ] || ! grep -q "DEBUG=1" $(BUILD_MODE_FILE); then \
@@ -185,6 +186,9 @@ valgrind:
 	@$(MAKE) VALGRIND=1 -s
 	@echo " -> $(BW)[Valgrind]:\t\t$(BB)Valgrind mode enabled\t🟦$(NC)\n"
 	-@valgrind $(VALGRIND_FLAGS) ./$(NAME) $(ARGS)
+
+run:
+	-@./$(NAME) $(ARGS)
 
 # **************************************************************************** #
 # ADDITIONAL RULES
