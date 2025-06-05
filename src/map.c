@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: raperez- <raperez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 18:42:36 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/06/04 20:56:17 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/06/05 12:37:19 by raperez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,8 +117,8 @@ static void	draw_map_player(t_game *game, int radius, int mmap_width,
 		{
 			if (dx * dx + dy * dy <= radius * radius)
 			{
-				draw_x = game->player.x + dx;
-				draw_y = game->player.y + dy;
+				draw_x = game->player.pos.x + dx;
+				draw_y = game->player.pos.y + dy;
 				if (draw_x >= 0 && draw_x < mmap_width 
 					&& draw_y >= 0 && draw_y < mmap_height)
 					mlx_put_pixel(game->graphs.minimap, draw_x, draw_y, GREEN);
@@ -140,10 +140,10 @@ void	draw_minimap(t_game *game)
 	game->scene.height_map = 5;
 	game->scene.width_map = 8;
 	game->scene.map2d = default_map;
-	game->player.x_map = 2;
-	game->player.y_map = 2;
-	game->player.x = game->player.x_map * MAP_TILE + MAP_TILE / 2;
-	game->player.y = game->player.y_map * MAP_TILE + MAP_TILE / 2;
+	game->player.mmap.x = 2;
+	game->player.mmap.y = 2;
+	game->player.pos.x = game->player.mmap.x * MAP_TILE + MAP_TILE / 2;
+	game->player.pos.y = game->player.mmap.y * MAP_TILE + MAP_TILE / 2;
 	game->player.angle = 0;
 	
 	mmap_width = MAP_TILE * game->scene.width_map;

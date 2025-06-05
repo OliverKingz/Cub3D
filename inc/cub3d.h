@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: raperez- <raperez-@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: raperez- <raperez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 18:31:20 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/06/05 01:06:22 by raperez-         ###   ########.fr       */
+/*   Updated: 2025/06/05 12:42:24 by raperez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,25 +46,38 @@
 # define FAIL_IMAGES "Failed loading images\n"
 # define FAIL_MINIMAP_TOO_BIG "Minimap is too big, change the tile size\n"
 
-#define WIDTH 540
-#define HEIGHT 360
+# define WIDTH 540
+# define HEIGHT 360
+# define MAP_TILE 20
+# define FOV 60
 
-#define M_PI 3.14159265358979323846
+#define PI 3.14159265358979323846
+
+# define BLACK 0x000000FFAdd
+# define WHITE 0xFFFFFFFF
+# define GREY 0x808080FF
+# define LIGHT_GREY 0xC0C0C0FF
+# define DARK_GREY 0x404040FF
+# define GREEN 0x00FF00FF
+# define TURQUOISE 0x40E0D0FF
+# define BLUE 0x0000FFFF
+# define LIGHT_BLUE 0xADD8E6FF
+# define DARK_BLUE 0x00008BFF
 
 /* ************************************************************************** */
 /*                              ENUMS AND STRUCTS                             */
 /* ************************************************************************** */
+
+typedef enum e_dir
+{
+	NONE, NO, SO, EA, WE
+}	t_dir;
 
 typedef struct s_point
 {
 	double	x;
 	double	y;
 }	t_point;
-
-typedef enum e_dir
-{
-	none, up, down, right, left
-}	t_dir;
 
 typedef struct s_ray
 {
@@ -80,11 +93,9 @@ typedef struct s_ray
 
 typedef struct s_player
 {
-	int				x;
-	int				y;
-	int				x_map;
-	int				y_map;
-	float			angle;
+	t_point			pos;
+	t_point			mmap;
+	double			angle;
 }					t_player;
 
 typedef struct s_scene

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycast.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: raperez- <raperez-@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: raperez- <raperez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 14:35:02 by raperez-          #+#    #+#             */
-/*   Updated: 2025/06/05 01:02:58 by raperez-         ###   ########.fr       */
+/*   Updated: 2025/06/05 13:11:25 by raperez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 double	degrees_to_radians(double degrees)
 {
-	return (degrees * M_PI / 180.0);
+	return (degrees * PI / 180.0);
 }
 
 //Convierte el angulo en grados a un vector
@@ -29,6 +29,10 @@ t_point	angle_to_vector(double angle_rads)
 
 //A partir del angulo, calcula las delta_dist (distancia que se recorre para
 //cruzar una casilla horizontal o verticalmente)
+// cos alfa = cat contig / hipotenusa
+// delta x = hipotenusa = cat contiguo / cos alfa = 1 / cos(alfa)
+// sen alfa = cat opuesto / hipotensa
+// delta y = hipotenusa = cat opuesto / sen alfa = 1 / sen(alfa)
 void	set_delta_dist(t_ray *ray)
 {
 	double	cosAngle;
@@ -50,11 +54,11 @@ void	init_ray(t_game *game, t_ray *ray)
 {
 	ray->angle_radians = degrees_to_radians(game->player.angle);
 	ray->vector = angle_to_vector(ray->angle_radians);	//Calculo el vector direccion
-	ray->start_point.x = game->player.x;
-	ray->start_point.y = game->player.y;
-	ray->pos.x = game->player.x;
-	ray->pos.y = game->player.y;
-	ray->hit_dir = none;
+	ray->start_point.x = game->player.pos.x;
+	ray->start_point.y = game->player.pos.y;
+	ray->pos.x = game->player.pos.x;
+	ray->pos.y = game->player.pos.y;
+	ray->hit_dir = NONE;
 	set_delta_dist(ray);
 }
 
@@ -68,6 +72,7 @@ t_ray	launch_ray(t_game *game)
 
 	while (!ray.hit_dir)
 	{
+		// Chequear distancia del punto hasta eje x e y
 		if (ray.vector.x > 0)
 			ray.axis_dist.x = 1 - (ray.pos.x - (int)ray.pos.x);
 		else
@@ -78,21 +83,28 @@ t_ray	launch_ray(t_game *game)
 			ray.axis_dist.y = ray.pos.y - (int)ray.pos.y;
 		
 		//Mover el rayo
+		// Regla de tres:
+		// 1 casilla x --> delta x
+		// 0,8 casilla x --> ?
+		// ? = (delta x * 0,8)/1
 		double distX = fabs(ray.delta_dist.x * ray.axis_dist.x);
 		double distY = fabs(ray.delta_dist.y * ray.axis_dist.y);
 		
+		// Nos quedamos con el pequeño, que es el que intersecciona primero con el eje cualquiera
 		//y - y0 = m(x - x0) | m = tan(angle)
-		if (ray.vector.x == 0)
+
+		// Hacemos ajustes porque cos puede valer 0, descarto esos casos
+		if (ray.vector.x == 0) // nos movemos verticalmente, solo avanzo 1
 			ray.pos.y = (int)ray.pos.y + 1;
-		else if(ray.vector.y == 0)
+		else if(ray.vector.y == 0) // nos movemos horizontalmente, solo avanzo 1
 			ray.pos.x = (int)ray.pos.x + 1;
-		else if (distX < distY)
+		else if (distX < distY) // intersecciona primero con el eje vertical y
 		{
 			ray.pos.x = (int)ray.pos.x + 1;
 			ray.pos.y = tan(ray.angle_radians) * (ray.pos.x - ray.start_point.x)
 				+ ray.start_point.y;
 		}
-		else
+		else //intersecciona primero con el eje horizontal x
 		{
 			ray.pos.y = (int)ray.pos.y + 1;
 			ray.pos.x = (ray.pos.y - ray.start_point.y)/tan(ray.angle_radians)
@@ -104,16 +116,16 @@ t_ray	launch_ray(t_game *game)
 			if (distX < distY)
 			{
 				if (ray.vector.x > 0)
-					ray.hit_dir = left;
+					ray.hit_dir = WE;
 				else
-					ray.hit_dir = right;
+					ray.hit_dir = EA;
 			}
 			else
 			{
 				if (ray.vector.y > 0)
-					ray.hit_dir = up;
+					ray.hit_dir = NO;
 				else
-					ray.hit_dir = down;
+					ray.hit_dir = SO;
 			}
 			ray.hit_point.x = ray.pos.x;
 			ray.hit_point.y = ray.pos.y;
@@ -122,23 +134,31 @@ t_ray	launch_ray(t_game *game)
 	return (ray);
 }
 
-/*
-int	main(void)
-{
-	t_game	game;
-	t_ray	ray;
-	double	distX;
-	double	distY;
-	double	dist;
 
-	game.player.angle = 45;
-	game.player.x = 1;
-	game.player.y = 1;
-	game.scene.map2d = ft_split("11111 10001 10001 10001 11111", ' ');
- 	ray = launch_ray(&game);
-	distX = ray.start_point.x - ray.hit_point.x;
-	distY = ray.start_point.y - ray.hit_point.y;
-	dist = sqrt(distX * distX + distY * distY);
-	printf("Distancia: %f\n", dist);
-	return (0);
-}*/
+// int	main(void)
+// {
+// 	t_game	game;
+// 	t_ray	ray;
+// 	double	distX;
+// 	double	distY;
+// 	double	dist;
+
+// 	game.player.angle = 45;
+// 	game.player.pos.x = 1;
+// 	game.player.pos.y = 1;
+// 	game.scene.map2d = ft_split("11111 10001 10001 10001 11111", ' ');
+//  	ray = launch_ray(&game);
+// 	distX = ray.start_point.x - ray.hit_point.x;
+// 	distY = ray.start_point.y - ray.hit_point.y;
+// 	dist = sqrt(distX * distX + distY * distY);
+// 	printf("Distancia: %f\n", dist);
+// 	return (0);
+// }
+
+/*
+11111
+10001
+10001
+10001
+11111
+*/
