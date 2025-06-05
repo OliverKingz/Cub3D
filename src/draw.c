@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: raperez- <raperez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 19:11:12 by raperez-          #+#    #+#             */
-/*   Updated: 2025/06/05 16:21:27 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/06/05 16:24:25 by raperez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	draw_game(t_game *game)
 	int			mmap_height;
 	
 	draw_bg(game);
-	// draw_walls(game); //AKA draw textures
+	draw_walls(game); //AKA draw textures
 
 	mmap_width = MAP_TILE * game->scene.width_map;
 	mmap_height = MAP_TILE * game->scene.height_map;
