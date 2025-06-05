@@ -77,7 +77,6 @@ all: libft libmlx $(NAME)
 
 # Rule to create the program
 $(NAME): $(OBJS) $(LIBFT) $(LIBMLX)
-	@printf "%b" "$(CL) -> $(BW)[$(NAME)]:\t\t$(NC)$(BY)Compilation start\t⏳$(NC)\n"
 	@$(CC) $(CFLAGS) $(IFLAGS) $^ $(LDFLAGS) -o $(NAME)
 	@printf "%b" "$(CL) -> $(BW)[$(NAME)]:\t\t$(NC)$(BG)Compilation success\t✅$(NC)\n"
 	@echo "─────────────────────────────────────────────────────$(BY)"
@@ -104,7 +103,6 @@ $(LIBFT):
 # Rule to make the library Libmlx
 libmlx: $(LIBMLX)
 $(LIBMLX):
-	@printf "%b" "$(CL) -> $(BW)[LibMLX]:\t\t$(NC)$(BY)Compilation start\t⏳$(NC)\n"
 	@cmake $(LIBMLX_DIR) -B $(LIBMLX_DIR)/build > /dev/null && make -C $(LIBMLX_DIR)/build -j4 > /dev/null
 	@printf "%b" "$(CL) -> $(BW)[LibMLX]:\t\t$(NC)$(BG)Compilation success\t✅$(NC)\n"
 
