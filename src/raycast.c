@@ -6,7 +6,7 @@
 /*   By: raperez- <raperez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 14:35:02 by raperez-          #+#    #+#             */
-/*   Updated: 2025/06/05 15:41:31 by raperez-         ###   ########.fr       */
+/*   Updated: 2025/06/05 16:01:36 by raperez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,9 @@ void	set_delta_dist(t_ray *ray)
 		ray->delta_dist.y = 1 / sin(ray->angle_radians);
 }
 
-void	init_ray(t_game *game, t_ray *ray)
+void	init_ray(t_game *game, t_ray *ray, double angle)
 {
-	ray->angle_radians = degrees_to_radians(game->player.angle);
+	ray->angle_radians = degrees_to_radians(angle);
 	ray->vector = angle_to_vector(ray->angle_radians);	//Calculo el vector direccion
 	ray->start_point.x = game->player.pos.x;
 	ray->start_point.y = game->player.pos.y;
@@ -179,11 +179,11 @@ double	calculate_ray_size(t_ray ray)
 
 //Lanza un rayo desde la posición inicial (xO, yO) con el angulo (angle)
 //Retorna la distancia que recorrió el rayo
-t_ray	launch_ray(t_game *game)
+t_ray	launch_ray(t_game *game, int angle)
 {
 	t_ray	ray;
 	
-	init_ray(game, &ray);
+	init_ray(game, &ray, (double)angle);
 	while (1)
 	{
 		check_hit(&ray, &(game->scene));

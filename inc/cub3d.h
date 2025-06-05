@@ -6,7 +6,7 @@
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 18:31:20 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/06/05 16:17:10 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/06/05 16:20:58 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -177,6 +177,18 @@ void				free_textures(t_game *game);
 void				free_images(t_game *game);
 void				free_map(t_game *game);
 void				free_game(t_game *game);
+
+// raycast.c
+
+double				degrees_to_radians(double degrees);
+t_point				angle_to_vector(double angle_rads);
+void				set_delta_dist(t_ray *ray);
+void				init_ray(t_game *game, t_ray *ray, double angle);
+void				calculate_axis_dist(t_ray *ray);
+void				move_ray(t_ray *ray);
+void				check_hit(t_ray *ray, t_scene *scene);
+double				calculate_ray_size(t_ray ray);
+t_ray				launch_ray(t_game *game, int angle);
 
 /* ************************************************************************** */
 #endif
