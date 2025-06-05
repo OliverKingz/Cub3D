@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: raperez- <raperez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 18:31:20 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/06/05 16:20:58 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/06/05 17:06:14 by raperez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@
 
 # define PI 3.14159265358979323846
 
-# define BLACK 0x000000FFAdd
+# define BLACK 0x000000FF
 # define WHITE 0xFFFFFFFF
 # define GREY 0x808080FF
 # define LIGHT_GREY 0xC0C0C0FF
@@ -129,6 +129,7 @@ typedef struct s_graph
 	mlx_image_t		*bg;
 	mlx_image_t		*minimap;
 	mlx_image_t		*player_mmap;
+	mlx_image_t		*rays_mmap;
 }					t_graph;
 
 typedef struct s_game

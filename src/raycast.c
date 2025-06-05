@@ -6,7 +6,7 @@
 /*   By: raperez- <raperez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 14:35:02 by raperez-          #+#    #+#             */
-/*   Updated: 2025/06/05 16:01:36 by raperez-         ###   ########.fr       */
+/*   Updated: 2025/06/05 16:26:44 by raperez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,7 +140,7 @@ void	move_ray(t_ray *ray)
 			ray->pos.x = (ray->pos.y - ray->start_point.y)/tan(ray->angle_radians)
 				+ ray->start_point.x;
 		}
-		printf("Interseccion P(%f, %f)\n", ray->pos.x, ray->pos.y);
+		//printf("Interseccion P(%f, %f)\n", ray->pos.x, ray->pos.y);
 }
 
 void	check_hit(t_ray *ray, t_scene *scene)

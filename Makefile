@@ -187,7 +187,7 @@ valgrind:
 	@echo " -> $(BW)[Valgrind]:\t\t$(BB)Valgrind mode enabled\t🟦$(NC)\n"
 	-@valgrind $(VALGRIND_FLAGS) ./$(NAME) $(ARGS)
 
-run:
+run: all
 	-@./$(NAME) $(ARGS)
 
 # **************************************************************************** #
