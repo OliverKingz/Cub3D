@@ -6,7 +6,7 @@
 /*   By: raperez- <raperez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 18:31:20 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/06/05 12:42:24 by raperez-         ###   ########.fr       */
+/*   Updated: 2025/06/05 15:24:39 by raperez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,10 +85,12 @@ typedef struct s_ray
 	t_point	vector;
 	t_point	start_point;
 	t_point	pos;
-	t_point	hit_point;
 	t_dir	hit_dir;
 	t_point	delta_dist;
 	t_point	axis_dist;
+	t_point real_axis_dist;
+	t_point	step;
+	double	size;
 }	t_ray;
 
 typedef struct s_player
