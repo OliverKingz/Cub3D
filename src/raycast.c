@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycast.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: raperez- <raperez-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: raperez- <raperez-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 14:35:02 by raperez-          #+#    #+#             */
-/*   Updated: 2025/06/05 19:20:17 by raperez-         ###   ########.fr       */
+/*   Updated: 2025/06/06 01:03:00 by raperez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,13 +74,17 @@ void	calculate_axis_dist(t_ray *ray)
 {
 		// Chequear distancia del punto hasta eje x e y
 		if (ray->vector.x > 0)
-			ray->axis_dist.x = 1 - fabs(ray->pos.x - (int)ray->pos.x);
+			ray->axis_dist.x = 1 - (ray->pos.x - (int)ray->pos.x);
+		else if (ray->pos.x - (int)ray->pos.x == 0)
+			ray->axis_dist.x = -1;
 		else
-			ray->axis_dist.x = fabs(ray->pos.x - (int)ray->pos.x);
+			ray->axis_dist.x = -(ray->pos.x - (int)ray->pos.x);
 		if (ray->vector.y > 0)
-			ray->axis_dist.y = 1 - fabs(ray->pos.y - (int)ray->pos.y);
+			ray->axis_dist.y = 1 - (ray->pos.y - (int)ray->pos.y);
+		else if (ray->pos.y - (int)ray->pos.y == 0)
+			ray->axis_dist.y = -1;
 		else
-			ray->axis_dist.y = fabs(ray->pos.y - (int)ray->pos.y);
+			ray->axis_dist.y = -(ray->pos.y - (int)ray->pos.y);
 		//Mover el rayo
 		// Regla de tres:
 		// 1 casilla x --> delta x
@@ -88,7 +92,6 @@ void	calculate_axis_dist(t_ray *ray)
 		// ? = (delta x * 0,8)/1
 		ray->real_axis_dist.x = fabs(ray->delta_dist.x * ray->axis_dist.x);
 		ray->real_axis_dist.y = fabs(ray->delta_dist.y * ray->axis_dist.y);
-		
 }
 
 void	move_ray(t_ray *ray)
@@ -125,18 +128,18 @@ void	move_ray(t_ray *ray)
 
 		// Hacemos ajustes porque cos pueden valer 0, descarto esos casos
 		if (ray->vector.x == 0) // nos movemos verticalmente, solo avanzo 1
-			ray->pos.y = (int)ray->pos.y + ray->step.y;
+			ray->pos.y = ray->pos.y + ray->axis_dist.y;
 		else if(ray->vector.y == 0) // nos movemos horizontalmente, solo avanzo 1
-			ray->pos.x = (int)ray->pos.x + ray->step.x;
-		else if (ray->real_axis_dist.x > 0 && ray->real_axis_dist.x < ray->real_axis_dist.y) // intersecciona primero con el eje vertical y
+			ray->pos.x = ray->pos.x + ray->axis_dist.x;
+		else if (ray->real_axis_dist.x < ray->real_axis_dist.y) // intersecciona primero con el eje vertical y
 		{
-			ray->pos.x = (int)ray->pos.x + ray->step.x;
+			ray->pos.x = ray->pos.x + ray->axis_dist.x;
 			ray->pos.y = tan(ray->angle_radians) * (ray->pos.x - ray->start_point.x)
 				+ ray->start_point.y;
 		}
 		else //intersecciona primero con el eje horizontal x
 		{
-			ray->pos.y = (int)ray->pos.y + ray->step.y;
+			ray->pos.y = ray->pos.y + ray->axis_dist.y;
 			ray->pos.x = (ray->pos.y - ray->start_point.y)/tan(ray->angle_radians)
 				+ ray->start_point.x;
 		}
@@ -150,9 +153,11 @@ void	check_hit(t_ray *ray, t_scene *scene)
 	
 	x = (int)ray->pos.x;
 	y = (int)ray->pos.y;
-	if (ray->vector.x < 0 && ray->vector.y > 0)
-		x -= 1;
 	
+	if (ray->vector.x < 0 && ray->pos.x - (int)ray->pos.x == 0.0)
+		x -= 1;
+	if (ray->vector.y < 0 && ray->pos.y - (int)ray->pos.y == 0.0)
+		y -= 1;
 	if (scene->map2d[y][x] == '1')
 	{
 		if (ray->real_axis_dist.x < ray->real_axis_dist.y && ray->vector.x >= 0)
@@ -193,19 +198,19 @@ t_ray	launch_ray(t_game *game, double angle)
 	return (ray);
 }
 
+/*
+int	main(void)
+{
+	t_game	game;
+	t_ray	ray;
 
-// int	main(void)
-// {
-// 	t_game	game;
-// 	t_ray	ray;
-
-// 	game.player.pos.x = 2;
-// 	game.player.pos.y = 2;
-// 	game.scene.map2d = ft_split("11111 10001 10001 10001 11111", ' ');
-//  	ray = launch_ray(&game, 91);
-// 	printf("Distancia: %f\n", ray.size);
-// 	return (0);
-// }
+	game.player.pos.x = 4;
+	game.player.pos.y = 4;
+	game.scene.map2d = ft_split("11111 10001 10001 10001 11111", ' ');
+ 	ray = launch_ray(&game, 180 + 45);
+	printf("Distancia: %f\n", ray.size);
+	return (0);
+}*/
 
 /*
 11111
