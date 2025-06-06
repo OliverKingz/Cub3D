@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: raperez- <raperez-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 19:11:12 by raperez-          #+#    #+#             */
-/*   Updated: 2025/06/06 15:34:23 by raperez-         ###   ########.fr       */
+/*   Updated: 2025/06/06 18:50:48 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,43 +57,36 @@ void	draw_rectangle(mlx_image_t *img, int x, int y, int height)
 	}
 }
 
-void	draw_walls(t_game *game, int mmap_width, int mmap_height)
+void	draw_walls_and_rays(t_game *game)
 {
 	double		i;
 	int			wall_x;
 	int			wall_height;
 	t_ray		ray;
 
-	game->graphs.rays_mmap = mlx_new_image(game->mlx, mmap_width, mmap_height);
+	// game->graphs.rays_mmap = mlx_new_image(game->mlx, game->scene.w_mmap, game->scene.h_mmap);
 	i = game->player.angle - FOV / 2;
 	wall_x = 0;
 	while (i < game->player.angle + FOV / 2)
 	{
 		ray = launch_ray(game, i);
-		draw_ray(game->graphs.rays_mmap, ray, MAP_TILE);
-		printf("Distacia: %f\n", ray.size);
+		draw_ray(game->graphs.minimap, ray, MAP_TILE);
+		//printf("Distacia: %f\n", ray.size);
 		wall_height = HEIGHT / ray.size;
 		draw_rectangle(game->graphs.bg, wall_x, (HEIGHT / 2) - (wall_height / 2), wall_height);
 		wall_x += WIDTH / FOV;
 		i++;
 	}
-	mlx_image_to_window(game->mlx, game->graphs.rays_mmap, WIDTH - 10
-		- mmap_width, HEIGHT - 10 - mmap_height);
+	// mlx_image_to_window(game->mlx, game->graphs.rays_mmap, WIDTH - 10
+	// 	- game->scene.w_mmap, HEIGHT - 10 - game->scene.h_mmap);
 }
 
 void	draw_game(t_game *game)
 {
-	int			mmap_width;
-	int			mmap_height;
-	
 	draw_bg(game);
-	mmap_width = MAP_TILE * game->scene.width_map;
-	mmap_height = MAP_TILE * game->scene.height_map;
-	if (mmap_width > WIDTH - 20 || mmap_height > HEIGHT - 20)
-		return (free_game(game), ft_mlx_err(FAIL_MINIMAP_TOO_BIG));
-	draw_minimap(game, mmap_width, mmap_height);
-	draw_walls(game, mmap_width, mmap_height);
-	draw_player_mmap(game, 3, mmap_width, mmap_height);
+	draw_minimap(game);
+	draw_walls_and_rays(game);
+	draw_player_mmap(game);
 }
 
 void	draw_bg(t_game *game)
@@ -101,7 +94,6 @@ void	draw_bg(t_game *game)
 	int	x;
 	int	y;
 
-	game->graphs.bg = mlx_new_image(game->mlx, WIDTH, HEIGHT);
 	x = 0;
 	while (x < WIDTH)
 	{

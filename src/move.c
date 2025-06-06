@@ -6,7 +6,7 @@
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 17:35:09 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/06/06 18:32:56 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/06/06 18:49:21 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,9 @@ void	move(t_game *game, int dx, int dy, int dang)
 		game->player.mmap.x = game->player.pos.x * MAP_TILE;
 		game->player.mmap.y = game->player.pos.y * MAP_TILE;
 		game->player.angle = game->player.angle + (dang * ANGLE_SPEED);
-		mlx_delete_image(game->mlx, game->graphs.player_mmap);
-		mlx_delete_image(game->mlx, game->graphs.rays_mmap);
-		mlx_delete_image(game->mlx, game->graphs.walls);
-		draw_walls(game);
+		draw_bg(game);
+		draw_minimap(game);
+		draw_walls_and_rays(game);
 		draw_player_mmap(game);
 	}
 }

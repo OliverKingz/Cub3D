@@ -3,25 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   map.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: raperez- <raperez-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 18:42:36 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/06/05 16:29:37 by raperez-         ###   ########.fr       */
+/*   Updated: 2025/06/06 18:25:04 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static void	draw_map_bg(t_game *game, int mmap_width, int mmap_height)
+void	draw_map_bg(t_game *game)
 {
 	int	y;
 	int	x;
 
 	y = 0;
-	while (y < mmap_height)
+	while (y < game->scene.h_mmap)
 	{
 		x = 0;
-		while (x < mmap_width)
+		while (x < game->scene.w_mmap)
 		{
 			mlx_put_pixel(game->graphs.minimap, x, y, BLACK);
 			x++;
@@ -30,7 +30,7 @@ static void	draw_map_bg(t_game *game, int mmap_width, int mmap_height)
 	}
 }
 
-static void	fill_cell(t_game *game, int x, int y, int color)
+void	draw_fill_cell(t_game *game, int x, int y, int color)
 {
 	int	py;
 	int	px;
@@ -50,7 +50,7 @@ static void	fill_cell(t_game *game, int x, int y, int color)
 	}
 }
 
-static void	draw_map_cells(t_game *game)
+void	draw_map_cells(t_game *game)
 {
 	int	y;
 	int	x;
@@ -63,26 +63,26 @@ static void	draw_map_cells(t_game *game)
 		while (x < game->scene.width_map)
 		{
 			if (game->scene.map2d[y][x] == '1')
-				fill_cell(game, x, y, WHITE);
+				draw_fill_cell(game, x, y, WHITE);
 			else if (game->scene.map2d[y][x] == '0')
-				fill_cell(game, x, y, BLACK);
+				draw_fill_cell(game, x, y, BLACK);
 			x++;
 		}
 		y++;
 	}
 }
 
-static void	draw_map_grid(t_game *game, int mmap_width, int mmap_height)
+void	draw_map_grid(t_game *game)
 {
 	int	x;
 	int	y;
 
 	// Draw vertical lines
 	x = -1;
-	while (++x < mmap_width)
+	while (++x < game->scene.w_mmap)
 	{
 		y = -1;
-		while (++y < mmap_height)
+		while (++y < game->scene.h_mmap)
 		{
 			if (x % MAP_TILE == 0)
 				mlx_put_pixel(game->graphs.minimap, x, y, LIGHT_GREY);
@@ -90,10 +90,10 @@ static void	draw_map_grid(t_game *game, int mmap_width, int mmap_height)
 	}
 	// Draw horizontal lines
 	y = -1;
-	while (++y < mmap_height)
+	while (++y < game->scene.h_mmap)
 	{
 		x = -1;
-		while (++x < mmap_width)
+		while (++x < game->scene.w_mmap)
 		{
 			if (y % MAP_TILE == 0)
 				mlx_put_pixel(game->graphs.minimap, x, y, LIGHT_GREY);
@@ -101,27 +101,25 @@ static void	draw_map_grid(t_game *game, int mmap_width, int mmap_height)
 	}
 }
 
-void	draw_player_mmap(t_game *game, int radius, int mmap_width,
-		int mmap_height)
+void	draw_player_mmap(t_game *game)
 {
 	int	dy;
 	int	dx;
 	int	draw_x;
 	int	draw_y;
 
-	game->graphs.player_mmap = mlx_new_image(game->mlx, 2 * radius, 2 * radius);
-	dy = -radius;
-	while (dy <= radius)
+	dy = -PMAP_RADIUS;
+	while (dy <= PMAP_RADIUS)
 	{
-		dx = -radius;
-		while (dx <= radius)
+		dx = -PMAP_RADIUS;
+		while (dx <= PMAP_RADIUS)
 		{
-			if (dx * dx + dy * dy <= radius * radius)
+			if (dx * dx + dy * dy <= PMAP_RADIUS * PMAP_RADIUS)
 			{
 				draw_x = game->player.mmap.x + dx;
 				draw_y = game->player.mmap.y + dy;
-				if (draw_x >= 0 && draw_x < mmap_width 
-					&& draw_y >= 0 && draw_y < mmap_height)
+				if (draw_x >= 0 && draw_x < game->scene.w_mmap && draw_y >= 0
+					&& draw_y < game->scene.h_mmap)
 					mlx_put_pixel(game->graphs.minimap, draw_x, draw_y, GREEN);
 			}
 			dx++;
@@ -129,15 +127,14 @@ void	draw_player_mmap(t_game *game, int radius, int mmap_width,
 		dy++;
 	}
 	mlx_image_to_window(game->mlx, game->graphs.player_mmap, WIDTH - 10
-		- mmap_width, HEIGHT - 10 - mmap_height);
+		- game->scene.w_mmap, HEIGHT - 10 - game->scene.h_mmap);
 }
 
-void	draw_minimap(t_game *game, int mmap_width, int mmap_height)
+void	draw_minimap(t_game *game)
 {
-	game->graphs.minimap = mlx_new_image(game->mlx, mmap_width, mmap_height);
-	draw_map_bg(game, mmap_width, mmap_height);
+	draw_map_bg(game);
 	draw_map_cells(game);
-	draw_map_grid(game, mmap_width, mmap_height);
+	draw_map_grid(game);
 	mlx_image_to_window(game->mlx, game->graphs.minimap, WIDTH - 10
-		- mmap_width, HEIGHT - 10 - mmap_height);
+		- game->scene.w_mmap, HEIGHT - 10 - game->scene.h_mmap);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: raperez- <raperez-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 18:31:20 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/06/06 16:47:29 by raperez-         ###   ########.fr       */
+/*   Updated: 2025/06/06 18:56:44 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,10 @@
 # define WIDTH 540
 # define HEIGHT 360
 # define MAP_TILE 10
+# define PMAP_RADIUS 3
 # define FOV 60
-# define SPEED 0.02
+# define SPEED 0.2
+# define ANGLE_SPEED 1
 
 # define PI 3.14159265358979323846
 
@@ -97,6 +99,8 @@ typedef struct s_scene
 	char			**map2d;
 	int				height_map;
 	int				width_map;
+	int				h_mmap;
+	int				w_mmap;
 	int				floor_rgb;
 	int				ceil_rgb;
 }					t_scene;
@@ -161,16 +165,26 @@ void				init_map(t_game *game, const char *scene_dir);
 // draw.c
 void				draw_game(t_game *game);
 void				draw_bg(t_game *game);
+void	draw_walls_and_rays(t_game *game);
+void	draw_rectangle(mlx_image_t *img, int x, int y, int height);
+void	draw_ray(mlx_image_t *img, t_ray ray, int mult);
 
 // map.c
 
-void				draw_minimap(t_game *game, int mmap_width, int mmap_height);
-void	draw_player_mmap(t_game *game, int radius, int mmap_width, int mmap_height);
+void				draw_minimap(t_game *game);
+void	draw_player_mmap(t_game *game);
+void	draw_map_bg(t_game *game);
+void	draw_fill_cell(t_game *game, int x, int y, int color);
+void	draw_map_cells(t_game *game);
+void	draw_map_grid(t_game *game);
 
 // hook.c
 
 void				key_hook(mlx_key_data_t keydata, void *param);
 void				close_hook(void *param);
+
+// move.c
+void	move(t_game *game, int dx, int dy, int dang);
 
 // exit.c
 

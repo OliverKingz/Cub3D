@@ -37,7 +37,7 @@ void	init_texture(t_game *game, const char *scene_dir)
 void	init_player(t_game *game, const char *scene_dir)
 {
 	(void)scene_dir;
-	game->player.angle = 120;
+	game->player.angle = 0;
 	game->player.pos.x = 2;
 	game->player.pos.y = 2;
 	game->player.mmap.x = game->player.pos.x * MAP_TILE;
@@ -51,6 +51,10 @@ void	init_map(t_game *game, const char *scene_dir)
 	game->scene.floor_rgb = DARK_GREY;
 	game->scene.height_map = 5;
 	game->scene.width_map = 8;
+	game->scene.h_mmap = game->scene.height_map * MAP_TILE;
+	game->scene.w_mmap = game->scene.width_map * MAP_TILE;
+	if (game->scene.w_mmap > WIDTH - 20 || game->scene.h_mmap > HEIGHT - 20)
+		return (free_game(game), ft_mlx_err(FAIL_MINIMAP_TOO_BIG));
 	game->scene.map1d = ft_strdup("11111111 10010001 1000N001 10000101 11111111");
 	game->scene.map2d = ft_split(game->scene.map1d, ' ');
 }

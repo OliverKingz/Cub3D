@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_game.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: raperez- <raperez-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 19:52:22 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/06/05 17:04:15 by raperez-         ###   ########.fr       */
+/*   Updated: 2025/06/06 18:19:55 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,11 @@ void	init_images(t_game *game)
 	game->graphs.north = mlx_texture_to_image(game->mlx, game->graphs.north_t);
 	game->graphs.south = mlx_texture_to_image(game->mlx, game->graphs.south_t);
 	game->graphs.west = mlx_texture_to_image(game->mlx, game->graphs.west_t);
+
+	game->graphs.bg = mlx_new_image(game->mlx, WIDTH, HEIGHT);
+	game->graphs.minimap = mlx_new_image(game->mlx, game->scene.w_mmap, game->scene.h_mmap);
+	game->graphs.player_mmap = mlx_new_image(game->mlx, 2 * PMAP_RADIUS, 2 * PMAP_RADIUS);
+
 	if (!game->graphs.east || !game->graphs.north || !game->graphs.south
 		|| !game->graphs.west)
 		ft_mlx_err(FAIL_IMAGES);

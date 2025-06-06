@@ -6,7 +6,7 @@
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 19:13:36 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/06/06 17:41:25 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/06/06 18:49:45 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	key_hook(mlx_key_data_t keydata, void *param)
 	t_game	*game;
 
 	game = (t_game *)param;
-	if (keydata.action == MLX_PRESS || keydata.action == MLX_REPEAT)
+	if (keydata.action == MLX_PRESS)
 	{
 		if (keydata.key == MLX_KEY_ESCAPE)
 			close_hook(game);

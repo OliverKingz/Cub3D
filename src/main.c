@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: raperez- <raperez-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 19:38:28 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/06/05 19:08:06 by raperez-         ###   ########.fr       */
+/*   Updated: 2025/06/06 17:31:13 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,3 +34,5 @@ int32_t	main(int argc, char **argv)
 		ft_mlx_err(USAGE);
 	return (EXIT_SUCCESS);
 }
+
+// PNG tiene colores que no son RGB, hay que castearlo. Problamente usar XPM
