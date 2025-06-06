@@ -6,7 +6,7 @@
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 19:11:12 by raperez-          #+#    #+#             */
-/*   Updated: 2025/06/06 19:25:56 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/06/06 21:57:41 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,8 @@ void	draw_frame(t_game *game)
 {
 	draw_screen_bg(game);
 	draw_minimap(game);
-	draw_walls_and_rays(game);
+	//draw_walls_and_rays(game);
+	draw_ray(game->graphs.minimap, launch_ray(game, game->player.angle), MAP_TILE);
 	draw_player_mmap(game);
 }
 

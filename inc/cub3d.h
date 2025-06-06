@@ -6,7 +6,7 @@
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 18:31:20 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/06/06 19:28:37 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/06/06 21:52:46 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,8 @@
 # define MAP_TILE 20
 # define PMAP_RADIUS 3
 # define FOV 60
-# define SPEED 0.2
-# define ANGLE_SPEED 1
+# define SPEED 0.5
+# define ANGLE_SPEED 45
 
 # define PI 3.14159265358979323846
 

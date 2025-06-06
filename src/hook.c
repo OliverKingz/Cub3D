@@ -6,7 +6,7 @@
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 19:13:36 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/06/06 20:41:27 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/06/06 21:42:14 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,9 @@ void	key_hook(mlx_key_data_t keydata, void *param)
 		if (keydata.key == MLX_KEY_D)
 			(printf("Pressed D "), move(game, 1, 0, 0));
 		if (keydata.key == MLX_KEY_LEFT)
-			move(game, 0, 0, -1);
+			(printf("Pressed <- "), move(game, 0, 0, -1));
 		if (keydata.key == MLX_KEY_RIGHT)
-			move(game, 0, 0, 1);
+			(printf("Pressed -> "), move(game, 0, 0, 1));
 	}
 }
 

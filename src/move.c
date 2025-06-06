@@ -6,7 +6,7 @@
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 17:35:09 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/06/06 20:48:13 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/06/06 22:15:13 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,13 +31,13 @@ void	move(t_game *game, int dx, int dy, int dang)
 	{
 		if (dy != 0)
 		{
-			new_pos.x += cos(angle_rad) * dy * SPEED;
-			new_pos.y -= sin(angle_rad) * dy * SPEED;
+			new_pos.x += cos(angle_rad) * -dy * SPEED;
+			new_pos.y += sin(angle_rad) * -dy * SPEED;
 		}
 		if (dx != 0)
 		{
-			new_pos.x += cos(angle_rad + PI / 2) * dx * SPEED;
-			new_pos.y -= sin(angle_rad + PI / 2) * dx * SPEED;
+			new_pos.x += -sin(angle_rad) * dx * SPEED;
+			new_pos.y += cos(angle_rad) * dx * SPEED;
 		}
 		if (new_pos.x >= 0 && new_pos.x < game->scene.width_map
 			&& new_pos.y >= 0 && new_pos.y < game->scene.height_map
@@ -50,5 +50,5 @@ void	move(t_game *game, int dx, int dy, int dang)
 	}
 	if (game->is_running == true)
 		draw_frame(game);
-	printf("P(%f, %f)\n", game->player.pos.x, game->player.pos.y);
+	printf("P(%f, %f, %f)\n", game->player.pos.x, game->player.pos.y, game->player.angle);
 }
