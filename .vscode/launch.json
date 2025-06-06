@@ -6,7 +6,7 @@
     "type": "cppdbg",
     "request": "launch",
     "program": "${workspaceFolder}/cub3d",  // Ruta a tu binario
-    "args": [],
+    "args": ["./cub3d assets/scenes/example.cub"],
     "stopAtEntry": false,
     "cwd": "${workspaceFolder}",
     "environment": [],

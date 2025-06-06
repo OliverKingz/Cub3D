@@ -6,7 +6,7 @@
 /*   By: raperez- <raperez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 18:31:20 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/06/05 18:17:10 by raperez-         ###   ########.fr       */
+/*   Updated: 2025/06/06 16:47:29 by raperez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@
 
 # define WIDTH 540
 # define HEIGHT 360
-# define MAP_TILE 20
+# define MAP_TILE 10
 # define FOV 60
 # define SPEED 0.02
 
@@ -127,6 +127,7 @@ typedef struct s_graph
 	mlx_image_t		*south;
 	mlx_image_t		*west;
 	mlx_image_t		*bg;
+	mlx_image_t		*walls;
 	mlx_image_t		*minimap;
 	mlx_image_t		*player_mmap;
 	mlx_image_t		*rays_mmap;

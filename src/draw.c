@@ -6,7 +6,7 @@
 /*   By: raperez- <raperez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 19:11:12 by raperez-          #+#    #+#             */
-/*   Updated: 2025/06/05 19:08:59 by raperez-         ###   ########.fr       */
+/*   Updated: 2025/06/06 15:34:23 by raperez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,18 +37,44 @@ void	draw_ray(mlx_image_t *img, t_ray ray, int mult)
 	}
 }
 
+void	draw_rectangle(mlx_image_t *img, int x, int y, int height)
+{
+	int j;
+	int	width;
+
+	width = x + WIDTH / FOV;
+	height += y;
+	while (x < width)
+	{
+		j = y;
+		while (j < height)
+		{
+			if (j >= 0)
+				mlx_put_pixel(img, x, j, GREEN);
+			j++;
+		} 
+		x++;
+	}
+}
+
 void	draw_walls(t_game *game, int mmap_width, int mmap_height)
 {
 	double		i;
+	int			wall_x;
+	int			wall_height;
 	t_ray		ray;
 
 	game->graphs.rays_mmap = mlx_new_image(game->mlx, mmap_width, mmap_height);
 	i = game->player.angle - FOV / 2;
+	wall_x = 0;
 	while (i < game->player.angle + FOV / 2)
 	{
 		ray = launch_ray(game, i);
 		draw_ray(game->graphs.rays_mmap, ray, MAP_TILE);
 		printf("Distacia: %f\n", ray.size);
+		wall_height = HEIGHT / ray.size;
+		draw_rectangle(game->graphs.bg, wall_x, (HEIGHT / 2) - (wall_height / 2), wall_height);
+		wall_x += WIDTH / FOV;
 		i++;
 	}
 	mlx_image_to_window(game->mlx, game->graphs.rays_mmap, WIDTH - 10
