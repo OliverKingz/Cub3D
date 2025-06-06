@@ -6,7 +6,7 @@
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 19:13:36 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/06/03 20:36:39 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/06/06 17:41:25 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,17 +22,17 @@ void	key_hook(mlx_key_data_t keydata, void *param)
 		if (keydata.key == MLX_KEY_ESCAPE)
 			close_hook(game);
 		if (keydata.key == MLX_KEY_W)
-			printf("W\n");
+			move(game, 0, -1, 0);
 		if (keydata.key == MLX_KEY_S)
-			printf("S\n");
+			move(game, 0, 1, 0);
 		if (keydata.key == MLX_KEY_A)
-			printf("A\n");
+			move(game, -1, 0, 0);
 		if (keydata.key == MLX_KEY_D)
-			printf("D\n");
+			move(game, 1, 0, 0);
 		if (keydata.key == MLX_KEY_LEFT)
-			printf("<--\n");
+			move(game, 0, 0, -1);
 		if (keydata.key == MLX_KEY_RIGHT)
-			printf("-->\n");
+			move(game, 0, 0, 1);
 	}
 }
 
