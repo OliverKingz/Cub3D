@@ -6,7 +6,7 @@
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 19:11:12 by raperez-          #+#    #+#             */
-/*   Updated: 2025/06/06 18:50:48 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/06/06 19:25:56 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,6 @@ void	draw_walls_and_rays(t_game *game)
 	int			wall_height;
 	t_ray		ray;
 
-	// game->graphs.rays_mmap = mlx_new_image(game->mlx, game->scene.w_mmap, game->scene.h_mmap);
 	i = game->player.angle - FOV / 2;
 	wall_x = 0;
 	while (i < game->player.angle + FOV / 2)
@@ -73,23 +72,29 @@ void	draw_walls_and_rays(t_game *game)
 		draw_ray(game->graphs.minimap, ray, MAP_TILE);
 		//printf("Distacia: %f\n", ray.size);
 		wall_height = HEIGHT / ray.size;
-		draw_rectangle(game->graphs.bg, wall_x, (HEIGHT / 2) - (wall_height / 2), wall_height);
+		draw_rectangle(game->graphs.screen, wall_x, (HEIGHT / 2) - (wall_height / 2), wall_height);
 		wall_x += WIDTH / FOV;
 		i++;
 	}
-	// mlx_image_to_window(game->mlx, game->graphs.rays_mmap, WIDTH - 10
-	// 	- game->scene.w_mmap, HEIGHT - 10 - game->scene.h_mmap);
 }
 
-void	draw_game(t_game *game)
+void	init_draw_to_window(t_game *game)
 {
-	draw_bg(game);
+	draw_frame(game);
+	mlx_image_to_window(game->mlx, game->graphs.screen, 0, 0);
+	mlx_image_to_window(game->mlx, game->graphs.minimap, WIDTH - 10
+		- game->scene.w_mmap, HEIGHT - 10 - game->scene.h_mmap);
+}
+
+void	draw_frame(t_game *game)
+{
+	draw_screen_bg(game);
 	draw_minimap(game);
 	draw_walls_and_rays(game);
 	draw_player_mmap(game);
 }
 
-void	draw_bg(t_game *game)
+void	draw_screen_bg(t_game *game)
 {
 	int	x;
 	int	y;
@@ -100,15 +105,14 @@ void	draw_bg(t_game *game)
 		y = 0;
 		while (y < HEIGHT / 2)
 		{
-			mlx_put_pixel(game->graphs.bg, x, y, game->scene.ceil_rgb);
+			mlx_put_pixel(game->graphs.screen, x, y, game->scene.ceil_rgb);
 			y++;
 		}
 		while (y < HEIGHT)
 		{
-			mlx_put_pixel(game->graphs.bg, x, y, game->scene.floor_rgb);
+			mlx_put_pixel(game->graphs.screen, x, y, game->scene.floor_rgb);
 			y++;
 		}
 		x++;
 	}
-	mlx_image_to_window(game->mlx, game->graphs.bg, 0, 0);
 }

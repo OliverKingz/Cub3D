@@ -6,7 +6,7 @@
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 19:52:22 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/06/06 18:19:55 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/06/06 19:25:36 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ t_game	init_game(t_game *game, const char *scene_dir)
 	init_mlx(game);
 	init_images(game);
 	game->is_running = true;
+	init_draw_to_window(game);
 	return (*game);
 }
 
@@ -28,9 +29,8 @@ void	init_images(t_game *game)
 	game->graphs.south = mlx_texture_to_image(game->mlx, game->graphs.south_t);
 	game->graphs.west = mlx_texture_to_image(game->mlx, game->graphs.west_t);
 
-	game->graphs.bg = mlx_new_image(game->mlx, WIDTH, HEIGHT);
+	game->graphs.screen = mlx_new_image(game->mlx, WIDTH, HEIGHT);
 	game->graphs.minimap = mlx_new_image(game->mlx, game->scene.w_mmap, game->scene.h_mmap);
-	game->graphs.player_mmap = mlx_new_image(game->mlx, 2 * PMAP_RADIUS, 2 * PMAP_RADIUS);
 
 	if (!game->graphs.east || !game->graphs.north || !game->graphs.south
 		|| !game->graphs.west)

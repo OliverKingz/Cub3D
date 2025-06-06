@@ -6,7 +6,7 @@
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 18:31:20 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/06/06 18:56:44 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/06/06 19:28:37 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@
 
 # define WIDTH 540
 # define HEIGHT 360
-# define MAP_TILE 10
+# define MAP_TILE 20
 # define PMAP_RADIUS 3
 # define FOV 60
 # define SPEED 0.2
@@ -107,17 +107,17 @@ typedef struct s_scene
 
 typedef struct s_ray
 {
-	double	angle_radians;
-	t_point	vector;
-	t_point	start_point;
-	t_point	pos;
-	t_dir	hit_dir;
-	t_point	delta_dist;
-	t_point	axis_dist;
-	t_point real_axis_dist;
-	t_point	step;
-	double	size;
-}	t_ray;
+	double			angle_radians;
+	t_point			vector;
+	t_point			start_point;
+	t_point			pos;
+	t_dir			hit_dir;
+	t_point			delta_dist;
+	t_point			axis_dist;
+	t_point			real_axis_dist;
+	t_point			step;
+	double			size;
+}					t_ray;
 
 typedef struct s_graph
 {
@@ -130,11 +130,8 @@ typedef struct s_graph
 	mlx_image_t		*north;
 	mlx_image_t		*south;
 	mlx_image_t		*west;
-	mlx_image_t		*bg;
-	mlx_image_t		*walls;
+	mlx_image_t		*screen;
 	mlx_image_t		*minimap;
-	mlx_image_t		*player_mmap;
-	mlx_image_t		*rays_mmap;
 }					t_graph;
 
 typedef struct s_game
@@ -163,20 +160,21 @@ void				init_player(t_game *game, const char *scene_dir);
 void				init_map(t_game *game, const char *scene_dir);
 
 // draw.c
-void				draw_game(t_game *game);
-void				draw_bg(t_game *game);
-void	draw_walls_and_rays(t_game *game);
-void	draw_rectangle(mlx_image_t *img, int x, int y, int height);
-void	draw_ray(mlx_image_t *img, t_ray ray, int mult);
+void				init_draw_to_window(t_game *game);
+void				draw_frame(t_game *game);
+void				draw_screen_bg(t_game *game);
+void				draw_walls_and_rays(t_game *game);
+void				draw_rectangle(mlx_image_t *img, int x, int y, int height);
+void				draw_ray(mlx_image_t *img, t_ray ray, int mult);
 
 // map.c
 
 void				draw_minimap(t_game *game);
-void	draw_player_mmap(t_game *game);
-void	draw_map_bg(t_game *game);
-void	draw_fill_cell(t_game *game, int x, int y, int color);
-void	draw_map_cells(t_game *game);
-void	draw_map_grid(t_game *game);
+void				draw_player_mmap(t_game *game);
+void				draw_map_bg(t_game *game);
+void				draw_fill_cell(t_game *game, int x, int y, int color);
+void				draw_map_cells(t_game *game);
+void				draw_map_grid(t_game *game);
 
 // hook.c
 
@@ -184,7 +182,7 @@ void				key_hook(mlx_key_data_t keydata, void *param);
 void				close_hook(void *param);
 
 // move.c
-void	move(t_game *game, int dx, int dy, int dang);
+void				move(t_game *game, int dx, int dy, int dang);
 
 // exit.c
 

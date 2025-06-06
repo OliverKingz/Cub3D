@@ -6,7 +6,7 @@
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 19:13:36 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/06/06 18:49:45 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/06/06 20:41:27 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,13 @@ void	key_hook(mlx_key_data_t keydata, void *param)
 		if (keydata.key == MLX_KEY_ESCAPE)
 			close_hook(game);
 		if (keydata.key == MLX_KEY_W)
-			move(game, 0, -1, 0);
+			(printf("Pressed W "), move(game, 0, -1, 0));
 		if (keydata.key == MLX_KEY_S)
-			move(game, 0, 1, 0);
+			(printf("Pressed S "), move(game, 0, 1, 0));
 		if (keydata.key == MLX_KEY_A)
-			move(game, -1, 0, 0);
+			(printf("Pressed A "), move(game, -1, 0, 0));
 		if (keydata.key == MLX_KEY_D)
-			move(game, 1, 0, 0);
+			(printf("Pressed D "), move(game, 1, 0, 0));
 		if (keydata.key == MLX_KEY_LEFT)
 			move(game, 0, 0, -1);
 		if (keydata.key == MLX_KEY_RIGHT)
@@ -42,5 +42,5 @@ void	close_hook(void *param)
 
 	game = param;
 	mlx_close_window(game->mlx);
-	//free_game(game);
+	free_game(game);
 }

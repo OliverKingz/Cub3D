@@ -6,7 +6,7 @@
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 19:38:28 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/06/06 17:31:13 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/06/06 19:16:04 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ int32_t	main(int argc, char **argv)
 		if (ft_strlen(argv[1]) == 0)
 			ft_mlx_err(SCENE_EMPTY);
 		game = init_game(&game, argv[1]);
-		draw_game(&game);
 		if (game.is_running == true)
 		{
 			mlx_key_hook(game.mlx, &key_hook, &game);

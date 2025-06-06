@@ -6,7 +6,7 @@
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 18:42:36 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/06/06 18:25:04 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/06/06 19:07:58 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,8 +126,6 @@ void	draw_player_mmap(t_game *game)
 		}
 		dy++;
 	}
-	mlx_image_to_window(game->mlx, game->graphs.player_mmap, WIDTH - 10
-		- game->scene.w_mmap, HEIGHT - 10 - game->scene.h_mmap);
 }
 
 void	draw_minimap(t_game *game)
@@ -135,6 +133,4 @@ void	draw_minimap(t_game *game)
 	draw_map_bg(game);
 	draw_map_cells(game);
 	draw_map_grid(game);
-	mlx_image_to_window(game->mlx, game->graphs.minimap, WIDTH - 10
-		- game->scene.w_mmap, HEIGHT - 10 - game->scene.h_mmap);
 }
