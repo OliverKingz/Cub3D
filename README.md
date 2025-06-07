@@ -2,10 +2,10 @@
 
 <div align="right">
 
-[![GitHub stars](https://img.shields.io/github/stars/oliverkingz/cub3D?color=brightgreen)]()
-[![Visits Badge](https://badges.pufler.dev/visits/oliverkingz/cub3D)]()
-[![Created Badge](https://badges.pufler.dev/created/oliverkingz/cub3D)]()
-[![Updated Badge](https://badges.pufler.dev/updated/oliverkingz/cub3D)]()
+[![GitHub stars](https://img.shields.io/github/stars/OliverKingz/cub3D?color=brightgreen)]()
+[![Visits Badge](https://badges.pufler.dev/visits/OliverKingz/cub3D)]()
+[![Created Badge](https://badges.pufler.dev/created/OliverKingz/cub3D)]()
+[![Updated Badge](https://badges.pufler.dev/updated/OliverKingz/cub3D)]()
 
 </div>
 
@@ -23,7 +23,7 @@ Keywords
 
 <div align="right">
 
-Made by: [![Contributors Display](https://badges.pufler.dev/contributors/oliverkingz/Cub3d?size=30&padding=5&perRow=10&bots=true)](https://github.com/RaulPerezDEV)
+Made by: [![Contributors Display](https://badges.pufler.dev/contributors/OliverKingz/Cub3d?size=30&padding=5&perRow=10&bots=true)](https://github.com/RaulPerezDEV)
 
 </div>
 
@@ -85,7 +85,7 @@ Made by: [![Contributors Display](https://badges.pufler.dev/contributors/oliverk
 1. **Clone this repository:**
 
    ```bash
-   git clone https://github.com/oliverkingz/cub3D.git
+   git clone https://github.com/OliverKingz/cub3D.git
    cd cub3D
    ```
 
@@ -178,7 +178,7 @@ make bonus
 
 | **Name**                   | **GitHub Profile**                              | **42 Login** |
 | -------------------------- | ----------------------------------------------- | ------------ |
-| **Oliver King Zamora**     | [OliverKingz](https://github.com/oliverkingz)   | **ozamora-** |
+| **Oliver King Zamora**     | [OliverKingz](https://github.com/OliverKingz)   | **ozamora-** |
 | **Raúl José Pérez Medina** | [RaulPerezDEV](https://github.com/RaulPerezDEV) | **raperez-** |
 
 </div>
