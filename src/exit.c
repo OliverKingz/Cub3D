@@ -6,7 +6,7 @@
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 19:43:10 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/06/08 00:08:01 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/06/08 00:26:30 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,16 +46,8 @@ void	free_images(t_game *game)
 
 void	free_map(t_game *game)
 {
-	int	i;
-
-	i = 0;
-	while (i < game->scene.height_map)
-	{
-		free(game->scene.map2d[i]);
-		i++;
-	}
-	free(game->scene.map2d);
-	free(game->scene.map1d);
+	my_free2d((void ***)&game->scene.map2d);
+	my_free((void **)&game->scene.map1d);
 }
 
 void	free_game(t_game *game)

@@ -6,7 +6,7 @@
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 19:13:36 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/06/08 00:02:55 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/06/08 00:31:05 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,4 +82,8 @@ void	close_hook(void *param)
 	game = param;
 	mlx_close_window(game->mlx);
 	free_game(game);
+	if (game->is_running)
+		game->is_running = false;
+	if (DEBUG_MODE)
+		printf("Game closed successfully.\n");
 }
