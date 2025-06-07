@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycast.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: raperez- <raperez-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 14:35:02 by raperez-          #+#    #+#             */
-/*   Updated: 2025/06/07 12:31:42 by raperez-         ###   ########.fr       */
+/*   Updated: 2025/06/08 01:37:13 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -162,7 +162,7 @@ void	check_hit(t_ray *ray, t_scene *scene)
 		x -= 1;
 	if (ray->vector.y < 0 && ray->pos.y - (int)ray->pos.y == 0.0)
 		y -= 1;
-	if (scene->map2d[y][x] == '1')
+	if (scene->map2d[y][x] == WALL)
 	{
 		if (ray->real_axis_dist.x < ray->real_axis_dist.y && ray->vector.x >= 0)
 			ray->hit_dir = WE;

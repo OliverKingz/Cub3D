@@ -6,7 +6,7 @@
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 18:31:20 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/06/08 01:05:38 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/06/08 01:33:39 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,13 +54,13 @@
 # define FAIL_MINIMAP_TOO_BIG "Minimap is too big, change the tile size\n"
 
 // Constants for the game window, minimap dimensions and speeds
-# define WIDTH 1080
-# define HEIGHT 720
-# define MAP_TILE 30
-# define PMAP_RADIUS 3
-# define FOV 60
-# define SPEED 0.05
-# define ANGLE_SPEED 1
+# define WIDTH 1080		// Width of the game window
+# define HEIGHT 720		// Height of the game window
+# define MAP_TILE 30	// Size of each tile in the minimap
+# define PMAP_RADIUS 3	// Radius of the player in the minimap in pixels
+# define FOV 60			// Field of view in degrees for the raycasting system
+# define SPEED 0.05		// Speed of the player movement in the game
+# define ANGLE_SPEED 1	// Speed of the player rotation in degrees per frame
 
 // Math constants for the game.
 # define PI 3.14159265358979323846
@@ -223,8 +223,8 @@ void				draw_player_mmap(t_game *game);
 // draw_minimap_utils.c
 
 void				draw_map_bg(t_game *game);
-void				draw_fill_cell(t_game *game, int x, int y, int color);
-void				draw_map_cells(t_game *game);
+void				draw_fill_tile(t_game *game, int x, int y, int color);
+void				draw_map_all_tiles(t_game *game);
 void				draw_map_grid(t_game *game);
 
 // hook.c

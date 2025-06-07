@@ -6,7 +6,7 @@
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 18:42:36 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/06/07 12:32:47 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/06/08 01:36:00 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	draw_map_bg(t_game *game)
 	}
 }
 
-void	draw_fill_cell(t_game *game, int x, int y, int color)
+void	draw_fill_tile(t_game *game, int x, int y, int color)
 {
 	int	py;
 	int	px;
@@ -50,22 +50,21 @@ void	draw_fill_cell(t_game *game, int x, int y, int color)
 	}
 }
 
-void	draw_map_cells(t_game *game)
+void	draw_map_all_tiles(t_game *game)
 {
 	int	y;
 	int	x;
 
-	// Draw map cells: fill white if '1'
 	y = 0;
 	while (y < game->scene.height_map)
 	{
 		x = 0;
 		while (x < game->scene.width_map)
 		{
-			if (game->scene.map2d[y][x] == '1')
-				draw_fill_cell(game, x, y, WHITE);
-			else if (game->scene.map2d[y][x] == '0')
-				draw_fill_cell(game, x, y, BLACK);
+			if (game->scene.map2d[y][x] == WALL)
+				draw_fill_tile(game, x, y, WHITE);
+			else if (game->scene.map2d[y][x] == EMPTY)
+				draw_fill_tile(game, x, y, BLACK);
 			x++;
 		}
 		y++;

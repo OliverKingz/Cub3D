@@ -6,7 +6,7 @@
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/07 12:27:32 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/06/07 13:02:16 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/06/08 01:35:25 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	draw_minimap(t_game *game)
 {
 	draw_map_bg(game);
-	draw_map_cells(game);
+	draw_map_all_tiles(game);
 	draw_map_grid(game);
 }
 
