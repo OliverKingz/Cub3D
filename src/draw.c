@@ -6,7 +6,7 @@
 /*   By: raperez- <raperez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 19:11:12 by raperez-          #+#    #+#             */
-/*   Updated: 2025/06/07 12:22:54 by raperez-         ###   ########.fr       */
+/*   Updated: 2025/06/07 12:59:13 by raperez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,23 +14,18 @@
 
 void	draw_ray(mlx_image_t *img, t_ray ray, int mult)
 {
-	int	x;
-	int	y;
+	double	x;
+	double	y;
 
-	ray.start_point.x *= mult;
-	ray.start_point.y *= mult;
-	ray.pos.x *= mult;
-	ray.pos.y *= mult;
 	x = ray.start_point.x;
 	while ((ray.vector.x > 0 && x <= ray.pos.x) || (ray.vector.x < 0 && x >= ray.pos.x))
 	{
 		if (cos(ray.angle_radians) != 0)
 		{
 			y = tan(ray.angle_radians)*(x - ray.start_point.x) + ray.start_point.y;
-			mlx_put_pixel(img, x, y, BLUE);
-			//printf("(%d, %d)\n", x, y);
+			mlx_put_pixel(img, x * mult, y * mult, BLUE);
 		}
-		x += ray.step.x;
+		x += ray.step.x * 0.05;
 	}
 	y = ray.start_point.y;
 	while ((ray.vector.y > 0 && y <= ray.pos.y) || (ray.vector.y < 0 && y >= ray.pos.y))
@@ -38,10 +33,9 @@ void	draw_ray(mlx_image_t *img, t_ray ray, int mult)
 		if (cos(ray.angle_radians) != 0 && tan(ray.angle_radians) != 0)
 		{
 			x = ((y - ray.start_point.y) / tan(ray.angle_radians)) + ray.start_point.x;
-			mlx_put_pixel(img, x, y, BLUE);
-			//printf("(%d, %d)\n", x, y);
+			mlx_put_pixel(img, x * mult, y * mult, BLUE);
 		}
-		y += ray.step.y;
+		y += ray.step.y * 0.05;
 	}
 }
 
