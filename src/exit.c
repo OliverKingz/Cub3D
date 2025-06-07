@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: raperez- <raperez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 19:43:10 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/06/06 19:25:36 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/06/07 11:52:06 by raperez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,21 +27,21 @@ void	ft_mlx_err(const char *msg)
 
 void	free_textures(t_game *game)
 {
-	mlx_delete_texture(game->graphs.icon_t);
-	mlx_delete_texture(game->graphs.north_t);
-	mlx_delete_texture(game->graphs.south_t);
-	mlx_delete_texture(game->graphs.east_t);
-	mlx_delete_texture(game->graphs.west_t);
+	my_delete_texture(game->graphs.icon_t);
+	my_delete_texture(game->graphs.north_t);
+	my_delete_texture(game->graphs.south_t);
+	my_delete_texture(game->graphs.east_t);
+	my_delete_texture(game->graphs.west_t);
 }
 
 void	free_images(t_game *game)
 {
-	mlx_delete_image(game->mlx, game->graphs.north);
-	mlx_delete_image(game->mlx, game->graphs.south);
-	mlx_delete_image(game->mlx, game->graphs.east);
-	mlx_delete_image(game->mlx, game->graphs.west);
-	mlx_delete_image(game->mlx, game->graphs.screen);
-	mlx_delete_image(game->mlx, game->graphs.minimap);
+	my_delete_image(game->mlx, game->graphs.north);
+	my_delete_image(game->mlx, game->graphs.south);
+	my_delete_image(game->mlx, game->graphs.east);
+	my_delete_image(game->mlx, game->graphs.west);
+	my_delete_image(game->mlx, game->graphs.screen);
+	my_delete_image(game->mlx, game->graphs.minimap);
 }
 
 void	free_map(t_game *game)

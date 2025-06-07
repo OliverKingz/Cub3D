@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: raperez- <raperez-@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: raperez- <raperez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 19:11:12 by raperez-          #+#    #+#             */
-/*   Updated: 2025/06/06 23:56:49 by raperez-         ###   ########.fr       */
+/*   Updated: 2025/06/07 12:22:54 by raperez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,15 +24,23 @@ void	draw_ray(mlx_image_t *img, t_ray ray, int mult)
 	x = ray.start_point.x;
 	while ((ray.vector.x > 0 && x <= ray.pos.x) || (ray.vector.x < 0 && x >= ray.pos.x))
 	{
-		y = tan(ray.angle_radians)*(x - ray.start_point.x) + ray.start_point.y;
-		mlx_put_pixel(img, x, y, BLUE);
+		if (cos(ray.angle_radians) != 0)
+		{
+			y = tan(ray.angle_radians)*(x - ray.start_point.x) + ray.start_point.y;
+			mlx_put_pixel(img, x, y, BLUE);
+			//printf("(%d, %d)\n", x, y);
+		}
 		x += ray.step.x;
 	}
 	y = ray.start_point.y;
 	while ((ray.vector.y > 0 && y <= ray.pos.y) || (ray.vector.y < 0 && y >= ray.pos.y))
 	{
-		x = (y - ray.start_point.y) / tan(ray.angle_radians) + ray.start_point.x;
-		mlx_put_pixel(img, x, y, BLUE);
+		if (cos(ray.angle_radians) != 0 && tan(ray.angle_radians) != 0)
+		{
+			x = ((y - ray.start_point.y) / tan(ray.angle_radians)) + ray.start_point.x;
+			mlx_put_pixel(img, x, y, BLUE);
+			//printf("(%d, %d)\n", x, y);
+		}
 		y += ray.step.y;
 	}
 }
@@ -70,7 +78,8 @@ void	draw_walls_and_rays(t_game *game)
 	{
 		ray = launch_ray(game, i);
 		draw_ray(game->graphs.minimap, ray, MAP_TILE);
-		printf("Distacia: %f\n", ray.size);
+		if (DEBUG_MODE)
+			//printf("Distacia ray: %f\n", ray.size);
 		wall_height = HEIGHT / ray.size;
 		(void)wall_height;
 		draw_rectangle(game->graphs.screen, wall_x, (HEIGHT / 2) - (wall_height / 2), wall_height);

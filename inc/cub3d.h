@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: raperez- <raperez-@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: raperez- <raperez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 18:31:20 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/06/06 23:17:48 by raperez-         ###   ########.fr       */
+/*   Updated: 2025/06/07 12:21:54 by raperez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,10 @@
 /* ************************************************************************** */
 /*                              MACROS AND DEFINES                            */
 /* ************************************************************************** */
+
+# ifndef DEBUG_MODE
+#  define DEBUG_MODE 1
+# endif
 
 # define USAGE "Usage: ./cub3d assets/scenes/example.cub\n"
 
@@ -80,6 +84,17 @@ typedef enum e_dir
 	WE
 }					t_dir;
 
+typedef enum e_file
+{
+	WALL = '1',
+	EMPTY = '0',
+	SPACE = ' ',
+	NO_PLAYER = 'N',
+	EA_PLAYER = 'E',
+	SO_PLAYER = 'S',
+	WE_PLAYER = 'W',
+}	t_file;
+
 typedef struct s_point
 {
 	double			x;
@@ -107,7 +122,7 @@ typedef struct s_scene
 
 typedef struct s_ray
 {
-	double			angle_radians;
+	double			angle_radians; //angulo en radianes
 	t_point			vector;
 	t_point			start_point;
 	t_point			pos;
@@ -184,14 +199,6 @@ void				close_hook(void *param);
 // move.c
 void				move(t_game *game, int dx, int dy, int dang);
 
-// exit.c
-
-void				ft_mlx_err(const char *msg);
-void				free_textures(t_game *game);
-void				free_images(t_game *game);
-void				free_map(t_game *game);
-void				free_game(t_game *game);
-
 // raycast.c
 
 double				degrees_to_radians(double degrees);
@@ -203,6 +210,23 @@ void				move_ray(t_ray *ray);
 void				check_hit(t_ray *ray, t_scene *scene);
 double				calculate_ray_size(t_ray ray);
 t_ray				launch_ray(t_game *game, double angle);
+
+// exit.c
+
+void				ft_mlx_err(const char *msg);
+void				free_textures(t_game *game);
+void				free_images(t_game *game);
+void				free_map(t_game *game);
+void				free_game(t_game *game);
+
+// utils.c
+
+void	my_perr(const char *msg, bool should_exit, int exit_code);
+void	my_free(void **mem);
+void	my_free2d(void ***mem);
+void	my_close(int *fd);
+void	my_delete_texture(mlx_texture_t* texture);
+void	my_delete_image(mlx_t* mlx, mlx_image_t* image);
 
 /* ************************************************************************** */
 #endif

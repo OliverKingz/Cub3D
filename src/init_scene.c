@@ -40,7 +40,8 @@ void	init_player(t_game *game, const char *scene_dir)
 	game->player.angle = 270;
 	game->player.pos.x = 3.5;
 	game->player.pos.y = 3;
-	printf("Starting at P(%f, %f, %f)\n", game->player.pos.x, game->player.pos.y, game->player.angle);
+	if (DEBUG_MODE)
+		printf("Starting at P(%f, %f, %f)\n", game->player.pos.x, game->player.pos.y, game->player.angle);
 	game->player.mmap.x = game->player.pos.x * MAP_TILE;
 	game->player.mmap.y = game->player.pos.y * MAP_TILE;
 }

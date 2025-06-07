@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   move.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: raperez- <raperez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 17:35:09 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/06/06 22:15:13 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/06/07 11:40:49 by raperez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,5 +50,6 @@ void	move(t_game *game, int dx, int dy, int dang)
 	}
 	if (game->is_running == true)
 		draw_frame(game);
-	printf("P(%f, %f, %f)\n", game->player.pos.x, game->player.pos.y, game->player.angle);
+	if (DEBUG_MODE)
+		printf("P(%f, %f, %f)\n", game->player.pos.x, game->player.pos.y, game->player.angle);
 }

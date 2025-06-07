@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_game.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: raperez- <raperez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 19:52:22 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/06/06 19:25:36 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/06/07 11:54:25 by raperez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 t_game	init_game(t_game *game, const char *scene_dir)
 {
+	ft_memset((void *)game, 0, sizeof(t_game));
 	init_scene(game, scene_dir);
 	init_mlx(game);
 	init_images(game);
