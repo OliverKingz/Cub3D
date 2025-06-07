@@ -6,7 +6,7 @@
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 18:31:20 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/06/07 12:55:13 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/06/08 00:06:10 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@
 /* ************************************************************************** */
 /*                              STANDARD INCLUDES                             */
 /* ************************************************************************** */
-// Standard libraries and system headers required for Cub3D functionality.
 
+// Standard libraries and system headers required for Cub3D functionality.
 # include "MLX42/MLX42.h"
 # include "libft.h"
 
@@ -38,18 +38,22 @@
 /*                              MACROS AND DEFINES                            */
 /* ************************************************************************** */
 
+// Debug mode flag to enable or disable debug features in the game.
 # ifndef DEBUG_MODE
 #  define DEBUG_MODE 1
 # endif
 
+// Usage message for the game.
 # define USAGE "Usage: ./cub3d assets/scenes/example.cub\n"
 
+// Error messages for various failure scenarios in the game.
 # define SCENE_EMPTY "Invalid scene: path is empty\n"
 # define FAIL_MLX "Failed initializing MLX42\n"
 # define FAIL_TEXTURE "Failed loading textures\n"
 # define FAIL_IMAGES "Failed loading images\n"
 # define FAIL_MINIMAP_TOO_BIG "Minimap is too big, change the tile size\n"
 
+// Constants for the game window, minimap dimensions and speeds
 # define WIDTH 1080
 # define HEIGHT 720
 # define MAP_TILE 30
@@ -58,8 +62,10 @@
 # define SPEED 0.05
 # define ANGLE_SPEED 1
 
+// Math constants for the game.
 # define PI 3.14159265358979323846
 
+// Colors used in the game, represented in RGBA format.
 # define BLACK 0x000000FF
 # define WHITE 0xFFFFFFFF
 # define GREY 0x808080FF
@@ -75,6 +81,8 @@
 /*                              ENUMS AND STRUCTS                             */
 /* ************************************************************************** */
 
+// Directions for the raycasting system.
+// These directions are used to determine which side of the wall the ray hits.
 typedef enum e_dir
 {
 	NONE,
@@ -84,6 +92,8 @@ typedef enum e_dir
 	WE
 }					t_dir;
 
+// File characters used in the file representation of the map.
+// These characters represent different elements in the game world.
 typedef enum e_file
 {
 	WALL = '1',
@@ -95,67 +105,85 @@ typedef enum e_file
 	WE_PLAYER = 'W',
 }					t_file;
 
+// Point structure to represent a 2D point in the game world.
 typedef struct s_point
 {
-	double			x;
-	double			y;
+	double			x;	// X coordinate of the point
+	double			y;	// Y coordinate of the point
 }					t_point;
 
+// Player structure to represent the player's position and angle in the game.
 typedef struct s_player
 {
-	t_point			pos;
-	t_point			mmap;
-	double			angle;
+	t_point			pos;	// Player's position in the map array
+	t_point			mmap;	// Player's position in the minimap in pixels
+	double			angle;	// Player's angle in degrees
 }					t_player;
 
+// Scene structure to represent the game scene, including the map and colors.
 typedef struct s_scene
 {
-	char			*map1d;
-	char			**map2d;
-	int				height_map;
-	int				width_map;
-	int				h_mmap;
-	int				w_mmap;
-	int				floor_rgb;
-	int				ceil_rgb;
+	char			*map1d;		// 1D representation of the map
+	char			**map2d;	// 2D representation of the map
+	int				height_map;	// Height of the map array
+	int				width_map;	// Width of the map array
+	int				h_mmap;		// Height of the minimap
+	int				w_mmap;		// Width of the minimap
+	int				floor_rgb;	// RGB values for floor
+	int				ceil_rgb;	// RGB values for ceiling
 }					t_scene;
 
+//  Ray structure to represent a ray in the raycasting system.
 typedef struct s_ray
 {
-	double angle_radians; // angulo en radianes
-	t_point			vector;
-	t_point			start_point;
-	t_point			pos;
-	t_dir			hit_dir;
-	t_point			delta_dist;
-	t_point			axis_dist;
-	t_point			real_axis_dist;
-	t_point			step;
-	double			size;
+	double	angle_radians;	// Ray angle in radians
+	t_point	vector;			// Direction vector (unit vector for the ray)
+	t_point	start_point;	// Ray starting position (player position)
+	t_point	pos;			// Current position of the ray (updated as it moves)
+	t_dir	hit_dir;		// Direction of the wall hit (NO, SO, EA, WE)
+	t_point	delta_dist;		// Distance ray must travel to cross the next axis
+	t_point	axis_dist;		// Distance from current pos to the next x or y axis
+	t_point	real_axis_dist;	// Scaled distance to next axis x or y
+	t_point	step;			// Step direction for x and y (-1, 0, or 1)
+	double	size;			// Total distance from start_point to hit point
 }					t_ray;
 
+// Graphical representation of the game, including textures and images.
 typedef struct s_graph
 {
-	mlx_texture_t	*icon_t;
-	mlx_texture_t	*east_t;
-	mlx_texture_t	*north_t;
-	mlx_texture_t	*south_t;
-	mlx_texture_t	*west_t;
-	mlx_image_t		*east;
-	mlx_image_t		*north;
-	mlx_image_t		*south;
-	mlx_image_t		*west;
-	mlx_image_t		*screen;
-	mlx_image_t		*minimap;
+	mlx_texture_t	*icon_t;	// Texture for the icon
+	mlx_texture_t	*east_t;	// Textures for the east wall
+	mlx_texture_t	*north_t;	// Textures for the north wall
+	mlx_texture_t	*south_t;	// Textures for the south wall
+	mlx_texture_t	*west_t;	// Textures for the west wall
+	mlx_image_t		*east;		// Image for the east wall
+	mlx_image_t		*north;		// Image for the north wall
+	mlx_image_t		*south;		// Image for the south wall
+	mlx_image_t		*west;		// Image for the west wall
+	mlx_image_t		*screen;	// Image for the screen/window
+	mlx_image_t		*minimap;	// Image for the minimap
 }					t_graph;
 
+// Keys structure to represent the state of the keys pressed by the player.
+typedef struct s_keys
+{
+	bool	w; // Forward movement key
+	bool	a; // Left movement key
+	bool	s; // Backward movement key
+	bool	d; // Right movement key
+	bool	left; // Left rotation key
+	bool	right; // Right rotation key
+}					t_keys;
+
+// Game structure to represent the entire game state.
 typedef struct s_game
 {
-	t_scene			scene;
-	t_player		player;
-	mlx_t			*mlx;
-	t_graph			graphs;
-	bool			is_running;
+	t_scene			scene;		// Scene containing the game information 
+	t_player		player;		// Player's position and angle
+	mlx_t			*mlx;		// Pointer to the MLX instance
+	t_graph			graphs;		// Graphical representation of the game
+	t_keys			keys;		// State of the keys pressed
+	bool			is_running; // Flag to indicate if the game is running
 }					t_game;
 
 /* ************************************************************************** */
@@ -203,6 +231,7 @@ void				draw_map_grid(t_game *game);
 
 void				key_hook(mlx_key_data_t keydata, void *param);
 void				close_hook(void *param);
+void				loop_hook(void *param);
 
 // move.c
 

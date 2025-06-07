@@ -6,7 +6,7 @@
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 17:35:09 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/06/07 12:52:13 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/06/08 00:01:43 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,18 +33,13 @@ void	move(t_game *game, int dx, int dy)
 		}
 		if (new_pos.x >= 0 && new_pos.x < game->scene.width_map
 			&& new_pos.y >= 0 && new_pos.y < game->scene.height_map
-			&& game->scene.map2d[(int)new_pos.y][(int)new_pos.x] != '1')
+			&& game->scene.map2d[(int)new_pos.y][(int)new_pos.x] != WALL)
 		{
 			game->player.pos = new_pos;
 			game->player.mmap.x = game->player.pos.x * MAP_TILE;
 			game->player.mmap.y = game->player.pos.y * MAP_TILE;
 		}
 	}
-	if (game->is_running == true)
-		draw_frame(game);
-	if (DEBUG_MODE)
-		printf("P(%f, %f, %f)\n", game->player.pos.x, game->player.pos.y,
-			game->player.angle);
 }
 
 void	rotate(t_game *game, int dang)
@@ -57,9 +52,4 @@ void	rotate(t_game *game, int dang)
 		else if (game->player.angle < 0)
 			game->player.angle += 360;
 	}
-	if (game->is_running == true)
-		draw_frame(game);
-	if (DEBUG_MODE)
-		printf("P(%f, %f, %f)\n", game->player.pos.x, game->player.pos.y,
-			game->player.angle);
 }
