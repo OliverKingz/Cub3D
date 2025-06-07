@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map.c                                              :+:      :+:    :+:   */
+/*   draw_minimap_utils.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 18:42:36 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/06/06 19:07:58 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/06/07 12:32:47 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,36 +101,3 @@ void	draw_map_grid(t_game *game)
 	}
 }
 
-void	draw_player_mmap(t_game *game)
-{
-	int	dy;
-	int	dx;
-	int	draw_x;
-	int	draw_y;
-
-	dy = -PMAP_RADIUS;
-	while (dy <= PMAP_RADIUS)
-	{
-		dx = -PMAP_RADIUS;
-		while (dx <= PMAP_RADIUS)
-		{
-			if (dx * dx + dy * dy <= PMAP_RADIUS * PMAP_RADIUS)
-			{
-				draw_x = game->player.mmap.x + dx;
-				draw_y = game->player.mmap.y + dy;
-				if (draw_x >= 0 && draw_x < game->scene.w_mmap && draw_y >= 0
-					&& draw_y < game->scene.h_mmap)
-					mlx_put_pixel(game->graphs.minimap, draw_x, draw_y, GREEN);
-			}
-			dx++;
-		}
-		dy++;
-	}
-}
-
-void	draw_minimap(t_game *game)
-{
-	draw_map_bg(game);
-	draw_map_cells(game);
-	draw_map_grid(game);
-}

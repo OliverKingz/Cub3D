@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hook.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: raperez- <raperez-@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 19:13:36 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/06/06 23:15:51 by raperez-         ###   ########.fr       */
+/*   Updated: 2025/06/07 12:53:40 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,17 +22,17 @@ void	key_hook(mlx_key_data_t keydata, void *param)
 		if (keydata.key == MLX_KEY_ESCAPE)
 			close_hook(game);
 		if (keydata.key == MLX_KEY_W)
-			(printf("Pressed W "), move(game, 0, -1, 0));
+			(printf("Pressed W "), move(game, 0, -1));
 		if (keydata.key == MLX_KEY_S)
-			(printf("Pressed S "), move(game, 0, 1, 0));
+			(printf("Pressed S "), move(game, 0, 1));
 		if (keydata.key == MLX_KEY_A)
-			(printf("Pressed A "), move(game, -1, 0, 0));
+			(printf("Pressed A "), move(game, -1, 0));
 		if (keydata.key == MLX_KEY_D)
-			(printf("Pressed D "), move(game, 1, 0, 0));
+			(printf("Pressed D "), move(game, 1, 0));
 		if (keydata.key == MLX_KEY_LEFT)
-			(printf("Pressed <- "), move(game, 0, 0, -1));
+			(printf("Pressed < "), rotate(game, -1));
 		if (keydata.key == MLX_KEY_RIGHT)
-			(printf("Pressed -> "), move(game, 0, 0, 1));
+			(printf("Pressed > "), rotate(game, 1));
 	}
 }
 

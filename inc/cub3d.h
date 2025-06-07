@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: raperez- <raperez-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 18:31:20 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/06/07 12:21:54 by raperez-         ###   ########.fr       */
+/*   Updated: 2025/06/07 12:55:13 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,9 @@
 # define FAIL_IMAGES "Failed loading images\n"
 # define FAIL_MINIMAP_TOO_BIG "Minimap is too big, change the tile size\n"
 
-# define WIDTH 540
-# define HEIGHT 360
-# define MAP_TILE 20
+# define WIDTH 1080
+# define HEIGHT 720
+# define MAP_TILE 30
 # define PMAP_RADIUS 3
 # define FOV 60
 # define SPEED 0.05
@@ -93,7 +93,7 @@ typedef enum e_file
 	EA_PLAYER = 'E',
 	SO_PLAYER = 'S',
 	WE_PLAYER = 'W',
-}	t_file;
+}					t_file;
 
 typedef struct s_point
 {
@@ -122,7 +122,7 @@ typedef struct s_scene
 
 typedef struct s_ray
 {
-	double			angle_radians; //angulo en radianes
+	double angle_radians; // angulo en radianes
 	t_point			vector;
 	t_point			start_point;
 	t_point			pos;
@@ -165,27 +165,35 @@ typedef struct s_game
 // init_game.c
 
 t_game				init_game(t_game *game, const char *scene_dir);
-void				init_images(t_game *game);
 void				init_mlx(t_game *game);
+void				init_images(t_game *game);
+void				init_draw_to_window(t_game *game);
 
 // init_scene.c
+
 t_game				init_scene(t_game *game, const char *scene_dir);
 void				init_texture(t_game *game, const char *scene_dir);
 void				init_player(t_game *game, const char *scene_dir);
 void				init_map(t_game *game, const char *scene_dir);
 
 // draw.c
-void				init_draw_to_window(t_game *game);
-void				draw_frame(t_game *game);
-void				draw_screen_bg(t_game *game);
-void				draw_walls_and_rays(t_game *game);
-void				draw_rectangle(mlx_image_t *img, int x, int y, int height);
-void				draw_ray(mlx_image_t *img, t_ray ray, int mult);
 
-// map.c
+void				draw_frame(t_game *game);
+void				draw_walls_and_rays(t_game *game);
+
+// draw_screen.c
+
+void				draw_screen_bg(t_game *game);
+void				draw_rectangle(mlx_image_t *img, int x, int y, int height);
+
+// draw_minimap.c
 
 void				draw_minimap(t_game *game);
+void				draw_ray(mlx_image_t *img, t_ray ray, int mult);
 void				draw_player_mmap(t_game *game);
+
+// draw_minimap_utils.c
+
 void				draw_map_bg(t_game *game);
 void				draw_fill_cell(t_game *game, int x, int y, int color);
 void				draw_map_cells(t_game *game);
@@ -197,7 +205,9 @@ void				key_hook(mlx_key_data_t keydata, void *param);
 void				close_hook(void *param);
 
 // move.c
-void				move(t_game *game, int dx, int dy, int dang);
+
+void				move(t_game *game, int dx, int dy);
+void				rotate(t_game *game, int dang);
 
 // raycast.c
 
@@ -221,12 +231,12 @@ void				free_game(t_game *game);
 
 // utils.c
 
-void	my_perr(const char *msg, bool should_exit, int exit_code);
-void	my_free(void **mem);
-void	my_free2d(void ***mem);
-void	my_close(int *fd);
-void	my_delete_texture(mlx_texture_t* texture);
-void	my_delete_image(mlx_t* mlx, mlx_image_t* image);
+void				my_perr(const char *msg, bool should_exit, int exit_code);
+void				my_free(void **mem);
+void				my_free2d(void ***mem);
+void				my_close(int *fd);
+void				my_delete_texture(mlx_texture_t *texture);
+void				my_delete_image(mlx_t *mlx, mlx_image_t *image);
 
 /* ************************************************************************** */
 #endif

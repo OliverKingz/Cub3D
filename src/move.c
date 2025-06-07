@@ -3,28 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   move.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: raperez- <raperez-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 17:35:09 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/06/07 11:40:49 by raperez-         ###   ########.fr       */
+/*   Updated: 2025/06/07 12:52:13 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	move(t_game *game, int dx, int dy, int dang)
+void	move(t_game *game, int dx, int dy)
 {
-	t_point new_pos;
+	t_point	new_pos;
 	double	angle_rad;
 
-	if (dang != 0)
-	{
-		game->player.angle += dang * ANGLE_SPEED;
-		if (game->player.angle >= 360)
-			game->player.angle -= 360;
-		else if (game->player.angle < 0)
-			game->player.angle += 360;
-	}
 	new_pos = game->player.pos;
 	angle_rad = degrees_to_radians(game->player.angle);
 	if (dx != 0 || dy != 0)
@@ -51,5 +43,23 @@ void	move(t_game *game, int dx, int dy, int dang)
 	if (game->is_running == true)
 		draw_frame(game);
 	if (DEBUG_MODE)
-		printf("P(%f, %f, %f)\n", game->player.pos.x, game->player.pos.y, game->player.angle);
+		printf("P(%f, %f, %f)\n", game->player.pos.x, game->player.pos.y,
+			game->player.angle);
+}
+
+void	rotate(t_game *game, int dang)
+{
+	if (dang != 0)
+	{
+		game->player.angle += dang * ANGLE_SPEED;
+		if (game->player.angle >= 360)
+			game->player.angle -= 360;
+		else if (game->player.angle < 0)
+			game->player.angle += 360;
+	}
+	if (game->is_running == true)
+		draw_frame(game);
+	if (DEBUG_MODE)
+		printf("P(%f, %f, %f)\n", game->player.pos.x, game->player.pos.y,
+			game->player.angle);
 }

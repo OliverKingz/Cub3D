@@ -29,7 +29,7 @@ void	init_texture(t_game *game, const char *scene_dir)
 	game->graphs.north_t = mlx_load_png("./assets/textures/basic_NO.png");
 	game->graphs.south_t = mlx_load_png("./assets/textures/basic_SO.png");
 	game->graphs.west_t = mlx_load_png("./assets/textures/basic_WE.png");
-	if (!game->graphs.north_t || !game->graphs.south_t
+	if (!game->graphs.icon_t || !game->graphs.north_t || !game->graphs.south_t
 		|| !game->graphs.east_t || !game->graphs.west_t)
 		ft_mlx_err(FAIL_TEXTURE);
 }
