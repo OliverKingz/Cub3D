@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycast.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: raperez- <raperez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 14:35:02 by raperez-          #+#    #+#             */
-/*   Updated: 2025/06/06 18:35:26 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/06/07 12:31:42 by raperez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,14 +60,18 @@ void	init_ray(t_game *game, t_ray *ray, double angle)
 	ray->pos.y = game->player.pos.y;
 	ray->hit_dir = NONE;
 	set_delta_dist(ray);
-	if (ray->vector.x >= 0)
+	if (ray->vector.x > 0)
 		ray->step.x = 1;
-	else
+	else if (ray->vector.x < 0)
 		ray->step.x = -1;
-	if (ray->vector.y >= 0)
-		ray->step.y = 1;
 	else
+		ray->step.x = 0;
+	if (ray->vector.y > 0)
+		ray->step.y = 1;
+	else if (ray->vector.y < 0)
 		ray->step.y = -1;
+	else
+		ray->step.y = 0;
 }
 
 void	calculate_axis_dist(t_ray *ray)
