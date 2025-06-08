@@ -6,7 +6,7 @@
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 14:35:02 by raperez-          #+#    #+#             */
-/*   Updated: 2025/06/08 01:37:13 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/06/08 13:22:21 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -165,13 +165,13 @@ void	check_hit(t_ray *ray, t_scene *scene)
 	if (scene->map2d[y][x] == WALL)
 	{
 		if (ray->real_axis_dist.x < ray->real_axis_dist.y && ray->vector.x >= 0)
-			ray->hit_dir = WE;
+			ray->hit_dir = WEST;
 		else if (ray->real_axis_dist.x < ray->real_axis_dist.y && ray->vector.x < 0)
-			ray->hit_dir = EA;
+			ray->hit_dir = EAST;
 		else if (ray->real_axis_dist.x >= ray->real_axis_dist.y && ray->vector.y > 0)
-			ray->hit_dir = NO;
+			ray->hit_dir = NORTH;
 		else
-			ray->hit_dir = SO;
+			ray->hit_dir = SOUTH;
 	}
 }
 

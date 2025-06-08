@@ -6,7 +6,7 @@
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 18:31:20 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/06/08 02:24:20 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/06/08 13:23:40 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 // Standard libraries and system headers required for Cub3D functionality.
 # include "MLX42/MLX42.h"
 # include "libft.h"
+# include "colors.h"
 
 /* Explicitly allowed functions for so_long, already included at the libraries
 # include <stdbool.h> // Included in MLX42
@@ -56,26 +57,26 @@
 // Constants for the game window, minimap dimensions and speeds
 # define WIDTH 1080		// Width of the game window
 # define HEIGHT 720		// Height of the game window
-# define MAP_TILE 30	// Size of each tile in the minimap
-# define PMAP_RADIUS 3	// Radius of the player in the minimap in pixels
+
 # define FOV 60			// Field of view in degrees for the raycasting system
 # define SPEED 0.05		// Speed of the player movement in the game
-# define ANGLE_SPEED 1	// Speed of the player rotation in degrees per frame
+# define ANGLE_SPEED 2	// Speed of the player rotation in degrees per frame
+
+# define MMAP_TILE 30			// Size of each tile in the minimap
+# define MMAP_PLAYER_RADIUS 3	// Radius of the player in the minimap in tiles
+
+// Colors used in the game, represented in RGBA format.
+# define MMAP_WALL_COLOR WHITE			// Color of the walls in the minimap
+# define MMAP_EMPTY_COLOR BLACK			// Color of the empty spaces in the mmap
+# define MMAP_GRID_COLOR LIGHT_GREY		// Color of the grid in the minimap
+
+# define MMAP_PLAYER_COLOR LIGHT_TURQUOISE	// Color of the player in the minimap
+# define MMAP_RAY_COLOR DARK_TURQUOISE	// Color of the rays in the minimap
+
+# define WALL_COLOR GREEN // Color of the walls in the game
 
 // Math constants for the game.
 # define PI 3.14159265358979323846
-
-// Colors used in the game, represented in RGBA format.
-# define BLACK 0x000000FF
-# define WHITE 0xFFFFFFFF
-# define GREY 0x808080FF
-# define LIGHT_GREY 0xC0C0C0FF
-# define DARK_GREY 0x404040FF
-# define GREEN 0x00FF00FF
-# define TURQUOISE 0x40E0D0FF
-# define BLUE 0x0000FFFF
-# define LIGHT_BLUE 0xADD8E6FF
-# define DARK_BLUE 0x00008BFF
 
 /* ************************************************************************** */
 /*                              ENUMS AND STRUCTS                             */
@@ -86,10 +87,10 @@
 typedef enum e_dir
 {
 	NONE,
-	NO,
-	SO,
-	EA,
-	WE
+	NORTH,
+	SOUTH,
+	EAST,
+	WEST
 }					t_dir;
 
 // File characters used in the file representation of the map.

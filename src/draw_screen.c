@@ -6,7 +6,7 @@
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/07 12:25:19 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/06/07 12:30:48 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/06/08 13:10:26 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	draw_rectangle(mlx_image_t *img, int x, int y, int height)
 		while (j < height)
 		{
 			if (j >= 0 && j < HEIGHT)
-				mlx_put_pixel(img, x, j, GREEN);
+				mlx_put_pixel(img, x, j, WALL_COLOR);
 			j++;
 		} 
 		x++;

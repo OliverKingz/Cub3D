@@ -6,7 +6,7 @@
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 19:11:12 by raperez-          #+#    #+#             */
-/*   Updated: 2025/06/08 01:40:13 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/06/08 14:07:18 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ void	draw_frame(t_game *game)
 	draw_player_mmap(game);
 }
 
-static double	fisheye_correction_ray_size(double ray_angle, double player_angle,
-		double ray_size)
+static double	fisheye_correction_ray_size(double ray_angle,
+		double player_angle, double ray_size)
 {
 	double	ray_angle_rad;
 	double	player_angle_rad;
@@ -48,7 +48,7 @@ void	draw_walls_and_rays(t_game *game)
 	while (ray_angle < game->player.angle + FOV / 2)
 	{
 		ray = launch_ray(game, ray_angle);
-		draw_ray(game->graphs.minimap, ray, MAP_TILE);
+		draw_ray(game->graphs.minimap, ray, MMAP_TILE);
 		corrected_dist = fisheye_correction_ray_size(ray_angle,
 				game->player.angle, ray.size);
 		wall_height = HEIGHT / corrected_dist;

@@ -6,7 +6,7 @@
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 17:35:09 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/06/08 00:01:43 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/06/08 12:56:53 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,8 @@ void	move(t_game *game, int dx, int dy)
 			&& game->scene.map2d[(int)new_pos.y][(int)new_pos.x] != WALL)
 		{
 			game->player.pos = new_pos;
-			game->player.mmap.x = game->player.pos.x * MAP_TILE;
-			game->player.mmap.y = game->player.pos.y * MAP_TILE;
+			game->player.mmap.x = game->player.pos.x * MMAP_TILE;
+			game->player.mmap.y = game->player.pos.y * MMAP_TILE;
 		}
 	}
 }
