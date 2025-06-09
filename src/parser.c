@@ -6,11 +6,57 @@
 /*   By: raperez- <raperez-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/09 11:56:40 by raperez-          #+#    #+#             */
-/*   Updated: 2025/06/09 16:46:02 by raperez-         ###   ########.fr       */
+/*   Updated: 2025/06/09 23:25:55 by raperez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+size_t	ft_strlen2d(char **s)
+{
+	size_t	i;
+
+	if (!s)
+		return (0);
+	i = 0;
+	while (s[i])
+		i++;
+	return (i);
+}
+
+bool	is_valid_color(const char *s)
+{
+	int	i;
+	int	n;
+
+	i = 0;
+	while (s[i])
+	{
+		if (!ft_isdigit(s[i]) && (s[i] != '+' && i == 0))
+			return (false);
+	}
+}
+
+uint32_t	get_rgb(t_game *game, char *s)
+{
+	char	**str_array;
+	char	*temp;
+	int		i;
+
+	(void) game;
+	str_array = ft_split(s, ',');
+	if (ft_strlen2d(str_array) != 3)
+		/*Error y liberar memoria*/;
+	i = 0;
+	while (i < 3)
+	{
+		temp = ft_strtrim(str_array[i], " \f\n\r\t\v");
+		
+		my_free((void *)&temp);
+		i++;
+	}
+	my_free2d((void *)&str_array);
+}
 
 //Returns 0 is line is empty, 1 in case of correct info and -1 on error
 int	manage_line(t_game *game, char *s)
@@ -54,6 +100,7 @@ bool	read_file(t_game *game, const char *file)
 	while (s)
 	{
 		manage_line(game, s);
+		my_free((void *)&s);
 		s = get_next_line(fd);
 	}
 	return (true);
