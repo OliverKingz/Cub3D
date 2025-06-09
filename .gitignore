@@ -52,5 +52,7 @@ Mkfile.old
 dkms.conf
 
 #Own
-cub3d
+cub3D
 *xcf
+.build_mode
+doc/memcheck.log

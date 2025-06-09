@@ -45,7 +45,8 @@ LDFLAGS			+= $(LIBMLX) -ldl -lglfw -pthread -lm
 BUILD_MODE_FILE := .build_mode
 DEBUG			?= 0
 VALGRIND		?= 0
-VALGRIND_FLAGS	:= --leak-check=full --show-leak-kinds=all --track-origins=yes
+VALGRIND_FLAGS	:= --leak-check=full --show-leak-kinds=all --track-origins=yes \
+	--suppressions=doc/valgrind.supp --log-file=doc/memcheck.log --gen-suppressions=all
 
 ifeq ($(DEBUG),1)
 	CFLAGS += -g3 -fsanitize=address
@@ -167,6 +168,7 @@ norm:
 	@norminette $(SRC_DIR) $(INC_DIR)
 
 ARGS = assets/scenes/example.cub
+
 # Rule to compile with debug flags
 debug:
 	@if [ ! -f $(BUILD_MODE_FILE) ] || ! grep -q "DEBUG=1" $(BUILD_MODE_FILE); then \
@@ -216,6 +218,8 @@ show:
 		"$(CC) $(CFLAGS) $(IFLAGS) $(OBJS) -o $(NAME) $(LDFLAGS)"
 	@echo "$(BY)Cleaning command:$(NC)\t rm -rf $(NAME) $(BONUS_NAME)"\
 		"$(OBJ_DIR)*.o $(OBJ_DIR)*.d $(OBJ_DIR) $(BUILD_MODE_FILE)"
+	@echo "$(BY)Valgrind command:$(NC)\t"\
+		"valgrind $(VALGRIND_FLAGS) ./$(NAME) $(ARGS)"
 
 # Rule to show all variables being used
 info:
