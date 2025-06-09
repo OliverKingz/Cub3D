@@ -13,7 +13,7 @@ LIBFT_INC_DIR	:= $(LIBFT_DIR)inc/
 
 # **************************************************************************** #
 # PROJECT
-NAME		:= cub3d
+NAME		:= cub3D
 LIBFT		:= $(LIBFT_DIR)libft.a
 LIBMLX		:= $(LIBMLX_DIR)build/libmlx42.a
 
@@ -34,7 +34,7 @@ INCS	:= $(INC_DIR)so_long.h $(LIBFT_INC_DIR)libft.h $(LIBMLX_INC_DIR)MLX42.h
 # **************************************************************************** #
 # COMPILER
 CC		:= cc
-CFLAGS	:= -Wall -Wextra -Werror
+CFLAGS	:= -Wall -Wextra -Werror -g
 CFLAGS	+= -MMD -MP
 CFLAGS	+= -Wunreachable-code -Ofast
 IFLAGS			:= -I$(INC_DIR) -I$(LIBFT_INC_DIR) -I$(LIBMLX_INC_DIR)

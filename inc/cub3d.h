@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: raperez- <raperez-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 18:31:20 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/06/08 13:23:40 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/06/09 14:18:41 by raperez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,6 +152,10 @@ typedef struct s_ray
 // Graphical representation of the game, including textures and images.
 typedef struct s_graph
 {
+	char			*east_path;	// Path to the texture for the east wall
+	char			*north_path;// Path to the texture for the north wall
+	char			*south_path;// Path to the texture for the south wall
+	char			*west_path;	// Path to the texture for the west wall
 	mlx_texture_t	*icon_t;	// Texture for the icon
 	mlx_texture_t	*east_t;	// Textures for the east wall
 	mlx_texture_t	*north_t;	// Textures for the north wall
@@ -273,6 +277,10 @@ void				my_free2d(void ***mem);
 void				my_close(int *fd);
 void				my_delete_texture(mlx_texture_t *texture);
 void				my_delete_image(mlx_t *mlx, mlx_image_t *image);
+
+// parser.c
+
+bool				read_file(t_game *game, const char *file);
 
 /* ************************************************************************** */
 #endif

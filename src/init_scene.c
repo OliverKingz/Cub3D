@@ -15,6 +15,7 @@
 
 t_game	init_scene(t_game *game, const char *scene_dir)
 {
+	read_file(game, scene_dir);
 	init_texture(game, scene_dir);
 	init_map(game, scene_dir);
 	init_player(game, scene_dir);
@@ -25,10 +26,10 @@ void	init_texture(t_game *game, const char *scene_dir)
 {
 	(void)scene_dir;
 	game->graphs.icon_t = mlx_load_png("./assets/textures/cub3de.png");
-	game->graphs.east_t = mlx_load_png("./assets/textures/basic_ES.png"); // Coger de scene, necesario leer 
-	game->graphs.north_t = mlx_load_png("./assets/textures/basic_NO.png");
-	game->graphs.south_t = mlx_load_png("./assets/textures/basic_SO.png");
-	game->graphs.west_t = mlx_load_png("./assets/textures/basic_WE.png");
+	game->graphs.east_t = mlx_load_png(game->graphs.east_path);
+	game->graphs.north_t = mlx_load_png(game->graphs.north_path);
+	game->graphs.south_t = mlx_load_png(game->graphs.south_path);
+	game->graphs.west_t = mlx_load_png(game->graphs.west_path);
 	if (!game->graphs.icon_t || !game->graphs.north_t || !game->graphs.south_t
 		|| !game->graphs.east_t || !game->graphs.west_t)
 		ft_mlx_err(FAIL_TEXTURE);
