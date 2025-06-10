@@ -1,36 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   draw_screen.c                                      :+:      :+:    :+:   */
+/*   raycast_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/07 12:25:19 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/06/10 00:57:47 by ozamora-         ###   ########.fr       */
+/*   Created: 2025/06/10 16:00:51 by ozamora-          #+#    #+#             */
+/*   Updated: 2025/06/10 16:07:41 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	draw_screen_bg(t_game *game)
+double	degrees_to_radians(double angle_degs)
 {
-	int	x;
-	int	y;
+	return (angle_degs * PI / 180.0);
+}
 
-	x = 0;
-	while (x < WIDTH)
-	{
-		y = 0;
-		while (y < HEIGHT / 2)
-		{
-			mlx_put_pixel(game->graphs.screen, x, y, game->scene.ceil_rgb);
-			y++;
-		}
-		while (y < HEIGHT)
-		{
-			mlx_put_pixel(game->graphs.screen, x, y, game->scene.floor_rgb);
-			y++;
-		}
-		x++;
-	}
+t_point	radians_to_vector(double angle_rads)
+{
+	t_point	p;
+
+	p.x = cos(angle_rads);
+	p.y = sin(angle_rads);
+	return (p);
 }

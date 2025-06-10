@@ -6,11 +6,24 @@
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 19:13:36 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/06/08 00:31:05 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/06/10 19:54:58 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+void	close_hook(void *param)
+{
+	t_game	*game;
+
+	game = param;
+	mlx_close_window(game->mlx);
+	free_game(game);
+	if (game->is_running)
+		game->is_running = false;
+	if (DEBUG_MODE)
+		printf("Game closed successfully.\n");
+}
 
 void	key_hook(mlx_key_data_t keydata, void *param)
 {
@@ -37,18 +50,29 @@ void	key_hook(mlx_key_data_t keydata, void *param)
 
 static void	update_player_keys_state(t_game *game)
 {
+	int dx;
+	int dy;
+	int dang;
+
+	dx = 0;
+	dy = 0;
+	dang = 0;
 	if (game->keys.w)
-		move(game, 0, -1);
+		dy -= 1;
 	if (game->keys.s)
-		move(game, 0, 1);
+		dy += 1;
 	if (game->keys.a)
-		move(game, -1, 0);
+		dx -= 1;
 	if (game->keys.d)
-		move(game, 1, 0);
+		dx += 1;
 	if (game->keys.left)
-		rotate(game, -1);
+		dang -= 1;
 	if (game->keys.right)
-		rotate(game, 1);
+		dang += 1;
+	if (dx != 0 || dy != 0)
+		move(game, dx, dy);
+	if (dang != 0)
+		rotate(game, dang);
 }
 
 void	loop_hook(void *param)
@@ -73,17 +97,23 @@ void	loop_hook(void *param)
 			printf("P(%f, %f, %f)\n", game->player.pos.x, game->player.pos.y,
 				game->player.angle);
 	}
+	fps_counter();
 }
 
-void	close_hook(void *param)
+void			fps_counter(void)
 {
-	t_game	*game;
+	static int	frame_count = 0;
+	static double	last_time = 0.0;
+	double		current_time;
+	double		delta_time;
 
-	game = param;
-	mlx_close_window(game->mlx);
-	free_game(game);
-	if (game->is_running)
-		game->is_running = false;
-	if (DEBUG_MODE)
-		printf("Game closed successfully.\n");
+	current_time = mlx_get_time();
+	delta_time = current_time - last_time;
+	if (delta_time >= 1.0)
+	{
+		printf("FPS: %d\n", frame_count);
+		frame_count = 0;
+		last_time = current_time;
+	}
+	frame_count++;
 }

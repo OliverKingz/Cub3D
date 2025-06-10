@@ -126,11 +126,13 @@
 ## 6. Fórmulas utilizadas y su aplicación
 
 ### Conversión de ángulos
+
 - **De grados a radianes:**
   - Fórmula: `radianes = grados * π / 180`
   - Uso: Todas las funciones trigonométricas en C usan radianes, por lo que es necesario convertir los ángulos del jugador y los rayos.
 
 ### Vector unitario a partir de un ángulo
+
 - **Coordenadas del vector dirección:**
   - Fórmulas:
     - `x = cos(α)`
@@ -138,14 +140,16 @@
   - Uso: Para obtener el vector de avance del jugador o del rayo según su ángulo.
 
 ### Cálculo de delta_dist (DDA step size)
+
 - **Distancia para cruzar una celda en X o Y:**
   - Fórmulas oficiales:
-    - `delta_x = |1 / cos(α)|`  (distancia para incrementar x en 1)
-    - `delta_y = |1 / sin(α)|`  (distancia para incrementar y en 1)
+    - `delta_x = |1 / cos(α)|` (distancia para incrementar x en 1)
+    - `delta_y = |1 / sin(α)|` (distancia para incrementar y en 1)
   - Variante: Si cos(α) o sin(α) es 0, se usa un valor muy grande (1e30) para evitar divisiones por cero.
   - Uso: Determina cuánto debe avanzar el rayo para cruzar la siguiente línea de la cuadrícula en X o Y.
 
 ### Cálculo de axis_dist (DDA initial side distance)
+
 - **Distancia desde la posición actual hasta el primer eje de la cuadrícula:**
   - Fórmulas:
     - Si el rayo va en dirección positiva:
@@ -157,29 +161,60 @@
   - Uso: Determina el primer salto parcial del rayo antes de entrar en el bucle DDA.
 
 ### Ecuación de la recta (punto-pendiente)
+
 - **Para calcular la nueva coordenada tras cruzar un eje:**
+- Fórmula: `y - y0 = m(x - x0)` o `x = (y - y0) / m + x0`
+- Donde:
+  - `m = tan(α) = sen(α) / cos(α)` es la pendiente del rayo.
+- Variables:
+  - `α` = ángulo del rayo en radianes
+  - `y` = variable a calcular (nueva posición y)
+  - `y0` = posición inicial y
+  - `m` = pendiente del rayo (tan(α))
+  - `x` = variable a calcular (nueva posición x)
+  - `x0` = posición inicial x
+- Uso: Permite calcular la posición exacta del rayo tras cruzar un eje de la cuadrícula, ya sea vertical u horizontalmente.
+
   - Si se avanza en X:
     - `y = tan(α) * (x - x0) + y0`
   - Si se avanza en Y:
     - `x = (y - y0) / tan(α) + x0`
   - Uso: Permite calcular la posición exacta del rayo tras cruzar un eje de la cuadrícula.
+  - Nos quedamos con el pequeño, que es el que intersecciona primero con el eje cualquiera
+    Ecuacion de la recta | Punto pendiente
+
+  Ejemplo: dist x < dist y (interseccion con eje y)
+  P (0.7 , 2.3)
+  pos x = (int) pos.x + 1 = 0 + 1 = 1.0 (de 0.7 avanzamos a 1.0 en x)
+  Ahora calculamos el avance de y usando punto pendiente
+  y = m(x - x0) + y0 = tan(alpha) \* (x - x0) + y0
+
+  Ejemplo: dist y < dist x (interseccion con eje x)
+  P (0.7 , 2.3)
+  pos y = (int) pos.y + 1 = 2 + 1 = 3.0 (de 2.3 avanzamos a 3.0 en y)
+  Ahora calculamos el avance de x usando punto pendiente
+  x = (y - y0)/m + x0
 
 ### Distancia euclídea
+
 - **Distancia entre dos puntos (Pitagoras):**
   - Fórmula: `dist = sqrt((x0 - x1)^2 + (y0 - y1)^2)`
   - Uso: Para calcular la distancia real recorrida por el rayo desde el jugador hasta la pared.
 
 ### Corrección del efecto fish-eye
+
 - **Proyección sin distorsión:**
   - Fórmula: `distancia_corregida = distancia * cos(ángulo_rayo - ángulo_jugador)`
   - Uso: Corrige la distorsión de perspectiva al renderizar las paredes en la vista 3D.
 
 ### Altura de la pared en la proyección 3D
+
 - **Cálculo de la altura de la pared:**
   - Fórmula: `wall_height = HEIGHT / distancia_corregida`
   - Uso: Determina cuántos píxeles de alto se debe dibujar la pared en la columna correspondiente.
 
 ### Movimiento del jugador
+
 - **Avance en la dirección del ángulo:**
   - Fórmulas:
     - Adelante/atrás: `x += cos(α) * velocidad`, `y += sin(α) * velocidad`

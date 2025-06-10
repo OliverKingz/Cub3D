@@ -6,7 +6,7 @@
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 19:38:28 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/06/07 23:29:21 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/06/10 18:00:04 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,5 +34,3 @@ int32_t	main(int argc, char **argv)
 		ft_mlx_err(USAGE);
 	return (EXIT_SUCCESS);
 }
-
-// PNG tiene colores que no son RGB, hay que castearlo. Problamente usar XPM

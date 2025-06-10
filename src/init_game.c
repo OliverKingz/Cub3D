@@ -6,7 +6,7 @@
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 19:52:22 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/06/10 03:05:23 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/06/10 18:54:15 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,13 @@
 
 t_game	init_game(t_game *game, const char *scene_dir)
 {
-	printf("Scene: %s\n", scene_dir);
 	ft_memset((void *)game, 0, sizeof(t_game));
 	init_scene(game, scene_dir);
 	init_mlx(game);
 	init_images(game);
 	game->is_running = true;
 	init_draw_to_window(game);
-	print_debug_info(game); // Debug
+	print_debug_info(game);
 	return (*game);
 }
 
@@ -32,10 +31,9 @@ void	init_mlx(t_game *game)
 	if (!game->mlx)
 		ft_mlx_err(FAIL_MLX);
 	mlx_set_window_pos(game->mlx, 0, 0);
-	mlx_set_window_size(game->mlx, WIDTH, HEIGHT);
 	mlx_set_icon(game->mlx, game->graphs.icon_t);
-	mlx_set_window_limit(game->mlx, WIDTH / 3, HEIGHT / 3, WIDTH * 5, HEIGHT
-		* 5);
+	mlx_set_window_limit(game->mlx, WIDTH / 2, HEIGHT / 2, WIDTH * 3, HEIGHT
+		* 3);
 }
 
 void	init_images(t_game *game)
@@ -58,5 +56,4 @@ void	init_draw_to_window(t_game *game)
 	mlx_image_to_window(game->mlx, game->graphs.screen, 0, 0);
 	mlx_image_to_window(game->mlx, game->graphs.minimap, WIDTH - 10
 		- game->scene.w_mmap, HEIGHT - 10 - game->scene.h_mmap);
-	//mlx_resize_image(game->graphs.minimap, WIDTH / 4, HEIGHT / 4);
 }

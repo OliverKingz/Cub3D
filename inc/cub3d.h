@@ -6,7 +6,7 @@
 /*   By: raperez- <raperez-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 18:31:20 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/06/10 20:51:38 by raperez-         ###   ########.fr       */
+/*   Updated: 2025/06/10 21:07:11 by raperez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,8 @@
 # include <sys/time.h> // To use gettimeofday
 
 /* ************************************************************************** */
-/*                              MACROS AND DEFINES                            */
+/*                                   FLAGS                                    */
 /* ************************************************************************** */
-
-// Usage message for the game. 
-# define USAGE "Usage: ./cub3d assets/scenes/example.cub\n"
 
 // Debug mode flag to enable or disable debug information printing.
 # ifndef DEBUG_MODE
@@ -52,17 +49,24 @@
 #  define USE_TEXTURES true
 # endif
 
+/* ************************************************************************** */
+/*                              MACROS AND DEFINES                            */
+/* ************************************************************************** */
+
+// Usage message for the game. 
+# define USAGE "Usage: ./cub3d assets/scenes/example.cub\n"
+
 // Settings: constants for the game window, minimap dimensions and speeds
-# define WIDTH 1080						// Width of the game window
-# define HEIGHT 720						// Height of the game window
-# define RATIO (double)(WIDTH / HEIGHT) // Aspect ratio of the game window
+# define WIDTH 1080		// Width of the game window
+# define HEIGHT 720		// Height of the game window
 
 # define FOV 60			// Field of view in degrees for the raycasting system
 # define SPEED 0.05		// Speed of the player movement in the game
-# define ANGLE_SPEED 2	// Speed of the player rotation in degrees per frame
-# define WALL_DIM_X 2	// Width of each wall segment in pixels
+# define ANGLE_SPEED 5	// Speed of the player rotation in degrees per frame
+# define WALL_DIM_X 1	// Width of each wall segment in pixels
+# define FPS 60 		// Frames per second for the game loop
 
-# define MMAP_TILE 30			// Size of each tile in the minimap
+# define MMAP_TILE 20			// Size of each tile in the minimap
 # define MMAP_PLAYER_RADIUS 3	// Radius of the player in the minimap in tiles
 
 // Colors used in the game, represented in RGBA format.
@@ -136,7 +140,7 @@ typedef struct s_scene
 	char			**map2d;	// 2D representation of the map
 	int				height_map;	// Height of the map array
 	int				width_map;	// Width of the map array
-	double			ratio_map;	// Aspect Ratio of the map dimensions (width/height)
+	double			ratio_map;	// Aspect Ratio of the map (width/height)
 	int				h_mmap;		// Height of the minimap
 	int				w_mmap;		// Width of the minimap
 	int				floor_rgb;	// RGB values for floor
@@ -146,16 +150,17 @@ typedef struct s_scene
 //  Ray structure to represent a ray in the raycasting system.
 typedef struct s_ray
 {
-	double	angle_radians;	// Ray angle in radians
+	double	length;			// Total distance from start_pos to hit point
+	double	corrected_len;	// Corrected distance considering fisheye effect
+	double	angle_rads;	// Ray angle in radians
+	t_dir	collision_dir;	// Direction of the wall hit (NO, SO, EA, WE)
 	t_point	vector;			// Direction vector (unit vector for the ray)
-	t_point	start_point;	// Start position of the ray (player position) RENAME POS_START
-	t_point	pos;			// Current/end position of the ray (updated as it moves)
+	t_point	start_pos;		// Start position of the ray (player position)
+	t_point	end_pos;		// End position of the ray (updated as it moves)
 	t_point	delta_dist;		// Distance ray must travel to cross the next axis
 	t_point	axis_dist;		// Distance from current pos to the next x or y axis
 	t_point	real_axis_dist;	// Scaled distance to next axis x or y
 	t_point	step;			// Step direction for x and y (-1, 0, or 1)
-	t_dir	hit_dir;		// Direction of the wall hit (NO, SO, EA, WE) RENAME TO COLLISION_DIR
-	double	size;			// Total distance from start_point to hit point RENAME TO LENGTH
 }					t_ray;
 
 // Graphical representation of the game, including textures and images.
@@ -181,12 +186,12 @@ typedef struct s_graph
 // Keys structure to represent the state of the keys pressed by the player.
 typedef struct s_keys
 {
-	bool	w; // Forward movement key
-	bool	a; // Left movement key
-	bool	s; // Backward movement key
-	bool	d; // Right movement key
-	bool	left; // Left rotation key
-	bool	right; // Right rotation key
+	bool	w;		// Forward movement key
+	bool	a;		// Left movement key
+	bool	s;		// Backward movement key
+	bool	d;		// Right movement key
+	bool	left;	// Left rotation key
+	bool	right;	// Right rotation key
 }					t_keys;
 
 // Game structure to represent the entire game state.
@@ -206,87 +211,97 @@ typedef struct s_game
 
 // init_game.c
 
-t_game				init_game(t_game *game, const char *scene_dir);
-void				init_mlx(t_game *game);
-void				init_images(t_game *game);
-void				init_draw_to_window(t_game *game);
+t_game			init_game(t_game *game, const char *scene_dir);
+void			init_mlx(t_game *game);
+void			init_images(t_game *game);
+void			init_draw_to_window(t_game *game);
 
 // init_scene.c
 
-t_game				init_scene(t_game *game, const char *scene_dir);
-void				init_texture(t_game *game, const char *scene_dir);
-void				init_player(t_game *game, const char *scene_dir);
-void				init_map(t_game *game, const char *scene_dir);
+t_game			init_scene(t_game *game, const char *scene_dir);
+void			init_texture(t_game *game, const char *scene_dir);
+void			init_player(t_game *game, const char *scene_dir);
+void			init_map(t_game *game, const char *scene_dir);
 
 // draw.c
 
-void				draw_frame(t_game *game);
-void				draw_screen_bg(t_game *game);
+void			draw_frame(t_game *game);
+void			draw_screen_bg(t_game *game);
 
 // draw_raycast.c
 
-void				draw_walls_and_rays(t_game *game);
-void				draw_ray(mlx_image_t *img, t_ray ray, int mult);
-//void				draw_rectangle(mlx_image_t *img, int x, int y, int height);
-void				draw_rectangle(mlx_image_t *img, t_point pos, t_point size, int color);
-unsigned int		get_pixel_rgba(mlx_texture_t *texture, int x, int y);
-void				draw_wall_texture(t_game *game, t_ray ray, t_point pos, t_point dim);
-void				draw_wall_rectangle(t_game *game, t_ray ray, t_point pos, t_point dim);
+void			draw_walls_and_rays(t_game *game);
+void			draw_ray(mlx_image_t *img, t_ray ray, int mult);
+void			draw_wall_rectangle(t_game *game, t_ray ray, t_point pos,
+					t_point dim);
+void			draw_wall_texture(t_game *game, t_ray ray, t_point pos,
+					t_point dim);
 
 // draw_minimap.c
 
-//void				draw_map_bg(t_game *game);
-//void				draw_fill_tile(t_game *game, int x, int y, int color);
 //void				draw_minimap(t_game *game);
-void				draw_minimap_player(t_game *game);
-void				draw_minimap_tiles(t_game *game);
-void				draw_minimap_grid(t_game *game);
+void			draw_minimap_player(t_game *game);
+void			draw_minimap_tiles(t_game *game);
+void			draw_minimap_grid(t_game *game);
+
+// draw_utils.c
+
+void			draw_rectangle(mlx_image_t *img, t_point pos, t_point size,
+					int color);
+int				get_texture_and_xt(t_game *game, t_ray ray,
+					mlx_texture_t **texture);
+unsigned int	get_pixel_rgba(mlx_texture_t *texture, int x, int y);
 
 // hook.c
 
-void				key_hook(mlx_key_data_t keydata, void *param);
-void				close_hook(void *param);
-void				loop_hook(void *param);
+void			key_hook(mlx_key_data_t keydata, void *param);
+void			close_hook(void *param);
+void			loop_hook(void *param);
+void			fps_counter(void);
 
 // move.c
 
-void				move(t_game *game, int dx, int dy);
-void				rotate(t_game *game, int dang);
+void			move(t_game *game, int dx, int dy);
+void			rotate(t_game *game, int dang);
 
-// raycast.c REORGANIZATION SUGGESTION
+// raycast.c
 
-void				init_ray(t_game *game, t_ray *ray, double angle);
-t_ray				launch_ray(t_game *game, double angle); // cast_ray
-double				calculate_ray_size(t_ray ray); // get_ray_length
+void			init_ray(t_game *game, t_ray *ray, double angle);
+t_ray			cast_ray(t_game *game, double angle);
+double			get_ray_length(t_ray ray);
+double			correct_raylen_fisheye(t_ray *ray, double player_angle);
 
 // raycast_dda.c
 
-void				set_delta_dist(t_ray *ray); // get_delta
-void				calculate_axis_dist(t_ray *ray); // get_ray_to_axis_distance
-void				move_ray(t_ray *ray); // move_ray_to_next_axis
-void				check_hit(t_ray *ray, t_scene *scene); // detect_axis_is_wall_collision
+void			get_delta(t_ray *ray);
+void			get_ray_to_axis_distance(t_ray *ray);
+void			move_ray_to_next_axis(t_ray *ray);
+void			check_axis_is_wall_collision(t_ray *ray, t_scene *scene);
 
 // raycast_utils.c
 
-double				degrees_to_radians(double degrees);
-t_point				angle_to_vector(double angle_rads);
+double			degrees_to_radians(double angle_degs);
+t_point			radians_to_vector(double angle_rads);
 
 // exit.c
 
-void				ft_mlx_err(const char *msg);
-void				free_textures(t_game *game);
-void				free_images(t_game *game);
-void				free_map(t_game *game);
-void				free_game(t_game *game);
+void			ft_mlx_err(const char *msg);
+void			free_textures(t_game *game);
+void			free_images(t_game *game);
+void			free_map(t_game *game);
+void			free_game(t_game *game);
 
 // utils.c
 
-void				my_perr(const char *msg, bool should_exit, int exit_code);
-void				my_free(void **mem);
-void				my_free2d(void ***mem);
-void				my_close(int *fd);
-void				my_delete_texture(mlx_texture_t *texture);
-void				my_delete_image(mlx_t *mlx, mlx_image_t *image);
+void			my_perr(const char *msg, bool should_exit, int exit_code);
+void			my_free(void **mem);
+void			my_free2d(void ***mem);
+void			my_close(int *fd);
+
+// utils2.c
+
+void			my_delete_texture(mlx_texture_t *texture);
+void			my_delete_image(mlx_t *mlx, mlx_image_t *image);
 
 // utils2.c
 
@@ -297,14 +312,14 @@ int					ft_strchr_count(const char *s, int c);
 
 // parser.c
 
-bool				read_file(t_game *game, const char *file);
+bool			read_file(t_game *game, const char *file);
 
 // debug.c
 
-void				print_debug_info(t_game *game);
-void				print_texture_info(mlx_texture_t *texture);
-void				print_texture_pixel_info(mlx_texture_t *texture, int x, int y);
-void				print_ray_info(t_ray *ray);
+void			print_debug_info(t_game *game);
+void			print_texture_info(mlx_texture_t *texture);
+void			print_texture_pixel_info(mlx_texture_t *texture, int x, int y);
+void			print_ray_info(t_ray *ray);
 
 /* ************************************************************************** */
 #endif
