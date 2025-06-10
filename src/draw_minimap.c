@@ -6,18 +6,18 @@
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/07 12:27:32 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/06/08 14:19:16 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/06/10 01:36:22 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	draw_minimap(t_game *game)
-{
-	// draw_map_bg(game);
-	draw_map_all_tiles(game);
-	draw_map_grid(game);
-}
+// void	draw_minimap(t_game *game)
+// {
+// 	//draw_map_bg(game);
+// 	draw_minimap_tiles(game);
+// 	draw_minimap_grid(game);
+// }
 
 void	draw_ray(mlx_image_t *img, t_ray ray, int mult)
 {
@@ -50,7 +50,7 @@ void	draw_ray(mlx_image_t *img, t_ray ray, int mult)
 	}
 }
 
-void	draw_player_mmap(t_game *game)
+void	draw_minimap_player(t_game *game)
 {
 	int	dy;
 	int	dx;

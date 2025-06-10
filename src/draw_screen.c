@@ -6,7 +6,7 @@
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/07 12:25:19 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/06/08 13:10:26 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/06/10 00:57:47 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,26 +31,6 @@ void	draw_screen_bg(t_game *game)
 			mlx_put_pixel(game->graphs.screen, x, y, game->scene.floor_rgb);
 			y++;
 		}
-		x++;
-	}
-}
-
-void	draw_rectangle(mlx_image_t *img, int x, int y, int height)
-{
-	int j;
-	int	width;
-
-	width = x + WIDTH / FOV;
-	height += y;
-	while (x < width)
-	{
-		j = y;
-		while (j < height)
-		{
-			if (j >= 0 && j < HEIGHT)
-				mlx_put_pixel(img, x, j, WALL_COLOR);
-			j++;
-		} 
 		x++;
 	}
 }

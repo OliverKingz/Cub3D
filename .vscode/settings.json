@@ -7,7 +7,8 @@
 		"mlx42.h": "c",
 		"cub3d.h": "c",
 		"libft.h": "c",
-		"random": "c"
+		"random": "c",
+		"lodepng.h": "c"
 	},
 	"cmake.sourceDirectory": "/home/oliverkingz/42-Cursus/Cub3d/lib/MLX42",
 	"cmake.ignoreCMakeListsMissing": true

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: raperez- <raperez-@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 18:31:20 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/06/09 14:18:41 by raperez-         ###   ########.fr       */
+/*   Updated: 2025/06/10 02:06:22 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,25 +55,28 @@
 # define FAIL_MINIMAP_TOO_BIG "Minimap is too big, change the tile size\n"
 
 // Constants for the game window, minimap dimensions and speeds
-# define WIDTH 1080		// Width of the game window
-# define HEIGHT 720		// Height of the game window
+# define WIDTH 1080						// Width of the game window
+# define HEIGHT 720						// Height of the game window
+# define RATIO (double)(WIDTH / HEIGHT) // Aspect ratio of the game window
 
 # define FOV 60			// Field of view in degrees for the raycasting system
 # define SPEED 0.05		// Speed of the player movement in the game
 # define ANGLE_SPEED 2	// Speed of the player rotation in degrees per frame
+# define WALL_DIM_X 9	// Width of each wall segment in pixels
 
 # define MMAP_TILE 30			// Size of each tile in the minimap
 # define MMAP_PLAYER_RADIUS 3	// Radius of the player in the minimap in tiles
 
 // Colors used in the game, represented in RGBA format.
-# define MMAP_WALL_COLOR WHITE			// Color of the walls in the minimap
-# define MMAP_EMPTY_COLOR BLACK			// Color of the empty spaces in the mmap
-# define MMAP_GRID_COLOR LIGHT_GREY		// Color of the grid in the minimap
+# define MMAP_WALL_COLOR LIGHT_GREEN	// Color of the walls in the minimap
+# define MMAP_EMPTY_COLOR GREY			// Color of the empty spaces in the mmap
+# define MMAP_GRID_COLOR BLACK			// Color of the grid in the minimap
 
-# define MMAP_PLAYER_COLOR LIGHT_TURQUOISE	// Color of the player in the minimap
-# define MMAP_RAY_COLOR DARK_TURQUOISE	// Color of the rays in the minimap
+# define MMAP_PLAYER_COLOR TURQUOISE	// Color of the player in the minimap
+# define MMAP_RAY_COLOR WHITE			// Color of the rays in the minimap
 
-# define WALL_COLOR GREEN // Color of the walls in the game
+# define WALL_COLOR GREEN 		// Color of the walls in the game
+# define WALL_SHADE DARK_GREEN	// Shaded color of the walls in the game
 
 // Math constants for the game.
 # define PI 3.14159265358979323846
@@ -128,6 +131,7 @@ typedef struct s_scene
 	char			**map2d;	// 2D representation of the map
 	int				height_map;	// Height of the map array
 	int				width_map;	// Width of the map array
+	double			ratio_map;	// Aspect Ratio of the map dimensions (width/height)
 	int				h_mmap;		// Height of the minimap
 	int				w_mmap;		// Width of the minimap
 	int				floor_rgb;	// RGB values for floor
@@ -139,8 +143,8 @@ typedef struct s_ray
 {
 	double	angle_radians;	// Ray angle in radians
 	t_point	vector;			// Direction vector (unit vector for the ray)
-	t_point	start_point;	// Ray starting position (player position) RENAME POS_START
-	t_point	pos;			// Current position of the ray (updated as it moves)
+	t_point	start_point;	// Start position of the ray (player position) RENAME POS_START
+	t_point	pos;			// Current/end position of the ray (updated as it moves)
 	t_point	delta_dist;		// Distance ray must travel to cross the next axis
 	t_point	axis_dist;		// Distance from current pos to the next x or y axis
 	t_point	real_axis_dist;	// Scaled distance to next axis x or y
@@ -212,25 +216,23 @@ void				init_map(t_game *game, const char *scene_dir);
 // draw.c
 
 void				draw_frame(t_game *game);
-void				draw_walls_and_rays(t_game *game);
-
-// draw_screen.c
-
 void				draw_screen_bg(t_game *game);
-void				draw_rectangle(mlx_image_t *img, int x, int y, int height);
+
+// draw_raycast.c
+
+void				draw_walls_and_rays(t_game *game);
+void				draw_ray(mlx_image_t *img, t_ray ray, int mult);
+//void				draw_rectangle(mlx_image_t *img, int x, int y, int height);
+void				draw_rectangle(mlx_image_t *img, t_point pos, t_point size, int color);
 
 // draw_minimap.c
 
-void				draw_minimap(t_game *game);
-void				draw_ray(mlx_image_t *img, t_ray ray, int mult);
-void				draw_player_mmap(t_game *game);
-
-// draw_minimap_utils.c
-
-void				draw_map_bg(t_game *game);
-void				draw_fill_tile(t_game *game, int x, int y, int color);
-void				draw_map_all_tiles(t_game *game);
-void				draw_map_grid(t_game *game);
+//void				draw_map_bg(t_game *game);
+//void				draw_fill_tile(t_game *game, int x, int y, int color);
+//void				draw_minimap(t_game *game);
+void				draw_minimap_player(t_game *game);
+void				draw_minimap_tiles(t_game *game);
+void				draw_minimap_grid(t_game *game);
 
 // hook.c
 
@@ -281,6 +283,13 @@ void				my_delete_image(mlx_t *mlx, mlx_image_t *image);
 // parser.c
 
 bool				read_file(t_game *game, const char *file);
+
+// debug.c
+
+void	print_debug_info(t_game *game);
+void	print_texture_info(mlx_texture_t *texture);
+void	print_texture_pixel_info(mlx_texture_t *texture, int x, int y);
+void	print_ray_info(t_ray *ray);
 
 /* ************************************************************************** */
 #endif
