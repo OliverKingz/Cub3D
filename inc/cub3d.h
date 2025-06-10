@@ -6,7 +6,7 @@
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 18:31:20 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/06/10 15:58:28 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/06/10 16:07:25 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -268,8 +268,8 @@ void				check_axis_is_wall_collision(t_ray *ray, t_scene *scene);
 
 // raycast_utils.c
 
-double				degrees_to_radians(double degrees);
-t_point				angle_to_vector(double angle_rads);
+double				degrees_to_radians(double angle_degs);
+t_point				radians_to_vector(double angle_rads);
 
 // exit.c
 

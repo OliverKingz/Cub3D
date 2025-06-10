@@ -6,7 +6,7 @@
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 14:35:02 by raperez-          #+#    #+#             */
-/*   Updated: 2025/06/10 16:04:32 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/06/10 16:25:07 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,7 @@
 void	init_ray(t_game *game, t_ray *ray, double angle)
 {
 	ray->angle_radians = degrees_to_radians(angle);
-	ray->vector = angle_to_vector(ray->angle_radians);
-		// Calculo el vector direccion
+	ray->vector = radians_to_vector(ray->angle_radians);
 	ray->start_pos.x = game->player.pos.x;
 	ray->start_pos.y = game->player.pos.y;
 	ray->end_pos.x = game->player.pos.x;
@@ -37,8 +36,17 @@ void	init_ray(t_game *game, t_ray *ray, double angle)
 		ray->step.y = 0;
 }
 
-// Lanza un rayo desde la posición inicial (xO, yO) con el angulo (angle)
-// Retorna la distancia que recorrió el rayo
+/**
+ * Casts a ray from the player's position at a given angle using DDA.
+ *
+ * Initializes a ray from the player's position and steps through the map
+ * grid at the given angle. Uses the DDA algorithm to find the first wall
+ * collision and returns the ray with collision info and distance.
+ *
+ * @param game Pointer to the game state.
+ * @param angle Angle (in radians) to cast the ray.
+ * @return t_ray Ray info including length and collision details.
+ */
 t_ray	cast_ray(t_game *game, double angle)
 {
 	t_ray	ray;
@@ -58,8 +66,10 @@ double	get_ray_length(t_ray ray)
 {
 	double	size_x;
 	double	size_y;
+	double	length;
 
 	size_x = ray.start_pos.x - ray.end_pos.x;
 	size_y = ray.start_pos.y - ray.end_pos.y;
-	return (sqrt(size_x * size_x + size_y * size_y));
+	length = sqrt(size_x * size_x + size_y * size_y);
+	return (length);
 }
