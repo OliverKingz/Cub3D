@@ -6,7 +6,7 @@
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 18:31:20 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/06/11 00:28:57 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/06/11 00:53:18 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,11 +84,11 @@
 # define PI 3.14159265358979323846
 
 // Error messages for various failure scenarios in the game.
-# define SCENE_EMPTY "Invalid scene: path is empty\n"
-# define FAIL_MLX "Failed initializing MLX42\n"
-# define FAIL_TEXTURE "Failed loading textures\n"
-# define FAIL_IMAGES "Failed loading images\n"
-# define FAIL_MINIMAP_TOO_BIG "Minimap is too big, change the tile size\n"
+# define SCENE_EMPTY "Invalid scene: path is empty"
+# define FAIL_MLX "Failed initializing MLX42"
+# define FAIL_TEXTURE "Failed loading textures"
+# define FAIL_IMAGES "Failed loading images"
+# define FAIL_MINIMAP_TOO_BIG "Minimap is too big, change the tile size"
 
 /* ************************************************************************** */
 /*                              ENUMS AND STRUCTS                             */

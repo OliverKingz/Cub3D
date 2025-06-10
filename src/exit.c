@@ -6,7 +6,7 @@
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 19:43:10 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/06/10 23:23:41 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/06/11 00:53:03 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	my_mlx_err(const char *msg)
 	if (mlx_errno != 0)
 	{
 		ft_putstr_fd("MLX42 Error: ", STDERR_FILENO);
-		ft_putstr_fd((char *)mlx_strerror(mlx_errno), 2);
+		ft_putendl_fd((char *)mlx_strerror(mlx_errno), STDERR_FILENO);
 	}
 	exit(EXIT_FAILURE);
 }
