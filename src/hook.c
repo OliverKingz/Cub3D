@@ -6,7 +6,7 @@
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 19:13:36 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/06/10 19:54:58 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/06/10 22:56:44 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,9 @@ void	key_hook(mlx_key_data_t keydata, void *param)
 
 static void	update_player_keys_state(t_game *game)
 {
-	int dx;
-	int dy;
-	int dang;
+	int	dx;
+	int	dy;
+	int	dang;
 
 	dx = 0;
 	dy = 0;
@@ -100,12 +100,12 @@ void	loop_hook(void *param)
 	fps_counter();
 }
 
-void			fps_counter(void)
+void	fps_counter(void)
 {
-	static int	frame_count = 0;
+	static int		frame_count = 0;
 	static double	last_time = 0.0;
-	double		current_time;
-	double		delta_time;
+	double			current_time;
+	double			delta_time;
 
 	current_time = mlx_get_time();
 	delta_time = current_time - last_time;

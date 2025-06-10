@@ -3,34 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: raperez- <raperez-@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/09 11:56:40 by raperez-          #+#    #+#             */
-/*   Updated: 2025/06/10 20:51:23 by raperez-         ###   ########.fr       */
+/*   Updated: 2025/06/10 23:13:59 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-void	error_clean(t_game *game, char *msg)
-{
-	ft_putendl_fd("Error", STDERR_FILENO);
-	ft_putendl_fd(msg, STDERR_FILENO);
-	free_game(game);
-	exit(1);
-}
-
-size_t	ft_strlen2d(char **s)
-{
-	size_t	i;
-
-	if (!s)
-		return (0);
-	i = 0;
-	while (s[i])
-		i++;
-	return (i);
-}
 
 bool	is_valid_color(const char *s)
 {
@@ -62,15 +42,15 @@ uint32_t	get_rgb(t_game *game, char *s)
 
 	(void) game;
 	str_array = ft_split(s, ',');
-	if (ft_strchr_count(s, ',') != 2 || ft_strlen2d(str_array) != 3)
-		error_clean(game, "Invalid rgb format");
+	if (my_strchr_count(s, ',') != 2 || my_strlen2d(str_array) != 3)
+		my_err_clean(game, "Invalid rgb format");
 	i = 0;
 	color = 0;
 	while (i < 3)
 	{
 		temp = ft_strtrim(str_array[i], " \f\n\r\t\v");
 		if (!is_valid_color(temp))
-			(my_free((void *)&temp), error_clean(game, "Invalid rgb format"));
+			(my_free((void *)&temp), my_err_clean(game, "Invalid rgb format"));
 		color = color << 8;
 		color += ft_atoi(temp);
 		my_free((void *)&temp);
@@ -140,12 +120,12 @@ bool	read_file(t_game *game, const char *file)
 	{
 		n = manage_line(game, s);
 		if (n == -1)
-			error_clean(game, "Invalid map format");
+			my_err_clean(game, "Invalid map format");
 		counter += n;
 		my_free((void *)&s);
 		s = get_next_line(fd);
 	}
 	if (counter != 6)
-		error_clean(game, "Invalid map format");
+		my_err_clean(game, "Invalid map format");
 	return (true);
 }

@@ -3,49 +3,35 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: raperez- <raperez-@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 19:43:10 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/06/10 12:31:24 by raperez-         ###   ########.fr       */
+/*   Updated: 2025/06/10 23:23:41 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	ft_mlx_err(const char *msg)
+void	my_mlx_err(const char *msg)
 {
-	ft_putstr_fd("Error\n", 2);
+	ft_putendl_fd("Error", STDERR_FILENO);
 	if (msg)
-		ft_putstr_fd((char *)msg, 2);
+		ft_putendl_fd((char *)msg, STDERR_FILENO);
 	if (mlx_errno != 0)
 	{
-		ft_putstr_fd("MLX42 Error: ", 2);
+		ft_putstr_fd("MLX42 Error: ", STDERR_FILENO);
 		ft_putstr_fd((char *)mlx_strerror(mlx_errno), 2);
 	}
 	exit(EXIT_FAILURE);
 }
 
-void	free_textures(t_game *game)
+void	my_err_clean(t_game *game, char *msg)
 {
-	my_free((void *)&(game->graphs.north_path));
-	my_free((void *)&(game->graphs.south_path));
-	my_free((void *)&(game->graphs.east_path));
-	my_free((void *)&(game->graphs.west_path));
-	my_delete_texture(game->graphs.icon_t);
-	my_delete_texture(game->graphs.north_t);
-	my_delete_texture(game->graphs.south_t);
-	my_delete_texture(game->graphs.east_t);
-	my_delete_texture(game->graphs.west_t);
-}
-
-void	free_images(t_game *game)
-{
-	my_delete_image(game->mlx, game->graphs.north);
-	my_delete_image(game->mlx, game->graphs.south);
-	my_delete_image(game->mlx, game->graphs.east);
-	my_delete_image(game->mlx, game->graphs.west);
-	my_delete_image(game->mlx, game->graphs.screen);
-	my_delete_image(game->mlx, game->graphs.minimap);
+	ft_putendl_fd("Error", STDERR_FILENO);
+	if (msg)
+		ft_putendl_fd(msg, STDERR_FILENO);
+	free_game(game);
+	exit(EXIT_FAILURE);
 }
 
 void	free_map(t_game *game)

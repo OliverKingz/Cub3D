@@ -6,7 +6,7 @@
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 19:38:28 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/06/10 18:00:04 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/06/10 22:53:39 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int32_t	main(int argc, char **argv)
 	if (argc == 2)
 	{
 		if (ft_strlen(argv[1]) == 0)
-			ft_mlx_err(SCENE_EMPTY);
+			my_mlx_err(SCENE_EMPTY);
 		game = init_game(&game, argv[1]);
 		if (game.is_running == true)
 		{
@@ -31,6 +31,6 @@ int32_t	main(int argc, char **argv)
 		mlx_terminate(game.mlx);
 	}
 	else
-		ft_mlx_err(USAGE);
+		my_mlx_err(USAGE);
 	return (EXIT_SUCCESS);
 }

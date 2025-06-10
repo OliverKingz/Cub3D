@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycast_dda.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: raperez- <raperez-@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 16:00:54 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/06/10 21:39:56 by raperez-         ###   ########.fr       */
+/*   Updated: 2025/06/10 22:58:00 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,8 +132,8 @@ void	check_axis_is_wall_collision(t_ray *ray, t_scene *scene)
 		y -= 1;
 	if (scene->map2d[y][x] == WALL)
 	{
-		if (ray->real_axis_dist.x < ray->real_axis_dist.y &&
-				ray->vector.x >= 0)
+		if (ray->real_axis_dist.x < ray->real_axis_dist.y
+			&& ray->vector.x >= 0)
 			ray->collision_dir = WEST;
 		else if (ray->real_axis_dist.x < ray->real_axis_dist.y
 			&& ray->vector.x < 0)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: raperez- <raperez-@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 21:07:40 by raperez-          #+#    #+#             */
-/*   Updated: 2025/06/10 21:07:45 by raperez-         ###   ########.fr       */
+/*   Updated: 2025/06/10 23:12:04 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ char	*my_replace_first(char *og, char *target, char *rep)
 	return (s);
 }
 
-int	ft_strchr_count(const char *s, int c)
+int	my_strchr_count(const char *s, int c)
 {
 	int	i;
 	int	counter;
@@ -84,14 +84,14 @@ int	ft_strchr_count(const char *s, int c)
 	return (counter);
 }
 
-void	my_delete_texture(mlx_texture_t *texture)
+size_t	my_strlen2d(char **s)
 {
-	if (texture)
-		mlx_delete_texture(texture);
-}
+	size_t	i;
 
-void	my_delete_image(mlx_t *mlx, mlx_image_t *image)
-{
-	if (mlx && image)
-		mlx_delete_image(mlx, image);
+	if (!s)
+		return (0);
+	i = 0;
+	while (s[i])
+		i++;
+	return (i);
 }

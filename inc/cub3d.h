@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: raperez- <raperez-@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 18:31:20 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/06/10 21:07:11 by raperez-         ###   ########.fr       */
+/*   Updated: 2025/06/10 23:42:16 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,43 +116,43 @@ typedef enum e_file
 	EA_PLAYER = 'E',
 	SO_PLAYER = 'S',
 	WE_PLAYER = 'W',
-}					t_file;
+}				t_file;
 
 // Point structure to represent a 2D point in the game world.
 typedef struct s_point
 {
-	double			x;	// X coordinate of the point
-	double			y;	// Y coordinate of the point
-}					t_point;
+	double	x;	// X coordinate of the point
+	double	y;	// Y coordinate of the point
+}				t_point;
 
 // Player structure to represent the player's position and angle in the game.
 typedef struct s_player
 {
-	t_point			pos;	// Player's position in the map array
-	t_point			mmap;	// Player's position in the minimap in pixels
-	double			angle;	// Player's angle in degrees
-}					t_player;
+	t_point		pos;	// Player's position in the map array
+	t_point		mmap;	// Player's position in the minimap in pixels
+	double		angle;	// Player's angle in degrees
+}				t_player;
 
 // Scene structure to represent the game scene, including the map and colors.
 typedef struct s_scene
 {
-	char			*map1d;		// 1D representation of the map
-	char			**map2d;	// 2D representation of the map
-	int				height_map;	// Height of the map array
-	int				width_map;	// Width of the map array
-	double			ratio_map;	// Aspect Ratio of the map (width/height)
-	int				h_mmap;		// Height of the minimap
-	int				w_mmap;		// Width of the minimap
-	int				floor_rgb;	// RGB values for floor
-	int				ceil_rgb;	// RGB values for ceiling
-}					t_scene;
+	char	*map1d;		// 1D representation of the map
+	char	**map2d;	// 2D representation of the map
+	int		height_map;	// Height of the map array
+	int		width_map;	// Width of the map array
+	double	ratio_map;	// Aspect Ratio of the map (width/height)
+	int		h_mmap;		// Height of the minimap
+	int		w_mmap;		// Width of the minimap
+	int		floor_rgb;	// RGB values for floor
+	int		ceil_rgb;	// RGB values for ceiling
+}				t_scene;
 
 //  Ray structure to represent a ray in the raycasting system.
 typedef struct s_ray
 {
 	double	length;			// Total distance from start_pos to hit point
 	double	corrected_len;	// Corrected distance considering fisheye effect
-	double	angle_rads;	// Ray angle in radians
+	double	angle_rads;		// Ray angle in radians
 	t_dir	collision_dir;	// Direction of the wall hit (NO, SO, EA, WE)
 	t_point	vector;			// Direction vector (unit vector for the ray)
 	t_point	start_pos;		// Start position of the ray (player position)
@@ -166,21 +166,21 @@ typedef struct s_ray
 // Graphical representation of the game, including textures and images.
 typedef struct s_graph
 {
-	char			*east_path;	// Path to the texture for the east wall
-	char			*north_path;// Path to the texture for the north wall
-	char			*south_path;// Path to the texture for the south wall
-	char			*west_path;	// Path to the texture for the west wall
-	mlx_texture_t	*icon_t;	// Texture for the icon
-	mlx_texture_t	*east_t;	// Textures for the east wall
-	mlx_texture_t	*north_t;	// Textures for the north wall
-	mlx_texture_t	*south_t;	// Textures for the south wall
-	mlx_texture_t	*west_t;	// Textures for the west wall
-	mlx_image_t		*east;		// Image for the east wall
-	mlx_image_t		*north;		// Image for the north wall
-	mlx_image_t		*south;		// Image for the south wall
-	mlx_image_t		*west;		// Image for the west wall
-	mlx_image_t		*screen;	// Image for the screen/window
-	mlx_image_t		*minimap;	// Image for the minimap
+	char			*east_path;		// Path to the texture for the east wall
+	char			*north_path;	// Path to the texture for the north wall
+	char			*south_path;	// Path to the texture for the south wall
+	char			*west_path;		// Path to the texture for the west wall
+	mlx_texture_t	*icon_t;		// Texture for the icon
+	mlx_texture_t	*east_t;		// Textures for the east wall
+	mlx_texture_t	*north_t;		// Textures for the north wall
+	mlx_texture_t	*south_t;		// Textures for the south wall
+	mlx_texture_t	*west_t;		// Textures for the west wall
+	mlx_image_t		*east;			// Image for the east wall
+	mlx_image_t		*north;			// Image for the north wall
+	mlx_image_t		*south;			// Image for the south wall
+	mlx_image_t		*west;			// Image for the west wall
+	mlx_image_t		*screen;		// Image for the screen/window
+	mlx_image_t		*minimap;		// Image for the minimap
 }					t_graph;
 
 // Keys structure to represent the state of the keys pressed by the player.
@@ -192,18 +192,18 @@ typedef struct s_keys
 	bool	d;		// Right movement key
 	bool	left;	// Left rotation key
 	bool	right;	// Right rotation key
-}					t_keys;
+}			t_keys;
 
 // Game structure to represent the entire game state.
 typedef struct s_game
 {
-	t_scene			scene;		// Scene containing the game information 
-	t_player		player;		// Player's position and angle
-	mlx_t			*mlx;		// Pointer to the MLX instance
-	t_graph			graphs;		// Graphical representation of the game
-	t_keys			keys;		// State of the keys pressed
-	bool			is_running; // Flag to indicate if the game is running
-}					t_game;
+	t_scene		scene;		// Scene containing the game information 
+	t_player	player;		// Player's position and angle
+	mlx_t		*mlx;		// Pointer to the MLX instance
+	t_graph		graphs;		// Graphical representation of the game
+	t_keys		keys;		// State of the keys pressed
+	bool		is_running; // Flag to indicate if the game is running
+}				t_game;
 
 /* ************************************************************************** */
 /*                              FUNCTION DECLARATIONS                         */
@@ -239,7 +239,7 @@ void			draw_wall_texture(t_game *game, t_ray ray, t_point pos,
 
 // draw_minimap.c
 
-//void				draw_minimap(t_game *game);
+//void			draw_minimap(t_game *game);
 void			draw_minimap_player(t_game *game);
 void			draw_minimap_tiles(t_game *game);
 void			draw_minimap_grid(t_game *game);
@@ -283,13 +283,26 @@ void			check_axis_is_wall_collision(t_ray *ray, t_scene *scene);
 double			degrees_to_radians(double angle_degs);
 t_point			radians_to_vector(double angle_rads);
 
+// parser.c
+
+bool			is_valid_color(const char *s);
+uint32_t		get_rgb(t_game *game, char *s);
+int				manage_line(t_game *game, char *s);
+bool			read_file(t_game *game, const char *file);
+
 // exit.c
 
-void			ft_mlx_err(const char *msg);
-void			free_textures(t_game *game);
-void			free_images(t_game *game);
+void			my_mlx_err(const char *msg);
+void			my_err_clean(t_game *game, char *msg);
 void			free_map(t_game *game);
 void			free_game(t_game *game);
+
+// exit_utils.c
+
+void			my_delete_texture(mlx_texture_t *texture);
+void			my_delete_image(mlx_t *mlx, mlx_image_t *image);
+void			free_textures(t_game *game);
+void			free_images(t_game *game);
 
 // utils.c
 
@@ -300,19 +313,11 @@ void			my_close(int *fd);
 
 // utils2.c
 
-void			my_delete_texture(mlx_texture_t *texture);
-void			my_delete_image(mlx_t *mlx, mlx_image_t *image);
-
-// utils2.c
-
-int					my_strchr_pos(const char *s, char c);
-int					my_strnstr_pos(const char *big, const char *little, size_t len);
-char				*my_replace_first(char *og, char *target, char *rep);
-int					ft_strchr_count(const char *s, int c);
-
-// parser.c
-
-bool			read_file(t_game *game, const char *file);
+int				my_strchr_pos(const char *s, char c);
+int				my_strnstr_pos(const char *big, const char *little, size_t len);
+char			*my_replace_first(char *og, char *target, char *rep);
+int				my_strchr_count(const char *s, int c);
+size_t			my_strlen2d(char **s);
 
 // debug.c
 
