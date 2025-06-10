@@ -6,7 +6,7 @@
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 18:31:20 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/06/10 15:10:42 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/06/10 15:58:28 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,16 +146,16 @@ typedef struct s_scene
 //  Ray structure to represent a ray in the raycasting system.
 typedef struct s_ray
 {
+	double	length;			// Total distance from start_pos to hit point
 	double	angle_radians;	// Ray angle in radians
+	t_dir	collision_dir;	// Direction of the wall hit (NO, SO, EA, WE)
 	t_point	vector;			// Direction vector (unit vector for the ray)
-	t_point	start_point;	// Start position of the ray (player position) RENAME POS_START
-	t_point	pos;			// Current/end position of the ray (updated as it moves)
+	t_point	start_pos;		// Start position of the ray (player position)
+	t_point	end_pos;		// End position of the ray (updated as it moves)
 	t_point	delta_dist;		// Distance ray must travel to cross the next axis
 	t_point	axis_dist;		// Distance from current pos to the next x or y axis
 	t_point	real_axis_dist;	// Scaled distance to next axis x or y
 	t_point	step;			// Step direction for x and y (-1, 0, or 1)
-	t_dir	hit_dir;		// Direction of the wall hit (NO, SO, EA, WE) RENAME TO COLLISION_DIR
-	double	size;			// Total distance from start_point to hit point RENAME TO LENGTH
 }					t_ray;
 
 // Graphical representation of the game, including textures and images.
@@ -181,12 +181,12 @@ typedef struct s_graph
 // Keys structure to represent the state of the keys pressed by the player.
 typedef struct s_keys
 {
-	bool	w; // Forward movement key
-	bool	a; // Left movement key
-	bool	s; // Backward movement key
-	bool	d; // Right movement key
-	bool	left; // Left rotation key
-	bool	right; // Right rotation key
+	bool	w;		// Forward movement key
+	bool	a;		// Left movement key
+	bool	s;		// Backward movement key
+	bool	d;		// Right movement key
+	bool	left;	// Left rotation key
+	bool	right;	// Right rotation key
 }					t_keys;
 
 // Game structure to represent the entire game state.
@@ -253,18 +253,18 @@ void				loop_hook(void *param);
 void				move(t_game *game, int dx, int dy);
 void				rotate(t_game *game, int dang);
 
-// raycast.c REORGANIZATION SUGGESTION
+// raycast.c
 
 void				init_ray(t_game *game, t_ray *ray, double angle);
-t_ray				launch_ray(t_game *game, double angle); // cast_ray
-double				calculate_ray_size(t_ray ray); // get_ray_length
+t_ray				cast_ray(t_game *game, double angle);
+double				get_ray_length(t_ray ray);
 
 // raycast_dda.c
 
-void				set_delta_dist(t_ray *ray); // get_delta
-void				calculate_axis_dist(t_ray *ray); // get_ray_to_axis_distance
-void				move_ray(t_ray *ray); // move_ray_to_next_axis
-void				check_hit(t_ray *ray, t_scene *scene); // detect_axis_is_wall_collision
+void				get_delta(t_ray *ray);
+void				get_ray_to_axis_distance(t_ray *ray);
+void				move_ray_to_next_axis(t_ray *ray);
+void				check_axis_is_wall_collision(t_ray *ray, t_scene *scene);
 
 // raycast_utils.c
 

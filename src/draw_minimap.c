@@ -6,7 +6,7 @@
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/07 12:27:32 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/06/10 01:36:22 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/06/10 15:50:24 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,26 +24,26 @@ void	draw_ray(mlx_image_t *img, t_ray ray, int mult)
 	double	x;
 	double	y;
 
-	x = ray.start_point.x;
-	while ((ray.vector.x > 0 && x <= ray.pos.x) 
-		|| (ray.vector.x < 0 && x >= ray.pos.x))
+	x = ray.start_pos.x;
+	while ((ray.vector.x > 0 && x <= ray.end_pos.x) 
+		|| (ray.vector.x < 0 && x >= ray.end_pos.x))
 	{
 		if (cos(ray.angle_radians) != 0)
 		{
-			y = tan(ray.angle_radians) * (x - ray.start_point.x)
-				+ ray.start_point.y;
+			y = tan(ray.angle_radians) * (x - ray.start_pos.x)
+				+ ray.start_pos.y;
 			mlx_put_pixel(img, x * mult, y * mult, MMAP_RAY_COLOR);
 		}
 		x += ray.step.x * 0.02;
 	}
-	y = ray.start_point.y;
-	while ((ray.vector.y > 0 && y <= ray.pos.y) 
-		|| (ray.vector.y < 0 && y >= ray.pos.y))
+	y = ray.start_pos.y;
+	while ((ray.vector.y > 0 && y <= ray.end_pos.y) 
+		|| (ray.vector.y < 0 && y >= ray.end_pos.y))
 	{
 		if (cos(ray.angle_radians) != 0 && tan(ray.angle_radians) != 0)
 		{
-			x = ((y - ray.start_point.y) / tan(ray.angle_radians))
-				+ ray.start_point.x;
+			x = ((y - ray.start_pos.y) / tan(ray.angle_radians))
+				+ ray.start_pos.x;
 			mlx_put_pixel(img, x * mult, y * mult, MMAP_RAY_COLOR);
 		}
 		y += ray.step.y * 0.02;

@@ -6,7 +6,7 @@
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 19:11:12 by raperez-          #+#    #+#             */
-/*   Updated: 2025/06/10 15:28:52 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/06/10 15:51:37 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,10 +51,10 @@ void	draw_walls_and_rays(t_game *game)
 	{
 		ray_angle = game->player.angle - (FOV / 2) + ((double)wall_pos.x
 				/ WIDTH) * FOV;
-		ray = launch_ray(game, ray_angle);
+		ray = cast_ray(game, ray_angle);
 		draw_ray(game->graphs.minimap, ray, MMAP_TILE);
 		corrected_dist = fisheye_correction_ray_size(ray_angle,
-				game->player.angle, ray.size);
+				game->player.angle, ray.length);
 		wall_dim.y = HEIGHT / corrected_dist;
 		wall_pos.y = (HEIGHT / 2) - (wall_dim.y / 2);
 		if (USE_TEXTURES)
@@ -87,7 +87,7 @@ void	draw_rectangle(mlx_image_t *img, t_point pos, t_point dim, int color)
 
 void	draw_wall_rectangle(t_game *game, t_ray ray, t_point pos, t_point dim)
 {
-	if (ray.hit_dir == NORTH || ray.hit_dir == SOUTH)
+	if (ray.collision_dir == NORTH || ray.collision_dir == SOUTH)
 		draw_rectangle(game->graphs.screen, pos, dim, WALL_COLOR);
 	else
 		draw_rectangle(game->graphs.screen, pos, dim, WALL_COLOR_SHADOW);
@@ -98,25 +98,25 @@ static int	get_texture_and_xt(t_game *game, t_ray ray, mlx_texture_t **texture)
 	int	x_t;
 
 	*texture = NULL;
-	if (ray.hit_dir == NORTH)
+	if (ray.collision_dir == NORTH)
 		*texture = game->graphs.north_t;
-	else if (ray.hit_dir == SOUTH)
+	else if (ray.collision_dir == SOUTH)
 		*texture = game->graphs.south_t;
-	else if (ray.hit_dir == WEST)
+	else if (ray.collision_dir == WEST)
 		*texture = game->graphs.west_t;
-	else if (ray.hit_dir == EAST)
+	else if (ray.collision_dir == EAST)
 		*texture = game->graphs.east_t;
-	if (ray.hit_dir == NORTH)
-		x_t = (int)((1.0 - (ray.pos.x - floor(ray.pos.x))) * (*texture)->width)
+	if (ray.collision_dir == NORTH)
+		x_t = (int)((1.0 - (ray.end_pos.x - floor(ray.end_pos.x))) * (*texture)->width)
 			% (int)(*texture)->width;
-	else if (ray.hit_dir == SOUTH)
-		x_t = (int)(((ray.pos.x - floor(ray.pos.x))) * (*texture)->width)
+	else if (ray.collision_dir == SOUTH)
+		x_t = (int)(((ray.end_pos.x - floor(ray.end_pos.x))) * (*texture)->width)
 			% (int)(*texture)->width;
-	else if (ray.hit_dir == WEST)
-		x_t = (int)(((ray.pos.y - floor(ray.pos.y)) * (*texture)->width))
+	else if (ray.collision_dir == WEST)
+		x_t = (int)(((ray.end_pos.y - floor(ray.end_pos.y)) * (*texture)->width))
 			% (int)(*texture)->width;
-	else if (ray.hit_dir == EAST)
-		x_t = (int)((1.0 - (ray.pos.y - floor(ray.pos.y))) * (*texture)->width)
+	else if (ray.collision_dir == EAST)
+		x_t = (int)((1.0 - (ray.end_pos.y - floor(ray.end_pos.y))) * (*texture)->width)
 			% (int)(*texture)->width;
 	return (x_t);
 }
@@ -181,7 +181,7 @@ unsigned int	get_pixel_rgba(mlx_texture_t *texture, int x, int y)
 // 	ray_angle = game->player.angle - FOV / 2;
 // 	while (ray_angle < game->player.angle + FOV / 2)
 // 	{
-// 		ray = launch_ray(game, ray_angle);
+// 		ray = cast_ray(game, ray_angle);
 // 		draw_ray(game->graphs.minimap, ray, MMAP_TILE);
 // 		corrected_dist = fisheye_correction_ray_size(ray_angle,
 // 				game->player.angle, ray.size);
