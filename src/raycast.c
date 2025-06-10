@@ -6,7 +6,7 @@
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 14:35:02 by raperez-          #+#    #+#             */
-/*   Updated: 2025/06/10 16:43:47 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/06/10 17:37:38 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void	init_ray(t_game *game, t_ray *ray, double angle)
 {
-	ray->angle_radians = degrees_to_radians(angle);
-	ray->vector = radians_to_vector(ray->angle_radians);
+	ray->angle_rads = degrees_to_radians(angle);
+	ray->vector = radians_to_vector(ray->angle_rads);
 	ray->start_pos.x = game->player.pos.x;
 	ray->start_pos.y = game->player.pos.y;
 	ray->end_pos.x = game->player.pos.x;
@@ -81,7 +81,7 @@ double	correct_raylen_fisheye(t_ray *ray, double player_angle)
 	double	corrected;
 
 	player_angle_rad = degrees_to_radians(player_angle);
-	corrected = ray->length * cos(ray->angle_radians - player_angle_rad);
+	corrected = ray->length * cos(ray->angle_rads - player_angle_rad);
 	if (corrected < 0.0001)
 		corrected = 0.0001;
 	return (corrected);

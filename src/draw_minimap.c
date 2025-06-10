@@ -6,7 +6,7 @@
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/07 12:27:32 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/06/10 15:50:24 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/06/10 17:49:26 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,34 +19,58 @@
 // 	draw_minimap_grid(game);
 // }
 
-void	draw_ray(mlx_image_t *img, t_ray ray, int mult)
+void	draw_minimap_tiles(t_game *game)
 {
-	double	x;
-	double	y;
+	int		y;
+	int		x;
+	t_point	tile_size;
+	t_point	tile_pos;
 
-	x = ray.start_pos.x;
-	while ((ray.vector.x > 0 && x <= ray.end_pos.x) 
-		|| (ray.vector.x < 0 && x >= ray.end_pos.x))
+	y = -1;
+	while (++y < game->scene.height_map)
 	{
-		if (cos(ray.angle_radians) != 0)
+		x = -1;
+		while (++x < game->scene.width_map)
 		{
-			y = tan(ray.angle_radians) * (x - ray.start_pos.x)
-				+ ray.start_pos.y;
-			mlx_put_pixel(img, x * mult, y * mult, MMAP_RAY_COLOR);
+			tile_size = (t_point){MMAP_TILE, MMAP_TILE};
+			tile_pos = (t_point){x * MMAP_TILE, y * MMAP_TILE};
+			if (game->scene.map2d[y][x] == WALL)
+				draw_rectangle(game->graphs.minimap, tile_pos, tile_size,
+					MMAP_WALL_COLOR);
+			else if (game->scene.map2d[y][x] == SPACE)
+				draw_rectangle(game->graphs.minimap, tile_pos, tile_size,
+					CLEAR);
+			else
+				draw_rectangle(game->graphs.minimap, tile_pos, tile_size,
+					MMAP_EMPTY_COLOR);
 		}
-		x += ray.step.x * 0.02;
 	}
-	y = ray.start_pos.y;
-	while ((ray.vector.y > 0 && y <= ray.end_pos.y) 
-		|| (ray.vector.y < 0 && y >= ray.end_pos.y))
+}
+
+void	draw_minimap_grid(t_game *game)
+{
+	int	x;
+	int	y;
+
+	x = -1;
+	while (++x < game->scene.w_mmap)
 	{
-		if (cos(ray.angle_radians) != 0 && tan(ray.angle_radians) != 0)
+		y = -1;
+		while (++y < game->scene.h_mmap)
 		{
-			x = ((y - ray.start_pos.y) / tan(ray.angle_radians))
-				+ ray.start_pos.x;
-			mlx_put_pixel(img, x * mult, y * mult, MMAP_RAY_COLOR);
+			if (x % MMAP_TILE == 0)
+				mlx_put_pixel(game->graphs.minimap, x, y, MMAP_GRID_COLOR);
 		}
-		y += ray.step.y * 0.02;
+	}
+	y = -1;
+	while (++y < game->scene.h_mmap)
+	{
+		x = -1;
+		while (++x < game->scene.w_mmap)
+		{
+			if (y % MMAP_TILE == 0)
+				mlx_put_pixel(game->graphs.minimap, x, y, MMAP_GRID_COLOR);
+		}
 	}
 }
 

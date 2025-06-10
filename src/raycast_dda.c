@@ -6,7 +6,7 @@
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 16:00:54 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/06/10 16:25:44 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/06/10 17:37:38 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,16 +30,16 @@ void	get_delta(t_ray *ray)
 	double	cos_angle;
 	double	sen_angle;
 
-	cos_angle = cos(ray->angle_radians);
+	cos_angle = cos(ray->angle_rads);
 	if (cos_angle == 0)
 		ray->delta_dist.x = 1e30;
 	else
-		ray->delta_dist.x = fabs(1 / cos(ray->angle_radians));
-	sen_angle = sin(ray->angle_radians);
+		ray->delta_dist.x = fabs(1 / cos(ray->angle_rads));
+	sen_angle = sin(ray->angle_rads);
 	if (sen_angle == 0)
 		ray->delta_dist.y = 1e30;
 	else
-		ray->delta_dist.y = fabs(1 / sin(ray->angle_radians));
+		ray->delta_dist.y = fabs(1 / sin(ray->angle_rads));
 }
 
 /**
@@ -98,14 +98,14 @@ void	move_ray_to_next_axis(t_ray *ray)
 	else if (ray->real_axis_dist.x < ray->real_axis_dist.y)
 	{
 		ray->end_pos.x = ray->end_pos.x + ray->axis_dist.x;
-		ray->end_pos.y = tan(ray->angle_radians) * (ray->end_pos.x
+		ray->end_pos.y = tan(ray->angle_rads) * (ray->end_pos.x
 				- ray->start_pos.x) + ray->start_pos.y;
 	}
 	else
 	{
 		ray->end_pos.y = ray->end_pos.y + ray->axis_dist.y;
 		ray->end_pos.x = (ray->end_pos.y - ray->start_pos.y)
-			/ tan(ray->angle_radians) + ray->start_pos.x;
+			/ tan(ray->angle_rads) + ray->start_pos.x;
 	}
 }
 
