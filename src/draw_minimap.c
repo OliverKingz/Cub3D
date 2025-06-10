@@ -6,7 +6,7 @@
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/07 12:27:32 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/06/10 17:49:26 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/06/11 00:16:42 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,7 @@ void	draw_minimap_tiles(t_game *game)
 				draw_rectangle(game->graphs.minimap, tile_pos, tile_size,
 					MMAP_WALL_COLOR);
 			else if (game->scene.map2d[y][x] == SPACE)
-				draw_rectangle(game->graphs.minimap, tile_pos, tile_size,
-					CLEAR);
+				continue ;
 			else
 				draw_rectangle(game->graphs.minimap, tile_pos, tile_size,
 					MMAP_EMPTY_COLOR);
@@ -47,30 +46,51 @@ void	draw_minimap_tiles(t_game *game)
 	}
 }
 
-void	draw_minimap_grid(t_game *game)
+void	draw_minimap_grid_vertical(t_game *game)
 {
 	int	x;
 	int	y;
+	int	tile_x;
 
-	x = -1;
-	while (++x < game->scene.w_mmap)
+	x = 0;
+	tile_x = 0;
+	while (tile_x < game->scene.width_map)
 	{
-		y = -1;
-		while (++y < game->scene.h_mmap)
+		x = tile_x * MMAP_TILE;
+		if (x >= game->scene.w_mmap)
+			break ;
+		y = 0;
+		while (y < game->scene.h_mmap && y < MMAP_TILE * game->scene.height_map)
 		{
-			if (x % MMAP_TILE == 0)
+			if (game->scene.map2d[y / MMAP_TILE][tile_x] != SPACE)
 				mlx_put_pixel(game->graphs.minimap, x, y, MMAP_GRID_COLOR);
+			y++;
 		}
+		tile_x++;
 	}
-	y = -1;
-	while (++y < game->scene.h_mmap)
+}
+
+void	draw_minimap_grid_horizontal(t_game *game)
+{
+	int	y;
+	int	x;
+	int	tile_y;
+
+	y = 0;
+	tile_y = 0;
+	while (tile_y < game->scene.height_map)
 	{
-		x = -1;
-		while (++x < game->scene.w_mmap)
+		y = tile_y * MMAP_TILE;
+		if (y >= game->scene.h_mmap)
+			break ;
+		x = 0;
+		while (x < game->scene.w_mmap && x < MMAP_TILE * game->scene.width_map)
 		{
-			if (y % MMAP_TILE == 0)
+			if (game->scene.map2d[tile_y][x / MMAP_TILE] != SPACE)
 				mlx_put_pixel(game->graphs.minimap, x, y, MMAP_GRID_COLOR);
+			x++;
 		}
+		tile_y++;
 	}
 }
 

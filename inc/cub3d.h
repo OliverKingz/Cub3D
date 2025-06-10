@@ -6,7 +6,7 @@
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 18:31:20 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/06/10 23:42:16 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/06/10 23:57:55 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -242,7 +242,8 @@ void			draw_wall_texture(t_game *game, t_ray ray, t_point pos,
 //void			draw_minimap(t_game *game);
 void			draw_minimap_player(t_game *game);
 void			draw_minimap_tiles(t_game *game);
-void			draw_minimap_grid(t_game *game);
+void			draw_minimap_grid_vertical(t_game *game);
+void			draw_minimap_grid_horizontal(t_game *game);
 
 // draw_utils.c
 
