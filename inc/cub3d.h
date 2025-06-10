@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: raperez- <raperez-@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 18:31:20 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/06/10 13:32:18 by raperez-         ###   ########.fr       */
+/*   Updated: 2025/06/10 15:10:42 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,22 +39,20 @@
 /*                              MACROS AND DEFINES                            */
 /* ************************************************************************** */
 
-// Debug mode flag to enable or disable debug features in the game.
-# ifndef DEBUG_MODE
-#  define DEBUG_MODE 1
-# endif
-
-// Usage message for the game.
+// Usage message for the game. 
 # define USAGE "Usage: ./cub3d assets/scenes/example.cub\n"
 
-// Error messages for various failure scenarios in the game.
-# define SCENE_EMPTY "Invalid scene: path is empty\n"
-# define FAIL_MLX "Failed initializing MLX42\n"
-# define FAIL_TEXTURE "Failed loading textures\n"
-# define FAIL_IMAGES "Failed loading images\n"
-# define FAIL_MINIMAP_TOO_BIG "Minimap is too big, change the tile size\n"
+// Debug mode flag to enable or disable debug information printing.
+# ifndef DEBUG_MODE
+#  define DEBUG_MODE false
+# endif
 
-// Constants for the game window, minimap dimensions and speeds
+// Use textures flag to enable or disable texture rendering in the game.
+# ifndef USE_TEXTURES
+#  define USE_TEXTURES true
+# endif
+
+// Settings: constants for the game window, minimap dimensions and speeds
 # define WIDTH 1080						// Width of the game window
 # define HEIGHT 720						// Height of the game window
 # define RATIO (double)(WIDTH / HEIGHT) // Aspect ratio of the game window
@@ -62,7 +60,7 @@
 # define FOV 60			// Field of view in degrees for the raycasting system
 # define SPEED 0.05		// Speed of the player movement in the game
 # define ANGLE_SPEED 2	// Speed of the player rotation in degrees per frame
-# define WALL_DIM_X 1	// Width of each wall segment in pixels
+# define WALL_DIM_X 2	// Width of each wall segment in pixels
 
 # define MMAP_TILE 30			// Size of each tile in the minimap
 # define MMAP_PLAYER_RADIUS 3	// Radius of the player in the minimap in tiles
@@ -75,11 +73,18 @@
 # define MMAP_PLAYER_COLOR TURQUOISE	// Color of the player in the minimap
 # define MMAP_RAY_COLOR WHITE			// Color of the rays in the minimap
 
-# define WALL_COLOR GREEN 		// Color of the walls in the game
-# define WALL_SHADE DARK_GREEN	// Shaded color of the walls in the game
+# define WALL_COLOR GREEN 				// Color of the walls in the game
+# define WALL_COLOR_SHADOW DARK_GREEN	// Shaded color of the walls in the game
 
 // Math constants for the game.
 # define PI 3.14159265358979323846
+
+// Error messages for various failure scenarios in the game.
+# define SCENE_EMPTY "Invalid scene: path is empty\n"
+# define FAIL_MLX "Failed initializing MLX42\n"
+# define FAIL_TEXTURE "Failed loading textures\n"
+# define FAIL_IMAGES "Failed loading images\n"
+# define FAIL_MINIMAP_TOO_BIG "Minimap is too big, change the tile size\n"
 
 /* ************************************************************************** */
 /*                              ENUMS AND STRUCTS                             */
@@ -224,8 +229,9 @@ void				draw_walls_and_rays(t_game *game);
 void				draw_ray(mlx_image_t *img, t_ray ray, int mult);
 //void				draw_rectangle(mlx_image_t *img, int x, int y, int height);
 void				draw_rectangle(mlx_image_t *img, t_point pos, t_point size, int color);
-unsigned int		get_pixel_color(mlx_texture_t *texture, int x, int y);
+unsigned int		get_pixel_rgba(mlx_texture_t *texture, int x, int y);
 void				draw_wall_texture(t_game *game, t_ray ray, t_point pos, t_point dim);
+void				draw_wall_rectangle(t_game *game, t_ray ray, t_point pos, t_point dim);
 
 // draw_minimap.c
 

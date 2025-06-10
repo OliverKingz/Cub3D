@@ -6,7 +6,7 @@
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 19:11:12 by raperez-          #+#    #+#             */
-/*   Updated: 2025/06/10 13:01:16 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/06/10 15:15:06 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,11 +57,10 @@ void	draw_walls_and_rays(t_game *game)
 				game->player.angle, ray.size);
 		wall_dim.y = HEIGHT / corrected_dist;
 		wall_pos.y = (HEIGHT / 2) - (wall_dim.y / 2);
-		if (ray.hit_dir == NORTH || ray.hit_dir == SOUTH)
-			draw_rectangle(game->graphs.screen, wall_pos, wall_dim, WALL_COLOR);
-		else if (ray.hit_dir == EAST || ray.hit_dir == WEST)
-			draw_rectangle(game->graphs.screen, wall_pos, wall_dim, WALL_SHADE);
-		// draw_wall_texture(game, ray, wall_pos, wall_dim);
+		if (USE_TEXTURES)
+			draw_wall_texture(game, ray, wall_pos, wall_dim);
+		else
+			draw_wall_rectangle(game, ray, wall_pos, wall_dim);
 		wall_pos.x += WALL_DIM_X;
 	}
 }
@@ -86,49 +85,75 @@ void	draw_rectangle(mlx_image_t *img, t_point pos, t_point dim, int color)
 	}
 }
 
-void draw_wall_texture(t_game *game, t_ray ray, t_point pos, t_point dim)
+void	draw_wall_rectangle(t_game *game, t_ray ray, t_point pos, t_point dim)
 {
-	mlx_texture_t *texture;
-	int x_t;
-	int y_t;
-	int y;
-	int x;
-
-	texture = NULL;
-	if (ray.hit_dir == NORTH)
-		texture = game->graphs.north_t;
-	else if (ray.hit_dir == SOUTH)
-		texture = game->graphs.south_t;
-	else if (ray.hit_dir == WEST)
-		texture = game->graphs.west_t;
-	else if (ray.hit_dir == EAST)
-		texture = game->graphs.east_t;
-	if (!texture)
-		return;
 	if (ray.hit_dir == NORTH || ray.hit_dir == SOUTH)
-		x_t = (int)(((ray.pos.x - floor(ray.pos.x)) * texture->width)) % (int)texture->width;
+		draw_rectangle(game->graphs.screen, pos, dim, WALL_COLOR);
 	else
-		x_t = (int)(((ray.pos.y - floor(ray.pos.y)) * texture->width)) % (int)texture->width;
-	x = 0;
-	while (x < dim.x)
+		draw_rectangle(game->graphs.screen, pos, dim, WALL_COLOR_SHADOW);
+}
+
+static int	get_texture_and_xt(t_game *game, t_ray ray, mlx_texture_t **texture)
+{
+	int	x_t;
+
+	*texture = NULL;
+	if (ray.hit_dir == NORTH)
+		*texture = game->graphs.north_t;
+	else if (ray.hit_dir == SOUTH)
+		*texture = game->graphs.south_t;
+	else if (ray.hit_dir == WEST)
+		*texture = game->graphs.west_t;
+	else if (ray.hit_dir == EAST)
+		*texture = game->graphs.east_t;
+	if (ray.hit_dir == NORTH)
+		x_t = (int)((1.0 - (ray.pos.x - floor(ray.pos.x))) * (*texture)->width)
+			% (int)(*texture)->width;
+	else if (ray.hit_dir == SOUTH)
+		x_t = (int)(((ray.pos.x - floor(ray.pos.x))) * (*texture)->width)
+			% (int)(*texture)->width;
+	else if (ray.hit_dir == WEST)
+		x_t = (int)(((ray.pos.y - floor(ray.pos.y)) * (*texture)->width))
+			% (int)(*texture)->width;
+	else if (ray.hit_dir == EAST)
+		x_t = (int)((1.0 - (ray.pos.y - floor(ray.pos.y))) * (*texture)->width)
+			% (int)(*texture)->width;
+	return (x_t);
+}
+
+void	draw_wall_texture(t_game *game, t_ray ray, t_point pos, t_point dim)
+{
+	mlx_texture_t	*texture;
+	int				x_t;
+	int				y_t;
+	int				y;
+	int				x;
+
+	x_t = get_texture_and_xt(game, ray, &texture);
+	if (!texture)
+		return ;
+	x = -1;
+	while (++x < dim.x)
 	{
-		y = 0;
-		while (y < dim.y)
+		y = -1;
+		while (++y < dim.y)
 		{
-			y_t = (int)(((double)y / (double)dim.y) * texture->height) % (int)texture->height;
-			if (pos.x + x >= 0 && pos.x + x < (int)game->graphs.screen->width
-			&& pos.y + y >= 0 && pos.y + y < (int)game->graphs.screen->height)
-				mlx_put_pixel(game->graphs.screen, pos.x + x, pos.y + y, get_pixel_color(texture, x_t, y_t));
-			y++;
+			y_t = (int)(((double)y / (double)dim.y) * texture->height)
+				% (int)texture->height;
+			if (pos.x + x >= 0
+				&& pos.x + x < (int)game->graphs.screen->width
+				&& pos.y + y >= 0
+				&& pos.y + y < (int)game->graphs.screen->height)
+				mlx_put_pixel(game->graphs.screen, pos.x + x, pos.y + y,
+					get_pixel_color(texture, x_t, y_t));
 		}
-		x++;
 	}
 }
 
-unsigned int get_pixel_color(mlx_texture_t *texture, int x, int y)
+unsigned int	get_pixel_rgba(mlx_texture_t *texture, int x, int y)
 {
-	size_t	idx;
-	unsigned int rgba_hex;
+	size_t			idx;
+	unsigned int	rgba_hex;
 
 	if (!texture || !texture->pixels)
 		return (CLEAR);
@@ -136,9 +161,9 @@ unsigned int get_pixel_color(mlx_texture_t *texture, int x, int y)
 	{
 		idx = (y * texture->width + x) * texture->bytes_per_pixel;
 		rgba_hex = (texture->pixels[idx] << 24)
-				| (texture->pixels[idx + 1] << 16)
-				| (texture->pixels[idx + 2] << 8)
-				| (texture->pixels[idx + 3]);
+			| (texture->pixels[idx + 1] << 16)
+			| (texture->pixels[idx + 2] << 8)
+			| (texture->pixels[idx + 3]);
 		return (rgba_hex);
 	}
 	return (CLEAR);
