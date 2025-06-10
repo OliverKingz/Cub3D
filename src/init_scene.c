@@ -25,6 +25,7 @@ t_game	init_scene(t_game *game, const char *scene_dir)
 void	init_texture(t_game *game, const char *scene_dir)
 {
 	(void)scene_dir;
+
 	game->graphs.icon_t = mlx_load_png("./assets/textures/cub3de.png");
 	game->graphs.east_t = mlx_load_png(game->graphs.east_path);
 	game->graphs.north_t = mlx_load_png(game->graphs.north_path);
@@ -49,7 +50,7 @@ void	init_map(t_game *game, const char *scene_dir)
 {
 	(void)scene_dir;
 	// Mapa 8x5
-	game->scene.map1d = ft_strdup("11111111 10010001 1000N001 10000101 11111111");
+	game->scene.map1d = ft_strdup("11111111 11010001 1000N001 10000101 11111111");
 	game->scene.map2d = ft_split(game->scene.map1d, ' ');
 	game->scene.width_map = 8;
 	game->scene.height_map = 5;

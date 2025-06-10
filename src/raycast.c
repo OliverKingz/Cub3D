@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycast.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: raperez- <raperez-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 14:35:02 by raperez-          #+#    #+#             */
-/*   Updated: 2025/06/08 13:22:21 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/06/10 14:03:45 by raperez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -164,6 +164,7 @@ void	check_hit(t_ray *ray, t_scene *scene)
 		y -= 1;
 	if (scene->map2d[y][x] == WALL)
 	{
+		//Cambiar para considerar las esquinas
 		if (ray->real_axis_dist.x < ray->real_axis_dist.y && ray->vector.x >= 0)
 			ray->hit_dir = WEST;
 		else if (ray->real_axis_dist.x < ray->real_axis_dist.y && ray->vector.x < 0)

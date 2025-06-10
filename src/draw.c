@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: raperez- <raperez-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 19:11:12 by raperez-          #+#    #+#             */
-/*   Updated: 2025/06/10 15:15:06 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/06/10 15:28:12 by raperez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,7 +145,7 @@ void	draw_wall_texture(t_game *game, t_ray ray, t_point pos, t_point dim)
 				&& pos.y + y >= 0
 				&& pos.y + y < (int)game->graphs.screen->height)
 				mlx_put_pixel(game->graphs.screen, pos.x + x, pos.y + y,
-					get_pixel_color(texture, x_t, y_t));
+					get_pixel_rgba(texture, x_t, y_t));
 		}
 	}
 }

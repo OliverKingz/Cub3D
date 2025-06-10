@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: raperez- <raperez-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 18:31:20 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/06/10 15:10:42 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/06/10 20:51:38 by raperez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -287,6 +287,13 @@ void				my_free2d(void ***mem);
 void				my_close(int *fd);
 void				my_delete_texture(mlx_texture_t *texture);
 void				my_delete_image(mlx_t *mlx, mlx_image_t *image);
+
+// utils2.c
+
+int					my_strchr_pos(const char *s, char c);
+int					my_strnstr_pos(const char *big, const char *little, size_t len);
+char				*my_replace_first(char *og, char *target, char *rep);
+int					ft_strchr_count(const char *s, int c);
 
 // parser.c
 
