@@ -6,7 +6,7 @@
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 18:31:20 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/06/10 16:07:25 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/06/10 16:46:43 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,8 @@
 # include <sys/time.h> // To use gettimeofday
 
 /* ************************************************************************** */
-/*                              MACROS AND DEFINES                            */
+/*                                   FLAGS                                    */
 /* ************************************************************************** */
-
-// Usage message for the game. 
-# define USAGE "Usage: ./cub3d assets/scenes/example.cub\n"
 
 // Debug mode flag to enable or disable debug information printing.
 # ifndef DEBUG_MODE
@@ -51,6 +48,13 @@
 # ifndef USE_TEXTURES
 #  define USE_TEXTURES true
 # endif
+
+/* ************************************************************************** */
+/*                              MACROS AND DEFINES                            */
+/* ************************************************************************** */
+
+// Usage message for the game. 
+# define USAGE "Usage: ./cub3d assets/scenes/example.cub\n"
 
 // Settings: constants for the game window, minimap dimensions and speeds
 # define WIDTH 1080						// Width of the game window
@@ -147,6 +151,7 @@ typedef struct s_scene
 typedef struct s_ray
 {
 	double	length;			// Total distance from start_pos to hit point
+	double	corrected_len;	// Corrected distance considering fisheye effect
 	double	angle_radians;	// Ray angle in radians
 	t_dir	collision_dir;	// Direction of the wall hit (NO, SO, EA, WE)
 	t_point	vector;			// Direction vector (unit vector for the ray)
@@ -227,11 +232,9 @@ void				draw_screen_bg(t_game *game);
 
 void				draw_walls_and_rays(t_game *game);
 void				draw_ray(mlx_image_t *img, t_ray ray, int mult);
-//void				draw_rectangle(mlx_image_t *img, int x, int y, int height);
-void				draw_rectangle(mlx_image_t *img, t_point pos, t_point size, int color);
-unsigned int		get_pixel_rgba(mlx_texture_t *texture, int x, int y);
-void				draw_wall_texture(t_game *game, t_ray ray, t_point pos, t_point dim);
 void				draw_wall_rectangle(t_game *game, t_ray ray, t_point pos, t_point dim);
+void				draw_wall_texture(t_game *game, t_ray ray, t_point pos, t_point dim);
+unsigned int		get_pixel_rgba(mlx_texture_t *texture, int x, int y);
 
 // draw_minimap.c
 
@@ -241,6 +244,7 @@ void				draw_wall_rectangle(t_game *game, t_ray ray, t_point pos, t_point dim);
 void				draw_minimap_player(t_game *game);
 void				draw_minimap_tiles(t_game *game);
 void				draw_minimap_grid(t_game *game);
+void				draw_rectangle(mlx_image_t *img, t_point pos, t_point size, int color);
 
 // hook.c
 
@@ -258,6 +262,7 @@ void				rotate(t_game *game, int dang);
 void				init_ray(t_game *game, t_ray *ray, double angle);
 t_ray				cast_ray(t_game *game, double angle);
 double				get_ray_length(t_ray ray);
+double				correct_raylen_fisheye(t_ray *ray, double player_angle);
 
 // raycast_dda.c
 

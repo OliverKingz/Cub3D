@@ -6,7 +6,7 @@
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 19:11:12 by raperez-          #+#    #+#             */
-/*   Updated: 2025/06/10 15:51:37 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/06/10 16:43:47 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,28 +21,12 @@ void	draw_frame(t_game *game)
 	draw_minimap_player(game);
 }
 
-static double	fisheye_correction_ray_size(double ray_angle,
-		double player_angle, double ray_size)
-{
-	double	ray_angle_rad;
-	double	player_angle_rad;
-	double	corrected;
-
-	ray_angle_rad = degrees_to_radians(ray_angle);
-	player_angle_rad = degrees_to_radians(player_angle);
-	corrected = ray_size * cos(ray_angle_rad - player_angle_rad);
-	if (corrected < 0.0001)
-		corrected = 0.0001;
-	return (corrected);
-}
-
 void	draw_walls_and_rays(t_game *game)
 {
 	double	ray_angle;
 	t_point	wall_pos;
 	t_point	wall_dim;
 	t_ray	ray;
-	double	corrected_dist;
 
 	wall_dim.x = WALL_DIM_X;
 	wall_pos.y = 0;
@@ -53,9 +37,7 @@ void	draw_walls_and_rays(t_game *game)
 				/ WIDTH) * FOV;
 		ray = cast_ray(game, ray_angle);
 		draw_ray(game->graphs.minimap, ray, MMAP_TILE);
-		corrected_dist = fisheye_correction_ray_size(ray_angle,
-				game->player.angle, ray.length);
-		wall_dim.y = HEIGHT / corrected_dist;
+		wall_dim.y = HEIGHT / ray.corrected_len;
 		wall_pos.y = (HEIGHT / 2) - (wall_dim.y / 2);
 		if (USE_TEXTURES)
 			draw_wall_texture(game, ray, wall_pos, wall_dim);
@@ -183,7 +165,7 @@ unsigned int	get_pixel_rgba(mlx_texture_t *texture, int x, int y)
 // 	{
 // 		ray = cast_ray(game, ray_angle);
 // 		draw_ray(game->graphs.minimap, ray, MMAP_TILE);
-// 		corrected_dist = fisheye_correction_ray_size(ray_angle,
+// 		corrected_dist = correct_raylen_fisheye(ray_angle,
 // 				game->player.angle, ray.size);
 // 		wall_height = HEIGHT / corrected_dist;
 // 		draw_rectangle(game->graphs.screen, wall_x_pos, (HEIGHT / 2)

@@ -6,7 +6,7 @@
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 14:35:02 by raperez-          #+#    #+#             */
-/*   Updated: 2025/06/10 16:25:07 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/06/10 16:43:47 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ t_ray	cast_ray(t_game *game, double angle)
 		check_axis_is_wall_collision(&ray, &(game->scene));
 	}
 	ray.length = get_ray_length(ray);
+	ray.corrected_len = correct_raylen_fisheye(&ray, game->player.angle);
 	return (ray);
 }
 
@@ -72,4 +73,16 @@ double	get_ray_length(t_ray ray)
 	size_y = ray.start_pos.y - ray.end_pos.y;
 	length = sqrt(size_x * size_x + size_y * size_y);
 	return (length);
+}
+
+double	correct_raylen_fisheye(t_ray *ray, double player_angle)
+{
+	double	player_angle_rad;
+	double	corrected;
+
+	player_angle_rad = degrees_to_radians(player_angle);
+	corrected = ray->length * cos(ray->angle_radians - player_angle_rad);
+	if (corrected < 0.0001)
+		corrected = 0.0001;
+	return (corrected);
 }
