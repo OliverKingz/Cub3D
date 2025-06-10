@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: raperez- <raperez-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 18:31:20 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/06/10 03:29:58 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/06/10 13:32:18 by raperez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@
 # define FOV 60			// Field of view in degrees for the raycasting system
 # define SPEED 0.05		// Speed of the player movement in the game
 # define ANGLE_SPEED 2	// Speed of the player rotation in degrees per frame
-# define WALL_DIM_X 18	// Width of each wall segment in pixels
+# define WALL_DIM_X 1	// Width of each wall segment in pixels
 
 # define MMAP_TILE 30			// Size of each tile in the minimap
 # define MMAP_PLAYER_RADIUS 3	// Radius of the player in the minimap in tiles
@@ -288,10 +288,10 @@ bool				read_file(t_game *game, const char *file);
 
 // debug.c
 
-void	print_debug_info(t_game *game);
-void	print_texture_info(mlx_texture_t *texture);
-void	print_texture_pixel_info(mlx_texture_t *texture, int x, int y);
-void	print_ray_info(t_ray *ray);
+void				print_debug_info(t_game *game);
+void				print_texture_info(mlx_texture_t *texture);
+void				print_texture_pixel_info(mlx_texture_t *texture, int x, int y);
+void				print_ray_info(t_ray *ray);
 
 /* ************************************************************************** */
 #endif

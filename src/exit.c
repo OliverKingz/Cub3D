@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: raperez- <raperez-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 19:43:10 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/06/08 00:26:30 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/06/10 12:31:24 by raperez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,10 @@ void	ft_mlx_err(const char *msg)
 
 void	free_textures(t_game *game)
 {
+	my_free((void *)&(game->graphs.north_path));
+	my_free((void *)&(game->graphs.south_path));
+	my_free((void *)&(game->graphs.east_path));
+	my_free((void *)&(game->graphs.west_path));
 	my_delete_texture(game->graphs.icon_t);
 	my_delete_texture(game->graphs.north_t);
 	my_delete_texture(game->graphs.south_t);
