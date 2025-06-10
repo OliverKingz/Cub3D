@@ -15,7 +15,7 @@
 
 t_game	init_scene(t_game *game, const char *scene_dir)
 {
-	read_file(game, scene_dir);
+	// read_file(game, scene_dir);
 	init_texture(game, scene_dir);
 	init_map(game, scene_dir);
 	init_player(game, scene_dir);
@@ -25,6 +25,10 @@ t_game	init_scene(t_game *game, const char *scene_dir)
 void	init_texture(t_game *game, const char *scene_dir)
 {
 	(void)scene_dir;
+	game->graphs.east_path = "./assets/textures/basic_EA.png";
+	game->graphs.north_path = "./assets/textures/basic_NO.png";
+	game->graphs.south_path = "./assets/textures/basic_SO.png";
+	game->graphs.west_path = "./assets/textures/basic_WE.png";
 	game->graphs.icon_t = mlx_load_png("./assets/textures/cub3de.png");
 	game->graphs.east_t = mlx_load_png(game->graphs.east_path);
 	game->graphs.north_t = mlx_load_png(game->graphs.north_path);

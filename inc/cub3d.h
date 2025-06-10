@@ -6,7 +6,7 @@
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 18:31:20 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/06/10 02:06:22 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/06/10 03:29:58 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@
 # define FOV 60			// Field of view in degrees for the raycasting system
 # define SPEED 0.05		// Speed of the player movement in the game
 # define ANGLE_SPEED 2	// Speed of the player rotation in degrees per frame
-# define WALL_DIM_X 9	// Width of each wall segment in pixels
+# define WALL_DIM_X 18	// Width of each wall segment in pixels
 
 # define MMAP_TILE 30			// Size of each tile in the minimap
 # define MMAP_PLAYER_RADIUS 3	// Radius of the player in the minimap in tiles
@@ -224,6 +224,8 @@ void				draw_walls_and_rays(t_game *game);
 void				draw_ray(mlx_image_t *img, t_ray ray, int mult);
 //void				draw_rectangle(mlx_image_t *img, int x, int y, int height);
 void				draw_rectangle(mlx_image_t *img, t_point pos, t_point size, int color);
+unsigned int		get_pixel_color(mlx_texture_t *texture, int x, int y);
+void				draw_wall_texture(t_game *game, t_ray ray, t_point pos, t_point dim);
 
 // draw_minimap.c
 

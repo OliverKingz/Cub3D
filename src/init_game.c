@@ -6,7 +6,7 @@
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 19:52:22 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/06/10 02:07:17 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/06/10 03:05:23 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,5 +58,5 @@ void	init_draw_to_window(t_game *game)
 	mlx_image_to_window(game->mlx, game->graphs.screen, 0, 0);
 	mlx_image_to_window(game->mlx, game->graphs.minimap, WIDTH - 10
 		- game->scene.w_mmap, HEIGHT - 10 - game->scene.h_mmap);
-	mlx_resize_image(game->graphs.minimap, WIDTH / 4, game->scene.ratio_map * (WIDTH / 4));
+	//mlx_resize_image(game->graphs.minimap, WIDTH / 4, HEIGHT / 4);
 }

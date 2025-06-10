@@ -6,12 +6,14 @@
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/08 13:16:14 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/06/08 14:06:23 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/06/10 02:41:38 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef COLORS_H
 # define COLORS_H
+
+# define CLEAR 0x00000000
 
 # define BLACK 0x000000FF
 # define WHITE 0xFFFFFFFF

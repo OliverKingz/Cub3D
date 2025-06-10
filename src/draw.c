@@ -6,7 +6,7 @@
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 19:11:12 by raperez-          #+#    #+#             */
-/*   Updated: 2025/06/10 02:01:48 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/06/10 03:24:08 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ void	draw_walls_and_rays(t_game *game)
 			draw_rectangle(game->graphs.screen, wall_pos, wall_dim, WALL_COLOR);
 		else if (ray.hit_dir == EAST || ray.hit_dir == WEST)
 			draw_rectangle(game->graphs.screen, wall_pos, wall_dim, WALL_SHADE);
+		// draw_wall_texture(game, ray, wall_pos, wall_dim);
 		wall_pos.x += WALL_DIM_X;
 	}
 }
@@ -83,6 +84,62 @@ void	draw_rectangle(mlx_image_t *img, t_point pos, t_point dim, int color)
 		}
 		py++;
 	}
+}
+
+void draw_wall_texture(t_game *game, t_ray ray, t_point pos, t_point dim)
+{
+	mlx_texture_t *texture;
+	int x_t;
+	int y_t;
+	int y;
+	int x;
+
+	texture = NULL;
+	if (ray.hit_dir == NORTH)
+		texture = game->graphs.north_t;
+	else if (ray.hit_dir == SOUTH)
+		texture = game->graphs.south_t;
+	else if (ray.hit_dir == WEST)
+		texture = game->graphs.west_t;
+	else if (ray.hit_dir == EAST)
+		texture = game->graphs.east_t;
+	if (!texture)
+		return;
+
+	x = 0;
+	while (x < dim.x)
+	{
+		x_t = (int)(((ray.pos.x - (int)ray.pos.x) * texture->width));
+		y = 0;
+		while (y < dim.y)
+		{
+			y_t = (int)((y * texture->height) / dim.y);
+			if (pos.x + x >= 0 && pos.x + x < (int)game->graphs.screen->width 
+			&& (HEIGHT / 2) - (dim.y / 2) + y >= 0 && (HEIGHT / 2) - (dim.y / 2) + y < (int)game->graphs.screen->height)
+				mlx_put_pixel(game->graphs.screen, pos.x + x, (HEIGHT / 2) - (dim.y / 2) + y, get_pixel_color(texture, x_t, y_t));
+			y++;
+		}
+		x++;
+	}
+}
+
+unsigned int get_pixel_color(mlx_texture_t *texture, int x, int y)
+{
+	size_t	idx;
+	unsigned int rgba_hex;
+
+	if (!texture || !texture->pixels)
+		return (CLEAR);
+	if (x >= 0 && x < (int)texture->width && y >= 0 && y < (int)texture->height)
+	{
+		idx = (y * texture->width + x) * texture->bytes_per_pixel;
+		rgba_hex = (texture->pixels[idx] << 24)
+				| (texture->pixels[idx + 1] << 16)
+				| (texture->pixels[idx + 2] << 8)
+				| (texture->pixels[idx + 3]);
+		return (rgba_hex);
+	}
+	return (CLEAR);
 }
 
 // void	draw_walls_and_rays(t_game *game)
