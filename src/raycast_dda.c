@@ -6,7 +6,7 @@
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 16:00:54 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/06/10 22:58:00 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/06/11 01:10:24 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,7 +130,8 @@ void	check_axis_is_wall_collision(t_ray *ray, t_scene *scene)
 		x -= 1;
 	if (ray->vector.y < 0 && ray->end_pos.y - (int)ray->end_pos.y == 0.0)
 		y -= 1;
-	if (scene->map2d[y][x] == WALL)
+	if (y >= 0 && y < scene->height_map
+		&& x >= 0 && x < scene->width_map && scene->map2d[y][x] == WALL)
 	{
 		if (ray->real_axis_dist.x < ray->real_axis_dist.y
 			&& ray->vector.x >= 0)

@@ -6,7 +6,7 @@
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 15:07:34 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/06/10 23:40:04 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/06/11 01:08:25 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,13 +49,13 @@ void	init_map(t_game *game, const char *scene_dir)
 	(void)scene_dir;
 	// Mapa 7x5
 	game->scene.map1d = ft_strdup (" 11111 \n"
-			"1100011\n"
-			"100N001\n"
-			"1100011\n"
-			" 11111 \n");
+			"110001 \n"
+			"100N011\n"
+			"111011 \n"
+			"1 111  \n");
 	game->scene.map2d = ft_split(game->scene.map1d, '\n');
-	game->scene.width_map = 7;
-	game->scene.height_map = 5;
+	game->scene.width_map = ft_strlen(game->scene.map2d[0]);
+	game->scene.height_map = my_strlen2d(game->scene.map2d);
 	game->scene.ratio_map = (double)game->scene.width_map
 		/ (double)game->scene.height_map;
 	game->scene.h_mmap = game->scene.height_map * MMAP_TILE;
@@ -77,4 +77,27 @@ void	init_map(t_game *game, const char *scene_dir)
 	/ (double)game->scene.height_map;
 	game->scene.ceil_rgb = LIGHT_BLUE;
 	game->scene.floor_rgb = DARK_GREY;
+*/
+
+// Mapa Example
+/*
+	game->scene.map1d = ft_strdup(
+		"        1111111111111111111111111\n"
+		"        1000000000110000000000001\n"
+		"        1011000001110000000000001\n"
+		"        1001000000000000000000001\n"
+		"111111111011000001110000000000001\n"
+		"100000000011000001110111111111111\n"
+		"11110111111111011100000010001    \n"
+		"11110111111111011101010010001    \n"
+		"11000000110101011100000010001    \n"
+		"10000000000000001100000010001    \n"
+		"10000000000000001101010010001    \n"
+		"11000001110101011111011110N0111  \n"
+		"11110111 1110101 101111010001    \n"
+		"11111111 1111111 111111111111    \n"
+	);
+	game->scene.map2d = ft_split(game->scene.map1d, '\n');
+	game->scene.width_map = ft_strlen(game->scene.map2d[0]);
+	game->scene.height_map = my_strlen2d(game->scene.map2d);
 */
