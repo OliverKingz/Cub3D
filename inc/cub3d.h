@@ -6,7 +6,7 @@
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 18:31:20 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/06/10 18:10:01 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/06/10 19:52:36 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,15 +57,16 @@
 # define USAGE "Usage: ./cub3d assets/scenes/example.cub\n"
 
 // Settings: constants for the game window, minimap dimensions and speeds
-# define WIDTH 1080						// Width of the game window
-# define HEIGHT 720						// Height of the game window
+# define WIDTH 1080		// Width of the game window
+# define HEIGHT 720		// Height of the game window
 
-# define FOV 75			// Field of view in degrees for the raycasting system
+# define FOV 60			// Field of view in degrees for the raycasting system
 # define SPEED 0.05		// Speed of the player movement in the game
-# define ANGLE_SPEED 3	// Speed of the player rotation in degrees per frame
+# define ANGLE_SPEED 5	// Speed of the player rotation in degrees per frame
 # define WALL_DIM_X 1	// Width of each wall segment in pixels
+# define FPS 60 		// Frames per second for the game loop
 
-# define MMAP_TILE 30			// Size of each tile in the minimap
+# define MMAP_TILE 20			// Size of each tile in the minimap
 # define MMAP_PLAYER_RADIUS 3	// Radius of the player in the minimap in tiles
 
 // Colors used in the game, represented in RGBA format.
@@ -256,6 +257,7 @@ unsigned int	get_pixel_rgba(mlx_texture_t *texture, int x, int y);
 void			key_hook(mlx_key_data_t keydata, void *param);
 void			close_hook(void *param);
 void			loop_hook(void *param);
+void			fps_counter(void);
 
 // move.c
 

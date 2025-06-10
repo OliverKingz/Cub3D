@@ -6,7 +6,7 @@
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/07 12:25:19 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/06/10 17:49:28 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/06/10 19:40:53 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,7 @@ void	draw_walls_and_rays(t_game *game)
 	wall_pos.x = 0;
 	while (wall_pos.x < WIDTH)
 	{
-		ray_angle = game->player.angle - (FOV / 2) + ((double)wall_pos.x
-				/ WIDTH) * FOV;
+		ray_angle = game->player.angle - (FOV / 2) + (wall_pos.x / (double)WIDTH) * FOV;
 		ray = cast_ray(game, ray_angle);
 		draw_ray(game->graphs.minimap, ray, MMAP_TILE);
 		wall_dim.y = HEIGHT / ray.corrected_len;
@@ -70,28 +69,24 @@ void	draw_ray(mlx_image_t *img, t_ray ray, int mult)
 void	draw_wall_texture(t_game *game, t_ray ray, t_point pos, t_point dim)
 {
 	mlx_texture_t	*texture;
-	int				x_t;
-	int				y_t;
-	int				y;
-	int				x;
+	t_point			txt;
+	t_point			p;
 
-	x_t = get_texture_and_xt(game, ray, &texture);
+	txt.x = get_texture_and_xt(game, ray, &texture);
 	if (!texture)
 		return ;
-	x = -1;
-	while (++x < dim.x)
+	p.x = -1;
+	while (++p.x < dim.x && (pos.x + p.x) < WIDTH)
 	{
-		y = -1;
-		while (++y < dim.y)
+		p.y = -1;
+		while (++p.y < dim.y && (pos.y + p.y) < HEIGHT)
 		{
-			y_t = (int)(((double)y / (double)dim.y) * texture->height)
+			txt.y = (int)(((double)p.y / (double)dim.y) * texture->height)
 				% (int)texture->height;
-			if (pos.x + x >= 0
-				&& pos.x + x < (int)game->graphs.screen->width
-				&& pos.y + y >= 0
-				&& pos.y + y < (int)game->graphs.screen->height)
-				mlx_put_pixel(game->graphs.screen, pos.x + x, pos.y + y,
-					get_pixel_rgba(texture, x_t, y_t));
+			if (pos.x + p.x >= 0 && pos.x + p.x < WIDTH
+				&& pos.y + p.y >= 0 && pos.y + p.y < HEIGHT)
+				mlx_put_pixel(game->graphs.screen, pos.x + p.x, pos.y + p.y,
+					get_pixel_rgba(texture, txt.x, txt.y));
 		}
 	}
 }
