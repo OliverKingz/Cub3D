@@ -6,7 +6,7 @@
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 19:52:22 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/06/10 03:05:23 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/06/10 18:08:06 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,13 @@
 
 t_game	init_game(t_game *game, const char *scene_dir)
 {
-	printf("Scene: %s\n", scene_dir);
 	ft_memset((void *)game, 0, sizeof(t_game));
 	init_scene(game, scene_dir);
 	init_mlx(game);
 	init_images(game);
 	game->is_running = true;
 	init_draw_to_window(game);
-	print_debug_info(game); // Debug
+	print_debug_info(game);
 	return (*game);
 }
 
@@ -58,5 +57,4 @@ void	init_draw_to_window(t_game *game)
 	mlx_image_to_window(game->mlx, game->graphs.screen, 0, 0);
 	mlx_image_to_window(game->mlx, game->graphs.minimap, WIDTH - 10
 		- game->scene.w_mmap, HEIGHT - 10 - game->scene.h_mmap);
-	//mlx_resize_image(game->graphs.minimap, WIDTH / 4, HEIGHT / 4);
 }

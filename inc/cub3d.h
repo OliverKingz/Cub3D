@@ -6,7 +6,7 @@
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 18:31:20 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/06/10 17:56:43 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/06/10 18:10:01 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,9 +60,9 @@
 # define WIDTH 1080						// Width of the game window
 # define HEIGHT 720						// Height of the game window
 
-# define FOV 60			// Field of view in degrees for the raycasting system
+# define FOV 75			// Field of view in degrees for the raycasting system
 # define SPEED 0.05		// Speed of the player movement in the game
-# define ANGLE_SPEED 2	// Speed of the player rotation in degrees per frame
+# define ANGLE_SPEED 3	// Speed of the player rotation in degrees per frame
 # define WALL_DIM_X 1	// Width of each wall segment in pixels
 
 # define MMAP_TILE 30			// Size of each tile in the minimap
@@ -295,6 +295,9 @@ void			my_perr(const char *msg, bool should_exit, int exit_code);
 void			my_free(void **mem);
 void			my_free2d(void ***mem);
 void			my_close(int *fd);
+
+// utils2.c
+
 void			my_delete_texture(mlx_texture_t *texture);
 void			my_delete_image(mlx_t *mlx, mlx_image_t *image);
 
