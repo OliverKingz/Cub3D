@@ -6,7 +6,7 @@
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 18:31:20 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/06/10 23:57:55 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/06/11 00:28:57 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -181,6 +181,7 @@ typedef struct s_graph
 	mlx_image_t		*west;			// Image for the west wall
 	mlx_image_t		*screen;		// Image for the screen/window
 	mlx_image_t		*minimap;		// Image for the minimap
+	mlx_image_t		*player;		// Image for the player in the minimap
 }					t_graph;
 
 // Keys structure to represent the state of the keys pressed by the player.
@@ -227,6 +228,7 @@ void			init_map(t_game *game, const char *scene_dir);
 
 void			draw_frame(t_game *game);
 void			draw_screen_bg(t_game *game);
+void			draw_player_bg(t_game *game);
 
 // draw_raycast.c
 
@@ -240,7 +242,7 @@ void			draw_wall_texture(t_game *game, t_ray ray, t_point pos,
 // draw_minimap.c
 
 //void			draw_minimap(t_game *game);
-void			draw_minimap_player(t_game *game);
+void			draw_player(t_game *game);
 void			draw_minimap_tiles(t_game *game);
 void			draw_minimap_grid_vertical(t_game *game);
 void			draw_minimap_grid_horizontal(t_game *game);

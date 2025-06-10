@@ -6,7 +6,7 @@
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 19:52:22 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/06/10 22:53:39 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/06/11 00:25:33 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,15 +45,23 @@ void	init_images(t_game *game)
 	game->graphs.screen = mlx_new_image(game->mlx, WIDTH, HEIGHT);
 	game->graphs.minimap = mlx_new_image(game->mlx, game->scene.w_mmap,
 			game->scene.h_mmap);
+	game->graphs.player = mlx_new_image(game->mlx, game->scene.w_mmap,
+			game->scene.h_mmap);
 	if (!game->graphs.east || !game->graphs.north || !game->graphs.south
-		|| !game->graphs.west || !game->graphs.screen || !game->graphs.minimap)
+		|| !game->graphs.west || !game->graphs.screen || !game->graphs.minimap
+		|| !game->graphs.player)
 		my_mlx_err(FAIL_IMAGES);
 }
 
 void	init_draw_to_window(t_game *game)
 {
+	draw_minimap_tiles(game);
+	draw_minimap_grid_vertical(game);
+	draw_minimap_grid_horizontal(game);
 	draw_frame(game);
 	mlx_image_to_window(game->mlx, game->graphs.screen, 0, 0);
 	mlx_image_to_window(game->mlx, game->graphs.minimap, WIDTH - 10
+		- game->scene.w_mmap, HEIGHT - 10 - game->scene.h_mmap);
+	mlx_image_to_window(game->mlx, game->graphs.player, WIDTH - 10
 		- game->scene.w_mmap, HEIGHT - 10 - game->scene.h_mmap);
 }

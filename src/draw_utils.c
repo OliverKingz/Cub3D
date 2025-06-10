@@ -6,7 +6,7 @@
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 18:42:36 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/06/10 17:49:38 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/06/11 00:38:59 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,17 +16,23 @@ void	draw_rectangle(mlx_image_t *img, t_point pos, t_point dim, int color)
 {
 	int	px;
 	int	py;
+	int	x_end;
+	int	y_end;
 
+	x_end = pos.x + dim.x;
+	y_end = pos.y + dim.y;
 	py = pos.y;
-	while (py < pos.y + dim.y)
+	while (py < y_end)
 	{
-		px = pos.x;
-		while (px < pos.x + dim.x)
+		if (py >= 0 && py < (int)img->height)
 		{
-			if (px >= 0 && px < (int)img->width && py >= 0
-				&& py < (int)img->height)
-				mlx_put_pixel(img, px, py, color);
-			px++;
+			px = pos.x;
+			while (px < x_end)
+			{
+				if (px >= 0 && px < (int)img->width)
+					mlx_put_pixel(img, px, py, color);
+				px++;
+			}
 		}
 		py++;
 	}
@@ -64,18 +70,13 @@ int	get_texture_and_xt(t_game *game, t_ray ray, mlx_texture_t **texture)
 unsigned int	get_pixel_rgba(mlx_texture_t *texture, int x, int y)
 {
 	size_t			idx;
-	unsigned int	rgba_hex;
+	unsigned char	*p;
 
-	if (!texture || !texture->pixels)
+	if (!texture || !texture->pixels || x < 0 || x >= (int)texture->width
+		|| y < 0 || y >= (int)texture->height)
 		return (CLEAR);
-	if (x >= 0 && x < (int)texture->width && y >= 0 && y < (int)texture->height)
-	{
-		idx = (y * texture->width + x) * texture->bytes_per_pixel;
-		rgba_hex = (texture->pixels[idx] << 24)
-			| (texture->pixels[idx + 1] << 16)
-			| (texture->pixels[idx + 2] << 8)
-			| (texture->pixels[idx + 3]);
-		return (rgba_hex);
-	}
-	return (CLEAR);
+	idx = ((size_t)y * texture->width + x) * 4;
+	p = &texture->pixels[idx];
+	return (((unsigned int)p[0] << 24) | ((unsigned int)p[1] << 16)
+		| ((unsigned int)p[2] << 8) | (unsigned int)p[3]);
 }

@@ -6,7 +6,7 @@
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/07 12:25:19 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/06/10 22:57:47 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/06/11 00:47:30 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	draw_walls_and_rays(t_game *game)
 		ray_angle = game->player.angle - (FOV / 2)
 			+ (wall_pos.x / (double)WIDTH) * FOV;
 		ray = cast_ray(game, ray_angle);
-		draw_ray(game->graphs.minimap, ray, MMAP_TILE);
+		draw_ray(game->graphs.player, ray, MMAP_TILE);
 		wall_dim.y = HEIGHT / ray.corrected_len;
 		wall_pos.y = (HEIGHT / 2) - (wall_dim.y / 2);
 		if (USE_TEXTURES)
@@ -82,8 +82,7 @@ void	draw_wall_texture(t_game *game, t_ray ray, t_point pos, t_point dim)
 		p.y = -1;
 		while (++p.y < dim.y && (pos.y + p.y) < HEIGHT)
 		{
-			txt.y = (int)(((double)p.y / (double)dim.y) * texture->height)
-				% (int)texture->height;
+			txt.y = ((long long)p.y * texture->height) / dim.y;
 			if (pos.x + p.x >= 0 && pos.x + p.x < WIDTH
 				&& pos.y + p.y >= 0 && pos.y + p.y < HEIGHT)
 				mlx_put_pixel(game->graphs.screen, pos.x + p.x, pos.y + p.y,

@@ -6,7 +6,7 @@
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/07 12:27:32 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/06/11 00:16:42 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/06/11 00:27:33 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ void	draw_minimap_grid_horizontal(t_game *game)
 	}
 }
 
-void	draw_minimap_player(t_game *game)
+void	draw_player(t_game *game)
 {
 	int	dy;
 	int	dx;
@@ -113,7 +113,7 @@ void	draw_minimap_player(t_game *game)
 				draw_y = game->player.mmap.y + dy;
 				if (draw_x >= 0 && draw_x < game->scene.w_mmap && draw_y >= 0
 					&& draw_y < game->scene.h_mmap)
-					mlx_put_pixel(game->graphs.minimap, draw_x, draw_y,
+					mlx_put_pixel(game->graphs.player, draw_x, draw_y,
 						MMAP_PLAYER_COLOR);
 			}
 			dx++;
