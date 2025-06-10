@@ -6,7 +6,7 @@
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 19:11:12 by raperez-          #+#    #+#             */
-/*   Updated: 2025/06/10 03:24:08 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/06/10 13:01:16 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,18 +105,20 @@ void draw_wall_texture(t_game *game, t_ray ray, t_point pos, t_point dim)
 		texture = game->graphs.east_t;
 	if (!texture)
 		return;
-
+	if (ray.hit_dir == NORTH || ray.hit_dir == SOUTH)
+		x_t = (int)(((ray.pos.x - floor(ray.pos.x)) * texture->width)) % (int)texture->width;
+	else
+		x_t = (int)(((ray.pos.y - floor(ray.pos.y)) * texture->width)) % (int)texture->width;
 	x = 0;
 	while (x < dim.x)
 	{
-		x_t = (int)(((ray.pos.x - (int)ray.pos.x) * texture->width));
 		y = 0;
 		while (y < dim.y)
 		{
-			y_t = (int)((y * texture->height) / dim.y);
-			if (pos.x + x >= 0 && pos.x + x < (int)game->graphs.screen->width 
-			&& (HEIGHT / 2) - (dim.y / 2) + y >= 0 && (HEIGHT / 2) - (dim.y / 2) + y < (int)game->graphs.screen->height)
-				mlx_put_pixel(game->graphs.screen, pos.x + x, (HEIGHT / 2) - (dim.y / 2) + y, get_pixel_color(texture, x_t, y_t));
+			y_t = (int)(((double)y / (double)dim.y) * texture->height) % (int)texture->height;
+			if (pos.x + x >= 0 && pos.x + x < (int)game->graphs.screen->width
+			&& pos.y + y >= 0 && pos.y + y < (int)game->graphs.screen->height)
+				mlx_put_pixel(game->graphs.screen, pos.x + x, pos.y + y, get_pixel_color(texture, x_t, y_t));
 			y++;
 		}
 		x++;
