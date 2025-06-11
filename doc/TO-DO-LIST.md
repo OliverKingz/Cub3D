@@ -4,4 +4,5 @@
 - El player ponerlo siempre inicialmente en el centro, nunca en un borde. Ocurren bugs.
 - Si te acercas mucho a pared, se distorsiona. Feature?
 - Mover diagonal va mas rapido. Arreglar
-- Mirar por que el mapa no funciona. 
+- Mirar por que el mapa no funciona.
+- Cerrar el fd
