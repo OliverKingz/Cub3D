@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_raycast.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: raperez- <raperez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/07 12:25:19 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/06/11 14:26:11 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/06/11 18:00:43 by raperez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@ void	draw_walls_and_rays(t_game *game)
 		if (USE_MINIMAP)
 			draw_ray(game->graphs.player, ray, MMAP_TILE);
 		wall_dim.y = HEIGHT / ray.corrected_len;
-		if (wall_dim.y > HEIGHT)
-			wall_dim.y = HEIGHT;
+		//if (wall_dim.y > HEIGHT)
+		//	wall_dim.y = HEIGHT;
 		wall_pos.y = (HEIGHT / 2) - (wall_dim.y / 2);
 		if (USE_TEXTURES)
 			draw_wall_texture(game, ray, wall_pos, wall_dim);
@@ -80,6 +80,10 @@ void	draw_wall_texture(t_game *game, t_ray ray, t_point pos, t_point dim)
 	if (!texture)
 		return ;
 	p.x = -1;
+	if (dim.x > WIDTH)
+		dim.x = WIDTH;
+	if (dim.x > WIDTH)
+		dim.x = WIDTH;
 	while (++p.x < dim.x && (pos.x + p.x) < WIDTH)
 	{
 		p.y = -1;

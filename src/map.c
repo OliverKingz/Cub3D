@@ -1,0 +1,92 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   map.c                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: raperez- <raperez-@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/06/11 16:16:16 by raperez-          #+#    #+#             */
+/*   Updated: 2025/06/11 17:50:23 by raperez-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "cub3d.h"
+
+void	manage_map(t_game *game)
+{
+	int		i;
+	int		j;
+	char	*tmp;
+
+	i = 0;
+	while (i < game->scene.height_map)
+	{
+		tmp = ft_calloc(game->scene.width_map + 1, sizeof(char));
+		ft_memset((void *)tmp, ' ', game->scene.width_map);
+		ft_memmove(tmp, game->scene.map2d[i], ft_strlen(game->scene.map2d[i]));
+		my_free((void *)&(game->scene.map2d[i]));
+		game->scene.map2d[i] = tmp;
+		j = 0;
+		while (game->scene.map2d[i][j])
+		{
+			if (ft_strchr("NSEW", game->scene.map2d[i][j]))
+				init_player(game, game->scene.map2d[i][j], j + 0.5, i + 0.5);
+			j++;
+		}
+		i++;
+	}
+}
+
+void	check_map1d(t_game *game)
+{
+	int	player_count;
+	int	i;
+
+	player_count = my_strchr_count(game->scene.map1d, 'N');
+	player_count += my_strchr_count(game->scene.map1d, 'S');
+	player_count += my_strchr_count(game->scene.map1d, 'E');
+	player_count += my_strchr_count(game->scene.map1d, 'W');
+	if (player_count != 1)
+		my_err_clean(game, ERR_PLAYER_AMOUNT, false);
+	i = 0;
+	while (game->scene.map1d[i])
+	{
+		if (!ft_strchr(" 01NSEW\n", game->scene.map1d[i]))
+			my_err_clean(game, ERR_INVALID_CHAR, false);
+		i++;
+	}
+}
+
+void	read_map(t_game *game, int fd)
+{
+	char	*s;
+	char	*temp;
+
+	while (1)
+	{
+		s = get_next_line(fd);
+		temp = ft_strtrim(s, " \f\n\r\t\v");
+		if (ft_strlen(temp) != 0)
+		{
+			my_free((void *)&temp);
+			break ;
+		}
+		my_free((void *)&temp);
+		my_free((void *)&s);
+	}
+	while (s)
+	{
+		temp = game->scene.map1d;
+		game->scene.map1d = ft_strjoin(temp, s);
+		if (ft_strlen(s) > (size_t) game->scene.width_map)
+			game->scene.width_map = ft_strlen(s);
+		my_free((void *)&temp);
+		my_free((void *)&s);
+		s = get_next_line(fd);
+	}
+	close(fd);
+	check_map1d(game);
+	game->scene.map2d = ft_split(game->scene.map1d, '\n');
+	game->scene.height_map = my_strlen2d(game->scene.map2d);
+	manage_map(game);
+}

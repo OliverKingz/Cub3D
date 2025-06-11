@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: raperez- <raperez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 18:31:20 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/06/11 15:12:00 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/06/11 17:38:22 by raperez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,9 @@
 # define FAIL_TEXTURE "Failed loading textures"
 # define FAIL_IMAGES "Failed loading images"
 # define FAIL_MINIMAP_TOO_BIG "Minimap is too big, change the tile size"
+# define ERR_PLAYER_AMOUNT "There must be only one player"
+# define ERR_INVALID_CHAR "Invalid char on the map"
+# define ERR_EMPTY
 
 /* ************************************************************************** */
 /*                              ENUMS AND STRUCTS                             */
@@ -226,7 +229,7 @@ void			init_draw_to_window(t_game *game);
 
 t_game			init_scene(t_game *game, const char *scene_dir);
 void			init_texture(t_game *game, const char *scene_dir);
-void			init_player(t_game *game, const char *scene_dir);
+void			init_player(t_game *game, char angle, double x, double y);
 void			init_map(t_game *game, const char *scene_dir);
 
 // draw.c
@@ -297,6 +300,10 @@ bool			is_valid_color(const char *s);
 uint32_t		get_rgb(t_game *game, char *s);
 int				manage_line(t_game *game, char *s);
 void			read_file(t_game *game, const char *file);
+
+// map.c
+
+void			read_map(t_game *game, int fd);
 
 // exit.c
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: raperez- <raperez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/09 11:56:40 by raperez-          #+#    #+#             */
-/*   Updated: 2025/06/11 15:11:50 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/06/11 16:16:42 by raperez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,16 +116,18 @@ void	read_file(t_game *game, const char *file)
 		my_err_clean(game, file, true);
 	s = get_next_line(fd);
 	counter = 0;
-	while (s && counter < 6)
+	while (s)
 	{
 		n = manage_line(game, s);
 		if (n == -1)
 			my_err_clean(game, "Invalid map format", false);
 		counter += n;
 		my_free((void *)&s);
+		if (counter >= 6)
+			break ;
 		s = get_next_line(fd);
 	}
-	my_free((void *)&s);
 	if (counter != 6)
 		my_err_clean(game, "Invalid map format", false);
+	read_map(game, fd);
 }

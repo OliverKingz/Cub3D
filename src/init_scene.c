@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_scene.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: raperez- <raperez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 15:07:34 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/06/11 15:11:04 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/06/11 16:43:11 by raperez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ t_game	init_scene(t_game *game, const char *scene_dir)
 	read_file(game, scene_dir);
 	init_texture(game, scene_dir);
 	init_map(game, scene_dir);
-	init_player(game, scene_dir);
 	return (*game);
 }
 
@@ -34,12 +33,18 @@ void	init_texture(t_game *game, const char *scene_dir)
 		my_mlx_err(FAIL_TEXTURE);
 }
 
-void	init_player(t_game *game, const char *scene_dir)
+void	init_player(t_game *game, char angle, double x, double y)
 {
-	(void)scene_dir;
-	game->player.angle = 0;
-	game->player.pos.x = 2.5;
-	game->player.pos.y = 5.5;
+	if (angle == 'E')
+		game->player.angle = 0;
+	else if (angle == 'S')
+		game->player.angle = 90;
+	else if (angle == 'W')
+		game->player.angle = 180;
+	else if (angle == 'N')
+		game->player.angle = 270;
+	game->player.pos.x = x;
+	game->player.pos.y = y;
 	game->player.mmap.x = game->player.pos.x * MMAP_TILE;
 	game->player.mmap.y = game->player.pos.y * MMAP_TILE;
 }
@@ -48,25 +53,25 @@ void	init_map(t_game *game, const char *scene_dir)
 {
 	(void)scene_dir;
 	// Mapa 7x5
-	game->scene.map1d = ft_strdup(
-		"        1111111111111111111111111\n"
-		"        1000000000110000000000001\n"
-		"        1011000001110000000000001\n"
-		"        1001000000000000000000001\n"
-		"111111111011000001110000000000001\n"
-		"100000000011000001110111111111111\n"
-		"11110111111111011100000010001    \n"
-		"11110111111111011101010010001    \n"
-		"11000000110101011100000010001    \n"
-		"10000000000000001100000010001    \n"
-		"10000000000000001101010010001    \n"
-		"11000001110101011111011110N0111  \n"
-		"11110111 1110101 101111010001    \n"
-		"11111111 1111111 111111111111    \n"
-	);
-	game->scene.map2d = ft_split(game->scene.map1d, '\n');
-	game->scene.width_map = ft_strlen(game->scene.map2d[0]);
-	game->scene.height_map = my_strlen2d(game->scene.map2d);
+	// game->scene.map1d = ft_strdup(
+	// 	"        1111111111111111111111111\n"
+	// 	"        1000000000110000000000001\n"
+	// 	"        1011000001110000000000001\n"
+	// 	"        1001000000000000000000001\n"
+	// 	"111111111011000001110000000000001\n"
+	// 	"100000000011000001110111111111111\n"
+	// 	"11110111111111011100000010001    \n"
+	// 	"11110111111111011101010010001    \n"
+	// 	"11000000110101011100000010001    \n"
+	// 	"10000000000000001100000010001    \n"
+	// 	"10000000000000001101010010001    \n"
+	// 	"11000001110101011111011110N0111  \n"
+	// 	"11110111 1110101 101111010001    \n"
+	// 	"11111111 1111111 111111111111    \n"
+	// );
+	// game->scene.map2d = ft_split(game->scene.map1d, '\n');
+	// game->scene.width_map = ft_strlen(game->scene.map2d[0]);
+	// game->scene.height_map = my_strlen2d(game->scene.map2d);
 	game->scene.ratio_map = (double)game->scene.width_map
 		/ (double)game->scene.height_map;
 	game->scene.h_mmap = game->scene.height_map * MMAP_TILE;
