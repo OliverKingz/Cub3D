@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: raperez- <raperez-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 19:43:10 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/06/11 12:56:20 by raperez-         ###   ########.fr       */
+/*   Updated: 2025/06/11 15:13:05 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	my_err_clean(t_game *game, const char *msg, bool perror_flag)
 	ft_putendl_fd("Error", STDERR_FILENO);
 	if (perror_flag && msg)
 		perror(msg);
-	if (msg)
+	else if (msg)
 		ft_putendl_fd(msg, STDERR_FILENO);
 	free_game(game);
 	exit(EXIT_FAILURE);
