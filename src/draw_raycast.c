@@ -6,7 +6,7 @@
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/07 12:25:19 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/06/11 12:29:26 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/06/11 12:51:02 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ void	draw_walls_and_rays(t_game *game)
 		ray_angle = game->player.angle - (FOV / 2)
 			+ (wall_pos.x / (double)WIDTH) * FOV;
 		ray = cast_ray(game, ray_angle);
-		draw_ray(game->graphs.player, ray, MMAP_TILE);
+		if (USE_MINIMAP)
+			draw_ray(game->graphs.player, ray, MMAP_TILE);
 		wall_dim.y = HEIGHT / ray.corrected_len;
 		if (wall_dim.y > HEIGHT)
 			wall_dim.y = HEIGHT;

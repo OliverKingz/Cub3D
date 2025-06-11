@@ -6,7 +6,7 @@
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 19:11:12 by raperez-          #+#    #+#             */
-/*   Updated: 2025/06/11 00:29:49 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/06/11 12:31:55 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,11 @@
 void	draw_frame(t_game *game)
 {
 	draw_screen_bg(game);
-	draw_player_bg(game);
+	if (USE_MINIMAP)
+		draw_player_bg(game);
 	draw_walls_and_rays(game);
-	draw_player(game);
+	if (USE_MINIMAP)
+		draw_player(game);
 }
 
 void	draw_screen_bg(t_game *game)

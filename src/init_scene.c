@@ -6,7 +6,7 @@
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 15:07:34 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/06/11 12:08:34 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/06/11 12:46:59 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	init_player(t_game *game, const char *scene_dir)
 {
 	(void)scene_dir;
 	game->player.angle = 0;
-	game->player.pos.x = 1;
+	game->player.pos.x = 1.5;
 	game->player.pos.y = 2.5;
 	game->player.mmap.x = game->player.pos.x * MMAP_TILE;
 	game->player.mmap.y = game->player.pos.y * MMAP_TILE;
