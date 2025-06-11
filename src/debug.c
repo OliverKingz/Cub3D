@@ -6,7 +6,7 @@
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/09 21:48:20 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/06/10 18:04:33 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/06/11 15:07:42 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ void	print_ray_info(t_ray *ray)
 		printf("  Axis Dist: (%f, %f)\n", ray->axis_dist.x, ray->axis_dist.y);
 		printf("  Real Axis Dist: (%f, %f)\n", ray->real_axis_dist.x,
 			ray->real_axis_dist.y);
-		printf("  Step: (%f, %f)\n", ray->step.x, ray->step.y);
+		printf("  Step Directio: (%f, %f)\n", ray->step_dir.x, ray->step_dir.y);
 		printf("  Hit Direction: %d\n", ray->collision_dir);
 		printf("  Size: %f\n\n", ray->length);
 	}

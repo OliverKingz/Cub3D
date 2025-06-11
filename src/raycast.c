@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycast.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: raperez- <raperez-@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 14:35:02 by raperez-          #+#    #+#             */
-/*   Updated: 2025/06/10 21:07:00 by raperez-         ###   ########.fr       */
+/*   Updated: 2025/06/11 14:21:09 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,17 +23,17 @@ void	init_ray(t_game *game, t_ray *ray, double angle)
 	ray->collision_dir = NONE;
 	get_delta(ray);
 	if (ray->vector.x > 0)
-		ray->step.x = 1;
+		ray->step_dir.x = 1;
 	else if (ray->vector.x < 0)
-		ray->step.x = -1;
+		ray->step_dir.x = -1;
 	else
-		ray->step.x = 0;
+		ray->step_dir.x = 0;
 	if (ray->vector.y > 0)
-		ray->step.y = 1;
+		ray->step_dir.y = 1;
 	else if (ray->vector.y < 0)
-		ray->step.y = -1;
+		ray->step_dir.y = -1;
 	else
-		ray->step.y = 0;
+		ray->step_dir.y = 0;
 }
 
 /**

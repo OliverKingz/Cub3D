@@ -6,7 +6,7 @@
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 18:31:20 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/06/11 12:17:13 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/06/11 15:05:41 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@
 
 // Use minimap flag to enable or disable minimap rendering in the game.
 # ifndef USE_MINIMAP
-#  define USE_MINIMAP false
+#  define USE_MINIMAP true
 # endif
 
 /* ************************************************************************** */
@@ -67,11 +67,11 @@
 
 # define FOV 60			// Field of view in degrees for the raycasting system
 # define SPEED 0.05		// Speed of the player movement in the game
-# define ANGLE_SPEED 5	// Speed of the player rotation in degrees per frame
+# define ANGLE_SPEED 3	// Speed of the player rotation in degrees per frame
 # define WALL_DIM_X 1	// Width of each wall segment in pixels
-# define FPS 60 		// Frames per second for the game loop
+# define RAY_RES 0.02	// Ray resolution
 
-# define MMAP_TILE 20			// Size of each tile in the minimap
+# define MMAP_TILE 15			// Size of each tile in the minimap
 # define MMAP_PLAYER_RADIUS 3	// Radius of the player in the minimap in tiles
 
 // Colors used in the game, represented in RGBA format.
@@ -165,7 +165,7 @@ typedef struct s_ray
 	t_point	delta_dist;		// Distance ray must travel to cross the next axis
 	t_point	axis_dist;		// Distance from current pos to the next x or y axis
 	t_point	real_axis_dist;	// Scaled distance to next axis x or y
-	t_point	step;			// Step direction for x and y (-1, 0, or 1)
+	t_point	step_dir;			// Step direction for x and y (-1, 0, or 1)
 }					t_ray;
 
 // Graphical representation of the game, including textures and images.

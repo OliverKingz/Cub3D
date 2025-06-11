@@ -6,7 +6,7 @@
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/09 11:56:40 by raperez-          #+#    #+#             */
-/*   Updated: 2025/06/10 23:13:59 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/06/11 13:00:43 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,6 +125,7 @@ bool	read_file(t_game *game, const char *file)
 		my_free((void *)&s);
 		s = get_next_line(fd);
 	}
+	my_free((void *)&s);
 	if (counter != 6)
 		my_err_clean(game, "Invalid map format");
 	return (true);

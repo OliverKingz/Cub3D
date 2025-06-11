@@ -6,7 +6,7 @@
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/07 12:25:19 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/06/11 12:51:02 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/06/11 14:26:11 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void	draw_ray(mlx_image_t *img, t_ray ray, int mult)
 			y = tan(ray.angle_rads) * (x - ray.start_pos.x) + ray.start_pos.y;
 			mlx_put_pixel(img, x * mult, y * mult, MMAP_RAY_COLOR);
 		}
-		x += ray.step.x * 0.02;
+		x += ray.step_dir.x * RAY_RES;
 	}
 	y = ray.start_pos.y;
 	while ((ray.vector.y > 0 && y <= ray.end_pos.y)
@@ -66,7 +66,7 @@ void	draw_ray(mlx_image_t *img, t_ray ray, int mult)
 			x = ((y - ray.start_pos.y) / tan(ray.angle_rads)) + ray.start_pos.x;
 			mlx_put_pixel(img, x * mult, y * mult, MMAP_RAY_COLOR);
 		}
-		y += ray.step.y * 0.02;
+		y += ray.step_dir.y * RAY_RES;
 	}
 }
 
