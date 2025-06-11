@@ -6,7 +6,7 @@
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 18:31:20 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/06/11 15:05:41 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/06/11 15:12:00 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -296,12 +296,12 @@ t_point			radians_to_vector(double angle_rads);
 bool			is_valid_color(const char *s);
 uint32_t		get_rgb(t_game *game, char *s);
 int				manage_line(t_game *game, char *s);
-bool			read_file(t_game *game, const char *file);
+void			read_file(t_game *game, const char *file);
 
 // exit.c
 
 void			my_mlx_err(const char *msg);
-void			my_err_clean(t_game *game, char *msg);
+void			my_err_clean(t_game *game, const char *msg, bool perror_flag);
 void			free_map(t_game *game);
 void			free_game(t_game *game);
 
@@ -323,7 +323,7 @@ void			my_close(int *fd);
 
 int				my_strchr_pos(const char *s, char c);
 int				my_strnstr_pos(const char *big, const char *little, size_t len);
-char			*my_replace_first(char *og, char *target, char *rep);
+int				my_strchrs_pos(const char *s, const char *c);
 int				my_strchr_count(const char *s, int c);
 size_t			my_strlen2d(char **s);
 

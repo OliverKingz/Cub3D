@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: raperez- <raperez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 15:28:46 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/03/07 14:27:49 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/06/11 12:57:08 by raperez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -172,7 +172,7 @@ int		ft_memcmp(const void *s1, const void *s2, size_t n);
 
 void	ft_putchar_fd(char c, int fd);
 void	ft_putstr_fd(char *s, int fd);
-void	ft_putendl_fd(char *s, int fd);
+void	ft_putendl_fd(const char *s, int fd);
 void	ft_putnbr_fd(int n, int fd);
 
 int		ft_printf(const char *format, ...);

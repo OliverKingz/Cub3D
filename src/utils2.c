@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: raperez- <raperez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 21:07:40 by raperez-          #+#    #+#             */
-/*   Updated: 2025/06/10 23:12:04 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/06/11 12:16:39 by raperez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,22 @@ int	my_strchr_pos(const char *s, char c)
 	while (s[i])
 	{
 		if (s[i] == c)
+			return (i);
+		i++;
+	}
+	return (-1);
+}
+
+int	my_strchrs_pos(const char *s, const char *c)
+{
+	int	i;
+
+	if (!s)
+		return (-1);
+	i = 0;
+	while (s[i])
+	{
+		if (ft_strchr(c, s[i]))
 			return (i);
 		i++;
 	}
@@ -44,28 +60,6 @@ int	my_strnstr_pos(const char *big, const char *little, size_t len)
 		i++;
 	}
 	return (-1);
-}
-
-char	*my_replace_first(char *og, char *target, char *rep)
-{
-	int		pos;
-	size_t	size;
-	char	*s;
-
-	if (!og || !target || !rep)
-		return (NULL);
-	pos = my_strnstr_pos(og, target, ft_strlen(og));
-	if (pos == -1)
-		return (ft_strdup(og));
-	size = ft_strlen(og) - ft_strlen(target) + ft_strlen(rep);
-	s = ft_calloc(size + 1, sizeof(char));
-	if (!s)
-		return (ft_puterr("str calloc"), NULL);
-	ft_memcpy(s, og, pos);
-	ft_memcpy(&s[pos], rep, ft_strlen(rep));
-	ft_memcpy(&s[pos + ft_strlen(rep)], &og[pos + ft_strlen(target)],
-		ft_strlen(&og[pos + ft_strlen(target)]));
-	return (s);
 }
 
 int	my_strchr_count(const char *s, int c)

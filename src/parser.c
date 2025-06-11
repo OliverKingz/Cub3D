@@ -6,7 +6,7 @@
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/09 11:56:40 by raperez-          #+#    #+#             */
-/*   Updated: 2025/06/11 13:00:43 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/06/11 15:11:50 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,14 +43,15 @@ uint32_t	get_rgb(t_game *game, char *s)
 	(void) game;
 	str_array = ft_split(s, ',');
 	if (my_strchr_count(s, ',') != 2 || my_strlen2d(str_array) != 3)
-		my_err_clean(game, "Invalid rgb format");
+		my_err_clean(game, "Invalid rgb format", false);
 	i = 0;
 	color = 0;
 	while (i < 3)
 	{
 		temp = ft_strtrim(str_array[i], " \f\n\r\t\v");
 		if (!is_valid_color(temp))
-			(my_free((void *)&temp), my_err_clean(game, "Invalid rgb format"));
+			(my_free((void *)&temp),
+				my_err_clean(game, "Invalid rgb format", false));
 		color = color << 8;
 		color += ft_atoi(temp);
 		my_free((void *)&temp);
@@ -66,13 +67,13 @@ static int	select_mode(t_game *game, char *id, char *info)
 	if (!game || !id || !info)
 		return (my_free((void *)&id), my_free((void *)&info), -1);
 	if (ft_strcmp(id, "NO") == 0)
-		game->graphs.north_path = ft_strdup(info);
+		game->graphs.north_path = ft_strtrim(info, " \f\n\r\t\v");
 	else if (ft_strcmp(id, "SO") == 0)
-		game->graphs.south_path = ft_strdup(info);
+		game->graphs.south_path = ft_strtrim(info, " \f\n\r\t\v");
 	else if (ft_strcmp(id, "WE") == 0)
-		game->graphs.west_path = ft_strdup(info);
+		game->graphs.west_path = ft_strtrim(info, " \f\n\r\t\v");
 	else if (ft_strcmp(id, "EA") == 0)
-		game->graphs.east_path = ft_strdup(info);
+		game->graphs.east_path = ft_strtrim(info, " \f\n\r\t\v");
 	else if (ft_strcmp(id, "F") == 0)
 		game->scene.floor_rgb = get_rgb(game, info);
 	else if (ft_strcmp(id, "C") == 0)
@@ -94,7 +95,7 @@ int	manage_line(t_game *game, char *s)
 	s = ft_strtrim(s, " \f\n\r\t\v");
 	if (!s || ft_strlen(s) == 0)
 		return (free(s), 0);
-	i = my_strchr_pos(s, ' ');
+	i = my_strchrs_pos(s, " \f\n\r\t\v");
 	if (i == -1)
 		return (free(s), -1);
 	id = ft_substr(s, 0, i);
@@ -103,8 +104,7 @@ int	manage_line(t_game *game, char *s)
 	return (select_mode(game, id, info));
 }
 
-//Tries to open and read the file passed as parameter, returns false on failure
-bool	read_file(t_game *game, const char *file)
+void	read_file(t_game *game, const char *file)
 {
 	int		fd;
 	int		n;
@@ -113,20 +113,19 @@ bool	read_file(t_game *game, const char *file)
 
 	fd = open(file, R_OK);
 	if (fd < 0)
-		return (false);
+		my_err_clean(game, file, true);
 	s = get_next_line(fd);
 	counter = 0;
 	while (s && counter < 6)
 	{
 		n = manage_line(game, s);
 		if (n == -1)
-			my_err_clean(game, "Invalid map format");
+			my_err_clean(game, "Invalid map format", false);
 		counter += n;
 		my_free((void *)&s);
 		s = get_next_line(fd);
 	}
 	my_free((void *)&s);
 	if (counter != 6)
-		my_err_clean(game, "Invalid map format");
-	return (true);
+		my_err_clean(game, "Invalid map format", false);
 }

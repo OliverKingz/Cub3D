@@ -6,7 +6,7 @@
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 15:07:34 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/06/11 15:09:23 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/06/11 15:11:04 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ void	init_map(t_game *game, const char *scene_dir)
 	game->scene.h_mmap = game->scene.height_map * MMAP_TILE;
 	game->scene.w_mmap = game->scene.width_map * MMAP_TILE;
 	if (game->scene.w_mmap > WIDTH - 20 || game->scene.h_mmap > HEIGHT - 20)
-		return (my_err_clean(game, FAIL_MINIMAP_TOO_BIG));
+		return (my_err_clean(game, FAIL_MINIMAP_TOO_BIG, false));
 }
 
 // Mapa 16x6
