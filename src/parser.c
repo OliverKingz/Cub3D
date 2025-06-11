@@ -6,7 +6,7 @@
 /*   By: raperez- <raperez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/09 11:56:40 by raperez-          #+#    #+#             */
-/*   Updated: 2025/06/11 12:55:55 by raperez-         ###   ########.fr       */
+/*   Updated: 2025/06/11 13:03:57 by raperez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,8 +103,6 @@ int	manage_line(t_game *game, char *s)
 	my_free((void *)&s);
 	return (select_mode(game, id, info));
 }
-
-
 
 void	read_file(t_game *game, const char *file)
 {
