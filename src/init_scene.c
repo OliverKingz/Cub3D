@@ -6,7 +6,7 @@
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 15:07:34 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/06/11 01:08:25 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/06/11 12:08:34 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,15 @@ void	init_map(t_game *game, const char *scene_dir)
 	/ (double)game->scene.height_map;
 	game->scene.ceil_rgb = LIGHT_BLUE;
 	game->scene.floor_rgb = DARK_GREY;
+*/
+
+// Mapa 7x5
+/*
+	game->scene.map1d = ft_strdup (" 11111 \n"
+			"110001 \n"
+			"100N011\n"
+			"111011 \n"
+			"1 111  \n");
 */
 
 // Mapa Example

@@ -6,7 +6,7 @@
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/07 12:25:19 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/06/11 00:47:30 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/06/11 12:29:26 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ void	draw_walls_and_rays(t_game *game)
 		ray = cast_ray(game, ray_angle);
 		draw_ray(game->graphs.player, ray, MMAP_TILE);
 		wall_dim.y = HEIGHT / ray.corrected_len;
+		if (wall_dim.y > HEIGHT)
+			wall_dim.y = HEIGHT;
 		wall_pos.y = (HEIGHT / 2) - (wall_dim.y / 2);
 		if (USE_TEXTURES)
 			draw_wall_texture(game, ray, wall_pos, wall_dim);
@@ -150,15 +152,20 @@ void	draw_wall_rectangle(t_game *game, t_ray ray, t_point pos, t_point dim)
 // 	t_point	wall_dim;
 // 	t_ray	ray;
 
-// 	wall_dim.x = WIDTH / FOV;
 // 	wall_pos.y = 0;
 // 	wall_pos.x = 0;
 // 	ray_angle = game->player.angle - (FOV / 2);
 // 	while (ray_angle < game->player.angle + FOV / 2)
 // 	{
 // 		ray = cast_ray(game, ray_angle);
-// 		draw_ray(game->graphs.minimap, ray, MMAP_TILE);
-// 		wall_dim.y = HEIGHT / ray.corrected_len;
+// 		draw_ray(game->graphs.player, ray, MMAP_TILE);
+// 		wall_dim.x = wall_pos.x + WIDTH / FOV;
+// 		if (ray.corrected_len != 0)
+// 			wall_dim.y = HEIGHT / ray.corrected_len;
+// 		else
+// 			wall_dim.y = HEIGHT;
+//		if (wall_dim.y > HEIGHT)
+//			wall_dim.y = HEIGHT;
 // 		wall_pos.y = (HEIGHT / 2) - (wall_dim.y / 2);
 // 		if (USE_TEXTURES)
 // 			draw_wall_texture(game, ray, wall_pos, wall_dim);

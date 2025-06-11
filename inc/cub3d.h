@@ -6,7 +6,7 @@
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 18:31:20 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/06/11 00:53:18 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/06/11 12:17:13 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,11 @@
 // Use textures flag to enable or disable texture rendering in the game.
 # ifndef USE_TEXTURES
 #  define USE_TEXTURES true
+# endif
+
+// Use minimap flag to enable or disable minimap rendering in the game.
+# ifndef USE_MINIMAP
+#  define USE_MINIMAP false
 # endif
 
 /* ************************************************************************** */
