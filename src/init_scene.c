@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_scene.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: raperez- <raperez-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 15:07:34 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/06/11 16:43:11 by raperez-         ###   ########.fr       */
+/*   Updated: 2025/06/12 00:41:58 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,26 +52,6 @@ void	init_player(t_game *game, char angle, double x, double y)
 void	init_map(t_game *game, const char *scene_dir)
 {
 	(void)scene_dir;
-	// Mapa 7x5
-	// game->scene.map1d = ft_strdup(
-	// 	"        1111111111111111111111111\n"
-	// 	"        1000000000110000000000001\n"
-	// 	"        1011000001110000000000001\n"
-	// 	"        1001000000000000000000001\n"
-	// 	"111111111011000001110000000000001\n"
-	// 	"100000000011000001110111111111111\n"
-	// 	"11110111111111011100000010001    \n"
-	// 	"11110111111111011101010010001    \n"
-	// 	"11000000110101011100000010001    \n"
-	// 	"10000000000000001100000010001    \n"
-	// 	"10000000000000001101010010001    \n"
-	// 	"11000001110101011111011110N0111  \n"
-	// 	"11110111 1110101 101111010001    \n"
-	// 	"11111111 1111111 111111111111    \n"
-	// );
-	// game->scene.map2d = ft_split(game->scene.map1d, '\n');
-	// game->scene.width_map = ft_strlen(game->scene.map2d[0]);
-	// game->scene.height_map = my_strlen2d(game->scene.map2d);
 	game->scene.ratio_map = (double)game->scene.width_map
 		/ (double)game->scene.height_map;
 	game->scene.h_mmap = game->scene.height_map * MMAP_TILE;
@@ -102,6 +82,9 @@ void	init_map(t_game *game, const char *scene_dir)
 			"100N011\n"
 			"111011 \n"
 			"1 111  \n");
+	game->scene.map2d = ft_split(game->scene.map1d, '\n');
+	game->scene.width_map = ft_strlen(game->scene.map2d[0]);
+	game->scene.height_map = my_strlen2d(game->scene.map2d);
 */
 
 // Mapa Example

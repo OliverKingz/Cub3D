@@ -6,7 +6,7 @@
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 18:42:36 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/06/11 00:38:59 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/06/12 00:37:43 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,56 +14,68 @@
 
 void	draw_rectangle(mlx_image_t *img, t_point pos, t_point dim, int color)
 {
-	int	px;
-	int	py;
-	int	x_end;
-	int	y_end;
+	t_point	p;
+	t_point	end;
 
-	x_end = pos.x + dim.x;
-	y_end = pos.y + dim.y;
-	py = pos.y;
-	while (py < y_end)
+	end.x = pos.x + dim.x;
+	end.y = pos.y + dim.y;
+	p.y = pos.y;
+	while (p.y < end.y)
 	{
-		if (py >= 0 && py < (int)img->height)
+		if (p.y < 0)
+			p.y = 0;
+		if (p.y >= (int)img->height)
+			break ;
+		p.x = pos.x;
+		while (p.x < end.x)
 		{
-			px = pos.x;
-			while (px < x_end)
-			{
-				if (px >= 0 && px < (int)img->width)
-					mlx_put_pixel(img, px, py, color);
-				px++;
-			}
+			if (p.x < 0)
+				p.x = 0;
+			if (p.x >= (int)img->width)
+				break ;
+			mlx_put_pixel(img, p.x, p.y, color);
+			p.x++;
 		}
-		py++;
+		p.y++;
 	}
 }
 
-int	get_texture_and_xt(t_game *game, t_ray ray, mlx_texture_t **texture)
+mlx_texture_t	*get_texture(t_game *game, t_ray ray)
+{
+	if (ray.collision_dir == NORTH)
+		return (game->graphs.north_t);
+	else if (ray.collision_dir == SOUTH)
+		return (game->graphs.south_t);
+	else if (ray.collision_dir == WEST)
+		return (game->graphs.west_t);
+	else if (ray.collision_dir == EAST)
+		return (game->graphs.east_t);
+	return (NULL);
+}
+
+int	get_x_texture(t_ray ray, mlx_texture_t *texture)
 {
 	int	x_t;
 
-	x_t = 0;
-	*texture = NULL;
-	if (ray.collision_dir == NORTH)
-		*texture = game->graphs.north_t;
-	else if (ray.collision_dir == SOUTH)
-		*texture = game->graphs.south_t;
-	else if (ray.collision_dir == WEST)
-		*texture = game->graphs.west_t;
-	else if (ray.collision_dir == EAST)
-		*texture = game->graphs.east_t;
+	if (!texture)
+		return (0);
 	if (ray.collision_dir == NORTH)
 		x_t = (int)((1.0 - (ray.end_pos.x - floor(ray.end_pos.x)))
-				* (*texture)->width) % (int)(*texture)->width;
+				* texture->width);
 	else if (ray.collision_dir == SOUTH)
 		x_t = (int)(((ray.end_pos.x - floor(ray.end_pos.x)))
-				* (*texture)->width) % (int)(*texture)->width;
+				* texture->width);
 	else if (ray.collision_dir == WEST)
 		x_t = (int)(((ray.end_pos.y - floor(ray.end_pos.y))
-					* (*texture)->width)) % (int)(*texture)->width;
+					* texture->width));
 	else if (ray.collision_dir == EAST)
 		x_t = (int)((1.0 - (ray.end_pos.y - floor(ray.end_pos.y)))
-				* (*texture)->width) % (int)(*texture)->width;
+				* texture->width);
+	else
+		x_t = 0;
+	x_t = x_t % (int)(texture->width);
+	if (x_t < 0)
+		x_t += (int)(texture->width);
 	return (x_t);
 }
 

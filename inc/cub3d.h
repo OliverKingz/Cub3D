@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: raperez- <raperez-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 18:31:20 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/06/11 18:02:49 by raperez-         ###   ########.fr       */
+/*   Updated: 2025/06/12 00:38:16 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -259,8 +259,8 @@ void			draw_minimap_grid_horizontal(t_game *game);
 
 void			draw_rectangle(mlx_image_t *img, t_point pos, t_point size,
 					int color);
-int				get_texture_and_xt(t_game *game, t_ray ray,
-					mlx_texture_t **texture);
+mlx_texture_t	*get_texture(t_game *game, t_ray ray);
+int				get_x_texture(t_ray ray, mlx_texture_t *texture);
 unsigned int	get_pixel_rgba(mlx_texture_t *texture, int x, int y);
 
 // hook.c

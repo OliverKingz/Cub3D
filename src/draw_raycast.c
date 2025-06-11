@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_raycast.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: raperez- <raperez-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/07 12:25:19 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/06/11 18:03:04 by raperez-         ###   ########.fr       */
+/*   Updated: 2025/06/12 00:52:35 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,6 @@ void	draw_walls_and_rays(t_game *game)
 		if (USE_MINIMAP)
 			draw_ray(game->graphs.player, ray, MMAP_TILE);
 		wall_dim.y = HEIGHT / ray.corrected_len;
-		//if (wall_dim.y > HEIGHT)
-		//	wall_dim.y = HEIGHT;
 		wall_pos.y = (HEIGHT / 2) - (wall_dim.y / 2);
 		if (USE_TEXTURES)
 			draw_wall_texture(game, ray, wall_pos, wall_dim);
@@ -75,22 +73,24 @@ void	draw_wall_texture(t_game *game, t_ray ray, t_point pos, t_point dim)
 	mlx_texture_t	*texture;
 	t_point			txt;
 	t_point			p;
+	int				draw_start;
+	int				draw_end;
 
-	txt.x = get_texture_and_xt(game, ray, &texture);
+	texture = get_texture(game, ray);
 	if (!texture)
 		return ;
-	txt.x = (int)txt.x % (int)(texture->width);
-	if (txt.x < 0)
-		txt.x += (int)(texture->width);
+	txt.x = get_x_texture(ray, texture);
 	p.x = -1;
-	if (dim.x > WIDTH)
-		dim.x = WIDTH;
-	if (dim.x > WIDTH)
-		dim.x = WIDTH;
 	while (++p.x < dim.x && (pos.x + p.x) < WIDTH)
 	{
-		p.y = -1;
-		while (++p.y < dim.y && (pos.y + p.y) < HEIGHT)
+		draw_start = (int)pos.y;
+		draw_end = (int)(pos.y + dim.y);
+		if (draw_start < 0)
+			draw_start = 0;
+		if (draw_end > HEIGHT)
+			draw_end = HEIGHT;
+		p.y = draw_start - (int)pos.y - 1;
+		while (++p.y < draw_end - (int)pos.y)
 		{
 			txt.y = ((long long)p.y * texture->height) / dim.y;
 			if (pos.x + p.x >= 0 && pos.x + p.x < WIDTH
