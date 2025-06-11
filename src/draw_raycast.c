@@ -6,7 +6,7 @@
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/07 12:25:19 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/06/11 14:26:11 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/06/11 17:47:15 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,9 @@ void	draw_wall_texture(t_game *game, t_ray ray, t_point pos, t_point dim)
 	txt.x = get_texture_and_xt(game, ray, &texture);
 	if (!texture)
 		return ;
+	txt.x = (int)txt.x % (int)(texture->width);
+	if (txt.x < 0)
+		txt.x += (int)(texture->width);
 	p.x = -1;
 	while (++p.x < dim.x && (pos.x + p.x) < WIDTH)
 	{
