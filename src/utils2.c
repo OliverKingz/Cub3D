@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: raperez- <raperez-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: raperez- <raperez-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 21:07:40 by raperez-          #+#    #+#             */
-/*   Updated: 2025/06/11 12:16:39 by raperez-         ###   ########.fr       */
+/*   Updated: 2025/06/12 22:08:08 by raperez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,24 +44,6 @@ int	my_strchrs_pos(const char *s, const char *c)
 	return (-1);
 }
 
-int	my_strnstr_pos(const char *big, const char *little, size_t len)
-{
-	size_t	i;
-	size_t	little_length;
-
-	little_length = ft_strlen(little);
-	if (little_length == 0)
-		return (0);
-	i = 0;
-	while (big[i] && i + little_length <= len)
-	{
-		if (ft_strncmp(&big[i], little, little_length) == 0)
-			return (i);
-		i++;
-	}
-	return (-1);
-}
-
 int	my_strchr_count(const char *s, int c)
 {
 	int	i;
@@ -88,4 +70,20 @@ size_t	my_strlen2d(char **s)
 	while (s[i])
 		i++;
 	return (i);
+}
+
+bool	is_empty(const char *s)
+{
+	int i;
+
+	if (!s)
+		return (true);
+	i = 0;
+	while (s[i])
+	{
+		if (!ft_isspace(s[i]))
+			return (false);
+		i++;
+	}
+	return (true);
 }

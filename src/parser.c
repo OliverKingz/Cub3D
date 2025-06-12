@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: raperez- <raperez-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: raperez- <raperez-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/09 11:56:40 by raperez-          #+#    #+#             */
-/*   Updated: 2025/06/11 16:16:42 by raperez-         ###   ########.fr       */
+/*   Updated: 2025/06/12 22:26:01 by raperez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,13 +40,12 @@ uint32_t	get_rgb(t_game *game, char *s)
 	int			i;
 	uint32_t	color;
 
-	(void) game;
 	str_array = ft_split(s, ',');
 	if (my_strchr_count(s, ',') != 2 || my_strlen2d(str_array) != 3)
 		my_err_clean(game, "Invalid rgb format", false);
-	i = 0;
+	i = -1;
 	color = 0;
-	while (i < 3)
+	while (++i < 3)
 	{
 		temp = ft_strtrim(str_array[i], " \f\n\r\t\v");
 		if (!is_valid_color(temp))
@@ -55,7 +54,6 @@ uint32_t	get_rgb(t_game *game, char *s)
 		color = color << 8;
 		color += ft_atoi(temp);
 		my_free((void *)&temp);
-		i++;
 	}
 	my_free2d((void *)&str_array);
 	color = (color << 8) + 0xFF;
@@ -92,9 +90,9 @@ int	manage_line(t_game *game, char *s)
 	char	*info;
 	int		i;
 
+	if (is_empty(s))
+		return (0);
 	s = ft_strtrim(s, " \f\n\r\t\v");
-	if (!s || ft_strlen(s) == 0)
-		return (free(s), 0);
 	i = my_strchrs_pos(s, " \f\n\r\t\v");
 	if (i == -1)
 		return (free(s), -1);

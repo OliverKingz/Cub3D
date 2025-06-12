@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: raperez- <raperez-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: raperez- <raperez-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/11 16:16:16 by raperez-          #+#    #+#             */
-/*   Updated: 2025/06/11 17:50:23 by raperez-         ###   ########.fr       */
+/*   Updated: 2025/06/12 23:30:46 by raperez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ void	manage_map(t_game *game)
 	char	*tmp;
 
 	i = 0;
+	game->scene.height_map = my_strlen2d(game->scene.map2d);
 	while (i < game->scene.height_map)
 	{
 		tmp = ft_calloc(game->scene.width_map + 1, sizeof(char));
@@ -57,24 +58,34 @@ void	check_map1d(t_game *game)
 	}
 }
 
+void	check_after_map(t_game *game, char *s, int fd)
+{
+	while (s)
+	{
+		if (!is_empty(s))
+			my_err_clean(game, "Data after map", false);
+		my_free((void *)&s);
+		s = get_next_line(fd);
+	}
+}
+
+void	check_walls()
+{
+	
+}
+
 void	read_map(t_game *game, int fd)
 {
 	char	*s;
 	char	*temp;
 
-	while (1)
+	s = get_next_line(fd);
+	while (is_empty(s))
 	{
-		s = get_next_line(fd);
-		temp = ft_strtrim(s, " \f\n\r\t\v");
-		if (ft_strlen(temp) != 0)
-		{
-			my_free((void *)&temp);
-			break ;
-		}
-		my_free((void *)&temp);
 		my_free((void *)&s);
+		s = get_next_line(fd);
 	}
-	while (s)
+	while (!is_empty(s))
 	{
 		temp = game->scene.map1d;
 		game->scene.map1d = ft_strjoin(temp, s);
@@ -84,9 +95,9 @@ void	read_map(t_game *game, int fd)
 		my_free((void *)&s);
 		s = get_next_line(fd);
 	}
+	check_after_map(game, s, fd);
 	close(fd);
 	check_map1d(game);
 	game->scene.map2d = ft_split(game->scene.map1d, '\n');
-	game->scene.height_map = my_strlen2d(game->scene.map2d);
 	manage_map(game);
 }

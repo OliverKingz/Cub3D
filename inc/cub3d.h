@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: raperez- <raperez-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 18:31:20 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/06/12 15:53:12 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/06/12 22:08:22 by raperez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -331,10 +331,10 @@ void			my_close(int *fd);
 // utils2.c
 
 int				my_strchr_pos(const char *s, char c);
-int				my_strnstr_pos(const char *big, const char *little, size_t len);
 int				my_strchrs_pos(const char *s, const char *c);
 int				my_strchr_count(const char *s, int c);
 size_t			my_strlen2d(char **s);
+bool			is_empty(const char *s);
 
 // debug.c
 
