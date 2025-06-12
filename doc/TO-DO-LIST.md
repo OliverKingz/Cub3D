@@ -9,6 +9,8 @@
 
 - ✅ Mirar por qué el mapa no funciona -> Player tiene que estar dentro del mapa, no fuera
 - ✅ Si te acercas mucho a pared, se distorsiona.
+- ✅ FOV constante, da igual WIDTH y HEIGHT
+- ✅ Mover diagonal va mas rapido, tiene que ir constante.
 
 ## Urgente
 
@@ -18,7 +20,6 @@
 
 - Linea vertical. Arreglar rayo que da justo en una esquina.
 - Linea horizontal. Se han intercambiado pixeles por alguna razon
-- Mover diagonal va mas rapido. Arreglar
 
 ## Opcional
 
