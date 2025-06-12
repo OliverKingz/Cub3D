@@ -6,7 +6,7 @@
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 17:35:09 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/06/10 18:06:48 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/06/12 01:46:02 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	move(t_game *game, int dx, int dy)
 	double	angle_rad;
 
 	new_pos = game->player.pos;
-	angle_rad = degrees_to_radians(game->player.angle);
+	angle_rad = deg_to_rad(game->player.angle);
 	if (dy != 0)
 	{
 		new_pos.x += cos(angle_rad) * -dy * SPEED;
