@@ -6,7 +6,7 @@
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 19:13:36 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/06/10 22:56:44 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/06/12 15:36:45 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,33 +46,6 @@ void	key_hook(mlx_key_data_t keydata, void *param)
 		game->keys.left = pressed;
 	if (keydata.key == MLX_KEY_RIGHT)
 		game->keys.right = pressed;
-}
-
-static void	update_player_keys_state(t_game *game)
-{
-	int	dx;
-	int	dy;
-	int	dang;
-
-	dx = 0;
-	dy = 0;
-	dang = 0;
-	if (game->keys.w)
-		dy -= 1;
-	if (game->keys.s)
-		dy += 1;
-	if (game->keys.a)
-		dx -= 1;
-	if (game->keys.d)
-		dx += 1;
-	if (game->keys.left)
-		dang -= 1;
-	if (game->keys.right)
-		dang += 1;
-	if (dx != 0 || dy != 0)
-		move(game, dx, dy);
-	if (dang != 0)
-		rotate(game, dang);
 }
 
 void	loop_hook(void *param)

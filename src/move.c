@@ -6,11 +6,23 @@
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 17:35:09 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/06/12 01:46:02 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/06/12 15:55:57 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+void	rotate(t_game *game, int dang)
+{
+	if (dang != 0)
+	{
+		game->player.angle += dang * ANGLE_SPEED;
+		if (game->player.angle >= 360)
+			game->player.angle -= 360;
+		else if (game->player.angle < 0)
+			game->player.angle += 360;
+	}
+}
 
 void	move(t_game *game, int dx, int dy)
 {
@@ -39,14 +51,41 @@ void	move(t_game *game, int dx, int dy)
 	}
 }
 
-void	rotate(t_game *game, int dang)
+static void	normalize_move(t_game *game, t_point end_pos)
 {
-	if (dang != 0)
+	int	length;
+
+	length = get_distance_length((t_point){0, 0}, end_pos);
+	if (length != 0)
 	{
-		game->player.angle += dang * ANGLE_SPEED;
-		if (game->player.angle >= 360)
-			game->player.angle -= 360;
-		else if (game->player.angle < 0)
-			game->player.angle += 360;
+		end_pos.x /= length;
+		end_pos.y /= length;
 	}
+	move(game, end_pos.x, end_pos.y);
+}
+
+void	update_player_keys_state(t_game *game)
+{
+	t_point	d;
+	int		dang;
+
+	d.x = 0;
+	d.y = 0;
+	dang = 0;
+	if (game->keys.w)
+		d.y -= 1;
+	if (game->keys.s)
+		d.y += 1;
+	if (game->keys.a)
+		d.x -= 1;
+	if (game->keys.d)
+		d.x += 1;
+	if (game->keys.left)
+		dang -= 1;
+	if (game->keys.right)
+		dang += 1;
+	if (d.x != 0 || d.y != 0)
+		normalize_move(game, d);
+	if (dang != 0)
+		rotate(game, dang);
 }

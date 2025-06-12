@@ -6,7 +6,7 @@
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 18:31:20 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/06/12 02:01:04 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/06/12 15:53:12 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -272,14 +272,14 @@ void			fps_counter(void);
 
 // move.c
 
-void			move(t_game *game, int dx, int dy);
 void			rotate(t_game *game, int dang);
+void			move(t_game *game, int dx, int dy);
+void			update_player_keys_state(t_game *game);
 
 // raycast.c
 
 void			init_ray(t_game *game, t_ray *ray, double angle);
 t_ray			cast_ray(t_game *game, double angle);
-double			get_ray_length(t_ray ray);
 double			correct_raylen_fisheye(t_ray *ray, double player_angle);
 
 // raycast_dda.c
@@ -294,6 +294,7 @@ void			check_axis_is_wall_collision(t_ray *ray, t_scene *scene);
 double			deg_to_rad(double angle_degs);
 double			rad_to_deg(double angle_rads);
 t_point			rad_to_vector(double angle_rads);
+double			get_distance_length(t_point start_pos, t_point end_pos);
 
 // parser.c
 
