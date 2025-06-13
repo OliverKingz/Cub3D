@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: raperez- <raperez-@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 18:31:20 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/06/12 22:08:22 by raperez-         ###   ########.fr       */
+/*   Updated: 2025/06/13 14:54:25 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,14 +89,16 @@
 # define PI 3.14159265358979323846
 
 // Error messages for various failure scenarios in the game.
-# define SCENE_EMPTY "Invalid scene: path is empty"
+# define SCENE_EXTENSION "Invalid scene: needs .cub extension"
+# define SCENE_UNEXISTENT "Invalid scene: doesn't exists or unable to open"
+# define SCENE_EMPTY "Invalid scene: file is empty"
+# define SCENE_ERROR_READ "Invalid scene: error reading"
 # define FAIL_MLX "Failed initializing MLX42"
 # define FAIL_TEXTURE "Failed loading textures"
 # define FAIL_IMAGES "Failed loading images"
 # define FAIL_MINIMAP_TOO_BIG "Minimap is too big, change the tile size"
 # define ERR_PLAYER_AMOUNT "There must be only one player"
 # define ERR_INVALID_CHAR "Invalid char on the map"
-# define ERR_EMPTY
 
 /* ************************************************************************** */
 /*                              ENUMS AND STRUCTS                             */
@@ -306,6 +308,10 @@ void			read_file(t_game *game, const char *file);
 // map.c
 
 void			read_map(t_game *game, int fd);
+
+// map_check.c
+
+void	check_file(t_game *game, const char *scene_dir);
 
 // exit.c
 

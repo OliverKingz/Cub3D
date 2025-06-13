@@ -6,7 +6,7 @@
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 15:07:34 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/06/12 00:41:58 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/06/13 14:44:48 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 t_game	init_scene(t_game *game, const char *scene_dir)
 {
+	check_file(game, scene_dir);
 	read_file(game, scene_dir);
 	init_texture(game, scene_dir);
 	init_map(game, scene_dir);
