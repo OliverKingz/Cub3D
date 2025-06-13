@@ -14,12 +14,11 @@
 
 ## Urgente
 
+- Poner col y fil maxima: 100 x 50
+- LEAK read_file textures_missing.cub >:(
+- Leak flood fill :S
 - El file acepta 6 elementos aunque este duplicados
-
-- Check map logic
-	- Si esta rodeado de 1
-		- Leer de izq a derecha cada fila. Ignorar si es ' ', el primer char encontrado tiene que ser '1'. 
-		- Leer de dcha a izq, arriba a abajo, abajo a arriba. Seguir misma idea. 
+- Cerrar el fd. 
 
 ## Con calma
 
@@ -32,4 +31,4 @@
 
 ## Raul
 
-- Cerrar el fd
+

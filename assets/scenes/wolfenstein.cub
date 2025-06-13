@@ -1,7 +1,7 @@
-NO ./assets/textures/wolfstein_greystone.png
-SO ./assets/textures/wolfstein_colorstone.png
-WE ./assets/textures/wolfstein_mossy.png
-EA ./assets/textures/wolfstein_wood.png
+NO ./assets/textures/wolfenstein_greystone.png
+SO ./assets/textures/wolfenstein_colorstone.png
+WE ./assets/textures/wolfenstein_mossy.png
+EA ./assets/textures/wolfenstein_wood.png
 
 F 0,100,40
 C 0,0,0

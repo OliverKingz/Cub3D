@@ -6,7 +6,7 @@
 /*   By: raperez- <raperez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/09 11:56:40 by raperez-          #+#    #+#             */
-/*   Updated: 2025/06/13 18:31:03 by raperez-         ###   ########.fr       */
+/*   Updated: 2025/06/13 19:08:14 by raperez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,15 +35,15 @@ void	read_file(t_game *game, const char *file)
 	{
 		n = manage_line(game, s);
 		if (n == -1)
-			my_err_clean(game, SCENE_FORMAT, false);
+			(my_free((void *)&s), my_err_clean(game, SCENE_FORMAT, false));
 		counter += n;
 		my_free((void *)&s);
 		if (counter >= 6)
 			break ;
 		s = get_next_line(fd);
 	}
-	if (counter != 6)
-		my_err_clean(game, SCENE_FORMAT, false);
+	if (counter < 6)
+		(my_free((void *)&s), my_err_clean(game, SCENE_FORMAT, false));
 	read_map(game, fd);
 }
 
