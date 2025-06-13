@@ -6,7 +6,7 @@
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/07 12:25:19 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/06/13 15:07:47 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/06/13 16:58:34 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,78 +109,3 @@ void	draw_wall_rectangle(t_game *game, t_ray ray, t_point pos, t_point dim)
 	else
 		draw_rectangle(game->graphs.screen, pos, dim, WALL_COLOR_SHADOW);
 }
-
-// void	draw_walls_and_rays(t_game *game)
-// {
-// 	double	ray_angle;
-// 	int		wall_x_pos;
-// 	int		wall_height;
-// 	t_ray	ray;
-// 	double	corrected_dist;
-
-// 	wall_x_pos = 0;
-// 	ray_angle = game->player.angle - FOV / 2;
-// 	while (ray_angle < game->player.angle + FOV / 2)
-// 	{
-// 		ray = cast_ray(game, ray_angle);
-// 		draw_ray(game->graphs.minimap, ray, MMAP_TILE);
-// 		corrected_dist = correct_raylen_fisheye(ray_angle,
-// 				game->player.angle, ray.size);
-// 		wall_height = HEIGHT / corrected_dist;
-// 		draw_rectangle(game->graphs.screen, wall_x_pos, (HEIGHT / 2)
-//			- (wall_height / 2), wall_height);
-// 		wall_x_pos += WIDTH / FOV;
-// 		ray_angle += 1;
-// 	}
-// }
-
-// void	draw_rectangle(mlx_image_t *img, int x, int y, int height)
-// {
-// 	int j;
-// 	int	width;
-
-// 	width = x + WIDTH / FOV;
-// 	height += y;
-// 	while (x < width)
-// 	{
-// 		j = y;
-// 		while (j < height)
-// 		{
-// 			if (j >= 0 && j < HEIGHT)
-// 				mlx_put_pixel(img, x, j, WALL_COLOR);
-// 			j++;
-// 		}
-// 		x++;
-// 	}
-// }
-
-// void	draw_walls_and_rays(t_game *game)
-// {
-// 	double	ray_angle;
-// 	t_point	wall_pos;
-// 	t_point	wall_dim;
-// 	t_ray	ray;
-
-// 	wall_pos.y = 0;
-// 	wall_pos.x = 0;
-// 	ray_angle = game->player.angle - (FOV / 2);
-// 	while (ray_angle < game->player.angle + FOV / 2)
-// 	{
-// 		ray = cast_ray(game, ray_angle);
-// 		draw_ray(game->graphs.player, ray, MMAP_TILE);
-// 		wall_dim.x = wall_pos.x + WIDTH / FOV;
-// 		if (ray.corrected_len != 0)
-// 			wall_dim.y = HEIGHT / ray.corrected_len;
-// 		else
-// 			wall_dim.y = HEIGHT;
-//		if (wall_dim.y > HEIGHT)
-//			wall_dim.y = HEIGHT;
-// 		wall_pos.y = (HEIGHT / 2) - (wall_dim.y / 2);
-// 		if (USE_TEXTURES)
-// 			draw_wall_texture(game, ray, wall_pos, wall_dim);
-// 		else
-// 			draw_wall_rectangle(game, ray, wall_pos, wall_dim);
-// 		wall_pos.x += WIDTH / FOV;
-// 		ray_angle += 1;
-// 	}
-// }

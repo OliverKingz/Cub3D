@@ -6,7 +6,7 @@
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 15:07:34 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/06/13 14:44:48 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/06/13 16:57:39 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,13 +36,13 @@ void	init_texture(t_game *game, const char *scene_dir)
 
 void	init_player(t_game *game, char angle, double x, double y)
 {
-	if (angle == 'E')
+	if (angle == EA_PLAYER)
 		game->player.angle = 0;
-	else if (angle == 'S')
+	else if (angle == SO_PLAYER)
 		game->player.angle = 90;
-	else if (angle == 'W')
+	else if (angle == WE_PLAYER)
 		game->player.angle = 180;
-	else if (angle == 'N')
+	else if (angle == NO_PLAYER)
 		game->player.angle = 270;
 	game->player.pos.x = x;
 	game->player.pos.y = y;
@@ -60,53 +60,3 @@ void	init_map(t_game *game, const char *scene_dir)
 	if (game->scene.w_mmap > WIDTH - 20 || game->scene.h_mmap > HEIGHT - 20)
 		return (my_err_clean(game, FAIL_MINIMAP_TOO_BIG, false));
 }
-
-// Mapa 16x6
-/*
-	game->scene.map1d = ft_strdup("1111111111111111 "
-								"1000000000000001 "
-								"1000N00000000001 "
-								"1111111111111111");
-	game->scene.map2d = ft_split(game->scene.map1d, ' ');
-	game->scene.width_map = 16;
-	game->scene.height_map = 6;
-	game->scene.ratio_map = (double)game->scene.width_map
-	/ (double)game->scene.height_map;
-	game->scene.ceil_rgb = LIGHT_BLUE;
-	game->scene.floor_rgb = DARK_GREY;
-*/
-
-// Mapa 7x5
-/*
-	game->scene.map1d = ft_strdup (" 11111 \n"
-			"110001 \n"
-			"100N011\n"
-			"111011 \n"
-			"1 111  \n");
-	game->scene.map2d = ft_split(game->scene.map1d, '\n');
-	game->scene.width_map = ft_strlen(game->scene.map2d[0]);
-	game->scene.height_map = my_strlen2d(game->scene.map2d);
-*/
-
-// Mapa Example
-/*
-	game->scene.map1d = ft_strdup(
-		"        1111111111111111111111111\n"
-		"        1000000000110000000000001\n"
-		"        1011000001110000000000001\n"
-		"        1001000000000000000000001\n"
-		"111111111011000001110000000000001\n"
-		"100000000011000001110111111111111\n"
-		"11110111111111011100000010001    \n"
-		"11110111111111011101010010001    \n"
-		"11000000110101011100000010001    \n"
-		"10000000000000001100000010001    \n"
-		"10000000000000001101010010001    \n"
-		"11000001110101011111011110N0111  \n"
-		"11110111 1110101 101111010001    \n"
-		"11111111 1111111 111111111111    \n"
-	);
-	game->scene.map2d = ft_split(game->scene.map1d, '\n');
-	game->scene.width_map = ft_strlen(game->scene.map2d[0]);
-	game->scene.height_map = my_strlen2d(game->scene.map2d);
-*/

@@ -6,7 +6,7 @@
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 18:31:20 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/06/13 15:26:09 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/06/13 16:53:04 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,9 +75,9 @@
 # define MMAP_PLAYER_RADIUS 3	// Radius of the player in the minimap in tiles
 
 // Colors used in the game, represented in RGBA format.
-# define MMAP_WALL_COLOR LIGHT_GREEN	// Color of the walls in the minimap
-# define MMAP_EMPTY_COLOR GREY			// Color of the empty spaces in the mmap
-# define MMAP_GRID_COLOR BLACK			// Color of the grid in the minimap
+# define MMAP_WALL_COLOR WHITE			// Color of the walls in the minimap
+# define MMAP_EMPTY_COLOR BLACK			// Color of the empty spaces in the mmap
+# define MMAP_GRID_COLOR GREY			// Color of the grid in the minimap
 
 # define MMAP_PLAYER_COLOR TURQUOISE	// Color of the player in the minimap
 # define MMAP_RAY_COLOR WHITE_A60			// Color of the rays in the minimap
@@ -93,12 +93,15 @@
 # define SCENE_UNEXISTENT "Invalid scene: doesn't exists or unable to open"
 # define SCENE_EMPTY "Invalid scene: file is empty"
 # define SCENE_ERROR_READ "Invalid scene: error reading"
+# define SCENE_FORMAT "Invalid scene: the file must follow the correct format"
+# define MAP_NOT_WALLED "Invalid map: map is not closed by walls"
+# define MAP_DATA_AFTERMAP "Invalid map: there is data after the map"
+# define MAP_PLAYER_AMOUNT "Invalid map: there must be only one player"
+# define MAP_INVALID_CHAR "Invalid map: invalid char on the map"
 # define FAIL_MLX "Failed initializing MLX42"
 # define FAIL_TEXTURE "Failed loading textures"
 # define FAIL_IMAGES "Failed loading images"
 # define FAIL_MINIMAP_TOO_BIG "Minimap is too big, change the tile size"
-# define ERR_PLAYER_AMOUNT "There must be only one player"
-# define ERR_INVALID_CHAR "Invalid char on the map"
 
 /* ************************************************************************** */
 /*                              ENUMS AND STRUCTS                             */
@@ -236,9 +239,10 @@ void			init_map(t_game *game, const char *scene_dir);
 
 // parser.c
 
+void			check_file(t_game *game, const char *scene_dir);
 void			read_file(t_game *game, const char *file);
 int				manage_line(t_game *game, char *s);
-int				select_mode(t_game *game, char *id, char *info);
+int				select_line_infotype(t_game *game, char *id, char *info);
 
 // map.c
 
@@ -247,7 +251,6 @@ void			manage_map(t_game *game);
 
 // map_check.c
 
-void			check_file(t_game *game, const char *scene_dir);
 void			check_map1d(t_game *game);
 void			check_after_map(t_game *game, char *s, int fd);
 void			flood_fill(t_game *game, char **map, int x, int y);

@@ -6,7 +6,7 @@
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/11 16:16:16 by raperez-          #+#    #+#             */
-/*   Updated: 2025/06/13 15:21:27 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/06/13 16:47:35 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	manage_map(t_game *game)
 	while (i < game->scene.height_map)
 	{
 		tmp = ft_calloc(game->scene.width_map + 1, sizeof(char));
-		ft_memset((void *)tmp, ' ', game->scene.width_map);
+		ft_memset((void *)tmp, SPACE, game->scene.width_map);
 		ft_memmove(tmp, game->scene.map2d[i], ft_strlen(game->scene.map2d[i]));
 		my_free((void *)&(game->scene.map2d[i]));
 		game->scene.map2d[i] = tmp;
