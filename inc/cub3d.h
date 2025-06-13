@@ -6,7 +6,7 @@
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 18:31:20 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/06/13 14:57:01 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/06/13 15:21:29 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -234,6 +234,31 @@ void			init_texture(t_game *game, const char *scene_dir);
 void			init_player(t_game *game, char angle, double x, double y);
 void			init_map(t_game *game, const char *scene_dir);
 
+// parser.c
+
+void			read_file(t_game *game, const char *file);
+int				manage_line(t_game *game, char *s);
+int				select_mode(t_game *game, char *id, char *info);
+
+// map.c
+
+void			read_map(t_game *game, int fd);
+void			manage_map(t_game *game);
+
+// map_check.c
+
+void			check_file(t_game *game, const char *scene_dir);
+void			check_map1d(t_game *game);
+void			check_after_map(t_game *game, char *s, int fd);
+void			flood_fill(t_game *game, char **map, int x, int y);
+void			check_walls(t_game *game);
+
+// rgb.c
+
+bool			is_valid_rgb(const char *s);
+uint32_t		get_rgb(t_game *game, char *s);
+uint32_t		get_rgb_pixel(mlx_texture_t *texture, int x, int y);
+
 // draw.c
 
 void			draw_frame(t_game *game);
@@ -251,7 +276,6 @@ void			draw_wall_texture(t_game *game, t_ray ray, t_point pos,
 
 // draw_minimap.c
 
-//void			draw_minimap(t_game *game);
 void			draw_player(t_game *game);
 void			draw_minimap_tiles(t_game *game);
 void			draw_minimap_grid_vertical(t_game *game);
@@ -263,7 +287,6 @@ void			draw_rectangle(mlx_image_t *img, t_point pos, t_point size,
 					int color);
 mlx_texture_t	*get_texture(t_game *game, t_ray ray);
 int				get_x_texture(t_ray ray, mlx_texture_t *texture);
-unsigned int	get_pixel_rgba(mlx_texture_t *texture, int x, int y);
 
 // hook.c
 
@@ -298,21 +321,6 @@ double			rad_to_deg(double angle_rads);
 t_point			rad_to_vector(double angle_rads);
 double			get_distance_length(t_point start_pos, t_point end_pos);
 
-// parser.c
-
-bool			is_valid_color(const char *s);
-uint32_t		get_rgb(t_game *game, char *s);
-int				manage_line(t_game *game, char *s);
-void			read_file(t_game *game, const char *file);
-
-// map.c
-
-void			read_map(t_game *game, int fd);
-
-// map_check.c
-
-void	check_file(t_game *game, const char *scene_dir);
-
 // exit.c
 
 void			my_mlx_err(const char *msg);
@@ -340,11 +348,12 @@ int				my_strchr_pos(const char *s, char c);
 int				my_strchrs_pos(const char *s, const char *c);
 int				my_strchr_count(const char *s, int c);
 size_t			my_strlen2d(char **s);
-bool			is_empty(const char *s);
+bool			my_is_str_empty(const char *s);
 
 // utils3.c
 
 char			**my_strdup2d(char **src);
+void			my_printf2d(char **s);
 
 // debug.c
 

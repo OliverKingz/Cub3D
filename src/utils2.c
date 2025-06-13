@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: raperez- <raperez-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 21:07:40 by raperez-          #+#    #+#             */
-/*   Updated: 2025/06/13 14:24:06 by raperez-         ###   ########.fr       */
+/*   Updated: 2025/06/13 15:21:27 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ size_t	my_strlen2d(char **s)
 	return (i);
 }
 
-bool	is_empty(const char *s)
+bool	my_is_str_empty(const char *s)
 {
 	int	i;
 

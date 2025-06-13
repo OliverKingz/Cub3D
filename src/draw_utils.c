@@ -6,7 +6,7 @@
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 18:42:36 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/06/12 00:37:43 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/06/13 15:12:56 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,18 +77,4 @@ int	get_x_texture(t_ray ray, mlx_texture_t *texture)
 	if (x_t < 0)
 		x_t += (int)(texture->width);
 	return (x_t);
-}
-
-unsigned int	get_pixel_rgba(mlx_texture_t *texture, int x, int y)
-{
-	size_t			idx;
-	unsigned char	*p;
-
-	if (!texture || !texture->pixels || x < 0 || x >= (int)texture->width
-		|| y < 0 || y >= (int)texture->height)
-		return (CLEAR);
-	idx = ((size_t)y * texture->width + x) * 4;
-	p = &texture->pixels[idx];
-	return (((unsigned int)p[0] << 24) | ((unsigned int)p[1] << 16)
-		| ((unsigned int)p[2] << 8) | (unsigned int)p[3]);
 }
