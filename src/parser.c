@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: raperez- <raperez-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: raperez- <raperez-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/09 11:56:40 by raperez-          #+#    #+#             */
-/*   Updated: 2025/06/13 19:08:14 by raperez-         ###   ########.fr       */
+/*   Updated: 2025/06/13 22:04:47 by raperez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	read_file(t_game *game, const char *file)
 	char	*s;
 
 	check_file_extension(game, file);
-	fd = open(file, R_OK);
+	fd = open(file, O_RDONLY);
 	if (fd < 0)
 		my_err_clean(game, file, true);
 	s = get_next_line(fd);

@@ -6,7 +6,7 @@
 /*   By: raperez- <raperez-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/07 12:25:19 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/06/13 21:40:15 by raperez-         ###   ########.fr       */
+/*   Updated: 2025/06/13 22:18:15 by raperez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,15 +69,6 @@ void	draw_ray(mlx_image_t *img, t_ray ray, int mult)
 	}
 }
 
-double	aux_pe(t_game *game, mlx_texture_t **texture, t_ray ray, t_point *txt)
-{
-	*texture = get_texture(game, ray);
-	if (!texture || !*texture)
-		return (__DBL_MAX__ - 1);
-	txt->x = get_x_texture(ray, *texture);
-	return (-1);
-}
-
 void	draw_wall_texture(t_game *game, t_ray ray, t_point pos, t_point dim)
 {
 	mlx_texture_t	*texture;
@@ -86,15 +77,15 @@ void	draw_wall_texture(t_game *game, t_ray ray, t_point pos, t_point dim)
 	int				draw_start;
 	int				draw_end;
 
-	p.x = aux_pe(game, &texture, ray, &txt);
+	texture = get_texture(game, ray);
+	txt.x = get_x_texture(ray, texture);
+	p.x = -1;
 	while (++p.x < dim.x && (pos.x + p.x) < WIDTH)
 	{
 		draw_start = (int)pos.y;
 		draw_end = (int)(pos.y + dim.y);
-		if (draw_start < 0)
-			draw_start = 0;
-		if (draw_end > HEIGHT)
-			draw_end = HEIGHT;
+		draw_start = fmax(0, draw_start);
+		draw_end = fmin(HEIGHT, draw_end);
 		p.y = draw_start - (int)pos.y - 1;
 		while (++p.y < draw_end - (int)pos.y)
 		{
