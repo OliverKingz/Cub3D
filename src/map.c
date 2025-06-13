@@ -6,7 +6,7 @@
 /*   By: raperez- <raperez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/11 16:16:16 by raperez-          #+#    #+#             */
-/*   Updated: 2025/06/13 17:04:06 by raperez-         ###   ########.fr       */
+/*   Updated: 2025/06/13 17:30:08 by raperez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,13 @@ void	read_map(t_game *game, int fd)
 	char	*temp;
 
 	s = get_next_line(fd);
-	while (my_is_str_empty(s))
+	while (s && my_is_str_empty(s))
 	{
 		my_free((void *)&s);
 		s = get_next_line(fd);
 	}
+	if (!s)
+		my_err_clean(game, MAP_EMPTY, false);
 	while (!my_is_str_empty(s))
 	{
 		temp = game->scene.map1d;
@@ -33,9 +35,7 @@ void	read_map(t_game *game, int fd)
 		my_free((void *)&s);
 		s = get_next_line(fd);
 	}
-	check_after_map(game, s, fd);
-	close(fd);
-	check_map1d(game);
+	(check_after_map(game, s, fd), close(fd), check_map1d(game));
 	game->scene.map2d = ft_split(game->scene.map1d, '\n');
 	manage_map(game);
 	check_walls(game);

@@ -6,7 +6,7 @@
 /*   By: raperez- <raperez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 18:31:20 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/06/13 17:05:05 by raperez-         ###   ########.fr       */
+/*   Updated: 2025/06/13 17:38:26 by raperez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@
 /* ************************************************************************** */
 
 // Usage message for the game. 
-# define USAGE "Usage: ./cub3d assets/scenes/example.cub\n"
+# define USAGE "Usage: ./cub3d assets/scenes/example.cub"
 
 // Settings: constants for the game window, minimap dimensions and speeds
 # define WIDTH 1080		// Width of the game window
@@ -89,11 +89,12 @@
 # define PI 3.14159265358979323846
 
 // Error messages for various failure scenarios in the game.
+# define SCENE_EMPTY_ARG "Invalid scene: empty argument"
 # define SCENE_EXTENSION "Invalid scene: needs .cub extension"
-# define SCENE_UNEXISTENT "Invalid scene: doesn't exists or unable to open"
 # define SCENE_EMPTY "Invalid scene: file is empty"
-# define SCENE_ERROR_READ "Invalid scene: error reading"
 # define SCENE_FORMAT "Invalid scene: the file must follow the correct format"
+# define SCENE_RGB "Invalid scene: rgb format incorrect"
+# define MAP_EMPTY "Invalid map: empty map"
 # define MAP_NOT_WALLED "Invalid map: map is not closed by walls"
 # define MAP_DATA_AFTERMAP "Invalid map: there is data after the map"
 # define MAP_PLAYER_AMOUNT "Invalid map: there must be only one player"
@@ -239,7 +240,7 @@ void			init_map(t_game *game, const char *scene_dir);
 
 // parser.c
 
-void			check_file(t_game *game, const char *scene_dir);
+void			check_file_extension(t_game *game, const char *scene_dir);
 void			read_file(t_game *game, const char *file);
 int				manage_line(t_game *game, char *s);
 int				select_line_infotype(t_game *game, char *id, char *info);
@@ -324,21 +325,6 @@ double			rad_to_deg(double angle_rads);
 t_point			rad_to_vector(double angle_rads);
 double			get_distance_length(t_point start_pos, t_point end_pos);
 
-// parser.c
-
-bool			is_valid_color(const char *s);
-uint32_t		get_rgb(t_game *game, char *s);
-int				manage_line(t_game *game, char *s);
-void			read_file(t_game *game, const char *file);
-
-// map.c
-
-void			read_map(t_game *game, int fd);
-
-// map_check.c
-
-void			check_file(t_game *game, const char *scene_dir);
-
 // exit.c
 
 void			my_mlx_err(const char *msg);
@@ -372,6 +358,7 @@ bool			my_is_str_empty(const char *s);
 
 char			**my_strdup2d(char **src);
 void			my_printf2d(char **s);
+int				my_strnbrlen(const char *s);
 
 // debug.c
 

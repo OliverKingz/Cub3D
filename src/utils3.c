@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils3.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: raperez- <raperez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/13 12:11:57 by raperez-          #+#    #+#             */
-/*   Updated: 2025/06/13 15:20:08 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/06/13 17:27:23 by raperez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,4 +41,14 @@ void	my_printf2d(char **s)
 		printf("%s\n", *s);
 		s += 1;
 	}
+}
+
+int	my_strnbrlen(const char *s)
+{
+	while ((*s < '1' || '9' < *s) && *s)
+		s++;
+	if (*s)
+		return (ft_strlen(s));
+	else
+		return (-1);
 }

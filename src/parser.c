@@ -3,32 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: raperez- <raperez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/09 11:56:40 by raperez-          #+#    #+#             */
-/*   Updated: 2025/06/13 16:53:14 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/06/13 17:32:00 by raperez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	check_file(t_game *game, const char *scene_dir)
+void	check_file_extension(t_game *game, const char *scene_dir)
 {
-	int		fd;
-	char	buffer[1];
-	ssize_t	bytes_read;
-
-	if (ft_strlen(scene_dir) <= 4 || ft_strrncmp(scene_dir, ".cub", 4) != 0)
+	if (ft_strlen(scene_dir) < 4 || ft_strrncmp(scene_dir, ".cub", 4) != 0)
 		(free_game(game), my_mlx_err(SCENE_EXTENSION));
-	fd = open(scene_dir, O_RDONLY);
-	if (fd == -1)
-		(free_game(game), my_mlx_err(SCENE_UNEXISTENT));
-	bytes_read = read(fd, buffer, 1);
-	if (bytes_read == 0)
-		(free_game(game), close(fd), my_mlx_err(SCENE_EMPTY));
-	else if (bytes_read == -1)
-		(free_game(game), close(fd), my_mlx_err(SCENE_ERROR_READ));
-	close(fd);
 }
 
 void	read_file(t_game *game, const char *file)
@@ -38,6 +25,7 @@ void	read_file(t_game *game, const char *file)
 	int		counter;
 	char	*s;
 
+	check_file_extension(game, file);
 	fd = open(file, R_OK);
 	if (fd < 0)
 		my_err_clean(game, file, true);

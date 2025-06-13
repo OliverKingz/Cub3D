@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_scene.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: raperez- <raperez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 15:07:34 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/06/13 16:57:39 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/06/13 17:31:51 by raperez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 t_game	init_scene(t_game *game, const char *scene_dir)
 {
-	check_file(game, scene_dir);
 	read_file(game, scene_dir);
 	init_texture(game, scene_dir);
 	init_map(game, scene_dir);
