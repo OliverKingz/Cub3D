@@ -167,7 +167,8 @@ $(OBJ_BONUS_DIR)%.o: $(SRC_BONUS_DIR)%.c | $(OBJ_BONUS_DIR)
 norm:
 	@norminette $(SRC_DIR) $(INC_DIR)
 
-ARGS = assets/scenes/example.cub
+DEFAULT_MAP := example
+MAP ?= $(DEFAULT_MAP)
 
 # Rule to compile with debug flags
 debug:
@@ -177,7 +178,7 @@ debug:
 	@echo "DEBUG=1" > $(BUILD_MODE_FILE)
 	@$(MAKE) DEBUG=1 -s
 	@echo " -> $(BW)[Debug]:\t\t$(BB)Debug mode enabled\t🟦$(NC)\n"
-	-@./$(NAME) $(ARGS)
+	-@./$(NAME) assets/scenes/$(MAP).cub
 
 # Rule to compile with valgrind debug flags
 valgrind:
@@ -187,10 +188,12 @@ valgrind:
 	@echo "VALGRIND=1" > $(BUILD_MODE_FILE)
 	@$(MAKE) VALGRIND=1 -s
 	@echo " -> $(BW)[Valgrind]:\t\t$(BB)Valgrind mode enabled\t🟦$(NC)\n"
-	-@valgrind $(VALGRIND_FLAGS) ./$(NAME) $(ARGS)
+	-@valgrind $(VALGRIND_FLAGS) ./$(NAME) assets/scenes/$(MAP).cub
 
+# Rule to run the program with a specific map
+# Example usage: make run MAP=subject
 run: all
-	-@./$(NAME) $(ARGS)
+	-@./$(NAME) assets/scenes/$(MAP).cub
 
 # **************************************************************************** #
 # ADDITIONAL RULES
