@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: raperez- <raperez-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: raperez- <raperez-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 18:31:20 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/06/13 18:29:30 by raperez-         ###   ########.fr       */
+/*   Updated: 2025/06/14 00:08:54 by raperez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -242,7 +242,7 @@ void			init_remaining_map_vars(t_game *game);
 
 void			check_file_extension(t_game *game, const char *scene_dir);
 void			read_file(t_game *game, const char *file);
-int				manage_line(t_game *game, char *s);
+int				manage_line(t_game *game, char **s);
 int				select_line_infotype(t_game *game, char *id, char *info);
 
 // map.c
@@ -260,7 +260,7 @@ void			check_walls(t_game *game);
 // rgb.c
 
 bool			is_valid_rgb(const char *s);
-uint32_t		get_rgb(t_game *game, char *s);
+uint32_t		get_rgb(t_game *game, char **s);
 uint32_t		get_rgb_pixel(mlx_texture_t *texture, int x, int y);
 
 // draw.c
