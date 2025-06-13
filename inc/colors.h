@@ -6,7 +6,7 @@
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/08 13:16:14 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/06/10 02:41:38 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/06/13 15:25:33 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # define CLEAR 0x00000000
 
 # define BLACK 0x000000FF
+# define WHITE_A60 0xFFFFFFAA
 # define WHITE 0xFFFFFFFF
 # define GREY 0x808080FF
 # define LIGHT_GREY 0xC0C0C0FF

@@ -6,7 +6,7 @@
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 18:31:20 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/06/13 15:21:29 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/06/13 15:26:09 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@
 # define MMAP_GRID_COLOR BLACK			// Color of the grid in the minimap
 
 # define MMAP_PLAYER_COLOR TURQUOISE	// Color of the player in the minimap
-# define MMAP_RAY_COLOR WHITE			// Color of the rays in the minimap
+# define MMAP_RAY_COLOR WHITE_A60			// Color of the rays in the minimap
 
 # define WALL_COLOR GREEN 				// Color of the walls in the game
 # define WALL_COLOR_SHADOW DARK_GREEN	// Shaded color of the walls in the game
