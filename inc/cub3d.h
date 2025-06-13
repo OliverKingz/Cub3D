@@ -6,7 +6,7 @@
 /*   By: raperez- <raperez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 18:31:20 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/06/13 17:38:26 by raperez-         ###   ########.fr       */
+/*   Updated: 2025/06/13 18:29:30 by raperez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -234,9 +234,9 @@ void			init_draw_to_window(t_game *game);
 // init_scene.c
 
 t_game			init_scene(t_game *game, const char *scene_dir);
-void			init_texture(t_game *game, const char *scene_dir);
+void			init_texture(t_game *game);
 void			init_player(t_game *game, char angle, double x, double y);
-void			init_map(t_game *game, const char *scene_dir);
+void			init_remaining_map_vars(t_game *game);
 
 // parser.c
 
@@ -327,7 +327,7 @@ double			get_distance_length(t_point start_pos, t_point end_pos);
 
 // exit.c
 
-void			my_mlx_err(const char *msg);
+void			my_mlx_err(t_game *game, const char *msg);
 void			my_err_clean(t_game *game, const char *msg, bool perror_flag);
 void			free_map(t_game *game);
 void			free_game(t_game *game);

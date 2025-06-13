@@ -14,6 +14,8 @@
 
 ## Urgente
 
+- El file acepta 6 elementos aunque este duplicados
+
 - Check map logic
 	- Si esta rodeado de 1
 		- Leer de izq a derecha cada fila. Ignorar si es ' ', el primer char encontrado tiene que ser '1'. 

@@ -6,7 +6,7 @@
 /*   By: raperez- <raperez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 15:07:34 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/06/13 17:31:51 by raperez-         ###   ########.fr       */
+/*   Updated: 2025/06/13 18:30:03 by raperez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,13 @@
 t_game	init_scene(t_game *game, const char *scene_dir)
 {
 	read_file(game, scene_dir);
-	init_texture(game, scene_dir);
-	init_map(game, scene_dir);
+	init_texture(game);
+	init_remaining_map_vars(game);
 	return (*game);
 }
 
-void	init_texture(t_game *game, const char *scene_dir)
+void	init_texture(t_game *game)
 {
-	(void)scene_dir;
 	game->graphs.icon_t = mlx_load_png("./assets/textures/cub3de.png");
 	game->graphs.east_t = mlx_load_png(game->graphs.east_path);
 	game->graphs.north_t = mlx_load_png(game->graphs.north_path);
@@ -30,7 +29,7 @@ void	init_texture(t_game *game, const char *scene_dir)
 	game->graphs.west_t = mlx_load_png(game->graphs.west_path);
 	if (!game->graphs.icon_t || !game->graphs.north_t || !game->graphs.south_t
 		|| !game->graphs.east_t || !game->graphs.west_t)
-		my_mlx_err(FAIL_TEXTURE);
+		my_mlx_err(game, FAIL_TEXTURE);
 }
 
 void	init_player(t_game *game, char angle, double x, double y)
@@ -49,9 +48,8 @@ void	init_player(t_game *game, char angle, double x, double y)
 	game->player.mmap.y = game->player.pos.y * MMAP_TILE;
 }
 
-void	init_map(t_game *game, const char *scene_dir)
+void	init_remaining_map_vars(t_game *game)
 {
-	(void)scene_dir;
 	game->scene.ratio_map = (double)game->scene.width_map
 		/ (double)game->scene.height_map;
 	game->scene.h_mmap = game->scene.height_map * MMAP_TILE;

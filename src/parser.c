@@ -6,7 +6,7 @@
 /*   By: raperez- <raperez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/09 11:56:40 by raperez-          #+#    #+#             */
-/*   Updated: 2025/06/13 17:32:00 by raperez-         ###   ########.fr       */
+/*   Updated: 2025/06/13 18:31:03 by raperez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	check_file_extension(t_game *game, const char *scene_dir)
 {
 	if (ft_strlen(scene_dir) < 4 || ft_strrncmp(scene_dir, ".cub", 4) != 0)
-		(free_game(game), my_mlx_err(SCENE_EXTENSION));
+		my_mlx_err(game, SCENE_EXTENSION);
 }
 
 void	read_file(t_game *game, const char *file)

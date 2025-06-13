@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: raperez- <raperez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 22:54:15 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/06/11 00:23:46 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/06/13 18:34:48 by raperez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ void	my_delete_image(mlx_t *mlx, mlx_image_t *image)
 
 void	free_textures(t_game *game)
 {
+	if (!game)
+		return ;
 	my_free((void *)&(game->graphs.north_path));
 	my_free((void *)&(game->graphs.south_path));
 	my_free((void *)&(game->graphs.east_path));
@@ -39,6 +41,8 @@ void	free_textures(t_game *game)
 
 void	free_images(t_game *game)
 {
+	if (!game)
+		return ;
 	my_delete_image(game->mlx, game->graphs.north);
 	my_delete_image(game->mlx, game->graphs.south);
 	my_delete_image(game->mlx, game->graphs.east);
