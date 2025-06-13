@@ -6,7 +6,7 @@
 /*   By: raperez- <raperez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 18:31:20 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/06/13 17:03:33 by raperez-         ###   ########.fr       */
+/*   Updated: 2025/06/13 17:05:05 by raperez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -337,7 +337,7 @@ void			read_map(t_game *game, int fd);
 
 // map_check.c
 
-void	check_file(t_game *game, const char *scene_dir);
+void			check_file(t_game *game, const char *scene_dir);
 
 // exit.c
 
