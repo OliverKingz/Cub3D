@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_raycast.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: raperez- <raperez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/07 12:25:19 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/06/13 16:58:34 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/06/13 17:03:50 by raperez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,15 @@ void	draw_ray(mlx_image_t *img, t_ray ray, int mult)
 	}
 }
 
+int	aux_pe(t_game *game, mlx_texture_t **texture, t_ray ray, t_point *txt)
+{
+	*texture = get_texture(game, ray);
+	if (!texture || !*texture)
+		return (__DBL_MAX__ - 1);
+	txt->x = get_x_texture(ray, *texture);
+	return (-1);
+}
+
 void	draw_wall_texture(t_game *game, t_ray ray, t_point pos, t_point dim)
 {
 	mlx_texture_t	*texture;
@@ -77,11 +86,7 @@ void	draw_wall_texture(t_game *game, t_ray ray, t_point pos, t_point dim)
 	int				draw_start;
 	int				draw_end;
 
-	texture = get_texture(game, ray);
-	if (!texture)
-		return ;
-	txt.x = get_x_texture(ray, texture);
-	p.x = -1;
+	p.x = aux_pe(game, &texture, ray, &txt);
 	while (++p.x < dim.x && (pos.x + p.x) < WIDTH)
 	{
 		draw_start = (int)pos.y;

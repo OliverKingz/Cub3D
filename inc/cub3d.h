@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: raperez- <raperez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 18:31:20 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/06/13 16:53:04 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/06/13 17:03:33 by raperez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@
 # include <unistd.h>  // To use system calls like write, open, read, close.
  */
 
-# include <math.h>     // To use every function needed
-# include <sys/time.h> // To use gettimeofday
+# include <math.h>		// To use every function needed
+# include <sys/time.h>	// To use gettimeofday
 
 /* ************************************************************************** */
 /*                                   FLAGS                                    */
@@ -323,6 +323,21 @@ double			deg_to_rad(double angle_degs);
 double			rad_to_deg(double angle_rads);
 t_point			rad_to_vector(double angle_rads);
 double			get_distance_length(t_point start_pos, t_point end_pos);
+
+// parser.c
+
+bool			is_valid_color(const char *s);
+uint32_t		get_rgb(t_game *game, char *s);
+int				manage_line(t_game *game, char *s);
+void			read_file(t_game *game, const char *file);
+
+// map.c
+
+void			read_map(t_game *game, int fd);
+
+// map_check.c
+
+void	check_file(t_game *game, const char *scene_dir);
 
 // exit.c
 
