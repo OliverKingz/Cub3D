@@ -6,7 +6,7 @@
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 18:31:20 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/06/13 14:54:25 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/06/13 14:57:01 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -341,6 +341,10 @@ int				my_strchrs_pos(const char *s, const char *c);
 int				my_strchr_count(const char *s, int c);
 size_t			my_strlen2d(char **s);
 bool			is_empty(const char *s);
+
+// utils3.c
+
+char			**my_strdup2d(char **src);
 
 // debug.c
 
