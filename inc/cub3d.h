@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: raperez- <raperez-@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: raperez- <raperez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 18:31:20 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/06/12 22:08:22 by raperez-         ###   ########.fr       */
+/*   Updated: 2025/06/13 14:19:01 by raperez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -335,6 +335,10 @@ int				my_strchrs_pos(const char *s, const char *c);
 int				my_strchr_count(const char *s, int c);
 size_t			my_strlen2d(char **s);
 bool			is_empty(const char *s);
+
+// utils3.c
+
+char			**my_strdup2d(char **src);
 
 // debug.c
 
