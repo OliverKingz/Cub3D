@@ -11,21 +11,19 @@
 - ✅ Si te acercas mucho a pared, se distorsiona.
 - ✅ FOV constante, da igual WIDTH y HEIGHT
 - ✅ Mover diagonal va mas rapido, tiene que ir constante.
+- ✅LEAK read_file textures_missing.cub >:(
+- ✅Poner col y fil maxima: 100 x 50
+- ✅Leak flood fill :S
 
 ## Urgente
+- ✅Cerrar el fd. FALTA CHECKEAR
 
-- LEAK read_file textures_missing.cub >:(
-- Cerrar el fd. 
-
-- Poner col y fil maxima: 100 x 50
-
-- Leak flood fill :S
 - El file acepta 6 elementos aunque este duplicados
+- Texture bug:
+	- Linea vertical. Arreglar rayo que da justo en una esquina.
+	- Linea horizontal. Se han intercambiado pixeles por alguna razon
 
 ## Con calma
-
-- Linea vertical. Arreglar rayo que da justo en una esquina.
-- Linea horizontal. Se han intercambiado pixeles por alguna razon
 
 ## Opcional
 
