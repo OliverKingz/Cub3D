@@ -5,10 +5,11 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/03 18:31:20 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/06/14 15:29:52 by ozamora-         ###   ########.fr       */
+/*   Created: Invalid date        by                   #+#    #+#             */
+/*   Updated: 2025/06/14 15:36:06 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #ifndef CUB3D_H
 # define CUB3D_H
@@ -156,6 +157,7 @@ typedef struct s_scene
 {
 	char	*map1d;		// 1D representation of the map
 	char	**map2d;	// 2D representation of the map
+	char	**file;		// The full file of the map
 	int		height_map;	// Height of the map array
 	int		width_map;	// Width of the map array
 	double	ratio_map;	// Aspect Ratio of the map (width/height)
@@ -245,21 +247,19 @@ void			init_remaining_map_vars(t_game *game);
 // parser.c
 
 void			check_file_extension(t_game *game, const char *scene_dir);
-void			read_file(t_game *game, const char *file);
-int				manage_line(t_game *game, char **s);
+void			parser(t_game *game, const char *file);
+int				manage_line(t_game *game, char *s);
 int				select_line_infotype(t_game *game, char *id, char *info);
 
 // map.c
 
-void			read_map(t_game *game, int fd);
+void			read_map(t_game *game, int i);
 void			manage_map(t_game *game);
 
 // map_check.c
 
 void			check_map1d(t_game *game);
 void			check_after_map(t_game *game, char *s, int fd);
-void			check_walls(t_game *game);
-void			check_dimension(t_game *game);
 void			flood_fill(t_game *game, char **map, int x, int y);
 
 // rgb.c

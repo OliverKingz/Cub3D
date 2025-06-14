@@ -6,7 +6,7 @@
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 15:07:34 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/06/14 15:19:32 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/06/14 15:36:32 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 t_game	init_scene(t_game *game, const char *scene_dir)
 {
-	read_file(game, scene_dir);
+	parser(game, scene_dir);
 	init_texture(game);
 	init_remaining_map_vars(game);
 	return (*game);

@@ -6,7 +6,7 @@
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/13 14:34:22 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/06/14 14:59:57 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/06/14 15:36:52 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,14 +32,13 @@ void	check_map1d(t_game *game)
 	}
 }
 
-void	check_after_map(t_game *game, char *s, int fd)
+void	check_after_map(t_game *game, int i)
 {
-	while (s)
+	while (game->scene.file[i])
 	{
-		if (!my_is_str_empty(s))
+		if (!my_is_str_empty(game->scene.file[i]))
 			my_err_clean(game, MAP_DATA_AFTERMAP, false);
-		my_free((void *)&s);
-		s = get_next_line(fd);
+		i++;
 	}
 }
 

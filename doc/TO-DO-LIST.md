@@ -14,11 +14,13 @@
 
 ## Urgente
 
-- Poner col y fil maxima: 100 x 50
 - LEAK read_file textures_missing.cub >:(
+- Cerrar el fd. 
+
+- Poner col y fil maxima: 100 x 50
+
 - Leak flood fill :S
 - El file acepta 6 elementos aunque este duplicados
-- Cerrar el fd. 
 
 ## Con calma
 
