@@ -1,0 +1,13 @@
+NO ./assets/textures/basic_NO.png
+SO ./assets/textures/basic_SO.png
+WE ./assets/textures/basic_WE.png
+EA ./assets/textures/basic_EA.png
+
+F 17, 38, 64
+C 218, 234, 235
+
+ 11111
+110001
+100N01
+111011
+  111 

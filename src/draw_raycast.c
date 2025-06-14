@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_raycast.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: raperez- <raperez-@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/07 12:25:19 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/06/13 22:18:15 by raperez-         ###   ########.fr       */
+/*   Updated: 2025/06/14 15:54:09 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ void	draw_wall_texture(t_game *game, t_ray ray, t_point pos, t_point dim)
 		draw_start = fmax(0, draw_start);
 		draw_end = fmin(HEIGHT, draw_end);
 		p.y = draw_start - (int)pos.y - 1;
-		while (++p.y < draw_end - (int)pos.y)
+		while (++p.y < draw_end - (int)pos.y && dim.y != 0)
 		{
 			txt.y = ((long long)p.y * texture->height) / dim.y;
 			if (pos.x + p.x >= 0 && pos.x + p.x < WIDTH
