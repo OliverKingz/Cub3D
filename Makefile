@@ -45,8 +45,8 @@ LDFLAGS			+= $(LIBMLX) -ldl -lglfw -pthread -lm
 BUILD_MODE_FILE := .build_mode
 DEBUG			?= 0
 VALGRIND		?= 0
-VALGRIND_FLAGS	:= --leak-check=full --show-leak-kinds=all --track-origins=yes \
-	--suppressions=doc/valgrind.supp --log-file=doc/memcheck.log --gen-suppressions=all
+VALGRIND_FLAGS	:= --leak-check=full --show-leak-kinds=all --track-origins=yes
+# --suppressions=doc/valgrind.supp --log-file=doc/memcheck.log --gen-suppressions=all
 
 ifeq ($(DEBUG),1)
 	CFLAGS += -g3 -fsanitize=address

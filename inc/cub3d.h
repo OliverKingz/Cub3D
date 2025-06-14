@@ -6,7 +6,7 @@
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2025/06/14 15:36:06 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/06/14 15:40:50 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -259,7 +259,9 @@ void			manage_map(t_game *game);
 // map_check.c
 
 void			check_map1d(t_game *game);
-void			check_after_map(t_game *game, char *s, int fd);
+void			check_after_map(t_game *game, int i);
+void			check_walls(t_game *game);
+void			check_dimension(t_game *game);
 void			flood_fill(t_game *game, char **map, int x, int y);
 
 // rgb.c

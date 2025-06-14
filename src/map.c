@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: raperez- <raperez-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/11 16:16:16 by raperez-          #+#    #+#             */
-/*   Updated: 2025/06/14 15:34:21 by raperez-         ###   ########.fr       */
+/*   Updated: 2025/06/14 15:41:23 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ void	read_map(t_game *game, int i)
 	check_map1d(game);
 	game->scene.map2d = ft_split(game->scene.map1d, '\n');
 	game->scene.height_map = my_strlen2d(game->scene.map2d);
+	check_dimension(game);
 	manage_map(game);
 	check_walls(game);
 }
