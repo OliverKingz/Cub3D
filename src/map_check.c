@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_check.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: raperez- <raperez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/13 14:34:22 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/06/13 16:48:39 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/06/14 14:52:10 by raperez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,14 +32,13 @@ void	check_map1d(t_game *game)
 	}
 }
 
-void	check_after_map(t_game *game, char *s, int fd)
+void	check_after_map(t_game *game, int i)
 {
-	while (s)
+	while (game->scene.file[i])
 	{
-		if (!my_is_str_empty(s))
+		if (!my_is_str_empty(game->scene.file[i]))
 			my_err_clean(game, MAP_DATA_AFTERMAP, false);
-		my_free((void *)&s);
-		s = get_next_line(fd);
+		i++;
 	}
 }
 

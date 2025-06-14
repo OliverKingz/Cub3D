@@ -6,7 +6,7 @@
 /*   By: raperez- <raperez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 19:43:10 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/06/13 18:50:24 by raperez-         ###   ########.fr       */
+/*   Updated: 2025/06/14 12:20:36 by raperez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ void	free_map(t_game *game)
 	if (!game)
 		return ;
 	my_free2d((void ***)&game->scene.map2d);
+	my_free2d((void ***)&game->scene.file);
 	my_free((void **)&game->scene.map1d);
 }
 

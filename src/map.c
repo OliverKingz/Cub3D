@@ -6,37 +6,34 @@
 /*   By: raperez- <raperez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/11 16:16:16 by raperez-          #+#    #+#             */
-/*   Updated: 2025/06/13 17:30:08 by raperez-         ###   ########.fr       */
+/*   Updated: 2025/06/14 15:34:21 by raperez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	read_map(t_game *game, int fd)
+void	read_map(t_game *game, int i)
 {
-	char	*s;
 	char	*temp;
 
-	s = get_next_line(fd);
-	while (s && my_is_str_empty(s))
-	{
-		my_free((void *)&s);
-		s = get_next_line(fd);
-	}
-	if (!s)
+	while (game->scene.file[i] && my_is_str_empty(game->scene.file[i]))
+		i++;
+	if (!game->scene.file[i])
 		my_err_clean(game, MAP_EMPTY, false);
-	while (!my_is_str_empty(s))
+	while (!my_is_str_empty(game->scene.file[i]))
 	{
 		temp = game->scene.map1d;
-		game->scene.map1d = ft_strjoin(temp, s);
-		if (ft_strlen(s) > (size_t) game->scene.width_map)
-			game->scene.width_map = ft_strlen(s);
+		game->scene.map1d = ft_strjoin(temp, game->scene.file[i]);
+		if (ft_strlen(game->scene.file[i]) > (size_t) game->scene.width_map)
+			game->scene.width_map = ft_strlen(game->scene.file[i]);
 		my_free((void *)&temp);
-		my_free((void *)&s);
-		s = get_next_line(fd);
+		i++;
 	}
-	(check_after_map(game, s, fd), close(fd), check_map1d(game));
+	check_after_map(game, i);
+	my_free2d((void *)&game->scene.file);
+	check_map1d(game);
 	game->scene.map2d = ft_split(game->scene.map1d, '\n');
+	game->scene.height_map = my_strlen2d(game->scene.map2d);
 	manage_map(game);
 	check_walls(game);
 }
@@ -48,7 +45,6 @@ void	manage_map(t_game *game)
 	char	*tmp;
 
 	i = 0;
-	game->scene.height_map = my_strlen2d(game->scene.map2d);
 	while (i < game->scene.height_map)
 	{
 		tmp = ft_calloc(game->scene.width_map + 1, sizeof(char));

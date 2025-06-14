@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: raperez- <raperez-@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: raperez- <raperez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/09 11:56:40 by raperez-          #+#    #+#             */
-/*   Updated: 2025/06/14 00:09:17 by raperez-         ###   ########.fr       */
+/*   Updated: 2025/06/14 15:32:42 by raperez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,43 +18,70 @@ void	check_file_extension(t_game *game, const char *scene_dir)
 		my_mlx_err(game, SCENE_EXTENSION);
 }
 
-void	read_file(t_game *game, const char *file)
+char	**read_file(t_game *game, const char *file)
 {
-	int		fd;
-	int		n;
-	int		counter;
 	char	*s;
+	char	**temp;
+	char	**full_file;
+	int	fd;
+	int	i;
 
-	check_file_extension(game, file);
 	fd = open(file, O_RDONLY);
 	if (fd < 0)
 		my_err_clean(game, file, true);
-	s = get_next_line(fd);
-	counter = 0;
-	while (s)
+	i = 0;
+	temp = NULL;
+	full_file = NULL;
+	while (1)
 	{
-		n = manage_line(game, &s);
+		s = get_next_line(fd);
+		if (!s)
+			break ;
+		temp = full_file;
+		full_file = malloc((i + 2) * sizeof(char *));
+		ft_memmove((void *)full_file, (void *)temp, i * sizeof(char *));
+		full_file[i] = s;
+		full_file[i + 1] = NULL;
+		free(temp);
+		i++;
+	}
+	close(fd);
+	return (full_file);
+}
+
+void	parser(t_game *game, const char *file)
+{
+	int		n;
+	int		counter;
+	int		i;
+
+	check_file_extension(game, file);
+	game->scene.file = read_file(game, file);
+	counter = 0;
+	i = 0;
+	while (game->scene.file[i])
+	{
+		n = manage_line(game, game->scene.file[i]);
 		if (n == -1)
 			my_err_clean(game, SCENE_FORMAT, false);
 		counter += n;
+		i++;
 		if (counter >= 6)
 			break ;
-		s = get_next_line(fd);
 	}
 	if (counter < 6)
 		my_err_clean(game, SCENE_FORMAT, false);
-	read_map(game, fd);
+	read_map(game, i);
 }
 
-int	manage_line(t_game *game, char **s)
+int	manage_line(t_game *game, char *s)
 {
 	char	*temp;
 	char	*id;
 	char	*info;
 	int		i;
 
-	temp = ft_strtrim(*s, " \f\n\r\t\v");
-	my_free((void **)s);
+	temp = ft_strtrim(s, " \f\n\r\t\v");
 	if (my_is_str_empty(temp))
 		return (free(temp), 0);
 	i = my_strchrs_pos(temp, " \f\n\r\t\v");
