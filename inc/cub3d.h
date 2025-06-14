@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: raperez- <raperez-@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 18:31:20 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/06/14 00:08:54 by raperez-         ###   ########.fr       */
+/*   Updated: 2025/06/14 15:29:52 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,13 +65,16 @@
 # define WIDTH 1080		// Width of the game window
 # define HEIGHT 720		// Height of the game window
 
+# define MAX_MAP_WIDTH	75	// Maximum width of the map
+# define MAX_MAP_HEIGHT 30	// Maximum height of the map
+
 # define FOV 75			// Field of view in degrees for the raycasting system
 # define SPEED 0.05		// Speed of the player movement in the game
 # define ANGLE_SPEED 3	// Speed of the player rotation in degrees per frame
 # define WALL_DIM_X 1	// Width of each wall segment in pixels
 # define RAY_RES 0.02	// Ray resolution
 
-# define MMAP_TILE 15			// Size of each tile in the minimap
+# define MMAP_TILE 10			// Size of each tile in the minimap
 # define MMAP_PLAYER_RADIUS 3	// Radius of the player in the minimap in tiles
 
 // Colors used in the game, represented in RGBA format.
@@ -95,6 +98,7 @@
 # define SCENE_FORMAT "Invalid scene: the file must follow the correct format"
 # define SCENE_RGB "Invalid scene: rgb format incorrect"
 # define MAP_EMPTY "Invalid map: empty map"
+# define MAP_TOO_BIG "Invalid map: Width x Height of the map exceeds limits"
 # define MAP_NOT_WALLED "Invalid map: map is not closed by walls"
 # define MAP_DATA_AFTERMAP "Invalid map: there is data after the map"
 # define MAP_PLAYER_AMOUNT "Invalid map: there must be only one player"
@@ -254,8 +258,9 @@ void			manage_map(t_game *game);
 
 void			check_map1d(t_game *game);
 void			check_after_map(t_game *game, char *s, int fd);
-void			flood_fill(t_game *game, char **map, int x, int y);
 void			check_walls(t_game *game);
+void			check_dimension(t_game *game);
+void			flood_fill(t_game *game, char **map, int x, int y);
 
 // rgb.c
 
@@ -297,7 +302,7 @@ int				get_x_texture(t_ray ray, mlx_texture_t *texture);
 void			key_hook(mlx_key_data_t keydata, void *param);
 void			close_hook(void *param);
 void			loop_hook(void *param);
-void			fps_counter(void);
+void			fps_counter(t_game *game);
 
 // move.c
 

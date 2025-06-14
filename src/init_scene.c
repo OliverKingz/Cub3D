@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_scene.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: raperez- <raperez-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 15:07:34 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/06/13 18:30:03 by raperez-         ###   ########.fr       */
+/*   Updated: 2025/06/14 15:19:32 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,15 @@ void	init_texture(t_game *game)
 	if (!game->graphs.icon_t || !game->graphs.north_t || !game->graphs.south_t
 		|| !game->graphs.east_t || !game->graphs.west_t)
 		my_mlx_err(game, FAIL_TEXTURE);
+	if (DEBUG_MODE)
+	{
+		printf("\n%s ✅\n", game->graphs.north_path);
+		printf("%s ✅\n", game->graphs.east_path);
+		printf("%s ✅\n", game->graphs.south_path);
+		printf("%s ✅\n", game->graphs.west_path);
+		printf("Ceiling color: %X \t✅\n", game->scene.ceil_rgb);
+		printf("Flooring color: %X  \t✅\n\n", game->scene.floor_rgb);
+	}
 }
 
 void	init_player(t_game *game, char angle, double x, double y)

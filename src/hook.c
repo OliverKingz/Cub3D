@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hook.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: raperez- <raperez-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 19:13:36 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/06/13 18:44:33 by raperez-         ###   ########.fr       */
+/*   Updated: 2025/06/14 15:31:05 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	close_hook(void *param)
 	if (game->is_running)
 		game->is_running = false;
 	if (DEBUG_MODE)
-		printf("Game closed successfully.\n");
+		printf("\nGame closed successfully.\n");
 }
 
 void	key_hook(mlx_key_data_t keydata, void *param)
@@ -65,14 +65,11 @@ void	loop_hook(void *param)
 		prev_pos.x = game->player.pos.x;
 		prev_pos.y = game->player.pos.y;
 		prev_angle = game->player.angle;
-		if (DEBUG_MODE)
-			printf("P(%f, %f, %f)\n", game->player.pos.x, game->player.pos.y,
-				game->player.angle);
 	}
-	fps_counter();
+	fps_counter(game);
 }
 
-void	fps_counter(void)
+void	fps_counter(t_game *game)
 {
 	static int		frame_count = 0;
 	static double	last_time = 0.0;
@@ -83,7 +80,9 @@ void	fps_counter(void)
 	delta_time = current_time - last_time;
 	if (delta_time >= 1.0)
 	{
-		printf("FPS: %d\n", frame_count);
+		printf("FPS: %d | ", frame_count);
+		printf("P(%f, %f, %f)\n", game->player.pos.x, game->player.pos.y,
+			game->player.angle);
 		frame_count = 0;
 		last_time = current_time;
 	}

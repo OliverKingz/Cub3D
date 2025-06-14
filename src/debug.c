@@ -6,7 +6,7 @@
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/09 21:48:20 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/06/11 15:07:42 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/06/14 15:28:07 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,8 @@ void	print_ray_info(t_ray *ray)
 	if (DEBUG_MODE && ray)
 	{
 		printf("\nRay info:\n");
-		printf("  Angle (radians): %f\n", ray->angle_rads);
+		printf("  Angle (radians/degree): %f / %fº\n", ray->angle_rads,
+			rad_to_deg(ray->angle_rads));
 		printf("  Start Point: (%f, %f)\n", ray->start_pos.x, ray->start_pos.y);
 		printf("  End Point: (%f, %f)\n", ray->end_pos.x, ray->end_pos.y);
 		printf("  Delta Dist: (%f, %f)\n", ray->delta_dist.x,

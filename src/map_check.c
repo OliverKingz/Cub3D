@@ -6,7 +6,7 @@
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/13 14:34:22 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/06/13 16:48:39 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/06/14 14:59:57 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,13 @@ void	check_walls(t_game *game)
 	my_free2d((void *)&temp);
 }
 
+void	check_dimension(t_game *game)
+{
+	if (game->scene.width_map > MAX_MAP_WIDTH
+		|| game->scene.height_map > MAX_MAP_HEIGHT)
+		my_err_clean(game, MAP_TOO_BIG, false);
+}
+
 void	flood_fill(t_game *game, char **map, int x, int y)
 {
 	if (x < 0 || y < 0 || x >= game->scene.width_map
@@ -74,6 +81,7 @@ void	flood_fill(t_game *game, char **map, int x, int y)
 	{
 		if (DEBUG_MODE)
 			(printf("Flood fill:\n"), my_printf2d(map));
+		my_free2d((void ***)&map);
 		my_err_clean(game, MAP_NOT_WALLED, false);
 	}
 	else if (ft_strchr("0NSEW", map[y][x]))
