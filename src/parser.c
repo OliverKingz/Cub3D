@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: raperez- <raperez-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: raperez- <raperez-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/09 11:56:40 by raperez-          #+#    #+#             */
-/*   Updated: 2025/06/14 15:32:42 by raperez-         ###   ########.fr       */
+/*   Updated: 2025/06/15 14:19:27 by raperez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ char	**read_file(t_game *game, const char *file)
 	char	*s;
 	char	**temp;
 	char	**full_file;
-	int	fd;
-	int	i;
+	int		fd;
+	int		i;
 
 	fd = open(file, O_RDONLY);
 	if (fd < 0)
@@ -42,11 +42,9 @@ char	**read_file(t_game *game, const char *file)
 		ft_memmove((void *)full_file, (void *)temp, i * sizeof(char *));
 		full_file[i] = s;
 		full_file[i + 1] = NULL;
-		free(temp);
-		i++;
+		(free(temp), i++);
 	}
-	close(fd);
-	return (full_file);
+	return (close(fd), full_file);
 }
 
 void	parser(t_game *game, const char *file)
@@ -97,17 +95,17 @@ int	select_line_infotype(t_game *game, char *id, char *info)
 {
 	if (!game || !id || !info)
 		return (my_free((void *)&id), my_free((void *)&info), -1);
-	if (ft_strcmp(id, "NO") == 0)
+	if (ft_strcmp(id, "NO") == 0 && !game->graphs.north_path)
 		game->graphs.north_path = ft_strtrim(info, " \f\n\r\t\v");
-	else if (ft_strcmp(id, "SO") == 0)
+	else if (ft_strcmp(id, "SO") == 0 && !game->graphs.south_path)
 		game->graphs.south_path = ft_strtrim(info, " \f\n\r\t\v");
-	else if (ft_strcmp(id, "WE") == 0)
+	else if (ft_strcmp(id, "WE") == 0 && !game->graphs.west_path)
 		game->graphs.west_path = ft_strtrim(info, " \f\n\r\t\v");
-	else if (ft_strcmp(id, "EA") == 0)
+	else if (ft_strcmp(id, "EA") == 0 && !game->graphs.east_path)
 		game->graphs.east_path = ft_strtrim(info, " \f\n\r\t\v");
-	else if (ft_strcmp(id, "F") == 0)
+	else if (ft_strcmp(id, "F") == 0 && !game->scene.floor_rgb)
 		(my_free((void *)&id), game->scene.floor_rgb = get_rgb(game, &info));
-	else if (ft_strcmp(id, "C") == 0)
+	else if (ft_strcmp(id, "C") == 0 && !game->scene.ceil_rgb)
 		(my_free((void *)&id), game->scene.ceil_rgb = get_rgb(game, &info));
 	else
 		return (my_free((void *)&id), my_free((void *)&info), -1);

@@ -6,10 +6,9 @@
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2025/06/15 14:59:36 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/06/15 15:01:34 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #ifndef CUB3D_H
 # define CUB3D_H
