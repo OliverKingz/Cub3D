@@ -19,15 +19,15 @@ LIBMLX		:= $(LIBMLX_DIR)build/libmlx42.a
 
 # **************************************************************************** #
 # FILES
-SRC_FILES	:= $(wildcard $(SRC_DIR)*.c)
+SRC_FILES	:= debug draw_minimap draw_raycast draw_utils draw exit_utils exit \
+			hook init_game init_scene main map_check map move parser raycast_dda \
+			raycast_utils raycast rgb utils utils2 utils3
 INC_FILES	:=	cub3d
 
 # GENERAL FILES
-SRCS	:= $(SRC_FILES)
-OBJS	:= $(addprefix $(OBJ_DIR), $(notdir $(SRC_FILES:.c=.o)))
 
-#SRCS	:= $(addprefix $(SRC_DIR), $(addsuffix .c, $(SRC_FILES)))
-#OBJS	:= $(addprefix $(OBJ_DIR), $(addsuffix .o, $(SRC_FILES)))
+SRCS	:= $(addprefix $(SRC_DIR), $(addsuffix .c, $(SRC_FILES)))
+OBJS	:= $(addprefix $(OBJ_DIR), $(addsuffix .o, $(SRC_FILES)))
 DEPS	:= $(OBJS:.o=.d)
 INCS	:= $(INC_DIR)so_long.h $(LIBFT_INC_DIR)libft.h $(LIBMLX_INC_DIR)MLX42.h
 
@@ -134,7 +134,7 @@ OBJ_BONUS_DIR	:= obj/bonus/
 
 # BONUS FILES
 BONUS_NAME	:= .cub3d_bonus
-SRC_BONUS_FILES	:= main_bonus
+SRC_BONUS_FILES	:= $(wildcard $(SRC_BONUS_DIR)*.c)
 INC_BONUS_FILES	:= cub3d_bonus
 
 # BONUS GENERAL FILES

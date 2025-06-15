@@ -6,7 +6,7 @@
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 19:13:36 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/06/14 15:31:05 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/06/15 15:16:56 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,8 @@ void	loop_hook(void *param)
 		prev_pos.y = game->player.pos.y;
 		prev_angle = game->player.angle;
 	}
-	fps_counter(game);
+	if (DEBUG_MODE)
+		fps_counter(game);
 }
 
 void	fps_counter(t_game *game)

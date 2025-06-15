@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2025/06/15 15:01:34 by ozamora-         ###   ########.fr       */
+/*   Created: 2025/06/03 18:31:20 by ozamora-          #+#    #+#             */
+/*   Updated: 2025/06/15 15:13:03 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,11 @@
 # define WIDTH 1080		// Width of the game window
 # define HEIGHT 720		// Height of the game window
 
-# define MAX_MAP_WIDTH	75	// Maximum width of the map
-# define MAX_MAP_HEIGHT 30	// Maximum height of the map
+# define MAX_MAP_WIDTH	75		// Maximum width of the map
+# define MAX_MAP_HEIGHT 30		// Maximum height of the map
+
+# define MMAP_TILE 10			// Size of each tile in the minimap
+# define MMAP_PLAYER_RADIUS 3	// Radius of the player in the minimap in tiles
 
 # define FOV 75			// Field of view in degrees for the raycasting system
 # define SPEED 0.05		// Speed of the player movement in the game
@@ -75,16 +78,13 @@
 # define RAY_RES 0.02	// Ray resolution
 # define LIGHT_RANGE 10	// Range of light for the walls (bigger than 3)
 
-# define MMAP_TILE 10			// Size of each tile in the minimap
-# define MMAP_PLAYER_RADIUS 3	// Radius of the player in the minimap in tiles
-
 // Colors used in the game, represented in RGBA format.
 # define MMAP_WALL_COLOR WHITE			// Color of the walls in the minimap
 # define MMAP_EMPTY_COLOR BLACK			// Color of the empty spaces in the mmap
 # define MMAP_GRID_COLOR GREY			// Color of the grid in the minimap
 
-# define MMAP_PLAYER_COLOR TURQUOISE	// Color of the player in the minimap
-# define MMAP_RAY_COLOR WHITE_A60			// Color of the rays in the minimap
+# define MMAP_PLAYER_COLOR LIGHT_BLUE	// Color of the player in the minimap
+# define MMAP_RAY_COLOR WHITE_A60		// Color of the rays in the minimap
 
 # define WALL_COLOR GREEN 				// Color of the walls in the game
 # define WALL_COLOR_SHADOW DARK_GREEN	// Shaded color of the walls in the game
@@ -98,12 +98,14 @@
 # define SCENE_EMPTY "Invalid scene: file is empty"
 # define SCENE_FORMAT "Invalid scene: the file must follow the correct format"
 # define SCENE_RGB "Invalid scene: rgb format incorrect"
+
 # define MAP_EMPTY "Invalid map: empty map"
 # define MAP_TOO_BIG "Invalid map: Width x Height of the map exceeds limits"
 # define MAP_NOT_WALLED "Invalid map: map is not closed by walls"
 # define MAP_DATA_AFTERMAP "Invalid map: there is data after the map"
 # define MAP_PLAYER_AMOUNT "Invalid map: there must be only one player"
 # define MAP_INVALID_CHAR "Invalid map: invalid char on the map"
+
 # define FAIL_MLX "Failed initializing MLX42"
 # define FAIL_TEXTURE "Failed loading textures"
 # define FAIL_IMAGES "Failed loading images"
@@ -140,8 +142,8 @@ typedef enum e_file
 // Point structure to represent a 2D point in the game world.
 typedef struct s_point
 {
-	double	x;	// X coordinate of the point
-	double	y;	// Y coordinate of the point
+	double	x;			// X coordinate of the point
+	double	y;			// Y coordinate of the point
 }				t_point;
 
 // Player structure to represent the player's position and angle in the game.
