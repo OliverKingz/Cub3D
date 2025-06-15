@@ -6,7 +6,7 @@
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2025/06/14 15:40:50 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/06/15 14:59:36 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@
 # define ANGLE_SPEED 3	// Speed of the player rotation in degrees per frame
 # define WALL_DIM_X 1	// Width of each wall segment in pixels
 # define RAY_RES 0.02	// Ray resolution
+# define LIGHT_RANGE 10	// Range of light for the walls (bigger than 3)
 
 # define MMAP_TILE 10			// Size of each tile in the minimap
 # define MMAP_PLAYER_RADIUS 3	// Radius of the player in the minimap in tiles
@@ -269,6 +270,7 @@ void			flood_fill(t_game *game, char **map, int x, int y);
 bool			is_valid_rgb(const char *s);
 uint32_t		get_rgb(t_game *game, char **s);
 uint32_t		get_rgb_pixel(mlx_texture_t *texture, int x, int y);
+uint32_t		get_rgb_px_raylen(mlx_texture_t *txt, int x, int y, int raylen);
 
 // draw.c
 

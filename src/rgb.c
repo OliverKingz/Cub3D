@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rgb.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: raperez- <raperez-@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/13 15:09:15 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/06/13 23:50:08 by raperez-         ###   ########.fr       */
+/*   Updated: 2025/06/15 14:59:53 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,4 +76,25 @@ uint32_t	get_rgb_pixel(mlx_texture_t *texture, int x, int y)
 	p = &texture->pixels[idx];
 	return (((uint32_t)p[0] << 24) | ((uint32_t)p[1] << 16)
 		| ((uint32_t)p[2] << 8) | (uint32_t)p[3]);
+}
+
+uint32_t	get_rgb_px_raylen(mlx_texture_t *txt, int x, int y, int raylen)
+{
+	size_t			idx;
+	unsigned char	*p;
+	double			factor;
+
+	if (!txt || !txt->pixels || x < 0 || x >= (int)txt->width
+		|| y < 0 || y >= (int)txt->height)
+		return (CLEAR);
+	idx = ((size_t)y * txt->width + x) * 4;
+	p = &txt->pixels[idx];
+	if (raylen <= 3)
+		factor = 1.0;
+	else if (raylen >= LIGHT_RANGE)
+		factor = 0.0;
+	else
+		factor = 1.0 - ((double)(raylen - 3) / (LIGHT_RANGE - 3));
+	return (((uint8_t)(p[0] * factor) << 24) | ((uint32_t)(p[1] * factor) << 16)
+		| ((uint32_t)(p[2] * factor) << 8) | (uint32_t)(p[3]));
 }
