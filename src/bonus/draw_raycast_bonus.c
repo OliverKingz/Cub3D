@@ -6,7 +6,7 @@
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/07 12:25:19 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/06/15 15:31:38 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/06/15 16:57:43 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ void	draw_wall_texture(t_game *game, t_ray ray, t_point pos, t_point dim)
 			if (pos.x + p.x >= 0 && pos.x + p.x < WIDTH
 				&& pos.y + p.y >= 0 && pos.y + p.y < HEIGHT)
 				mlx_put_pixel(game->graphs.screen, pos.x + p.x, pos.y + p.y,
-					get_rgb_pixel(texture, txt.x, txt.y));
+					get_rgb_px_raylen(texture, txt.x, txt.y, ray.length));
 		}
 	}
 }

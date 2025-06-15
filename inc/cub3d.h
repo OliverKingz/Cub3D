@@ -6,7 +6,7 @@
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 18:31:20 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/06/15 15:43:52 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/06/15 16:56:53 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@
 /* ************************************************************************** */
 
 // Usage message for the game. 
-# define USAGE "Usage: ./cub3d assets/scenes/example.cub"
+# define USAGE "Usage: ./cub3D assets/scenes/example.cub"
 
 // Settings: constants for the game window, minimap dimensions and speeds
 # define WIDTH 1080		// Width of the game window
