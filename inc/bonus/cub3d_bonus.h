@@ -6,7 +6,7 @@
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/15 15:22:16 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/06/15 16:56:42 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/06/15 23:25:18 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@
 
 // Debug mode flag to enable or disable debug information printing.
 # ifndef DEBUG_MODE
-#  define DEBUG_MODE false
+#  define DEBUG_MODE true
 # endif
 
 // Use textures flag to enable or disable texture rendering in the game.
@@ -197,10 +197,6 @@ typedef struct s_graph
 	mlx_texture_t	*north_t;		// Textures for the north wall
 	mlx_texture_t	*south_t;		// Textures for the south wall
 	mlx_texture_t	*west_t;		// Textures for the west wall
-	mlx_image_t		*east;			// Image for the east wall
-	mlx_image_t		*north;			// Image for the north wall
-	mlx_image_t		*south;			// Image for the south wall
-	mlx_image_t		*west;			// Image for the west wall
 	mlx_image_t		*screen;		// Image for the screen/window
 	mlx_image_t		*minimap;		// Image for the minimap
 	mlx_image_t		*player;		// Image for the player in the minimap

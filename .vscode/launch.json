@@ -5,7 +5,7 @@
     "name": "Depurar C",
     "type": "cppdbg",
     "request": "launch",
-    "program": "${workspaceFolder}/cub3D",  // Ruta a tu binario
+    "program": "${workspaceFolder}/cub3D_bonus",  // Ruta a tu binario
     "args": ["assets/scenes/example.cub"],
     "stopAtEntry": false,
     "cwd": "${workspaceFolder}",

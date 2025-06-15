@@ -6,7 +6,7 @@
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 19:52:22 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/06/15 16:58:29 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/06/15 23:24:59 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,13 +38,8 @@ void	init_mlx(t_game *game)
 
 void	init_images(t_game *game)
 {
-	game->graphs.east = mlx_texture_to_image(game->mlx, game->graphs.east_t);
-	game->graphs.north = mlx_texture_to_image(game->mlx, game->graphs.north_t);
-	game->graphs.south = mlx_texture_to_image(game->mlx, game->graphs.south_t);
-	game->graphs.west = mlx_texture_to_image(game->mlx, game->graphs.west_t);
 	game->graphs.screen = mlx_new_image(game->mlx, WIDTH, HEIGHT);
-	if (!game->graphs.east || !game->graphs.north || !game->graphs.south
-		|| !game->graphs.west || !game->graphs.screen)
+	if (!game->graphs.screen)
 		my_mlx_err(game, FAIL_IMAGES);
 	if (USE_MINIMAP)
 	{

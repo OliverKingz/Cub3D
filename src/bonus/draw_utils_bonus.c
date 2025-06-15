@@ -6,7 +6,7 @@
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 18:42:36 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/06/15 15:31:42 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/06/15 23:34:02 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,29 +14,29 @@
 
 void	draw_rectangle(mlx_image_t *img, t_point pos, t_point dim, int color)
 {
-	t_point	p;
+	t_point	start;
 	t_point	end;
 
 	end.x = pos.x + dim.x;
 	end.y = pos.y + dim.y;
-	p.y = pos.y;
-	while (p.y < end.y)
+	start.y = pos.y;
+	while (start.y < end.y)
 	{
-		if (p.y < 0)
-			p.y = 0;
-		if (p.y >= (int)img->height)
+		if (start.y < 0)
+			start.y = 0;
+		if (start.y >= (int)img->height)
 			break ;
-		p.x = pos.x;
-		while (p.x < end.x)
+		start.x = pos.x;
+		while (start.x < end.x)
 		{
-			if (p.x < 0)
-				p.x = 0;
-			if (p.x >= (int)img->width)
+			if (start.x < 0)
+				start.x = 0;
+			if (start.x >= (int)img->width)
 				break ;
-			mlx_put_pixel(img, p.x, p.y, color);
-			p.x++;
+			mlx_put_pixel(img, start.x, start.y, color);
+			start.x++;
 		}
-		p.y++;
+		start.y++;
 	}
 }
 
