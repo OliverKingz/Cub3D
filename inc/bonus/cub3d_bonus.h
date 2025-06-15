@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3d.h                                            :+:      :+:    :+:   */
+/*   cub3d_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/03 18:31:20 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/06/15 15:43:52 by ozamora-         ###   ########.fr       */
+/*   Created: 2025/06/15 15:22:16 by ozamora-          #+#    #+#             */
+/*   Updated: 2025/06/15 15:22:51 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CUB3D_H
-# define CUB3D_H
+#ifndef CUB3D_BONUS_H
+# define CUB3D_BONUS_H
 
 /* ************************************************************************** */
 /*                              STANDARD INCLUDES                             */
@@ -20,7 +20,7 @@
 // Standard libraries and system headers required for Cub3D functionality.
 # include "MLX42/MLX42.h"
 # include "libft.h"
-# include "colors.h"
+# include "../colors.h"
 
 /* Explicitly allowed functions for so_long, already included at the libraries
 # include <stdbool.h> // Included in MLX42
@@ -51,7 +51,7 @@
 
 // Use minimap flag to enable or disable minimap rendering in the game.
 # ifndef USE_MINIMAP
-#  define USE_MINIMAP false
+#  define USE_MINIMAP true
 # endif
 
 /* ************************************************************************** */
