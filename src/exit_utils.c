@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: raperez- <raperez-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 22:54:15 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/06/13 18:34:48 by raperez-         ###   ########.fr       */
+/*   Updated: 2025/06/15 23:39:55 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,6 @@ void	free_images(t_game *game)
 {
 	if (!game)
 		return ;
-	my_delete_image(game->mlx, game->graphs.north);
-	my_delete_image(game->mlx, game->graphs.south);
-	my_delete_image(game->mlx, game->graphs.east);
-	my_delete_image(game->mlx, game->graphs.west);
 	my_delete_image(game->mlx, game->graphs.screen);
 	my_delete_image(game->mlx, game->graphs.minimap);
 	my_delete_image(game->mlx, game->graphs.player);
