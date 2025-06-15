@@ -80,13 +80,7 @@ all: libft libmlx $(NAME)
 $(NAME): $(OBJS) $(LIBFT) $(LIBMLX)
 	@$(CC) $(CFLAGS) $(IFLAGS) $^ $(LDFLAGS) -o $(NAME)
 	@printf "%b" "$(CL) -> $(BW)[$(NAME)]:\t\t$(NC)$(BG)Compilation success\t✅$(NC)\n"
-	@echo "─────────────────────────────────────────────────────$(BY)"
-	@echo "              ▗▄▄▖     ▗▖   ▗▄▄▖ ▗▄▄▄                ";
-	@echo "             ▐▌        ▐▌      ▐▌▐▌  █               ";
-	@echo "             ▐▌   ▐▌ ▐▌▐▛▀▚▖ ▀▀▚▖▐▌  █               ";
-	@echo "             ▝▚▄▄▖▝▚▄▞▘▐▙▄▞▘▗▄▄▞▘▐▙▄▄▀               ";
-	@echo "                           by ozamora- and raperez-  ";
-	@echo "$(NC)─────────────────────────────────────────────────────"
+	@$(MAKE) -s print_banner
 
 # Rule to compile object files from source files
 $(OBJ_DIR):
@@ -124,6 +118,15 @@ fclean:
 # Rule to recompile from zero
 re: fclean all
 
+print_banner:
+		@echo "─────────────────────────────────────────────────────$(BY)"
+		@echo "              ▗▄▄▖     ▗▖   ▗▄▄▖ ▗▄▄▄                ";
+		@echo "             ▐▌        ▐▌      ▐▌▐▌  █               ";
+		@echo "             ▐▌   ▐▌ ▐▌▐▛▀▚▖ ▀▀▚▖▐▌  █               ";
+		@echo "             ▝▚▄▄▖▝▚▄▞▘▐▙▄▞▘▗▄▄▞▘▐▙▄▄▀               ";
+		@echo "                           by ozamora- and raperez-  ";
+		@echo "$(NC)─────────────────────────────────────────────────────"
+
 # **************************************************************************** #
 # BONUS SECTION 
 
@@ -133,7 +136,7 @@ INC_BONUS_DIR	:= inc/bonus/
 OBJ_BONUS_DIR	:= obj/bonus/
 
 # BONUS FILES
-BONUS_NAME	:= cub3d_bonus
+BONUS_NAME	:= cub3D_bonus
 # SRCS_BONUS_FILES	:= $(addprefix $(SRC_BONUS_DIR), $(addsuffix .c, $(SRC_BONUS_FILES)))
 SRC_BONUS_FILES	:= $(wildcard $(SRC_BONUS_DIR)*.c)
 INC_BONUS_FILES	:= cub3d_bonus
@@ -142,7 +145,7 @@ INC_BONUS_FILES	:= cub3d_bonus
 # OBJS_BONUS	:= $(SRCS_BONUS:$(SRC_BONUS_DIR)%.c=$(OBJ_BONUS_DIR)%.o)
 OBJS_BONUS	:= $(addprefix $(OBJ_BONUS_DIR), $(notdir $(SRC_BONUS_FILES:.c=.o)))
 DEPS_BONUS	:= $(OBJS_BONUS:.o=.d)
-INCS_BONUS	:= $(INC_BONUS_DIR)cub3D_bonus.h $(LIBFT_INC_DIR)libft.h $(LIBMLX_INC_DIR)MLX42.h
+INCS_BONUS	:= $(INC_BONUS_DIR)cub3d_bonus.h $(LIBFT_INC_DIR)libft.h $(LIBMLX_INC_DIR)MLX42.h
 
 # BONUS COMPILER FLAGS
 IFLAGS_BONUS:= -I$(INC_BONUS_DIR) -I$(LIBFT_INC_DIR) -I$(LIBMLX_INC_DIR)
@@ -151,18 +154,19 @@ IFLAGS_BONUS:= -I$(INC_BONUS_DIR) -I$(LIBFT_INC_DIR) -I$(LIBMLX_INC_DIR)
 bonus: libft libmlx $(BONUS_NAME)
 $(BONUS_NAME): $(OBJS_BONUS)
 	@$(CC) $(CFLAGS) $(IFLAGS_BONUS) $(OBJS_BONUS) $(LDFLAGS) -o $(BONUS_NAME)
-	@printf "%b" "$(CL) -> $(BW)[$(NAME)]:\t\t$(BG)Bonus compiled\t\t✅$(NC)\n"
+	@printf "%b" "$(CL) -> $(BW)[$(BONUS_NAME)]:\t$(BG)Bonus compiled\t\t✅$(NC)\n"
+	@$(MAKE) -s print_banner
 
 $(OBJ_BONUS_DIR):
 	@mkdir -p $(OBJ_BONUS_DIR)
 $(OBJ_BONUS_DIR)%.o: $(SRC_BONUS_DIR)%.c | $(OBJ_BONUS_DIR)
 	@mkdir -p $(dir $@)
-	@printf "%b" "$(CL) -> $(BW)[$(NAME)]:\t\t$(NC)$<\r"
+	@printf "%b" "$(CL) -> $(BW)[$(BONUS_NAME)]:\t$(NC)$<\r"
 	@$(CC) $(CFLAGS) $(IFLAGS_BONUS) -c $< -o $@
 
 # Rule to run the bonus program with a specific map
 # Example usage: make runb MAP=subject
-runb: bonus
+brun: bonus
 	-@./$(BONUS_NAME) assets/scenes/$(MAP).cub
 
 # **************************************************************************** #

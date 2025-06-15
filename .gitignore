@@ -53,6 +53,7 @@ dkms.conf
 
 #Own
 cub3D
+cub3D_bonus
 *xcf
 .build_mode
 doc/memcheck.log
