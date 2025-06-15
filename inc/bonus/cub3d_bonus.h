@@ -6,7 +6,7 @@
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/15 15:22:16 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/06/15 23:25:18 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/06/16 00:10:15 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -197,9 +197,11 @@ typedef struct s_graph
 	mlx_texture_t	*north_t;		// Textures for the north wall
 	mlx_texture_t	*south_t;		// Textures for the south wall
 	mlx_texture_t	*west_t;		// Textures for the west wall
+	mlx_texture_t	*torch_t;		// Textures for the torch
 	mlx_image_t		*screen;		// Image for the screen/window
 	mlx_image_t		*minimap;		// Image for the minimap
 	mlx_image_t		*player;		// Image for the player in the minimap
+	mlx_image_t		*torch;			// Image for the torch in screen
 }					t_graph;
 
 // Keys structure to represent the state of the keys pressed by the player.

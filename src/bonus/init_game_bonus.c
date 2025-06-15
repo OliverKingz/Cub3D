@@ -6,7 +6,7 @@
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 19:52:22 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/06/15 23:24:59 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/06/16 00:10:09 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,4 +67,9 @@ void	init_draw_to_window(t_game *game)
 		mlx_image_to_window(game->mlx, game->graphs.minimap, 10, 10);
 		mlx_image_to_window(game->mlx, game->graphs.player, 10, 10);
 	}
+	game->graphs.torch_t = mlx_load_png("./assets/textures/torch1.png");
+	game->graphs.torch = mlx_texture_to_image(game->mlx, game->graphs.torch_t);
+	mlx_resize_image(game->graphs.torch, game->graphs.torch_t->width * 6, game->graphs.torch_t->height * 6);
+	mlx_image_to_window(game->mlx, game->graphs.torch, WIDTH - game->graphs.torch->width - 100, HEIGHT - game->graphs.torch->height + 40);
+	game->graphs.torch->enabled = true;
 }
