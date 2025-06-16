@@ -6,7 +6,7 @@
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 19:52:22 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/06/16 00:10:09 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/06/16 01:38:00 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,10 @@ void	init_mlx(t_game *game)
 	mlx_set_icon(game->mlx, game->graphs.icon_t);
 	mlx_set_window_limit(game->mlx, WIDTH / 2, HEIGHT / 2, WIDTH * 3, HEIGHT
 		* 3);
+	if (USE_MOUSE)
+		mlx_set_cursor_mode(game->mlx, MLX_MOUSE_HIDDEN);
+	else
+		mlx_set_cursor_mode(game->mlx, MLX_MOUSE_DISABLED);
 }
 
 void	init_images(t_game *game)

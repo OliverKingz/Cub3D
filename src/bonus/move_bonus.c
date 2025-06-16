@@ -6,7 +6,7 @@
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 17:35:09 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/06/15 15:32:15 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/06/16 01:57:09 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,36 @@ void	update_player_keys_state(t_game *game)
 		dang -= 1;
 	if (game->keys.right)
 		dang += 1;
+	if (d.x != 0 || d.y != 0)
+		normalize_move(game, d);
+	if (dang != 0)
+		rotate(game, dang);
+}
+
+void	update_player_state(t_game *game)
+{
+	int32_t		mouse_x;
+	int32_t		mouse_y;
+	t_point		d;
+	int			dang;
+
+	d.x = 0;
+	d.y = 0;
+	dang = 0;
+	if (game->keys.w)
+		d.y -= 1;
+	if (game->keys.s)
+		d.y += 1;
+	if (game->keys.a)
+		d.x -= 1;
+	if (game->keys.d)
+		d.x += 1;
+	mlx_get_mouse_pos(game->mlx, &mouse_x, &mouse_y);
+	if (mouse_x < WIDTH / 2)
+		dang = -1;
+	else if (mouse_x > WIDTH / 2)
+		dang = 1;
+	mlx_set_mouse_pos(game->mlx, WIDTH / 2, HEIGHT / 2);
 	if (d.x != 0 || d.y != 0)
 		normalize_move(game, d);
 	if (dang != 0)

@@ -6,7 +6,7 @@
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/15 15:22:16 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/06/16 00:10:15 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/06/16 02:00:35 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,11 @@
 // Use minimap flag to enable or disable minimap rendering in the game.
 # ifndef USE_MINIMAP
 #  define USE_MINIMAP true
+# endif
+
+// Use mouse flag to enable or disable mouse control in the game.
+# ifndef USE_MOUSE
+#  define USE_MOUSE true
 # endif
 
 /* ************************************************************************** */
@@ -312,6 +317,7 @@ void			fps_counter(t_game *game);
 void			rotate(t_game *game, int dang);
 void			move(t_game *game, int dx, int dy);
 void			update_player_keys_state(t_game *game);
+void			update_player_state(t_game *game);
 
 // raycast.c
 
