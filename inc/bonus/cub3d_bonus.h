@@ -6,7 +6,7 @@
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/15 15:22:16 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/06/16 16:10:13 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/06/16 16:11:40 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -242,7 +242,7 @@ typedef struct s_game
 /*                              FUNCTION DECLARATIONS                         */
 /* ************************************************************************** */
 
-// init_game.c
+// init_game_bonus.c
 
 t_game			init_game(t_game *game, const char *scene_dir);
 void			init_mlx(t_game *game);
@@ -250,24 +250,24 @@ void			init_texture(t_game *game);
 void			init_images(t_game *game);
 void			init_draw_to_window(t_game *game);
 
-// init_scene.c
+// init_scene_bonus.c
 
 void			init_player(t_game *game, char angle, double x, double y);
 void			init_remaining_map_vars(t_game *game);
 
-// parser.c
+// parser_bonus.c
 
 void			check_file_extension(t_game *game, const char *scene_dir);
 void			parser(t_game *game, const char *file);
 int				manage_line(t_game *game, char *s);
 int				select_line_infotype(t_game *game, char *id, char *info);
 
-// map.c
+// map_bonus.c
 
 void			read_map(t_game *game, int i);
 void			manage_map(t_game *game);
 
-// map_check.c
+// map_check_bonus.c
 
 void			check_map1d(t_game *game);
 void			check_after_map(t_game *game, int i);
@@ -275,20 +275,20 @@ void			check_walls(t_game *game);
 void			check_dimension(t_game *game);
 void			flood_fill(t_game *game, char **map, int x, int y);
 
-// rgb.c
+// rgb_bonus.c
 
 bool			is_valid_rgb(const char *s);
 uint32_t		get_rgb(t_game *game, char **s);
 uint32_t		get_rgb_pixel(mlx_texture_t *texture, int x, int y);
 uint32_t		get_rgb_px_raylen(mlx_texture_t *txt, int x, int y, int raylen);
 
-// draw.c
+// draw_bonus.c
 
 void			draw_frame(t_game *game);
 void			draw_screen_bg(t_game *game);
 void			draw_player_bg(t_game *game);
 
-// draw_raycast.c
+// draw_raycast_bonus.c
 
 void			draw_walls_and_rays(t_game *game);
 void			draw_ray(mlx_image_t *img, t_ray ray, int mult);
@@ -297,85 +297,85 @@ void			draw_wall_rectangle(t_game *game, t_ray ray, t_point pos,
 void			draw_wall_texture(t_game *game, t_ray ray, t_point pos,
 					t_point dim);
 
-// draw_minimap.c
+// draw_minimap_bonus.c
 
 void			draw_player(t_game *game);
 void			draw_minimap_tiles(t_game *game);
 void			draw_minimap_grid_vertical(t_game *game);
 void			draw_minimap_grid_horizontal(t_game *game);
 
-// draw_utils.c
+// draw_utils_bonus.c
 
 void			draw_rectangle(mlx_image_t *img, t_point pos, t_point size,
 					int color);
 mlx_texture_t	*get_texture(t_game *game, t_ray ray);
 int				get_x_texture(t_ray ray, mlx_texture_t *texture);
 
-// draw_torch.c
+// draw_torch_bonus.c
 
 void			init_torch_textures(t_game *game);
 void			draw_torch(t_game *game);
 
-// hook.c
+// hook_bonus.c
 
 void			key_hook(mlx_key_data_t keydata, void *param);
 void			close_hook(void *param);
 void			loop_hook(void *param);
 void			fps_counter(t_game *game);
 
-// move.c
+// move_bonus.c
 
 void			rotate(t_game *game, int dang);
 void			move(t_game *game, int dx, int dy);
 void			update_player_state(t_game *game);
 
-// door.c
+// door_bonus.c
 
 void			open_close_door(t_game *game, t_dir dir);
 void			key_door(t_game *game);
 
-// raycast.c
+// raycast_bonus.c
 
 void			init_ray(t_game *game, t_ray *ray, double angle);
 t_ray			cast_ray(t_game *game, double angle);
 double			correct_raylen_fisheye(t_ray *ray, double player_angle);
 
-// raycast_dda.c
+// raycast_dda_bonus.c
 
 void			get_delta(t_ray *ray);
 void			get_ray_to_axis_distance(t_ray *ray);
 void			move_ray_to_next_axis(t_ray *ray);
 void			check_axis_is_wall_collision(t_ray *ray, t_scene *scene);
 
-// raycast_utils.c
+// raycast_utils_bonus.c
 
 double			deg_to_rad(double angle_degs);
 double			rad_to_deg(double angle_rads);
 t_point			rad_to_vector(double angle_rads);
 double			get_distance_length(t_point start_pos, t_point end_pos);
 
-// exit.c
+// exit_bonus.c
 
 void			my_mlx_err(t_game *game, const char *msg);
 void			my_err_clean(t_game *game, const char *msg, bool perror_flag);
 void			free_map(t_game *game);
 void			free_game(t_game *game);
 
-// exit_utils.c
+// exit_utils_bonus.c
 
 void			my_delete_texture(mlx_texture_t *texture);
 void			my_delete_image(mlx_t *mlx, mlx_image_t *image);
 void			free_textures(t_game *game);
 void			free_images(t_game *game);
 
-// utils.c
+// utils_bonus.c
 
 void			my_perr(const char *msg, bool should_exit, int exit_code);
 void			my_free(void **mem);
 void			my_free2d(void ***mem);
 void			my_close(int *fd);
 
-// utils2.c
+// utils2_bonus.c
 
 int				my_strchr_pos(const char *s, char c);
 int				my_strchrs_pos(const char *s, const char *c);
@@ -383,13 +383,13 @@ int				my_strchr_count(const char *s, int c);
 size_t			my_strlen2d(char **s);
 bool			my_is_str_empty(const char *s);
 
-// utils3.c
+// utils3_bonus.c
 
 char			**my_strdup2d(char **src);
 void			my_printf2d(char **s);
 int				my_strnbrlen(const char *s);
 
-// debug.c
+// debug_bonus.c
 
 void			print_debug_info(t_game *game);
 void			print_texture_info(mlx_texture_t *texture);
