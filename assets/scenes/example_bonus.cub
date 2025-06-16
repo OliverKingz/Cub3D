@@ -2,7 +2,7 @@ NO ./assets/textures/wolfenstein_colorstone.png
 SO ./assets/textures/wolfenstein_colorstone.png
 WE ./assets/textures/wolfenstein_wood.png
 EA ./assets/textures/wolfenstein_wood.png
-DO ./assets/textures/door_v1.png
+DO ./assets/textures/door_wood.png
 
 F 0,100,40
 C 0,0,0
