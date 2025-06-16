@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: raperez- <raperez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 18:31:20 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/06/16 16:43:23 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/06/16 18:10:47 by raperez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,10 +65,10 @@
 # define WIDTH 1080		// Width of the game window
 # define HEIGHT 720		// Height of the game window
 
-# define MAX_MAP_WIDTH	75		// Maximum width of the map
+# define MAX_MAP_WIDTH	50		// Maximum width of the map
 # define MAX_MAP_HEIGHT 30		// Maximum height of the map
 
-# define MMAP_TILE 10			// Size of each tile in the minimap
+# define MMAP_TILE 12			// Size of each tile in the minimap
 # define MMAP_PLAYER_RADIUS 3	// Radius of the player in the minimap in tiles
 
 # define FOV 75			// Field of view in degrees for the raycasting system
