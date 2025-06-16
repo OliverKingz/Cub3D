@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: raperez- <raperez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/15 15:22:16 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/06/16 16:56:30 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/06/16 18:05:40 by raperez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@
 # define WIDTH 1080		// Width of the game window
 # define HEIGHT 720		// Height of the game window
 
-# define MAX_MAP_WIDTH	75		// Maximum width of the map
+# define MAX_MAP_WIDTH	50		// Maximum width of the map
 # define MAX_MAP_HEIGHT 30		// Maximum height of the map
 
 # define MMAP_TILE 12			// Size of each tile in the minimap
