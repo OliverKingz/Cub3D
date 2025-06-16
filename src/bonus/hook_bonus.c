@@ -6,7 +6,7 @@
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 19:13:36 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/06/16 01:53:15 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/06/16 14:33:04 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,6 @@ void	key_hook(mlx_key_data_t keydata, void *param)
 		game->keys.a = pressed;
 	if (keydata.key == MLX_KEY_D)
 		game->keys.d = pressed;
-	if (keydata.key == MLX_KEY_LEFT)
-		game->keys.left = pressed;
-	if (keydata.key == MLX_KEY_RIGHT)
-		game->keys.right = pressed;
 }
 
 void	loop_hook(void *param)
@@ -57,10 +53,7 @@ void	loop_hook(void *param)
 	prev_pos.x = game->player.pos.x;
 	prev_pos.y = game->player.pos.y;
 	prev_angle = game->player.angle;
-	if (USE_MOUSE)
-		update_player_state(game);
-	else
-		update_player_keys_state(game);
+	update_player_state(game);
 	if (game->player.pos.x != prev_pos.x || game->player.pos.y != prev_pos.y
 		|| game->player.angle != prev_angle)
 	{

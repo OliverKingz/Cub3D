@@ -6,7 +6,7 @@
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 17:35:09 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/06/16 01:57:09 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/06/16 14:35:16 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,32 +64,6 @@ static void	normalize_move(t_game *game, t_point end_pos)
 	move(game, end_pos.x, end_pos.y);
 }
 
-void	update_player_keys_state(t_game *game)
-{
-	t_point	d;
-	int		dang;
-
-	d.x = 0;
-	d.y = 0;
-	dang = 0;
-	if (game->keys.w)
-		d.y -= 1;
-	if (game->keys.s)
-		d.y += 1;
-	if (game->keys.a)
-		d.x -= 1;
-	if (game->keys.d)
-		d.x += 1;
-	if (game->keys.left)
-		dang -= 1;
-	if (game->keys.right)
-		dang += 1;
-	if (d.x != 0 || d.y != 0)
-		normalize_move(game, d);
-	if (dang != 0)
-		rotate(game, dang);
-}
-
 void	update_player_state(t_game *game)
 {
 	int32_t		mouse_x;
@@ -97,8 +71,7 @@ void	update_player_state(t_game *game)
 	t_point		d;
 	int			dang;
 
-	d.x = 0;
-	d.y = 0;
+	d = (t_point){0, 0};
 	dang = 0;
 	if (game->keys.w)
 		d.y -= 1;

@@ -6,7 +6,7 @@
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/15 16:07:30 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/06/15 23:50:19 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/06/16 14:36:03 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,8 @@
 
 // 	pos.x = WIDTH - (game->graphs.torch_t[0]->width);
 // 	pos.y = HEIGHT - (game->graphs.torch_t[0]->height);
-// 	game->graphs.torch = mlx_texture_to_image(game->mlx, game->graphs.torch_t[frame]);
+// 	game->graphs.torch = mlx_texture_to_image(game->mlx,
+//		game->graphs.torch_t[frame]);
 // 	mlx_image_to_window(game->mlx, game->graphs.torch, pos.x, pos.y);
 // 	frame = (frame + 1) % 8;
 // }
