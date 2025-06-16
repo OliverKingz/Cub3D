@@ -6,7 +6,7 @@ EA ./assets/textures/wolfenstein_wood.png
 F 0,100,40
 C 0,0,0
 
-DO ./assets/textures/door.png
+DO ./assets/textures/door_v1.png
 
         1111111111111111111111111
         1000000000110000000000001
