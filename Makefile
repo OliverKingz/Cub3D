@@ -208,7 +208,7 @@ bdebug:
 	@echo "DEBUG=1" > $(BUILD_MODE_FILE)
 	@$(MAKE) bonus DEBUG=1 -s
 	@echo " -> $(BW)[Debug]:\t\t$(BB)Debug mode enabled\t🟦$(NC)\n"
-	-@./$(BONUS_NAME) assets/scenes/$(BMAP).cub
+	-@./$(BONUS_NAME) assets/scenes/$(BMAP)_bonus.cub
 
 # Rule to compile with valgrind debug flags
 bvalgrind:
@@ -218,12 +218,12 @@ bvalgrind:
 	@echo "VALGRIND=1" > $(BUILD_MODE_FILE)
 	@$(MAKE) bonus VALGRIND=1 -s
 	@echo " -> $(BW)[Valgrind]:\t\t$(BB)Valgrind mode enabled\t🟦$(NC)\n"
-	-@valgrind $(VALGRIND_FLAGS) ./$(BONUS_NAME) assets/scenes/$(BMAP).cub
+	-@valgrind $(VALGRIND_FLAGS) ./$(BONUS_NAME) assets/scenes/$(BMAP)_bonus.cub
 
 # Rule to run the bonus program with a specific map
 # Example usage: make brun MAP=wolfenstein_bonus
 brun: bonus
-	-@./$(BONUS_NAME) assets/scenes/$(BMAP).cub
+	-@./$(BONUS_NAME) assets/scenes/$(BMAP)_bonus.cub
 
 # **************************************************************************** #
 # ADDITIONAL RULES
