@@ -10,7 +10,8 @@
 		"random": "c",
 		"lodepng.h": "c",
 		"mlx42_int.h": "c",
-		"float.h": "c"
+		"float.h": "c",
+		"cub3d_bonus.h": "c"
 	},
 	"cmake.sourceDirectory": "/home/oliverkingz/42-Cursus/Cub3d/lib/MLX42",
 	"cmake.ignoreCMakeListsMissing": true

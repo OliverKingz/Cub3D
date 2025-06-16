@@ -6,7 +6,7 @@
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/09 21:48:20 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/06/15 15:31:25 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/06/16 14:57:36 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,12 @@ void	print_debug_info(t_game *game)
 
 	if (DEBUG_MODE && game)
 	{
+		printf("\n%s ✅\n", game->graphs.north_path);
+		printf("%s ✅\n", game->graphs.east_path);
+		printf("%s ✅\n", game->graphs.south_path);
+		printf("%s ✅\n", game->graphs.west_path);
+		printf("Ceiling color: %X \t✅\n", game->scene.ceil_rgb);
+		printf("Flooring color: %X  \t✅\n\n", game->scene.floor_rgb);
 		print_texture_info(game->graphs.east_t);
 		printf("Player (%f, %f, %f)\n", game->player.pos.x, game->player.pos.y,
 			game->player.angle);

@@ -6,7 +6,7 @@
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/15 15:22:16 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/06/16 14:37:15 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/06/16 15:18:50 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,7 @@
 
 # define FAIL_MLX "Failed initializing MLX42"
 # define FAIL_TEXTURE "Failed loading textures"
-# define FAIL_IMAGES "Failed loading images"
+# define FAIL_IMAGES "Failed creating images"
 # define FAIL_MINIMAP_TOO_BIG "Minimap is too big, change the tile size"
 
 /* ************************************************************************** */
@@ -197,7 +197,7 @@ typedef struct s_graph
 	mlx_texture_t	*north_t;		// Textures for the north wall
 	mlx_texture_t	*south_t;		// Textures for the south wall
 	mlx_texture_t	*west_t;		// Textures for the west wall
-	mlx_texture_t	*torch_t;		// Textures for the torch
+	mlx_texture_t	*torch_t[8];	// Textures for the torch (8 frames)
 	mlx_image_t		*screen;		// Image for the screen/window
 	mlx_image_t		*minimap;		// Image for the minimap
 	mlx_image_t		*player;		// Image for the player in the minimap
@@ -232,13 +232,12 @@ typedef struct s_game
 
 t_game			init_game(t_game *game, const char *scene_dir);
 void			init_mlx(t_game *game);
+void			init_texture(t_game *game);
 void			init_images(t_game *game);
 void			init_draw_to_window(t_game *game);
 
 // init_scene.c
 
-t_game			init_scene(t_game *game, const char *scene_dir);
-void			init_texture(t_game *game);
 void			init_player(t_game *game, char angle, double x, double y);
 void			init_remaining_map_vars(t_game *game);
 
@@ -297,6 +296,11 @@ void			draw_rectangle(mlx_image_t *img, t_point pos, t_point size,
 					int color);
 mlx_texture_t	*get_texture(t_game *game, t_ray ray);
 int				get_x_texture(t_ray ray, mlx_texture_t *texture);
+
+// draw_torch.c
+
+void			init_torch_textures(t_game *game);
+void			draw_torch(t_game *game);
 
 // hook.c
 
