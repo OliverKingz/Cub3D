@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycast_dda_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: raperez- <raperez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 16:00:54 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/06/15 15:32:29 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/06/16 14:08:57 by raperez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,7 +131,7 @@ void	check_axis_is_wall_collision(t_ray *ray, t_scene *scene)
 	if (ray->vector.y < 0 && ray->end_pos.y - (int)ray->end_pos.y == 0.0)
 		y -= 1;
 	if (y >= 0 && y < scene->height_map
-		&& x >= 0 && x < scene->width_map && scene->map2d[y][x] == WALL)
+		&& x >= 0 && x < scene->width_map && ft_strchr("1D", scene->map2d[y][x]))
 	{
 		if (ray->real_axis_dist.x < ray->real_axis_dist.y
 			&& ray->vector.x >= 0)
@@ -144,5 +144,9 @@ void	check_axis_is_wall_collision(t_ray *ray, t_scene *scene)
 			ray->collision_dir = NORTH;
 		else
 			ray->collision_dir = SOUTH;
+		if (scene->map2d[y][x] == WALL)
+			ray->collition = WALL_COLL;
+		else
+			ray->collition = DOOR_COLL;
 	}
 }

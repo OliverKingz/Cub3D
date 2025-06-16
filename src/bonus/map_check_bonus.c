@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_check_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: raperez- <raperez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/13 14:34:22 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/06/15 15:32:11 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/06/16 12:23:18 by raperez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	check_map1d(t_game *game)
 	i = 0;
 	while (game->scene.map1d[i])
 	{
-		if (!ft_strchr(" 01NSEW\n", game->scene.map1d[i]))
+		if (!ft_strchr(" 01NSEWDd\n", game->scene.map1d[i]))
 			my_err_clean(game, MAP_INVALID_CHAR, false);
 		i++;
 	}
@@ -55,7 +55,7 @@ void	check_walls(t_game *game)
 		x = 0;
 		while (x < game->scene.width_map)
 		{
-			if (ft_strchr("0NSEW", game->scene.map2d[y][x]))
+			if (ft_strchr("0NSEWDd", game->scene.map2d[y][x]))
 				flood_fill(game, temp, x, y);
 			x++;
 		}
@@ -83,7 +83,7 @@ void	flood_fill(t_game *game, char **map, int x, int y)
 		my_free2d((void ***)&map);
 		my_err_clean(game, MAP_NOT_WALLED, false);
 	}
-	else if (ft_strchr("0NSEW", map[y][x]))
+	else if (ft_strchr("0NSEWDd", map[y][x]))
 	{
 		map[y][x] = '*';
 		flood_fill(game, map, x - 1, y);

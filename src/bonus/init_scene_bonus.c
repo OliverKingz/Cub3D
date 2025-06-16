@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_scene_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: raperez- <raperez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 15:07:34 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/06/15 15:32:00 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/06/16 11:54:13 by raperez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ void	init_texture(t_game *game)
 	game->graphs.north_t = mlx_load_png(game->graphs.north_path);
 	game->graphs.south_t = mlx_load_png(game->graphs.south_path);
 	game->graphs.west_t = mlx_load_png(game->graphs.west_path);
+	game->graphs.door_t = mlx_load_png(game->graphs.door_path);
 	if (!game->graphs.icon_t || !game->graphs.north_t || !game->graphs.south_t
 		|| !game->graphs.east_t || !game->graphs.west_t)
 		my_mlx_err(game, FAIL_TEXTURE);
@@ -36,6 +37,7 @@ void	init_texture(t_game *game)
 		printf("%s ✅\n", game->graphs.east_path);
 		printf("%s ✅\n", game->graphs.south_path);
 		printf("%s ✅\n", game->graphs.west_path);
+		printf("%s ✅\n", game->graphs.door_path);
 		printf("Ceiling color: %X \t✅\n", game->scene.ceil_rgb);
 		printf("Flooring color: %X  \t✅\n\n", game->scene.floor_rgb);
 	}

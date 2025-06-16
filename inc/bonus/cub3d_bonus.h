@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: raperez- <raperez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/15 15:22:16 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/06/16 02:00:35 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/06/16 15:12:14 by raperez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,16 +77,18 @@
 # define MMAP_PLAYER_RADIUS 3	// Radius of the player in the minimap in tiles
 
 # define FOV 75			// Field of view in degrees for the raycasting system
-# define SPEED 0.05		// Speed of the player movement in the game
+# define SPEED 0.051	// Speed of the player movement in the game
 # define ANGLE_SPEED 3	// Speed of the player rotation in degrees per frame
 # define WALL_DIM_X 1	// Width of each wall segment in pixels
 # define RAY_RES 0.02	// Ray resolution
 # define LIGHT_RANGE 10	// Range of light for the walls (bigger than 3)
 
 // Colors used in the game, represented in RGBA format.
-# define MMAP_WALL_COLOR WHITE			// Color of the walls in the minimap
-# define MMAP_EMPTY_COLOR BLACK			// Color of the empty spaces in the mmap
-# define MMAP_GRID_COLOR GREY			// Color of the grid in the minimap
+# define MMAP_WALL_COLOR WHITE				// Color of the walls in the minimap
+# define MMAP_OPEN_DOOR_COLOR LIGHT_GREEN	// Color of the open doors in the minimap
+# define MMAP_CLOSED_DOOR_COLOR ORANGE		// Color of the closed doors in the minimap
+# define MMAP_EMPTY_COLOR BLACK				// Color of the empty spaces in the mmap
+# define MMAP_GRID_COLOR GREY				// Color of the grid in the minimap
 
 # define MMAP_PLAYER_COLOR LIGHT_BLUE	// Color of the player in the minimap
 # define MMAP_RAY_COLOR WHITE_A60		// Color of the rays in the minimap
@@ -128,7 +130,7 @@ typedef enum e_dir
 	NORTH,
 	SOUTH,
 	EAST,
-	WEST
+	WEST,
 }					t_dir;
 
 // File characters used in the file representation of the map.
@@ -138,11 +140,19 @@ typedef enum e_file
 	WALL = '1',
 	EMPTY = '0',
 	SPACE = ' ',
+	DOOR_OPEN = 'D',
+	DOOR_CLOSED = 'd',
 	NO_PLAYER = 'N',
 	EA_PLAYER = 'E',
 	SO_PLAYER = 'S',
-	WE_PLAYER = 'W',
+	WE_PLAYER = 'W'
 }				t_file;
+
+typedef enum e_collition
+{
+	WALL_COLL,
+	DOOR_COLL
+}	t_collition;
 
 // Point structure to represent a 2D point in the game world.
 typedef struct s_point
@@ -177,17 +187,18 @@ typedef struct s_scene
 //  Ray structure to represent a ray in the raycasting system.
 typedef struct s_ray
 {
-	double	length;			// Total distance from start_pos to hit point
-	double	corrected_len;	// Corrected distance considering fisheye effect
-	double	angle_rads;		// Ray angle in radians
-	t_dir	collision_dir;	// Direction of the wall hit (NO, SO, EA, WE)
-	t_point	vector;			// Direction vector (unit vector for the ray)
-	t_point	start_pos;		// Start position of the ray (player position)
-	t_point	end_pos;		// End position of the ray (updated as it moves)
-	t_point	delta_dist;		// Distance ray must travel to cross the next axis
-	t_point	axis_dist;		// Distance from current pos to the next x or y axis
-	t_point	real_axis_dist;	// Scaled distance to next axis x or y
-	t_point	step_dir;			// Step direction for x and y (-1, 0, or 1)
+	double		length;			// Total distance from start_pos to hit point
+	double		corrected_len;	// Corrected distance considering fisheye effect
+	double		angle_rads;		// Ray angle in radians
+	t_collition	collition;
+	t_dir		collision_dir;	// Direction of the wall hit (NO, SO, EA, WE)
+	t_point		vector;			// Direction vector (unit vector for the ray)
+	t_point		start_pos;		// Start position of the ray (player position)
+	t_point		end_pos;		// End position of the ray (updated as it moves)
+	t_point		delta_dist;		// Distance ray must travel to cross the next axis
+	t_point		axis_dist;		// Distance from current pos to the next x or y axis
+	t_point		real_axis_dist;	// Scaled distance to next axis x or y
+	t_point		step_dir;			// Step direction for x and y (-1, 0, or 1)
 }					t_ray;
 
 // Graphical representation of the game, including textures and images.
@@ -197,11 +208,13 @@ typedef struct s_graph
 	char			*north_path;	// Path to the texture for the north wall
 	char			*south_path;	// Path to the texture for the south wall
 	char			*west_path;		// Path to the texture for the west wall
+	char			*door_path;		// Path to the texture for the door
 	mlx_texture_t	*icon_t;		// Texture for the icon
 	mlx_texture_t	*east_t;		// Textures for the east wall
 	mlx_texture_t	*north_t;		// Textures for the north wall
 	mlx_texture_t	*south_t;		// Textures for the south wall
 	mlx_texture_t	*west_t;		// Textures for the west wall
+	mlx_texture_t	*door_t;		// Textures for the door
 	mlx_texture_t	*torch_t;		// Textures for the torch
 	mlx_image_t		*screen;		// Image for the screen/window
 	mlx_image_t		*minimap;		// Image for the minimap
@@ -216,8 +229,7 @@ typedef struct s_keys
 	bool	a;		// Left movement key
 	bool	s;		// Backward movement key
 	bool	d;		// Right movement key
-	bool	left;	// Left rotation key
-	bool	right;	// Right rotation key
+	bool	e;		// Open/close door key
 }			t_keys;
 
 // Game structure to represent the entire game state.

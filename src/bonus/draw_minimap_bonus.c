@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_minimap_bonus.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: raperez- <raperez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/07 12:27:32 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/06/15 15:31:34 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/06/16 12:43:58 by raperez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,27 +21,29 @@
 
 void	draw_minimap_tiles(t_game *game)
 {
-	int		y;
-	int		x;
+	t_point pos;
 	t_point	tile_size;
 	t_point	tile_pos;
+	int		color;
 
-	y = -1;
-	while (++y < game->scene.height_map)
+	pos.y = -1;
+	while (++pos.y < game->scene.height_map)
 	{
-		x = -1;
-		while (++x < game->scene.width_map)
+		pos.x = -1;
+		while (++pos.x < game->scene.width_map)
 		{
 			tile_size = (t_point){MMAP_TILE, MMAP_TILE};
-			tile_pos = (t_point){x * MMAP_TILE, y * MMAP_TILE};
-			if (game->scene.map2d[y][x] == WALL)
-				draw_rectangle(game->graphs.minimap, tile_pos, tile_size,
-					MMAP_WALL_COLOR);
-			else if (game->scene.map2d[y][x] == SPACE)
+			tile_pos = (t_point){pos.x * MMAP_TILE, pos.y * MMAP_TILE};
+			color = MMAP_EMPTY_COLOR;
+			if (game->scene.map2d[(int)pos.y][(int)pos.x] == WALL)
+				color = MMAP_WALL_COLOR;
+			else if (game->scene.map2d[(int)pos.y][(int)pos.x] == DOOR_OPEN)
+				color = MMAP_OPEN_DOOR_COLOR;
+			else if (game->scene.map2d[(int)pos.y][(int)pos.x] == DOOR_CLOSED)
+				color = MMAP_CLOSED_DOOR_COLOR;
+			else if (game->scene.map2d[(int)pos.y][(int)pos.x] == SPACE)
 				continue ;
-			else
-				draw_rectangle(game->graphs.minimap, tile_pos, tile_size,
-					MMAP_EMPTY_COLOR);
+			draw_rectangle(game->graphs.minimap, tile_pos, tile_size, color);
 		}
 	}
 }

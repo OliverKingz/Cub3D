@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit_utils_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: raperez- <raperez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 22:54:15 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/06/15 23:27:09 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/06/16 15:24:55 by raperez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,13 @@ void	free_textures(t_game *game)
 	my_free((void *)&(game->graphs.south_path));
 	my_free((void *)&(game->graphs.east_path));
 	my_free((void *)&(game->graphs.west_path));
+	my_free((void *)&(game->graphs.door_path));
 	my_delete_texture(game->graphs.icon_t);
 	my_delete_texture(game->graphs.north_t);
 	my_delete_texture(game->graphs.south_t);
 	my_delete_texture(game->graphs.east_t);
 	my_delete_texture(game->graphs.west_t);
+	my_delete_texture(game->graphs.door_t);
 }
 
 void	free_images(t_game *game)

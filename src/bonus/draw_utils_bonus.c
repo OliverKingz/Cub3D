@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_utils_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: raperez- <raperez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 18:42:36 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/06/15 23:34:02 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/06/16 12:25:08 by raperez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,15 +42,20 @@ void	draw_rectangle(mlx_image_t *img, t_point pos, t_point dim, int color)
 
 mlx_texture_t	*get_texture(t_game *game, t_ray ray)
 {
-	if (ray.collision_dir == NORTH)
-		return (game->graphs.north_t);
-	else if (ray.collision_dir == SOUTH)
-		return (game->graphs.south_t);
-	else if (ray.collision_dir == WEST)
-		return (game->graphs.west_t);
-	else if (ray.collision_dir == EAST)
-		return (game->graphs.east_t);
-	return (NULL);
+	if (ray.collition == DOOR_COLL)
+		return (game->graphs.door_t);
+	else
+	{
+		if (ray.collision_dir == NORTH)
+			return (game->graphs.north_t);
+		else if (ray.collision_dir == SOUTH)
+			return (game->graphs.south_t);
+		else if (ray.collision_dir == WEST)
+			return (game->graphs.west_t);
+		else if (ray.collision_dir == EAST)
+			return (game->graphs.east_t);
+		return (NULL);
+	}
 }
 
 int	get_x_texture(t_ray ray, mlx_texture_t *texture)
