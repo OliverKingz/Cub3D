@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: raperez- <raperez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/09 11:56:40 by raperez-          #+#    #+#             */
-/*   Updated: 2025/06/15 15:32:21 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/06/16 11:56:24 by raperez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,10 +64,10 @@ void	parser(t_game *game, const char *file)
 			my_err_clean(game, SCENE_FORMAT, false);
 		counter += n;
 		i++;
-		if (counter >= 6)
+		if (counter >= 7)
 			break ;
 	}
-	if (counter < 6)
+	if (counter < 7)
 		my_err_clean(game, SCENE_FORMAT, false);
 	read_map(game, i);
 }
@@ -103,6 +103,8 @@ int	select_line_infotype(t_game *game, char *id, char *info)
 		game->graphs.west_path = ft_strtrim(info, " \f\n\r\t\v");
 	else if (ft_strcmp(id, "EA") == 0 && !game->graphs.east_path)
 		game->graphs.east_path = ft_strtrim(info, " \f\n\r\t\v");
+	else if (ft_strcmp(id, "DO") == 0 && !game->graphs.door_path)
+		game->graphs.door_path = ft_strtrim(info, " \f\n\r\t\v");
 	else if (ft_strcmp(id, "F") == 0 && !game->scene.floor_rgb)
 		(my_free((void *)&id), game->scene.floor_rgb = get_rgb(game, &info));
 	else if (ft_strcmp(id, "C") == 0 && !game->scene.ceil_rgb)
