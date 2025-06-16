@@ -168,8 +168,6 @@ $(OBJ_BONUS_DIR)%.o: $(SRC_BONUS_DIR)%.c | $(OBJ_BONUS_DIR)
 
 DEFAULT_MAP := example
 MAP ?= $(DEFAULT_MAP)
-DEFAULT_MAP_BONUS := example_bonus
-BMAP ?= $(DEFAULT_MAP_BONUS)
 
 # Rule to check if the files pass norminette
 norm:
@@ -208,7 +206,7 @@ bdebug:
 	@echo "DEBUG=1" > $(BUILD_MODE_FILE)
 	@$(MAKE) bonus DEBUG=1 -s
 	@echo " -> $(BW)[Debug]:\t\t$(BB)Debug mode enabled\t🟦$(NC)\n"
-	-@./$(BONUS_NAME) assets/scenes/$(BMAP)_bonus.cub
+	-@./$(BONUS_NAME) assets/scenes/$(MAP)_bonus.cub
 
 # Rule to compile with valgrind debug flags
 bvalgrind:
@@ -218,12 +216,12 @@ bvalgrind:
 	@echo "VALGRIND=1" > $(BUILD_MODE_FILE)
 	@$(MAKE) bonus VALGRIND=1 -s
 	@echo " -> $(BW)[Valgrind]:\t\t$(BB)Valgrind mode enabled\t🟦$(NC)\n"
-	-@valgrind $(VALGRIND_FLAGS) ./$(BONUS_NAME) assets/scenes/$(BMAP)_bonus.cub
+	-@valgrind $(VALGRIND_FLAGS) ./$(BONUS_NAME) assets/scenes/$(MAP)_bonus.cub
 
 # Rule to run the bonus program with a specific map
 # Example usage: make brun MAP=wolfenstein_bonus
 brun: bonus
-	-@./$(BONUS_NAME) assets/scenes/$(BMAP)_bonus.cub
+	-@./$(BONUS_NAME) assets/scenes/$(MAP)_bonus.cub
 
 # **************************************************************************** #
 # ADDITIONAL RULES
