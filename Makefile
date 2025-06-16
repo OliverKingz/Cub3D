@@ -45,8 +45,7 @@ LDFLAGS			+= $(LIBMLX) -ldl -lglfw -pthread -lm
 BUILD_MODE_FILE := .build_mode
 DEBUG			?= 0
 VALGRIND		?= 0
-VALGRIND_FLAGS	:= --leak-check=full --show-leak-kinds=all --track-origins=yes --track-fds=yes \
- 			--suppressions=doc/valgrind.supp --log-file=doc/memcheck.log --gen-suppressions=all
+VALGRIND_FLAGS	:= --leak-check=full --show-leak-kinds=all --track-origins=yes --track-fds=yes --suppressions=doc/valgrind.supp --log-file=doc/memcheck.log --gen-suppressions=all
 
 ifeq ($(DEBUG),1)
 	CFLAGS += -g3 -fsanitize=address
@@ -67,7 +66,7 @@ BW	= \033[1;37m
 
 # NO COLOR and CLEAR LINE
 NC	= \033[0;39m
-CL	= \033[2Ksuppressions=doc/valgrind.supp --gen-suppressions=all --log-file=doc/memcheck.log
+CL	= \033[2K
 
 # **************************************************************************** #
 # ESSENTIAL RULES
@@ -173,6 +172,8 @@ norm:
 
 DEFAULT_MAP := example
 MAP ?= $(DEFAULT_MAP)
+DEFAULT_MAP_BONUS := example_bonus
+MAP_BONUS ?= $(DEFAULT_MAP_BONUS)
 
 # Rule to compile with debug flags
 debug:
@@ -198,9 +199,6 @@ valgrind:
 # Example usage: make run MAP=subject
 run: all
 	-@./$(NAME) assets/scenes/$(MAP).cub
-
-DEFAULT_MAP_BONUS := example_bonus
-MAP_BONUS ?= $(DEFAULT_MAP_BONUS)
 
 # Rule to compile bonus with debug flags
 bdebug:

@@ -6,7 +6,7 @@
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 19:11:12 by raperez-          #+#    #+#             */
-/*   Updated: 2025/06/11 12:31:55 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/06/16 18:01:56 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,27 +22,15 @@ void	draw_frame(t_game *game)
 		draw_player(game);
 }
 
+void draw_gradient_floor(t_game *game, 
 void	draw_screen_bg(t_game *game)
 {
-	int	x;
-	int	y;
-
-	x = 0;
-	while (x < WIDTH)
-	{
-		y = 0;
-		while (y < HEIGHT / 2)
-		{
-			mlx_put_pixel(game->graphs.screen, x, y, game->scene.ceil_rgb);
-			y++;
-		}
-		while (y < HEIGHT)
-		{
-			mlx_put_pixel(game->graphs.screen, x, y, game->scene.floor_rgb);
-			y++;
-		}
-		x++;
-	}
+	draw_rectangle(game->graphs.screen, (t_point){0, 0},
+		(t_point){WIDTH, HEIGHT / 2}, game->scene.ceil_rgb);
+	// draw_rectangle(game->graphs.screen, (t_point){0, HEIGHT / 2},
+	// 	(t_point){WIDTH, HEIGHT}, game->scene.floor_rgb);
+	draw_gradient_rectangle(game->graphs.screen, (t_point){0, HEIGHT / 2},
+		(t_point){WIDTH, HEIGHT}, BLACK, game->scene.floor_rgb);
 }
 
 void	draw_player_bg(t_game *game)
