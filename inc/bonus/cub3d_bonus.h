@@ -6,7 +6,7 @@
 /*   By: raperez- <raperez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/15 15:22:16 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/06/16 15:12:14 by raperez-         ###   ########.fr       */
+/*   Updated: 2025/06/16 15:37:43 by raperez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@
 
 // Debug mode flag to enable or disable debug information printing.
 # ifndef DEBUG_MODE
-#  define DEBUG_MODE true
+#  define DEBUG_MODE false
 # endif
 
 // Use textures flag to enable or disable texture rendering in the game.
@@ -52,11 +52,6 @@
 // Use minimap flag to enable or disable minimap rendering in the game.
 # ifndef USE_MINIMAP
 #  define USE_MINIMAP true
-# endif
-
-// Use mouse flag to enable or disable mouse control in the game.
-# ifndef USE_MOUSE
-#  define USE_MOUSE true
 # endif
 
 /* ************************************************************************** */
@@ -328,7 +323,6 @@ void			fps_counter(t_game *game);
 
 void			rotate(t_game *game, int dang);
 void			move(t_game *game, int dx, int dy);
-void			update_player_keys_state(t_game *game);
 void			update_player_state(t_game *game);
 
 // raycast.c

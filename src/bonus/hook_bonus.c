@@ -6,7 +6,7 @@
 /*   By: raperez- <raperez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 19:13:36 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/06/16 15:22:46 by raperez-         ###   ########.fr       */
+/*   Updated: 2025/06/16 15:39:32 by raperez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,10 +91,7 @@ void	loop_hook(void *param)
 	prev_pos.x = game->player.pos.x;
 	prev_pos.y = game->player.pos.y;
 	prev_angle = game->player.angle;
-	if (USE_MOUSE)
-		update_player_state(game);
-	else
-		update_player_keys_state(game);
+	update_player_state(game);
 	if (game->keys.e)
 		key_door(game);
 	if (game->player.pos.x != prev_pos.x || game->player.pos.y != prev_pos.y

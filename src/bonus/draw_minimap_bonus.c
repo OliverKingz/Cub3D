@@ -6,18 +6,12 @@
 /*   By: raperez- <raperez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/07 12:27:32 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/06/16 12:43:58 by raperez-         ###   ########.fr       */
+/*   Updated: 2025/06/16 15:38:58 by raperez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d_bonus.h"
 
-// void	draw_minimap(t_game *game)
-// {
-// 	//draw_map_bg(game);
-// 	draw_minimap_tiles(game);
-// 	draw_minimap_grid(game);
-// }
+#include "cub3d_bonus.h"
 
 void	draw_minimap_tiles(t_game *game)
 {

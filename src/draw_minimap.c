@@ -6,18 +6,11 @@
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/07 12:27:32 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/06/11 00:27:33 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/06/16 14:51:14 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-// void	draw_minimap(t_game *game)
-// {
-// 	//draw_map_bg(game);
-// 	draw_minimap_tiles(game);
-// 	draw_minimap_grid(game);
-// }
 
 void	draw_minimap_tiles(t_game *game)
 {
