@@ -6,7 +6,7 @@
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/15 15:22:16 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/06/16 16:11:40 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/06/16 16:56:30 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@
 # define MAX_MAP_WIDTH	75		// Maximum width of the map
 # define MAX_MAP_HEIGHT 30		// Maximum height of the map
 
-# define MMAP_TILE 10			// Size of each tile in the minimap
+# define MMAP_TILE 12			// Size of each tile in the minimap
 # define MMAP_PLAYER_RADIUS 3	// Radius of the player in the minimap in tiles
 
 # define FOV 75			// Field of view in degrees for the raycasting system
@@ -76,7 +76,7 @@
 # define ANGLE_SPEED 3	// Speed of the player rotation in degrees per frame
 # define WALL_DIM_X 1	// Width of each wall segment in pixels
 # define RAY_RES 0.02	// Ray resolution
-# define LIGHT_RANGE 10	// Range of light for the walls (bigger than 3)
+# define LIGHT_RANGE 6	// Range of light for the walls (bigger than 3)
 
 // Colors used in the game, represented in RGBA format.
 # define MMAP_WALL_COLOR WHITE			// Color of the walls in the minimap

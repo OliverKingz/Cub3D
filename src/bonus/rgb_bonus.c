@@ -6,7 +6,7 @@
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/13 15:09:15 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/06/15 15:32:37 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/06/16 16:58:54 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,12 +89,12 @@ uint32_t	get_rgb_px_raylen(mlx_texture_t *txt, int x, int y, int raylen)
 		return (CLEAR);
 	idx = ((size_t)y * txt->width + x) * 4;
 	p = &txt->pixels[idx];
-	if (raylen <= 3)
+	if (raylen <= 1)
 		factor = 1.0;
 	else if (raylen >= LIGHT_RANGE)
 		factor = 0.0;
 	else
-		factor = 1.0 - ((double)(raylen - 3) / (LIGHT_RANGE - 3));
+		factor = 1.0 - ((double)(raylen - 1) / (LIGHT_RANGE - 1));
 	return (((uint8_t)(p[0] * factor) << 24) | ((uint32_t)(p[1] * factor) << 16)
 		| ((uint32_t)(p[2] * factor) << 8) | (uint32_t)(p[3]));
 }
