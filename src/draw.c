@@ -6,7 +6,7 @@
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 19:11:12 by raperez-          #+#    #+#             */
-/*   Updated: 2025/06/16 18:01:56 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/06/16 18:18:07 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,15 +22,12 @@ void	draw_frame(t_game *game)
 		draw_player(game);
 }
 
-void draw_gradient_floor(t_game *game, 
 void	draw_screen_bg(t_game *game)
 {
 	draw_rectangle(game->graphs.screen, (t_point){0, 0},
 		(t_point){WIDTH, HEIGHT / 2}, game->scene.ceil_rgb);
-	// draw_rectangle(game->graphs.screen, (t_point){0, HEIGHT / 2},
-	// 	(t_point){WIDTH, HEIGHT}, game->scene.floor_rgb);
-	draw_gradient_rectangle(game->graphs.screen, (t_point){0, HEIGHT / 2},
-		(t_point){WIDTH, HEIGHT}, BLACK, game->scene.floor_rgb);
+	draw_rectangle(game->graphs.screen, (t_point){0, HEIGHT / 2},
+		(t_point){WIDTH, HEIGHT}, game->scene.floor_rgb);
 }
 
 void	draw_player_bg(t_game *game)
