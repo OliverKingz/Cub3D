@@ -34,7 +34,7 @@ INCS	:= $(INC_DIR)cub3D.h $(LIBFT_INC_DIR)libft.h $(LIBMLX_INC_DIR)MLX42.h
 # **************************************************************************** #
 # COMPILER
 CC		:= cc
-CFLAGS	:= -Wall -Wextra -Werror -g
+CFLAGS	:= -Wall -Wextra -Werror
 CFLAGS	+= -MMD -MP
 CFLAGS	+= -Wunreachable-code -Ofast
 IFLAGS			:= -I$(INC_DIR) -I$(LIBFT_INC_DIR) -I$(LIBMLX_INC_DIR)
@@ -45,8 +45,8 @@ LDFLAGS			+= $(LIBMLX) -ldl -lglfw -pthread -lm
 BUILD_MODE_FILE := .build_mode
 DEBUG			?= 0
 VALGRIND		?= 0
-VALGRIND_FLAGS	:= --leak-check=full --show-leak-kinds=all --track-origins=yes
-# --suppressions=doc/valgrind.supp --log-file=doc/memcheck.log --gen-suppressions=all
+VALGRIND_FLAGS	:= --leak-check=full --show-leak-kinds=all --track-origins=yes --track-fds=yes \
+ 			--suppressions=doc/valgrind.supp --log-file=doc/memcheck.log --gen-suppressions=all
 
 ifeq ($(DEBUG),1)
 	CFLAGS += -g3 -fsanitize=address
@@ -67,7 +67,7 @@ BW	= \033[1;37m
 
 # NO COLOR and CLEAR LINE
 NC	= \033[0;39m
-CL	= \033[2K
+CL	= \033[2Ksuppressions=doc/valgrind.supp --gen-suppressions=all --log-file=doc/memcheck.log
 
 # **************************************************************************** #
 # ESSENTIAL RULES
@@ -164,11 +164,6 @@ $(OBJ_BONUS_DIR)%.o: $(SRC_BONUS_DIR)%.c | $(OBJ_BONUS_DIR)
 	@printf "%b" "$(CL) -> $(BW)[$(BONUS_NAME)]:\t$(NC)$<\r"
 	@$(CC) $(CFLAGS) $(IFLAGS_BONUS) -c $< -o $@
 
-# Rule to run the bonus program with a specific map
-# Example usage: make runb MAP=subject
-brun: bonus
-	-@./$(BONUS_NAME) assets/scenes/$(MAP).cub
-
 # **************************************************************************** #
 # NORM AND DEBUG RULES
 
@@ -203,6 +198,34 @@ valgrind:
 # Example usage: make run MAP=subject
 run: all
 	-@./$(NAME) assets/scenes/$(MAP).cub
+
+DEFAULT_MAP_BONUS := example_bonus
+MAP_BONUS ?= $(DEFAULT_MAP_BONUS)
+
+# Rule to compile bonus with debug flags
+bdebug:
+	@if [ ! -f $(BUILD_MODE_FILE) ] || ! grep -q "DEBUG=1" $(BUILD_MODE_FILE); then \
+		$(MAKE) fclean -s; \
+	fi
+	@echo "DEBUG=1" > $(BUILD_MODE_FILE)
+	@$(MAKE) bonus DEBUG=1 -s
+	@echo " -> $(BW)[Debug]:\t\t$(BB)Debug mode enabled\t🟦$(NC)\n"
+	-@./$(BONUS_NAME) assets/scenes/$(MAP_BONUS).cub
+
+# Rule to compile with valgrind debug flags
+bvalgrind:
+	@if [ ! -f $(BUILD_MODE_FILE) ] || ! grep -q "VALGRIND=1" $(BUILD_MODE_FILE); then \
+		$(MAKE) fclean -s; \
+	fi
+	@echo "VALGRIND=1" > $(BUILD_MODE_FILE)
+	@$(MAKE) bonus VALGRIND=1 -s
+	@echo " -> $(BW)[Valgrind]:\t\t$(BB)Valgrind mode enabled\t🟦$(NC)\n"
+	-@valgrind $(VALGRIND_FLAGS) ./$(BONUS_NAME) assets/scenes/$(MAP_BONUS).cub
+
+# Rule to run the bonus program with a specific map
+# Example usage: make brun MAP=wolfenstein_bonus
+brun: bonus
+	-@./$(BONUS_NAME) assets/scenes/$(MAP_BONUS).cub
 
 # **************************************************************************** #
 # ADDITIONAL RULES

@@ -1,31 +1,47 @@
 {
-   mlx42-lib
-   Memcheck:Leak
-   ...
-   fun:malloc
-   ...
-   fun:???
+    <MLX42>
+    Memcheck:Leak
+    ...
+    obj:/usr/lib/x86_64-linux-gnu/libnvidia*
 }
 {
-   mlx42-lib
-   Memcheck:Leak
-   ...
-   fun:???
+    <MLX42>
+    Memcheck:Leak
+    ...
+    obj:/usr/lib/x86_64-linux-gnu/libdbus*
 }
 {
-   glibc-dl-calloc-reachable
-   Memcheck:Leak
-   ...
-   fun:dlopen@@GLIBC_2.34
+    <MLX42>
+    Memcheck:Leak
+    ...
+    obj:/usr/lib/x86_64-linux-gnu/libglfw*
 }
 {
-   glibc-dl-calloc-reachable
-   Memcheck:Leak
-   ...
-   fun:_dl_open
+    <MLX42>
+    Memcheck:Leak
+    ...
+    obj:/usr/lib/x86_64-linux-gnu/libX11*
 }
 {
-   glibc-dl-strncmp-addr8
+    <MLX42>
+    Memcheck:Leak
+    ...
+    obj:/usr/lib/x86_64-linux-gnu/dri*
+}
+{
+    <MLX42>
+    Memcheck:Leak
+    ...
+    obj:/usr/lib/x86_64-linux-gnu/libLLVM*
+}
+{
+    <MLX42>
+    Memcheck:Leak
+    ...
+    fun:_dl_open
+}
+{
+   <insert_a_suppression_name_here>
    Memcheck:Addr8
    fun:strncmp
    fun:is_dst
@@ -44,7 +60,7 @@
    fun:dl_open_worker
 }
 {
-   glibc-dl-strncmp-addr8-subst
+   <insert_a_suppression_name_here>
    Memcheck:Addr8
    fun:strncmp
    fun:is_dst
@@ -60,92 +76,4 @@
    fun:dl_open_worker_begin
    fun:_dl_catch_exception
    fun:dl_open_worker
-}
-{
-   x11-xlocale-reachable
-   Memcheck:Leak
-   match-leak-kinds: reachable
-   fun:malloc
-   fun:strdup
-   fun:_XlcCreateLC
-   fun:_XlcUtf8Loader
-   fun:_XOpenLC
-   fun:XSupportsLocale
-   fun:glfwInit}
-{
-   x11-xlocale-addloader-reachable
-   Memcheck:Leak
-   match-leak-kinds: reachable
-   fun:malloc
-   fun:_XlcAddLoader
-   fun:_XlcInitLoader
-   fun:_XOpenLC
-   fun:XSupportsLocale
-   fun:glfwInit}
-{
-   x11-xlocale-setconverter-reachable
-   Memcheck:Leak
-   match-leak-kinds: reachable
-   fun:malloc
-   fun:_XlcSetConverter
-   fun:_XlcAddUtf8LocaleConverters
-   fun:_XlcUtf8Loader
-   fun:_XOpenLC
-   fun:XSupportsLocale
-   fun:glfwInit
-}
-{
-   glibc-dlopen-definite
-   Memcheck:Leak
-   match-leak-kinds: definite
-   fun:malloc
-   fun:malloc
-   fun:_dl_find_object_update
-   fun:dl_open_worker_begin
-   fun:_dl_catch_exception
-   fun:dl_open_worker
-   fun:_dl_catch_exception
-   fun:_dl_open
-   fun:dlopen_doit
-   fun:_dl_catch_exception
-   fun:_dl_catch_error
-   fun:_dlerror_run
-   fun:dlopen_implementation
-   fun:dlopen@@GLIBC_2.34
-}
-{
-   glibc-dlcache-reachable
-   Memcheck:Leak
-   match-leak-kinds: reachable
-   fun:malloc
-   fun:malloc
-   fun:strdup
-   fun:_dl_load_cache_lookup
-   fun:_dl_map_object
-   fun:dl_open_worker_begin
-   fun:_dl_catch_exception
-   fun:dl_open_worker
-   fun:_dl_catch_exception
-   fun:_dl_open
-   fun:dlopen_doit
-   fun:_dl_catch_exception
-   fun:_dl_catch_error
-}
-{
-   glibc-dlnewobj-reachable
-   Memcheck:Leak
-   match-leak-kinds: reachable
-   fun:malloc
-   fun:malloc
-   fun:_dl_new_object
-   fun:_dl_map_object_from_fd
-   fun:_dl_map_object
-   fun:dl_open_worker_begin
-   fun:_dl_catch_exception
-   fun:dl_open_worker
-   fun:_dl_catch_exception
-   fun:_dl_open
-   fun:dlopen_doit
-   fun:_dl_catch_exception
-   fun:_dl_catch_error
 }
