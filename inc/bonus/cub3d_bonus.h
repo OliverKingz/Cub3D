@@ -6,7 +6,7 @@
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/15 15:22:16 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/06/16 15:43:18 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/06/16 16:10:13 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,11 +79,10 @@
 # define LIGHT_RANGE 10	// Range of light for the walls (bigger than 3)
 
 // Colors used in the game, represented in RGBA format.
-# define MMAP_WALL_COLOR WHITE				// Color of the walls in the minimap
-# define MMAP_OPEN_DOOR_COLOR LIGHT_GREEN	// Color of the open doors in the minimap
-# define MMAP_CLOSED_DOOR_COLOR ORANGE		// Color of the closed doors in the minimap
-# define MMAP_EMPTY_COLOR BLACK				// Color of the empty spaces in the mmap
-# define MMAP_GRID_COLOR GREY				// Color of the grid in the minimap
+# define MMAP_WALL_COLOR WHITE			// Color of the walls in the minimap
+# define MMAP_DOOR_COLOR LIGHT_GREEN	// Color of the doors in the minimap
+# define MMAP_EMPTY_COLOR BLACK			// Color of the empty spaces in the mmap
+# define MMAP_GRID_COLOR GREY			// Color of the grid in the minimap
 
 # define MMAP_PLAYER_COLOR LIGHT_BLUE	// Color of the player in the minimap
 # define MMAP_RAY_COLOR WHITE_A60		// Color of the rays in the minimap
@@ -143,11 +142,12 @@ typedef enum e_file
 	WE_PLAYER = 'W'
 }				t_file;
 
-typedef enum e_collition
+// Type of collision
+typedef enum e_coll
 {
 	WALL_COLL,
 	DOOR_COLL
-}	t_collition;
+}	t_coll;
 
 // Point structure to represent a 2D point in the game world.
 typedef struct s_point
@@ -182,18 +182,18 @@ typedef struct s_scene
 //  Ray structure to represent a ray in the raycasting system.
 typedef struct s_ray
 {
-	double		length;			// Total distance from start_pos to hit point
-	double		corrected_len;	// Corrected distance considering fisheye effect
-	double		angle_rads;		// Ray angle in radians
-	t_collition	collition;
-	t_dir		collision_dir;	// Direction of the wall hit (NO, SO, EA, WE)
-	t_point		vector;			// Direction vector (unit vector for the ray)
-	t_point		start_pos;		// Start position of the ray (player position)
-	t_point		end_pos;		// End position of the ray (updated as it moves)
-	t_point		delta_dist;		// Distance ray must travel to cross the next axis
-	t_point		axis_dist;		// Distance from current pos to the next x or y axis
-	t_point		real_axis_dist;	// Scaled distance to next axis x or y
-	t_point		step_dir;			// Step direction for x and y (-1, 0, or 1)
+	double	length;			// Total distance from start_pos to hit point
+	double	corrected_len;	// Corrected distance considering fisheye effect
+	double	angle_rads;		// Ray angle in radians
+	t_coll	collition;		// Type of collision (wall or door)
+	t_dir	collision_dir;	// Direction of the wall hit (NO, SO, EA, WE)
+	t_point	vector;			// Direction vector (unit vector for the ray)
+	t_point	start_pos;		// Start position of the ray (player position)
+	t_point	end_pos;		// End position of the ray (updated as it moves)
+	t_point	delta_dist;		// Distance ray must travel to cross the next axis
+	t_point	axis_dist;		// Distance from current pos to the next x or y axis
+	t_point	real_axis_dist;	// Scaled distance to next axis x or y
+	t_point	step_dir;		// Step direction for x and y (-1, 0, or 1)
 }					t_ray;
 
 // Graphical representation of the game, including textures and images.
@@ -209,6 +209,7 @@ typedef struct s_graph
 	mlx_texture_t	*north_t;		// Textures for the north wall
 	mlx_texture_t	*south_t;		// Textures for the south wall
 	mlx_texture_t	*west_t;		// Textures for the west wall
+	mlx_texture_t	*door_t;		// Texture for the door
 	mlx_texture_t	*torch_t[8];	// Textures for the torch (8 frames)
 	mlx_image_t		*screen;		// Image for the screen/window
 	mlx_image_t		*minimap;		// Image for the minimap
@@ -327,6 +328,11 @@ void			fps_counter(t_game *game);
 void			rotate(t_game *game, int dang);
 void			move(t_game *game, int dx, int dy);
 void			update_player_state(t_game *game);
+
+// door.c
+
+void			open_close_door(t_game *game, t_dir dir);
+void			key_door(t_game *game);
 
 // raycast.c
 

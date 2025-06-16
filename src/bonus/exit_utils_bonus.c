@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit_utils_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: raperez- <raperez-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 22:54:15 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/06/16 15:24:55 by raperez-         ###   ########.fr       */
+/*   Updated: 2025/06/16 15:49:58 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ void	my_delete_image(mlx_t *mlx, mlx_image_t *image)
 
 void	free_textures(t_game *game)
 {
+	int	i;
+
 	if (!game)
 		return ;
 	my_free((void *)&(game->graphs.north_path));
@@ -39,6 +41,9 @@ void	free_textures(t_game *game)
 	my_delete_texture(game->graphs.east_t);
 	my_delete_texture(game->graphs.west_t);
 	my_delete_texture(game->graphs.door_t);
+	i = -1;
+	while (++i <= 7)
+		my_delete_texture(game->graphs.torch_t[i]);
 }
 
 void	free_images(t_game *game)
@@ -48,4 +53,5 @@ void	free_images(t_game *game)
 	my_delete_image(game->mlx, game->graphs.screen);
 	my_delete_image(game->mlx, game->graphs.minimap);
 	my_delete_image(game->mlx, game->graphs.player);
+	my_delete_image(game->mlx, game->graphs.torch);
 }

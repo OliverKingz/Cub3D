@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycast_dda_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: raperez- <raperez-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 16:00:54 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/06/16 14:08:57 by raperez-         ###   ########.fr       */
+/*   Updated: 2025/06/16 16:04:09 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,6 +109,25 @@ void	move_ray_to_next_axis(t_ray *ray)
 	}
 }
 
+static void	classify_collision(t_ray *ray, t_scene *scene, int x, int y)
+{
+	if (ray->real_axis_dist.x < ray->real_axis_dist.y
+		&& ray->vector.x >= 0)
+		ray->collision_dir = WEST;
+	else if (ray->real_axis_dist.x < ray->real_axis_dist.y
+		&& ray->vector.x < 0)
+		ray->collision_dir = EAST;
+	else if (ray->real_axis_dist.x >= ray->real_axis_dist.y
+		&& ray->vector.y > 0)
+		ray->collision_dir = NORTH;
+	else
+		ray->collision_dir = SOUTH;
+	if (scene->map2d[y][x] == WALL)
+		ray->collition = WALL_COLL;
+	else
+		ray->collition = DOOR_COLL;
+}
+
 /**
  * @brief Checks if the ray has collided with a wall in the scene.
  *
@@ -130,23 +149,9 @@ void	check_axis_is_wall_collision(t_ray *ray, t_scene *scene)
 		x -= 1;
 	if (ray->vector.y < 0 && ray->end_pos.y - (int)ray->end_pos.y == 0.0)
 		y -= 1;
-	if (y >= 0 && y < scene->height_map
-		&& x >= 0 && x < scene->width_map && ft_strchr("1D", scene->map2d[y][x]))
+	if (y >= 0 && y < scene->height_map && x >= 0
+		&& x < scene->width_map && ft_strchr("1D", scene->map2d[y][x]))
 	{
-		if (ray->real_axis_dist.x < ray->real_axis_dist.y
-			&& ray->vector.x >= 0)
-			ray->collision_dir = WEST;
-		else if (ray->real_axis_dist.x < ray->real_axis_dist.y
-			&& ray->vector.x < 0)
-			ray->collision_dir = EAST;
-		else if (ray->real_axis_dist.x >= ray->real_axis_dist.y
-			&& ray->vector.y > 0)
-			ray->collision_dir = NORTH;
-		else
-			ray->collision_dir = SOUTH;
-		if (scene->map2d[y][x] == WALL)
-			ray->collition = WALL_COLL;
-		else
-			ray->collition = DOOR_COLL;
+		classify_collision(ray, scene, x, y);
 	}
 }

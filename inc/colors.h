@@ -6,7 +6,7 @@
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/08 13:16:14 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/06/13 15:25:33 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/06/16 16:08:37 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,9 @@
 # define LIGHT_GREEN 0x90EE90FF
 # define DARK_GREEN 0x006400FF
 
+# define BLUE_A60 0x0000FFAA
 # define BLUE 0x0000FFFF
+# define LIGHT_BLUE_A60 0xADD8E6AA
 # define LIGHT_BLUE 0xADD8E6FF
 # define DARK_BLUE 0x00008BFF
 

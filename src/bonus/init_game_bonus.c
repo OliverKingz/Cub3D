@@ -6,7 +6,7 @@
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 19:52:22 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/06/16 15:20:54 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/06/16 15:47:52 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,9 @@ void	init_texture(t_game *game)
 	game->graphs.north_t = mlx_load_png(game->graphs.north_path);
 	game->graphs.south_t = mlx_load_png(game->graphs.south_path);
 	game->graphs.west_t = mlx_load_png(game->graphs.west_path);
+	game->graphs.door_t = mlx_load_png(game->graphs.door_path);
 	if (!game->graphs.icon_t || !game->graphs.north_t || !game->graphs.south_t
-		|| !game->graphs.east_t || !game->graphs.west_t)
+		|| !game->graphs.east_t || !game->graphs.west_t || !game->graphs.door_t)
 		my_mlx_err(game, FAIL_TEXTURE);
 	init_torch_textures(game);
 }

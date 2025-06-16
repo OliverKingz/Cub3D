@@ -3,19 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   draw_minimap_bonus.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: raperez- <raperez-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/07 12:27:32 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/06/16 15:38:58 by raperez-         ###   ########.fr       */
+/*   Updated: 2025/06/16 15:56:55 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "cub3d_bonus.h"
 
 void	draw_minimap_tiles(t_game *game)
 {
-	t_point pos;
+	t_point	pos;
 	t_point	tile_size;
 	t_point	tile_pos;
 	int		color;
@@ -31,10 +30,8 @@ void	draw_minimap_tiles(t_game *game)
 			color = MMAP_EMPTY_COLOR;
 			if (game->scene.map2d[(int)pos.y][(int)pos.x] == WALL)
 				color = MMAP_WALL_COLOR;
-			else if (game->scene.map2d[(int)pos.y][(int)pos.x] == DOOR_OPEN)
-				color = MMAP_OPEN_DOOR_COLOR;
-			else if (game->scene.map2d[(int)pos.y][(int)pos.x] == DOOR_CLOSED)
-				color = MMAP_CLOSED_DOOR_COLOR;
+			else if (ft_strchr("Dd", game->scene.map2d[(int)pos.y][(int)pos.x]))
+				color = MMAP_DOOR_COLOR;
 			else if (game->scene.map2d[(int)pos.y][(int)pos.x] == SPACE)
 				continue ;
 			draw_rectangle(game->graphs.minimap, tile_pos, tile_size, color);
