@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_raycast.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: raperez- <raperez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/07 12:25:19 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/06/14 15:54:09 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/06/17 12:26:25 by raperez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,18 +82,18 @@ void	draw_wall_texture(t_game *game, t_ray ray, t_point pos, t_point dim)
 	p.x = -1;
 	while (++p.x < dim.x && (pos.x + p.x) < WIDTH)
 	{
-		draw_start = (int)pos.y;
 		draw_end = (int)(pos.y + dim.y);
-		draw_start = fmax(0, draw_start);
+		draw_start = fmax(0, (int)pos.y);
 		draw_end = fmin(HEIGHT, draw_end);
-		p.y = draw_start - (int)pos.y - 1;
-		while (++p.y < draw_end - (int)pos.y && dim.y != 0)
+		p.y = draw_start - (int)pos.y;
+		while (p.y < draw_end - (int)pos.y && dim.y != 0)
 		{
 			txt.y = ((long long)p.y * texture->height) / dim.y;
 			if (pos.x + p.x >= 0 && pos.x + p.x < WIDTH
 				&& pos.y + p.y >= 0 && pos.y + p.y < HEIGHT)
 				mlx_put_pixel(game->graphs.screen, pos.x + p.x, pos.y + p.y,
 					get_rgb_pixel(texture, txt.x, txt.y));
+			p.y += 0.9;
 		}
 	}
 }

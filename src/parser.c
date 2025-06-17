@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: raperez- <raperez-@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: raperez- <raperez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/09 11:56:40 by raperez-          #+#    #+#             */
-/*   Updated: 2025/06/15 14:19:27 by raperez-         ###   ########.fr       */
+/*   Updated: 2025/06/17 11:56:09 by raperez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void	parser(t_game *game, const char *file)
 	game->scene.file = read_file(game, file);
 	counter = 0;
 	i = 0;
-	while (game->scene.file[i])
+	while (game->scene.file && game->scene.file[i])
 	{
 		n = manage_line(game, game->scene.file[i]);
 		if (n == -1)
