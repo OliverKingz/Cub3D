@@ -3,8 +3,8 @@ SO ./assets/textures/basic_SO.png
 WE ./assets/textures/basic_WE.png
 EA ./assets/textures/basic_EA.png
 
-F 17, 38, 64
-C 218, 234, 235
+C 255, 192, 203
+F 128, 0, 128
 
  11111
 110001

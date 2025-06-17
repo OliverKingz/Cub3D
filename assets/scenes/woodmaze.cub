@@ -1,13 +1,20 @@
-NO ./assets/textures/basic1_NO.png
-SO ./assets/textures/basic1_SO.png
-WE ./assets/textures/basic1_WE.png
-EA ./assets/textures/basic1_EA.png
+   WE                            ./assets/textures/wood1_1.png
+NO      ./assets/textures/wood1_2.png
 
-C 35,19,73
-F 15,6,40
+
+SO ./assets/textures/wood1_2.png
+
+F 60, 32, 10
+
+EA ./assets/textures/wolfenstein_wood.png
+
+
+
+C 255, 165, 0
+
 
 111111111111111111111
-101000001000000000001
+1010000010000000000S1
 101010101011111110001
 100010100010000010001
 111110101111101011101
@@ -25,5 +32,5 @@ F 15,6,40
 101011111111111010101
 100010000000000010001
 101010111011111111101
-1N1000001000000000001
+101000001000000000001
 111111111111111111111

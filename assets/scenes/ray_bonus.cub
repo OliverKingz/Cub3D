@@ -1,15 +1,15 @@
-	WE                            assets/textures/wolfenstein_wood.png 
-NO      assets/textures/wolfenstein_wood.png
+	WE                            assets/textures/wolfenstein_mossy.png 
+NO      assets/textures/wolfenstein_greystone.png
 
 
 
-SO assets/textures/wolfenstein_wood.png
+SO assets/textures/wolfenstein_greystone.png
 
 F   69, 222, 199
 
 	DO		assets/textures/door_v1.png
 
-EA assets/textures/wolfenstein_wood.png
+EA assets/textures/wolfenstein_mossy.png
 
 
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_raycast_bonus.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: raperez- <raperez-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/07 12:25:19 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/06/17 12:30:57 by raperez-         ###   ########.fr       */
+/*   Updated: 2025/06/17 14:17:25 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ void	draw_wall_texture(t_game *game, t_ray ray, t_point pos, t_point dim)
 			if (pos.x + p.x >= 0 && pos.x + p.x < WIDTH
 				&& pos.y + p.y >= 0 && pos.y + p.y < HEIGHT)
 				mlx_put_pixel(game->graphs.screen, pos.x + p.x, pos.y + p.y,
-					get_rgb_pixel(texture, txt.x, txt.y));
+					get_rgb_px_raylen(texture, txt.x, txt.y, ray.length));
 			p.y += 0.9;
 		}
 	}
