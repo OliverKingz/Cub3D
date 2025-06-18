@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: raperez- <raperez-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/15 15:22:16 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/06/16 18:05:40 by raperez-         ###   ########.fr       */
+/*   Updated: 2025/06/19 00:27:54 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -214,7 +214,8 @@ typedef struct s_graph
 	mlx_image_t		*screen;		// Image for the screen/window
 	mlx_image_t		*minimap;		// Image for the minimap
 	mlx_image_t		*player;		// Image for the player in the minimap
-	mlx_image_t		*torch;			// Image for the torch in screen
+	mlx_image_t		*torch[8];		// Images for the torch in the minimap
+	mlx_image_t		*torch_screen;	// Image for the torch in screen
 }					t_graph;
 
 // Keys structure to represent the state of the keys pressed by the player.
@@ -314,6 +315,7 @@ int				get_x_texture(t_ray ray, mlx_texture_t *texture);
 // draw_torch_bonus.c
 
 void			init_torch_textures(t_game *game);
+void			init_torch_images(t_game *game);
 void			draw_torch(t_game *game);
 
 // hook_bonus.c
@@ -363,7 +365,7 @@ void			free_game(t_game *game);
 
 // exit_utils_bonus.c
 
-void			my_delete_texture(mlx_texture_t *texture);
+void			my_delete_texture(mlx_texture_t **texture);
 void			my_delete_image(mlx_t *mlx, mlx_image_t *image);
 void			free_textures(t_game *game);
 void			free_images(t_game *game);

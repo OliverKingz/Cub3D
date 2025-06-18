@@ -6,7 +6,7 @@
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 19:52:22 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/06/16 15:47:52 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/06/19 00:28:11 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ void	init_images(t_game *game)
 		if (!game->graphs.minimap || !game->graphs.player)
 			my_mlx_err(game, FAIL_IMAGES);
 	}
+	init_torch_images(game);
 }
 
 void	init_draw_to_window(t_game *game)
