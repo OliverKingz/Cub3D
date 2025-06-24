@@ -6,7 +6,7 @@
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/15 16:07:30 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/06/19 00:28:41 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/06/24 15:33:14 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,9 +56,10 @@ void	init_torch_images(t_game *game)
 void	draw_torch(t_game *game)
 {
 	static double	frame = 0;
-	int				idx = ((int)frame) % 8;
+	int				idx;
 	t_point			pos;
 
+	idx = ((int)frame) % 8;
 	pos.x = WIDTH - (game->graphs.torch_t[0]->width * 6.5) - 100;
 	pos.y = HEIGHT - (game->graphs.torch_t[0]->height * 6.5) + 60;
 	game->graphs.torch_screen->enabled = false;

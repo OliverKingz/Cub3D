@@ -6,7 +6,7 @@
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/15 15:22:16 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/06/19 00:27:54 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/06/24 15:35:52 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@
 # define MAX_MAP_WIDTH	50		// Maximum width of the map
 # define MAX_MAP_HEIGHT 30		// Maximum height of the map
 
-# define MMAP_TILE 12			// Size of each tile in the minimap
+# define MMAP_TILE 11			// Size of each tile in the minimap
 # define MMAP_PLAYER_RADIUS 3	// Radius of the player in the minimap in tiles
 
 # define FOV 75			// Field of view in degrees for the raycasting system

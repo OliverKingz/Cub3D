@@ -6,7 +6,7 @@
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 22:54:15 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/06/19 00:27:59 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/06/24 15:33:24 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	free_textures(t_game *game)
 
 void	free_images(t_game *game)
 {
-	int i;
+	int	i;
 
 	if (!game)
 		return ;
