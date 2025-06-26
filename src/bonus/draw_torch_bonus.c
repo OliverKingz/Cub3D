@@ -6,7 +6,7 @@
 /*   By: ozamora- <ozamora-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/15 16:07:30 by ozamora-          #+#    #+#             */
-/*   Updated: 2025/06/16 15:36:03 by ozamora-         ###   ########.fr       */
+/*   Updated: 2025/06/26 22:52:32 by ozamora-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,14 @@
 
 void	init_torch_textures(t_game *game)
 {
-	game->graphs.torch_t[0] = mlx_load_png("./assets/textures/torch1.png");
-	game->graphs.torch_t[1] = mlx_load_png("./assets/textures/torch2.png");
-	game->graphs.torch_t[2] = mlx_load_png("./assets/textures/torch3.png");
-	game->graphs.torch_t[3] = mlx_load_png("./assets/textures/torch4.png");
-	game->graphs.torch_t[4] = mlx_load_png("./assets/textures/torch5.png");
-	game->graphs.torch_t[5] = mlx_load_png("./assets/textures/torch6.png");
-	game->graphs.torch_t[6] = mlx_load_png("./assets/textures/torch7.png");
-	game->graphs.torch_t[7] = mlx_load_png("./assets/textures/torch8.png");
+	game->graphs.torch_t[0] = mlx_load_png("./assets/textures/torch-1.png");
+	game->graphs.torch_t[1] = mlx_load_png("./assets/textures/torch-2.png");
+	game->graphs.torch_t[2] = mlx_load_png("./assets/textures/torch-3.png");
+	game->graphs.torch_t[3] = mlx_load_png("./assets/textures/torch-4.png");
+	game->graphs.torch_t[4] = mlx_load_png("./assets/textures/torch-5.png");
+	game->graphs.torch_t[5] = mlx_load_png("./assets/textures/torch-6.png");
+	game->graphs.torch_t[6] = mlx_load_png("./assets/textures/torch-7.png");
+	game->graphs.torch_t[7] = mlx_load_png("./assets/textures/torch-8.png");
 	if (!game->graphs.torch_t[0] || !game->graphs.torch_t[1]
 		|| !game->graphs.torch_t[2] || !game->graphs.torch_t[3]
 		|| !game->graphs.torch_t[4] || !game->graphs.torch_t[5]
