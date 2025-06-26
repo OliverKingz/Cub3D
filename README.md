@@ -173,7 +173,7 @@ make bonus
 ## Assets Credits
 
 - **Wall Textures**: Wolfenstein 3D (Id Software, 1992).
-- **Torch Animation**: Original available at [OpenGameart](https://opengameart.org).
+- **Torch Animation**: Based on original assets "Torch" by CastorCandente. Original available at [OpenGameart](https://opengameart.org/content/bartolomeos-journey-assets#comment-form). This work is in the Public Domain (CC0).
 - **Door Texture**: Based on "LPC Door Rework" by AntumDeluge and Lanea Zimmerman (Sharm). Original available at [OpenGameart](https://opengameart.org/node/84409). This modified work is licensed under CC BY-SA 3.0.
 
 ---
