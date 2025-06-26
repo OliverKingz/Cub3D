@@ -1,17 +1,21 @@
-# cub3D
+# Cub3D
 
 <div align="right">
 
-[![GitHub stars](https://img.shields.io/github/stars/OliverKingz/cub3D?color=brightgreen)]()
-[![Visits Badge](https://badges.pufler.dev/visits/OliverKingz/cub3D)]()
-[![Created Badge](https://badges.pufler.dev/created/OliverKingz/cub3D)]()
-[![Updated Badge](https://badges.pufler.dev/updated/OliverKingz/cub3D)]()
+[![GitHub stars](https://img.shields.io/github/stars/OliverKingz/Cub3D?color=brightgreen)]()
+[![Visits Badge](https://badges.pufler.dev/visits/OliverKingz/Cub3D)]()
+[![Created Badge](https://badges.pufler.dev/created/OliverKingz/Cub3D)]()
+[![Updated Badge](https://badges.pufler.dev/updated/OliverKingz/Cub3D)]()
 
 </div>
 
 [42-Cursus] A project inspired by the classic Wolfenstein 3D game. This ray-caster uses **MLX42 from Codam** to create a dynamic 3D maze navigable in first-person view, with textured walls, floor/ceiling colors, and smooth controls.
 
-![Example Screenshot](assets/images/cub3d_demo.png) _A glimpse of the ray-casting maze._
+<div align="center">
+
+![Example Gameplay](assets/images/Cub3D_GB.gif)
+
+</div>
 
 Keywords
 
@@ -49,7 +53,7 @@ Made by: [![Contributors Display](https://badges.pufler.dev/contributors/OliverK
 
 ## Overview
 
-**cub3D** is a 3D maze exploration game built using ray-casting techniques, mimicking the mechanics of the iconic _Wolfenstein 3D_. The project leverages **MLX42** for rendering and emphasizes efficient mathematical algorithms to create a seamless first-person perspective. Players navigate a maze with textured walls, customizable floor/ceiling colors, and intuitive controls.
+**Cub3D** is a 3D maze exploration game built using ray-casting techniques, mimicking the mechanics of the iconic _Wolfenstein 3D_. The project leverages **MLX42** for rendering and emphasizes efficient mathematical algorithms to create a seamless first-person perspective. Players navigate a maze with textured walls, customizable floor/ceiling colors, and intuitive controls.
 
 ---
 
@@ -85,8 +89,8 @@ Made by: [![Contributors Display](https://badges.pufler.dev/contributors/OliverK
 1. **Clone this repository:**
 
    ```bash
-   git clone https://github.com/OliverKingz/cub3D.git
-   cd cub3D
+   git clone https://github.com/OliverKingz/Cub3D.git
+   cd Cub3D
    ```
 
 2. **Compile the project using the provided Makefile** (use the `bonus` rule for a better experience):
@@ -113,8 +117,8 @@ Made by: [![Contributors Display](https://badges.pufler.dev/contributors/OliverK
 3. **Run the game with a scene file** (e.g., `example.cub` for mandatory, `example_bonus.cub` for bonus):
 
    ```bash
-   ./cub3D assets/scenes/example.cub
-   ./cub3D_bonus assets/scenes/example_bonus.cub
+   ./Cub3D assets/scenes/example.cub
+   ./Cub3D_bonus assets/scenes/example_bonus.cub
    ```
 
 ---
@@ -123,8 +127,8 @@ Made by: [![Contributors Display](https://badges.pufler.dev/contributors/OliverK
 
 | **Command**                     | **Description**                 | **Expected Output**         |
 | ------------------------------- | ------------------------------- | --------------------------- |
-| `./cub3D maps/valid.cub`        | Runs the game with a valid map. | Renders the 3D maze.        |
-| `./cub3D maps/invalid_open.cub` | Map not surrounded by walls.    | `Error: Map is not closed.` |
+| `./Cub3D maps/valid.cub`        | Runs the game with a valid map. | Renders the 3D maze.        |
+| `./Cub3D maps/invalid_open.cub` | Map not surrounded by walls.    | `Error: Map is not closed.` |
 
 ### Bonus Usage
 
@@ -132,19 +136,19 @@ Compile and run bonuses:
 
 ```bash
 make bonus
-./cub3D_bonus assets/scenes/example.cub
+./Cub3D_bonus assets/scenes/example.cub
 ```
 
-| **Command**                           | **Description**       | **Expected Output**           |
-| ------------------------------------- | --------------------- | ----------------------------- |
-| `./cub3D_bonus assets/scenes/example.cub` | Displays the minimap. | Renders maze + top-down view. |
+| **Command**                               | **Description**       | **Expected Output**           |
+| ----------------------------------------- | --------------------- | ----------------------------- |
+| `./Cub3D_bonus assets/scenes/example.cub` | Displays the minimap. | Renders maze + top-down view. |
 
 ### Error Handling
 
 | **Command**                        | **Error Scenario**    | **Output**                     |
 | ---------------------------------- | --------------------- | ------------------------------ |
-| `./cub3D nonexistent.cub`          | Invalid file path.    | `Error: File not found.`       |
-| `./cub3D maps/missing_texture.cub` | Missing texture path. | `Error: Texture file missing.` |
+| `./Cub3D nonexistent.cub`          | Invalid file path.    | `Error: File not found.`       |
+| `./Cub3D maps/missing_texture.cub` | Missing texture path. | `Error: Texture file missing.` |
 
 ---
 
@@ -168,7 +172,9 @@ make bonus
 
 ## Assets Credits
 
-- **Inspiration**: Wolfenstein 3D (Id Software, 1992).
+- **Wall Textures**: Wolfenstein 3D (Id Software, 1992).
+- **Torch Animation**: Original available at [OpenGameart](https://opengameart.org).
+- **Door Texture**: Based on "LPC Door Rework" by AntumDeluge and Lanea Zimmerman (Sharm). Original available at [OpenGameart](https://opengameart.org/node/84409). This modified work is licensed under CC BY-SA 3.0.
 
 ---
 
