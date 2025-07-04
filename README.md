@@ -157,6 +157,7 @@ make bonus
 - **W/A/S/D**: Move forward/left/backward/right.
 - **←/→ Arrow Keys**: Rotate view left/right.
 - **ESC**: Close the window.
+- **E (Bonus)**: To open/close a door. 
 - **Mouse Move (Bonus)**: Rotate view horizontally.
 
 ---
